@@ -52,13 +52,14 @@ background-color: #fff;
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              
               <button id="personal_effects" type="button" class="btn btn-primary">Personal Effects</button>
              <button id="ocean_freight" class="btn btn-primary">Ocean Freight</button>
              <button id="air_freight" class="btn btn-primary">Air Freight</button>
              <button id="vehicle_shipment" class="btn btn-primary">Vehicle Shipment</button>
              <form id="form_add_update" name="form_add_update" role="form" style="display: none">
              <div class="alert hidden"></div>
-             
+             <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
                                 <h2 id="heading" style="text-align: center">Personal Effect</h2>
                                 <hr>
@@ -81,27 +82,46 @@ background-color: #fff;
                                  
                                  <div id="contact_details" class="form-group">
                                  <div class="row">
-                               <div class="col-xs-12 col-md-4">
-   <select name="shipper_country" id="shipper_country" class="form-control">
-    <option value="<?php if(isset($row)){echo $row->shipper_country;}?>">Select Country</option>
-    <?php
-    foreach($countries as $cont)
+                              
+  
+  <div class="col-xs-12 col-md-4">
+    <label>Select State</label>
+   <select name="shipper_state" id="shipper_state" class="form-control">
+    <option value="">Select State</option>
+     <?php
+    
+    foreach($nigerianStates as $state)
     {
-     echo '<option value="'.$cont->id.'">'.$row->shipper_country.'</option>';
+      $stateSelected='';
+      if(isset($row)){
+if($state['state_id']==$row->shipper_state){
+  $stateSelected='selected="selected"';
+}
+      }
+     echo '<option '.$stateSelected.' value="'.$state['state_id'].'">'.$state['state'].'</option>';
     }
     ?>
    </select>
   </div>
   
   <div class="col-xs-12 col-md-4">
-   <select name="shipper_state" id="shipper_state" class="form-control">
-    <option value="">Select State</option>
-   </select>
-  </div>
-  
-  <div class="col-xs-12 col-md-4">
+    <label>Select city</label>
    <select name="shipper_city" id="shipper_city" class="form-control">
-    <option value="">Select City</option>
+    <option>Select City</option>
+   <?php 
+//nigeriancities
+    foreach($nigerianCities as $city)
+    {
+      $citySelected='';
+      if(isset($row)){
+if($city['city_id']==$row->shipper_city){
+  $citySelected='selected="selected"';
+}
+      }
+     echo '<option '.$citySelected.' value="'.$city['city_id'].'">'.$city['city'].'</option>';
+    }
+    ?>
+   
    </select>
   </div>
   </div>
@@ -114,10 +134,11 @@ background-color: #fff;
  
                                      <div class="form-group" id="request_pickup">
                         <?php
+                        $checked='';
                        if(isset($row)){            
-                      $checked=$row->request_pickup;
                       
-                      switch ($checked) {
+                      
+                      switch ($row->request_pickup) {
                         case 'yes':
                          $checked='checked';
                           break;
@@ -139,11 +160,12 @@ background-color: #fff;
                                     
                                         </div></div></div>
                                      <div class="form-group" id="request_insurance">
-                                       <?php
+                              <?php
+                        $checked='';
                        if(isset($row)){            
-                      $checked=$row->request_insurance;
                       
-                      switch ($checked) {
+                      
+                      switch ($row->request_insurance) {
                         case 'yes':
                          $checked='checked';
                           break;
@@ -152,15 +174,30 @@ background-color: #fff;
                       }
                       }
                       ?>
-                                    Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="<?php if(isset($row)){ echo  $checked;}?>">    
+                                    Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="yes" <?php echo  $checked;?>>    
                                   
                                         </div>
 
                                      <div class="form-group" id="delivery_option">
+                                       <?php
+                        $home='';
+                        $warehouse='';
+                       if(isset($row)){            
+                      
+                      
+                      switch ($row->delivery_type) {
+                        case 'home':
+                         $home='checked';
+                          break;
+                       case 'lagos warehouse':
+                         $warehouse='checked';                      
+                      }
+                      }
+                      ?>
                                     <label>Delivery Type</label>
                                     <br>
-                                    <input type="radio" id="delivery_type" name="delivery_type" value="home">  Home &nbsp;&nbsp;
-                                     <input type="radio" id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
+                                    <input type="radio" id="delivery_type" name="delivery_type"  value="<?php echo  $home?>">  Home &nbsp;&nbsp;
+                                     <input type="radio" id="delivery_type" name="delivery_type" value="<?php echo  $warehouse?>">  Lagos Warehouse
                                         </div><hr>
                                <h3>Consignee's Details</h3>
                                 
@@ -195,10 +232,24 @@ background-color: #fff;
    <select name="consignee_country" id="consignee_country" class="form-control">
     <option value="">Select Country</option>
     <?php
-    foreach($countries as $country)
-    {
-     echo '<option value="'.$country->id.'">'.$country->name.'</option>';
-    }
+    
+    foreach ($countries as $country) {
+      
+    
+     foreach ($selectedcountries as $selectcountry) {  
+        $selectedCountry='';
+       
+if(isset($row)){
+          if($selectcountry['country_id'] == $row->consignee_country){
+           $selectedCountry='selected="selected"'; 
+          }
+          }
+        
+      
+echo '<option '.$selectedCountry.' value="'.$selectcountry['country_id'].'">'.$selectcountry['country'].'</option>';    }
+
+echo '<option value="'.$country->id.'">'.$country->name.'</option>';
+ }
     ?>
    </select>
   </div>
@@ -206,12 +257,41 @@ background-color: #fff;
   <div class="col-xs-12 col-md-4">
    <select name="consignee_state" id="consignee_state" class="form-control">
     <option value="">Select State</option>
+    <?php
+     foreach ($selectedstates as $selectstate) {  
+        $selectedState='';
+       
+if(isset($row)){
+          if($selectstate['state_id'] == $row->consignee_state){
+           $selectedState='selected="selected"'; 
+          }
+          }
+        
+      
+echo '<option '.$selectedState.' value="'.$selectstate['state_id'].'">'.$selectstate['state'].'</option>';    }
+
+ 
+    ?>
    </select>
   </div>
   
   <div class="col-xs-12 col-md-4">
    <select name="consignee_city" id="consignee_city" class="form-control">
     <option value="">Select City</option>
+     <?php foreach ($selectedcities as $selectcity) {  
+        $selectedCity='';
+       
+if(isset($row)){
+          if($selectcity['city_id'] == $row->consignee_city){
+           $selectedCity='selected="selected"'; 
+          }
+          }
+        
+      
+echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity['city'].'</option>';    }
+
+ 
+    ?>
    </select>
   </div>
   </div>
@@ -354,6 +434,8 @@ background-color: #fff;
 <script type="text/javascript">
  $("#personal_effects").click(function(){
     $('#form_add_update').toggle('slow');
+     $("#shipment_type").val(1);
+
     var h = "Personal Effect";
     $('#heading').html(h);
     $('#shipper_phone').hide();
@@ -371,6 +453,7 @@ background-color: #fff;
 <script type="text/javascript">
  $("#air_freight").click(function(){
     $('#form_add_update').toggle('slow');
+    $("#shipment_type").val(3);
     var h = "Air Freight";
     $('#heading').html(h);
     $('#shipper_phone').hide();
@@ -388,6 +471,7 @@ background-color: #fff;
 <script type="text/javascript">
  $("#vehicle_shipment").click(function(){
     $('#form_add_update').toggle('slow');
+    $("#shipment_type").val(4);
     var h = "Vehicle Shipment";
     $('#heading').html(h);
     $('#shipper_phone').show();
@@ -405,6 +489,7 @@ background-color: #fff;
 <script type="text/javascript">
  $("#ocean_freight").click(function(){
     $('#form_add_update').toggle('slow');
+    $("#shipment_type").val(2);
     var h = "Ocean Freight";
     $('#heading').html(h);
     $('#shipper_phone').hide();
@@ -592,6 +677,31 @@ $(document).ready(function(){
  });
  
 });
+
+<?php 
+
+if(isset($row)){
+
+if($row->shipment_type==1){
+  $btn='personal_effects';
+}
+if($row->shipment_type==2){
+  $btn='ocean_freight';
+}
+
+if($row->shipment_type==3){
+  $btn='air_freight';
+}
+if($row->shipment_type==4){
+  $btn='vehicle_shipment';
+}
+  ?>
+
+$("#<?=$btn?>").click();
+
+<?php 
+}
+?>
 </script>
 
   

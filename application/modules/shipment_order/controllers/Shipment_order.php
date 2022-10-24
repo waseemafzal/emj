@@ -29,7 +29,9 @@ class Shipment_order extends MX_Controller {
 		
 		$aData['tbl'] =$this->tbl;
 		$aData["countries"] = $this->country_model->get_country();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
+	//	pre($aData);
 		$this->load->view('add_shipment',$aData);
 	}
 	 function get_state()
@@ -51,12 +53,29 @@ class Shipment_order extends MX_Controller {
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+	
 		$aData['row']=$query;
+	
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	$aData["selectedcountries"] =$this->db->query("SELECT id as country_id,name as country FROM `tbl_countries`;")->result_array();
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+
 		//pre($aData);
 		$aData['tbl'] =$this->tbl;
 		
 		$aData['module_heading'] =$this->module_heading;
-		
+		//pre($aData);
 		$this->load->view('add_shipment',$aData);
 	}
 	public function delete(){ 
@@ -78,9 +97,9 @@ class Shipment_order extends MX_Controller {
 		}
 	}
 	function save(){ 
-		extract($_POST);
+		//extract($_POST);
 		$PrimaryID = $_POST['id'];
-		unset($_POST['action'],$_POST['id'],$_POST['description']);
+		unset($_POST['action'],$_POST['id'],$_POST['description'], $_POST['country_id']);
 	//pre($_POST);
 	//echo $this->tbl;exit;
 		//echo $PrimaryID;exit;

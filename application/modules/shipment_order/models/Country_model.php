@@ -6,7 +6,7 @@ function __construct(){
  function get_country()
  {
   $this->db->order_by("name", "ASC");
-  $query = $this->db->where('id', 160)->get("tbl_countries");
+  $query = $this->db->get("tbl_countries");
   return $query->result();
  }
 

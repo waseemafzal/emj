@@ -26,13 +26,6 @@ background-color: #fff;
     top: 10%;
     width: 50%;
 }
-.active{
-  border-bottom: 2px solid red;
-}
-.button{
-  display: inline-block;
-}
-
    </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -59,14 +52,11 @@ background-color: #fff;
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-             <div class="button">
-              <button id="personal_effects" type="button" class="btn btn-primary">Personal Effects</button></div>
-              <div class="button">
-             <button id="ocean_freight" class="btn btn-primary">Ocean Freight</button></div>
-             <div class="button">
-             <button id="air_freight" class="btn btn-primary button">Air Freight</button></div>
-             <div class="button">
-             <button id="vehicle_shipment" class="btn btn-primary button">Vehicle Shipment</button></div>
+              
+              <button id="personal_effects" type="button" class="btn btn-primary">Personal Effects</button>
+             <button id="ocean_freight" class="btn btn-primary">Ocean Freight</button>
+             <button id="air_freight" class="btn btn-primary">Air Freight</button>
+             <button id="vehicle_shipment" class="btn btn-primary">Vehicle Shipment</button>
              <form id="form_add_update" name="form_add_update" role="form" style="display: none">
              <div class="alert hidden"></div>
              <input type="hidden" name="shipment_type" id="shipment_type">
@@ -200,15 +190,14 @@ if($city['city_id']==$row->shipper_city){
                          $home='checked';
                           break;
                        case 'lagos warehouse':
-                         $warehouse='checked';  
-                         break;                    
+                         $warehouse='checked';                      
                       }
                       }
                       ?>
                                     <label>Delivery Type</label>
                                     <br>
-                                    <input type="radio" <?php echo  $home?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
-                                     <input type="radio" <?php echo  $warehouse?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
+                                    <input type="radio" id="delivery_type" name="delivery_type"  value="<?php echo  $home?>">  Home &nbsp;&nbsp;
+                                     <input type="radio" id="delivery_type" name="delivery_type" value="<?php echo  $warehouse?>">  Lagos Warehouse
                                         </div><hr>
                                <h3>Consignee's Details</h3>
                                 
@@ -245,13 +234,7 @@ if($city['city_id']==$row->shipper_city){
     <?php
     
     foreach ($countries as $country) {
-      $selectedCountry='';
-      if(isset($row)){
-          if($country->id == $row->consignee_country){
-           $selectedCountry='selected="selected"'; 
-          }
-          }
-echo '<option '.$selectedCountry.' value="'.$country->id.'">'.$country->name.'</option>';
+echo '<option value="'.$country->id.'">'.$country->name.'</option>';
  }
     ?>
    </select>
@@ -368,15 +351,12 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                     
                                         </div> 
                                     </div>       
-                              </div></section>
+                              </div></section><hr>
                               <section id="shipment">
                               
                                <div class="form-group">
                                  <div class="row">
-                                   <div class="col-md-4">
-                              <label style="color: blue">Front and back of title and Invoice</label>
-                                    <input type="file" name="file[]" class=" file"  id="file" accept=".png,.PNG,.JPG,.jpg,.jpeg,.JPEG,.gif"  multiple>
-                     </div>
+                                   <div class="col-md-4"><label style="color: blue">Front and back of title and Invoice</label><input type="file" name="file[]"></div>
                                 
                                   </div><hr>
                                  <h3>Shipment Details</h3>
@@ -394,37 +374,6 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                        <label>Shipment Date</label>
                                        <input type="date" name="shipment_date" class="form-control">
                                      <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-                                     </div>
-                                   </div>
-                                 </div>
-                                 <div class="form-group">
-                                   <div class="row">
-                                     <div class="col-md-4">
-                                       <label>Vehicle Description</label>
-                                       <input type="text" name="vehicle_description" class="form-control">
-                                     </div>
-                                     <div class="col-md-4">
-                                       <label>Vin Number</label>
-                                       <input type="text" name="vin_number" class="form-control">
-                                     </div>
-                                     <div class="col-md-4">
-                                       <label>Vehicle Purchase Cost</label>
-                                       <input type="text" name="purchase_cost" class="form-control">
-                                   
-                                     </div>
-                                   </div>
-                                  
-                                 </div>
-                                 <div class="form-group">
-                                   <div class="row">
-                                     <div class="col-md-4">
-                                           <div class="field_wrapper">
-    <div>
-         <label>Company Preference</label>
-        <input type="text" name="company_preference[]"class="form-control" value=""/>Add more <a href="javascript:void(0);" class="add_button" title="Add field"><img width="30" height="30" src="<?php echo base_url()?>image/add-more.png"></a>
-       
-    </div>
-</div>         
                                      </div>
                                    </div>
                                  </div>
@@ -469,44 +418,10 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
 
 </html>
 <script type="text/javascript">
-$(function(){
-
-  $('.button').click(function () {
-    $('.button').removeClass("active");
-    $(this).addClass("active");
-  });
-
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-    var maxField = 10; //Input fields increment limitation
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div><input type="text" name="company_preference[]" value=""/><a href="javascript:void(0);" class="remove_button"><img height="30" width="30" src="<?php echo base_url()?>image/remove.png"/></a></div>'; //New input field html 
-    var x = 1; //Initial field counter is 1
-    
-    //Once add button is clicked
-    $(addButton).click(function(){
-        //Check maximum number of input fields
-        if(x < maxField){ 
-            x++; //Increment field counter
-            $(wrapper).append(fieldHTML); //Add field html
-        }
-    });
-    
-    //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e){
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
-        x--; //Decrement field counter
-    });
-});
-</script>
-<script type="text/javascript">
  $("#personal_effects").click(function(){
-    $('#form_add_update').show('slow');
+    $('#form_add_update').toggle('slow');
      $("#shipment_type").val(1);
+
     var h = "Personal Effect";
     $('#heading').html(h);
     $('#shipper_phone').hide();
@@ -523,7 +438,7 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
  $("#air_freight").click(function(){
-    $('#form_add_update').show('slow');
+    $('#form_add_update').toggle('slow');
     $("#shipment_type").val(3);
     var h = "Air Freight";
     $('#heading').html(h);
@@ -541,7 +456,7 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
  $("#vehicle_shipment").click(function(){
-    $('#form_add_update').show('slow');
+    $('#form_add_update').toggle('slow');
     $("#shipment_type").val(4);
     var h = "Vehicle Shipment";
     $('#heading').html(h);
@@ -559,7 +474,7 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript">
  $("#ocean_freight").click(function(){
-    $('#form_add_update').show('slow');
+    $('#form_add_update').toggle('slow');
     $("#shipment_type").val(2);
     var h = "Ocean Freight";
     $('#heading').html(h);
@@ -585,23 +500,12 @@ $(document).ready(function(){
   /**********************************save************************************/
      $('#form_add_update').on("submit",function(e) {
          e.preventDefault();    
-         var inputFile = $('input#file');
-    var filesToUpload = inputFile[0].files;
          var formData = new FormData();
-          var other_data = $('#form_add_update').serializeArray();
+        var other_data = $('#form_add_update').serializeArray();
         $.each(other_data,function(key,input){
         formData.append(input.name,input.value);
         });
         
-         if (filesToUpload.length > 0) {
-      // provide the form data
-      // that would be sent to sever through ajax
-      for (var i = 0; i < filesToUpload.length; i++) {
-        var file = filesToUpload[i];
-        formData.append("file[]", file, file.name);
-      }
-    }
-       
         if(window.CKEDITOR){
             item_description = CKEDITOR.instances.editor1.getData();
         formData.append("item_description", item_description);
@@ -780,8 +684,6 @@ if($row->shipment_type==4){
   ?>
 
 $("#<?=$btn?>").click();
-$("#<?=$btn?>").addClass('active');
-
 
 <?php 
 }

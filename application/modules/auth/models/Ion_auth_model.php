@@ -1785,7 +1785,7 @@ return $password;
 		    'email'                => $user->email,
 		    'user_type'                => $user->user_type,
 		    'image'                => $user->image,
-		    'phone'                => $user->phone,
+		    //'phone'                => $user->phone,
 		    'mobile'                => $user->mobile,
 		    'name'                => $user->name,
 		    'add_by'                => $user->added_by,

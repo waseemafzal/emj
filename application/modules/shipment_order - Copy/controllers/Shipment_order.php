@@ -61,7 +61,7 @@ $aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state
 	
 	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
 	
-	
+	$aData["selectedcountries"] =$this->db->query("SELECT id as country_id,name as country FROM `tbl_countries`;")->result_array();
 
 $consignee_country = $query->consignee_country;
 $aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
@@ -104,36 +104,40 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	//echo $this->tbl;exit;
 		//echo $PrimaryID;exit;
 			//Multiple Images
-	
+	if(isset($_FILES['file'])){		 
+			 $data = [];
+   
+      $count = count($_FILES['files']['name']);
+    
+      for($i=0;$i<$count;$i++){
+    
+        if(!empty($_FILES['files']['name'][$i])){
+    
+          $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+          $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+          $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+          $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+          $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+  
+          $config['upload_path'] = 'uploads/'; 
+          $config['allowed_types'] = 'jpg|jpeg|png|gif';
+          $config['max_size'] = '5000';
+          $config['file_name'] = $_FILES['files']['name'][$i];
+   
+          $this->load->library('upload',$config); 
+          $this->upload->initialize($config);
+          if($this->upload->do_upload('file')){
+            $uploadData = $this->upload->data();
+            $filename{$i}['file'] = $uploadData['file_name'];
+   
+          }
+        }
+   
+      }
+  }
+
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
-	    if(empty($PrimaryID)){
-				$insrtID = $this->db->insert_id();
-			
-	    if (!empty($_FILES)){ 
-			$nameArray = $this->crud->upload_files($_FILES);
-			$nameData = explode(',',$nameArray);
-			foreach($nameData as $file){
-				$file_data = array(
-				'file' => $file,
-				'order_id' => $insrtID
-				);
-				$this->db->insert('shipment_orders_files', $file_data);
-				}
-			  }
-			if (!empty('company_preference')){ 
-                $id = $this->db->insert_id();
-                $data = array(
-                      'vin_number'=>$vin_number,
-                      'vehicle_description'=>$vehicle_description,
-                      'order_id'=> $id,
-                      'purchase_cost'=>$purchase_cost,
-                      'company_preference[]'=>$company_preference
-
-                );  
-                $this->db->insert('shipment_orders_oceanfreight', $data);
-			}
-
-	    }
+	    
 	    		$e = $this->db->error(); // Gets the last error that has occured
 $num = $e['code'];
 $mess = $e['message'];

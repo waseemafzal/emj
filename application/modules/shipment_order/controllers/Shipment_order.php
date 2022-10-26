@@ -98,13 +98,26 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	}
 	function save(){ 
 		//extract($_POST);
+		//pre($_POST);
 		$PrimaryID = $_POST['id'];
+		$vehicleDescriptionArr=array();
+		$vin_numberArr=array();
+		$purchase_costArr=array();
+		$company_preferenceArr=array();
+if($_POST['shipment_type']==4){
+	$vehicleDescriptionArr=$_POST['vehicle_description'];
+	$vin_numberArr=$_POST['vin_number'];
+	$purchase_costArr=$_POST['purchase_cost'];
+	$company_preferenceArr=$_POST['company_preference'];
+		unset($_POST['vehicle_description'],$_POST['vin_number'],$_POST['purchase_cost'], $_POST['company_preference']);
+	
+}
 		unset($_POST['action'],$_POST['id'],$_POST['description'], $_POST['country_id']);
 	//pre($_POST);
 	//echo $this->tbl;exit;
 		//echo $PrimaryID;exit;
 			//Multiple Images
-	
+	//pre();
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
 	    if(empty($PrimaryID)){
 				$insrtID = $this->db->insert_id();
@@ -120,17 +133,26 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 				$this->db->insert('shipment_orders_files', $file_data);
 				}
 			  }
-			if (!empty('company_preference')){ 
+
+			if (!empty($vehicleDescriptionArr)){ 
                 $id = $this->db->insert_id();
-                $data = array(
-                      'vin_number'=>$vin_number,
-                      'vehicle_description'=>$vehicle_description,
+              $totalvehicle =   count($vehicleDescriptionArr);
+               // $_POST['company_preference'] = implode(',', $_POST['company_preference']);
+                //$company_preference =  $_POST['company_preference'];
+              for ($i=0; $i < $totalvehicle; $i++) { 
+              	$dataArr = array(
+                      'vin_number'=>$vin_numberArr[$i],
+                      'vehicle_description'=>$vehicleDescriptionArr[$i],
                       'order_id'=> $id,
-                      'purchase_cost'=>$purchase_cost,
-                      'company_preference[]'=>$company_preference
+                      'purchase_cost'=>$purchase_costArr[$i],
+                      'company_preference' => $company_preferenceArr[$i]
+                      
 
                 );  
-                $this->db->insert('shipment_orders_oceanfreight', $data);
+                $this->db->insert('shipment_orders_oceanfreight', $dataArr);
+              }
+                
+             //   lq();
 			}
 
 	    }
@@ -158,8 +180,47 @@ $mess = $e['message'];
 			break;	
 		}
 	}	
+
+
+	
+		public function update_image(){ 
+	
+		extract($_POST);
+		$data = array();
+		if (!empty($_FILES)){ 
+		/*--------------------------------------------------
+		|File uploading either single or multiple
+		---------------------------------------------------*/
+		
+		$image = $this->crud->upload_files($_FILES);
+		$data['file'] =$image;
+		}
+		else{
+			$data['file'] =$edit_image_hidden;
+			$image =$edit_image_hidden;
+			}	
+		
+		//	pre($data);	
+		$result =$this->crud->update_where($edit_img_id,'shipment_orders_files',$data);
+		/*===============================================*/
+		
+		switch($result){
+		case 1:
+			$arr = array('status' => 1,'image' => $image,'id' => $edit_img_id,'message' => "Updated Succefully !");
+			echo json_encode($arr);
+			break;
+		case 0:
+			$arr = array('status' => 0,'message' => "Not Updated!");
+			echo json_encode($arr);
+			break;
+		default:
+			$arr = array('status' => 0,'message' => "Not Updated!");
+			echo json_encode($arr);
+			break;	
+		}
+	}
+
+
+
+
 }
-
-	
-	
-

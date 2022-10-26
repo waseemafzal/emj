@@ -300,10 +300,10 @@ function html_cut($text, $max_length)
 		return ("admin/header");
     }   
     
-	    function getMyscript(){
-		$CI = &get_instance();
-		return $CI->load->view("admin/myscript");
-    }   
+	 //    function getMyscript(){
+		// $CI = &get_instance();
+		// return $CI->load->view("admin/myscript");
+  //   }   
 
 
 	function if_active($url){

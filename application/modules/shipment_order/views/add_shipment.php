@@ -7,6 +7,8 @@ $Heading=   $module_heading;
 
  ?>
    <style>
+    .remove_button{position: absolute;top: 25px;left: 0;}
+    .add_button{position: absolute;top: 25px;left: 0;}
     .box-primary {
     margin:5px 2px; 
         }
@@ -397,36 +399,68 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                      </div>
                                    </div>
                                  </div>
-                                 <div class="form-group">
+                                 <?php if(isset($row)){?>
+                             <div class="form-group field_wrapper">
                                    <div class="row">
-                                     <div class="col-md-4">
+                                    <div class="col-md-3">
                                        <label>Vehicle Description</label>
-                                       <input type="text" name="vehicle_description" class="form-control">
+                                       <input type="text" name="vehicle_description[]" value="<?php echo $row->vehicle_description?>" class="form-control">
                                      </div>
-                                     <div class="col-md-4">
+                                     <div class="col-md-3">
                                        <label>Vin Number</label>
-                                       <input type="text" name="vin_number" class="form-control">
+                                       <input type="text" name="vin_number[]" value="<?php echo $row->vin_number?>" class="form-control">
                                      </div>
-                                     <div class="col-md-4">
+                                     <div class="col-md-2">
                                        <label>Vehicle Purchase Cost</label>
-                                       <input type="text" name="purchase_cost" class="form-control">
+                                       <input type="text" name="purchase_cost[]" value="<?php echo $row->purchase_cost?>" class="form-control">
                                    
                                      </div>
+                                     <div class="col-md-3">
+                                       <label>Company Preference</label>
+                                       <input type="text" name="company_preference[]" value="<?php echo $row->company_preference?>" class="form-control">
+                                   
+                                     </div>
+                                     <div class="col-md-1">
+ <a href="javascript:void(0);" class="add_button" title="Add field">
+  <img width="30" height="30" src="<?php echo base_url()?>image/add-more.png">
+                                                </a>
+                                     </div>
+
+                                       
+                                   </div>
+                                 <?php }?>
+                                 
+                                  
+                                 <div class="form-group field_wrapper">
+                                   <div class="row">
+                                    <div class="col-md-3">
+                                       <label>Vehicle Description</label>
+                                       <input type="text" name="vehicle_description[]" class="form-control">
+                                     </div>
+                                     <div class="col-md-3">
+                                       <label>Vin Number</label>
+                                       <input type="text" name="vin_number[]" class="form-control">
+                                     </div>
+                                     <div class="col-md-2">
+                                       <label>Vehicle Purchase Cost</label>
+                                       <input type="text" name="purchase_cost[]" class="form-control">
+                                   
+                                     </div>
+                                     <div class="col-md-3">
+                                       <label>Company Preference</label>
+                                       <input type="text" name="company_preference[]" class="form-control">
+                                   
+                                     </div>
+                                     <div class="col-md-1">
+ <a href="javascript:void(0);" class="add_button" title="Add field">
+  <img width="30" height="30" src="<?php echo base_url()?>image/add-more.png">
+                                                </a>
+                                     </div>
+
+                                       
                                    </div>
                                   
-                                 </div>
-                                 <div class="form-group">
-                                   <div class="row">
-                                     <div class="col-md-4">
-                                           <div class="field_wrapper">
-    <div>
-         <label>Company Preference</label>
-        <input type="text" name="company_preference[]"class="form-control" value=""/>Add more <a href="javascript:void(0);" class="add_button" title="Add field"><img width="30" height="30" src="<?php echo base_url()?>image/add-more.png"></a>
-       
-    </div>
-</div>         
-                                     </div>
-                                   </div>
+
                                  </div>
                                   </section>
                                         <div class="clearfix">&nbsp;</div>
@@ -483,7 +517,7 @@ $(document).ready(function(){
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
     var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div><input type="text" name="company_preference[]" value=""/><a href="javascript:void(0);" class="remove_button"><img height="30" width="30" src="<?php echo base_url()?>image/remove.png"/></a></div>'; //New input field html 
+    var fieldHTML = ' <div class="row"><div class="col-md-3"> <label>Vehicle Description</label> <input type="text" name="vehicle_description[]" class="form-control"> </div><div class="col-md-3"> <label>Vin Number</label> <input type="text" name="vin_number[]" class="form-control"> </div><div class="col-md-2"> <label>Vehicle Purchase Cost</label> <input type="text" name="purchase_cost[]" class="form-control"> </div><div class="col-md-3"> <label>Company Preference</label> <input type="text" name="company_preference[]" class="form-control"> </div><div class="col-md-1"><a  href="javascript:void(0);" class="remove_button"><img height="30" width="30" src="<?php echo base_url()?>image/remove.png"/></a></div></div>'; //New input field html 
     var x = 1; //Initial field counter is 1
     
     //Once add button is clicked
@@ -497,8 +531,9 @@ $(document).ready(function(){
     
     //Once remove button is clicked
     $(wrapper).on('click', '.remove_button', function(e){
+      //console.log('remove clicked');
         e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
+        $(this).parent().parent('div').remove(); //Remove field html
         x--; //Decrement field counter
     });
 });
@@ -788,4 +823,3 @@ $("#<?=$btn?>").addClass('active');
 ?>
 </script>
 
-  

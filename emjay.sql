@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 07:51 AM
+-- Generation Time: Oct 26, 2022 at 02:31 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -600,10 +600,10 @@ INSERT INTO `setting` (`id`, `description`, `image`, `banner`, `phone`, `status`
 
 CREATE TABLE `shipment_orders` (
   `id` int(11) NOT NULL,
+  `shipment_type` int(11) NOT NULL,
   `shipper_name` varchar(255) NOT NULL,
   `shipper_phone` varchar(255) NOT NULL,
   `shipper_address` varchar(255) NOT NULL,
-  `shipper_country` varchar(255) NOT NULL,
   `shipper_state` varchar(255) NOT NULL,
   `shipper_city` varchar(255) NOT NULL,
   `request_pickup` varchar(255) NOT NULL DEFAULT 'No',
@@ -628,19 +628,18 @@ CREATE TABLE `shipment_orders` (
   `amount` double DEFAULT NULL,
   `shipment_from` varchar(255) NOT NULL,
   `shipment_to` varchar(255) NOT NULL,
-  `shipment_date` varchar(255) NOT NULL,
-  `file` varchar(255) NOT NULL
+  `shipment_date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `shipment_orders`
 --
 
-INSERT INTO `shipment_orders` (`id`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_country`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `ship_date`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `file`) VALUES
-(1, 'waseem', '', 'jhgjgk', '', '', '', 'yes', 'we', 'yes', '', 'e', 'wfe', '43298', '<p>rui</p>\r\n', '', '', '', '1', '123', '342', '324', 'Extra Large Box', '237', '798', '2022-07-09', NULL, '', '', '', ''),
-(2, 'Jawad', '', '', '', '', '', 'yes', '', 'yes', 'Home', '', '', '', '', '', '', '', '', '', '', '', 'Extra Large Box', '', '', '', NULL, '', 'was', '', ''),
-(3, '', '', '', '', '', '', 'No', '', 'No', 'Home', '', '', '', '', '', '', '', '', '', '', '', 'Extra Large Box', '', '', '', NULL, '', '', '', ''),
-(4, '', '', '', '', '', '', 'No', '', 'No', 'Home', '', '', '', '', '', '', '', '', '', '', '', 'Extra Large Box', '', '', '', NULL, '', '', '', '');
+INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `ship_date`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`) VALUES
+(1, 1, 'Jawad', '', 'skhdeq', '2650', '48481', 'yes', 'dwelui', 'yes', 'Home', 'waseem', 'dhwkjh', '03142578932', '<p>worei</p>\r\n', '13', '265', '6572', '3', '2', '3', '3', 'Extra Large Box', '23', '32', '2022-03-31', NULL, '', '', ''),
+(2, 4, 'Jawad', '03120020003', '', '', 'Select City', 'No', '', 'No', 'Home', 'Waseem', 'mlk', '43298', '<p>nkjh</p>\r\n', '6', '176', '6454', '7', '7', '78', '88', 'Extra Large Box', '', '', '', NULL, 'e', 'z', '2022-03-11'),
+(3, 4, '', '', '', '', 'Select City', 'No', '', 'No', 'Home', '', '', '', '', '', '', '', '', '', '', '', 'Extra Large Box', '', '', '', NULL, '', '', ''),
+(4, 4, '', '', '', '', 'Select City', 'No', '', 'No', 'Home', '', '', '', '', '', '', '', '', '', '', '', 'Extra Large Box', '', '', '', NULL, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -653,6 +652,21 @@ CREATE TABLE `shipment_orders_files` (
   `file` varchar(255) NOT NULL DEFAULT 'noimg.png',
   `order_id` int(11) NOT NULL COMMENT 'primary key of shipment_orders table'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shipment_orders_files`
+--
+
+INSERT INTO `shipment_orders_files` (`id`, `file`, `order_id`) VALUES
+(1, '5290c39bdfde9c24088d7e711cc7cdda.jpg', 2),
+(2, 'e681f241ad822212c61420638b517b62.jpg', 3),
+(3, '1fbb7aebdce600ee2e3ceb030d6e63eb.jpg', 3),
+(4, '26bf1643df9a13aecaf1f930e3d5f839.jpg', 3),
+(5, 'f964bda42667f13675365b49225e4667.jpg', 3),
+(6, '67da1ba5c5ffeb1a5521471fec2c4d8b.jpg', 3),
+(7, '4fea92aba1b2fbae3412a73f4eca2641.jpg', 3),
+(8, '139e30baa62292a9f21e7bb8452cef04.jpg', 3),
+(9, '06d51f718e7cbb4dc7a5eb7b1c4e6f46.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -668,6 +682,35 @@ CREATE TABLE `shipment_orders_oceanfreight` (
   `purchase_cost` double NOT NULL,
   `vehicle_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shipment_orders_oceanfreight`
+--
+
+INSERT INTO `shipment_orders_oceanfreight` (`id`, `company_preference`, `order_id`, `vin_number`, `purchase_cost`, `vehicle_description`) VALUES
+(1, 'no', 4, '789', 79879, 'suzuki'),
+(2, 'yui', 4, 'hsoid', 0, 'culsjak');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipment_types`
+--
+
+CREATE TABLE `shipment_types` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shipment_types`
+--
+
+INSERT INTO `shipment_types` (`id`, `type`) VALUES
+(1, 'Personal Effects'),
+(2, 'Ocean Freight'),
+(3, 'Air Freight'),
+(4, 'Vehicle Shipment');
 
 -- --------------------------------------------------------
 
@@ -49334,7 +49377,7 @@ CREATE TABLE `tbl_countries` (
 --
 
 INSERT INTO `tbl_countries` (`id`, `sortname`, `name`, `phonecode`) VALUES
-(1, 'AF', 'Afghanistannnnnn', 93000),
+(1, 'AF', 'Afghanistan', 93000),
 (2, 'AL', 'Albania', 355),
 (3, 'DZ', 'Algeria', 213),
 (4, 'AS', 'American Samoa', 1684),
@@ -53781,7 +53824,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `name`, `email`, `mobile`, `address`, `country`, `city`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`) VALUES
-(1, 3, 'Jawad', 'jawad@gmail.com', '03411663111', 'Chowk Shah Abbass', 'Pakistan', 'Multan', '', 'noimg.png', '', '', '', '', 0, 1, '', NULL, NULL, NULL, 0, NULL, '', 0, '', '', '', '', 0, '', '', 0);
+(1, 1, 'Jawad', 'admin@admin.com', '03411663111', 'Chowk Shah Abbass', 'Pakistan', 'Multan', '', 'noimg.png', '', '', '', '', 0, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1666760428, '', 0, '', '', '', '', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -53933,6 +53976,12 @@ ALTER TABLE `shipment_orders_oceanfreight`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shipment_types`
+--
+ALTER TABLE `shipment_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_cities`
 --
 ALTER TABLE `tbl_cities`
@@ -54058,13 +54107,19 @@ ALTER TABLE `shipment_orders`
 -- AUTO_INCREMENT for table `shipment_orders_files`
 --
 ALTER TABLE `shipment_orders_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_oceanfreight`
 --
 ALTER TABLE `shipment_orders_oceanfreight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shipment_types`
+--
+ALTER TABLE `shipment_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_cities`

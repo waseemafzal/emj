@@ -67,7 +67,14 @@
 .skin-red .sidebar a {
     color: #000;
 }
-
+ .alert{
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
   </style>
   <?php
 //  pre($this->session);

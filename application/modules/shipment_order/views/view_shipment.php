@@ -48,7 +48,7 @@ $Heading=	$module_heading;
 	foreach ($data->result() as $row){
 		
 		?>
-		<tr id="row_<?php echo$row->id;?>">
+		<tr id="row_<?php echo $row->id;?>">
         
 		<td><?php echo $row->shipper_name;?></td>
     <td><?php echo $row->shipper_address;?></td>
@@ -62,7 +62,7 @@ $Heading=	$module_heading;
                 <i class="glyphicon glyphicon-edit icon-white"></i>
                
             </a>
-            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $row->id;?>','$dataTable');">
+            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $row->id;?>','$tbl');">
                 <i class="glyphicon glyphicon-trash icon-white"></i>
             </a>
         </td>
@@ -99,20 +99,7 @@ $('#post_table').dataTable( {
 } );
 </script>
   
-  <script type="text/javascript">
-  $("#deleteion").confirm({
-    title:"Delete confirmation",
-    text:"Are you really really sure?",
-    confirm: function(button) {
-        alert("You just confirmed.");
-    },
-    cancel: function(button) {
-        alert("You aborted the operation.");
-    },
-    confirmButton: "Yes I am",
-    cancelButton: "No"
-});
-</script>
+  
 
   
   

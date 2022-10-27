@@ -726,56 +726,102 @@ function is_valid_number(val) {
       }  
     
 }
- function deleteRecord(id,table){
-	     $.confirm({
-    title: 'Confirmation!',
-    content: 'Are you sure to delete!',
-	animation: 'zoom',
-    closeAnimation: 'scale',
-	autoClose: 'cancel|5000',
-	type: 'red',
-	buttons: {
-        deleteUser: {
-            text : 'Yes',
-			btnClass: 'btn-primary',
-            action: function () {
-                // if user click ok the row will be deleted by the following code
-				//ajax call to delete	
-				$.ajax({
-				url: "<?php echo base_url().'crud/delete'; ?>",
-				type: 'POST',
-				data: {id:id,table:table},
-				dataType: "json",
-				success: function(response) {
-					$(".ui-item").hide();
-				if (response.status == 1)
-				{   
-				
-				$("#row_"+id).hide('slow');
-				}
-				else if (response.status ==0)
-				{  
-				$.alert('Error',':You could not delete');
-				}
-				else  
-				{  
-				$.alert('Error',response);
-				
-				}
-				}
-				});
+function deleteRecord(id, table) {
+
+		$.confirm({
+
+			title: 'Confirmation!',
+
+			content: 'Are you sure to delete!',
+
+			animation: 'zoom',
+
+			closeAnimation: 'scale',
+
+			autoClose: 'cancel|5000',
+
+			type: 'red',
+
+			buttons: {
+
+				deleteUser: {
+
+					text: 'Yes',
+
+					btnClass: 'btn-primary',
+
+					action: function() {
+
+						// if user click ok the row will be deleted by the following code
+
+						//ajax call to delete	
+
+						$.ajax({
+
+							url: "<?php echo base_url() . 'crud/delete'; ?>",
+
+							type: 'POST',
+
+							data: {
+								id: id,
+								table: table
+							},
+
+							dataType: "json",
+
+							success: function(response) {
+
+								$(".ui-item").hide();
+
+								if (response.status == 1)
+
+								{
 
 
-            }
-        },
-        cancel: function () {
-			text : 'Yes'
-        },
-    }
-   
-	});  
-	} 
 
+									$("#row_" + id).hide('slow');
+
+								} else if (response.status == 0)
+
+								{
+
+									$.alert('Error', ':You could not delete');
+
+								} else
+
+								{
+
+									$.alert('Error', response);
+
+
+
+								}
+
+							}
+
+						});
+
+
+
+
+
+					}
+
+				},
+
+				cancel: function() {
+
+					text: 'Yes'
+
+				},
+
+			}
+
+
+
+		});
+
+	}
 function deleteItem(id,controllername){
 	
 	     $.confirm({
@@ -1054,49 +1100,151 @@ function is_valid_number(val) {
 		}
 		
 		});  
-	}                             
+	}       
+/*********************************************************/
+function getImage(id, tbl) { // will get single entitty	and show its image in modal
+
+
+
+		$('#edit_image_wrap').show('slow');
+
+		$('#edit_image_wrap').addClass('shown');
+
+		$.ajax({
+
+			url: "<?php echo base_url() . 'crud/edit'; ?>",
+
+			type: 'POST',
+
+			data: {
+				id: id,
+				table: tbl
+			},
+
+			dataType: "json",
+
+			success: function(response) {
+
+				if (response.status == 1)
+
+				{
+
+					//populating data in form field
+
+					var dataArr = response.data;
+
+					$.each(dataArr, function(field, val) {
+
+						$('#form_edit_image #' + field).val(val);
+
+					});
+
+					$('#edit_img_id').val(id);
+
+					var src = '<?php echo base_url() ?>uploads/' + response.data.image;
+
+
+
+					$('#edit_small_image_div').html('<div class="col-xs-2"><img src="' + src + '" class="pull-left" width="100"></div>');
+
+					$('#edit_image_hidden').val(response.data.image);
+
+
+
+				} else
+
+				{
+
+					showAlert('response error');
+
+				}
+
+			}
+
+		});
+
+
 	/*********************************************************/
  
- 	   function deleteImage(id,table){
-	 $.confirm({
-		title: 'Confirmation!',
-		content: 'Are you sure to delete!',
-		animation: 'zoom',
-		closeAnimation: 'scale',
-		autoClose: 'cancel|5000',
-		type: 'red',
-		buttons: {
-		deleteUser: {
-		text : 'Yes',
-		btnClass: 'btn-primary',
-		action: function () {
-		//ajax call to delete	
-		$.ajax({
-		url: "<?php echo base_url().'crud/deleteImage'; ?>",
-		type: 'POST',
-		data: {id:id,table:table},
-		dataType: "json",
-		success: function(response) {
-		if (response.status == 1){   
-			$(".img_wrap_"+id).hide('slow');
+ 	 function deleteImage(id, table) {
+
+		$.confirm({
+
+			title: 'Confirmation!',
+
+			content: 'Are you sure to delete!',
+
+			animation: 'zoom',
+
+			closeAnimation: 'scale',
+
+			autoClose: 'cancel|5000',
+
+			type: 'red',
+
+			buttons: {
+
+				deleteUser: {
+
+					text: 'Yes',
+
+					btnClass: 'btn-primary',
+
+					action: function() {
+
+						//ajax call to delete	
+
+						$.ajax({
+
+							url: "<?php echo base_url() . 'crud/deleteImage'; ?>",
+
+							type: 'POST',
+
+							data: {
+								id: id,
+								table: table
+							},
+
+							dataType: "json",
+
+							success: function(response) {
+
+								if (response.status == 1) {
+
+									$(".img_wrap_" + id).hide('slow');
+
+								} else if (response.status == 0) {
+
+									showAlert('Error :You could not delete');
+
+								} else {
+
+									showAlert(response);
+
+								}
+
+							}
+
+						});
+
+					}
+
+				},
+
+				cancel: function() {
+
+					text: 'Yes'
+
+				},
+
 			}
-		else if (response.status ==0){  
-			showAlert('Error :You could not delete');
-		}
-		else{   
-			showAlert(response);
-		}
-		}
+
+
+
 		});
-		}
-		},
-		cancel: function () {
-		text : 'Yes'
-		},
-		}
-		
-		});  
-	}                             
+
+	}
+             
 /**************************************************************************/
 function open_edit_image_form(id){ 	
 // will get single entitty	and show its image in modal
@@ -1144,45 +1292,7 @@ else{*/
 	   
 	
 /**************************************************************************/
-function getImage(id,tbl){ 	// will get single entitty	and show its image in modal
 
-	$('#edit_image_wrap').show('slow');
-	$('#edit_image_wrap').addClass('shown');
-		    $.ajax({
-			url: "<?php echo base_url().'crud/edit'; ?>",
-			type: 'POST',
-			data: {id:id,table:tbl},
-			dataType: "json",
-			success: function(response) {
-			if (response.status == 1)
-            {   
-			//populating data in form field
-				var dataArr = response.data;
-				$.each(dataArr, function (field, val) {
-					$('#form_edit_image #'+field).val(val);
-				});
-				$('#edit_img_id').val(id);
-				var src ='<?php echo base_url()?>uploads/'+response.data.image;
-				
-				$('#edit_small_image_div').html('<div class="col-xs-2"><img src="'+src+'" class="pull-left" width="100"></div>');
-				$('#edit_image_hidden').val(response.data.image);
-				
-			}
-			else  
-			{   
-			showAlert('response error');
-			}
-			}
-		});
-
-	
-	
-//}
-	   
-	}
-	
-	
-	
 /**************************************************************************/
 
 function save_image(e){

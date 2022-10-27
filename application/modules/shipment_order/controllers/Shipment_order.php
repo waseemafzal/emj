@@ -54,7 +54,8 @@ class Shipment_order extends MX_Controller {
 		$aData["countries"] = $this->country_model->get_country();
 
 $aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
-	
+$aData['vehicles'] = $this->db->where('order_id', $query->id)->get('shipment_orders_oceanfreight')->result();	
+$aData['files'] = $this->db->where('order_id', $query->id)->get('shipment_orders_files')->result();
 		$aData['row']=$query;
 	
 	$shipper_state=	$query->shipper_state;
@@ -99,25 +100,29 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	function save(){ 
 		//extract($_POST);
 		//pre($_POST);
+
 		$PrimaryID = $_POST['id'];
 		$vehicleDescriptionArr=array();
 		$vin_numberArr=array();
 		$purchase_costArr=array();
 		$company_preferenceArr=array();
-if($_POST['shipment_type']==4){
-	$vehicleDescriptionArr=$_POST['vehicle_description'];
+if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])>0){
+	//pre($_POST);
+            	$vehicleDescriptionArr=$_POST['vehicle_description'];
 	$vin_numberArr=$_POST['vin_number'];
 	$purchase_costArr=$_POST['purchase_cost'];
 	$company_preferenceArr=$_POST['company_preference'];
 		unset($_POST['vehicle_description'],$_POST['vin_number'],$_POST['purchase_cost'], $_POST['company_preference']);
 	
 }
+//echo 'out o if';exit;
 		unset($_POST['action'],$_POST['id'],$_POST['description'], $_POST['country_id']);
 	//pre($_POST);
 	//echo $this->tbl;exit;
 		//echo $PrimaryID;exit;
 			//Multiple Images
 	//pre();
+		pre($_POST);
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
 	    if(empty($PrimaryID)){
 				$insrtID = $this->db->insert_id();
@@ -134,8 +139,8 @@ if($_POST['shipment_type']==4){
 				}
 			  }
 
-			if (!empty($vehicleDescriptionArr)){ 
-                $id = $this->db->insert_id();
+			if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])>0){
+                
               $totalvehicle =   count($vehicleDescriptionArr);
                // $_POST['company_preference'] = implode(',', $_POST['company_preference']);
                 //$company_preference =  $_POST['company_preference'];
@@ -143,7 +148,7 @@ if($_POST['shipment_type']==4){
               	$dataArr = array(
                       'vin_number'=>$vin_numberArr[$i],
                       'vehicle_description'=>$vehicleDescriptionArr[$i],
-                      'order_id'=> $id,
+                      'order_id'=> $insrtID,
                       'purchase_cost'=>$purchase_costArr[$i],
                       'company_preference' => $company_preferenceArr[$i]
                       

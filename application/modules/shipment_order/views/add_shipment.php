@@ -101,11 +101,11 @@ background-color: #fff;
    <select name="shipper_state" id="shipper_state" class="form-control">
     <option value="">Select State</option>
      <?php
-    
+    if(isset($row)){
     foreach($nigerianStates as $state)
     {
       $stateSelected='';
-      if(isset($row)){
+      
 if($state['state_id']==$row->shipper_state){
   $stateSelected='selected="selected"';
 }
@@ -122,10 +122,11 @@ if($state['state_id']==$row->shipper_state){
     <option>Select City</option>
    <?php 
 //nigeriancities
+   if(isset($row)){
     foreach($nigerianCities as $city)
     {
       $citySelected='';
-      if(isset($row)){
+      
 if($city['city_id']==$row->shipper_city){
   $citySelected='selected="selected"';
 }
@@ -263,10 +264,11 @@ echo '<option '.$selectedCountry.' value="'.$country->id.'">'.$country->name.'</
    <select name="consignee_state" id="consignee_state" class="form-control">
     <option value="">Select State</option>
     <?php
+    
      foreach ($selectedstates as $selectstate) {  
         $selectedState='';
-       
-if(isset($row)){
+    if(isset($row)){   
+
           if($selectstate['state_id'] == $row->consignee_state){
            $selectedState='selected="selected"'; 
           }
@@ -283,10 +285,12 @@ echo '<option '.$selectedState.' value="'.$selectstate['state_id'].'">'.$selects
   <div class="col-xs-12 col-md-4">
    <select name="consignee_city" id="consignee_city" class="form-control">
     <option value="">Select City</option>
-     <?php foreach ($selectedcities as $selectcity) {  
+     <?php
+
+      foreach ($selectedcities as $selectcity) {  
         $selectedCity='';
-       
-if(isset($row)){
+if(isset($row)){       
+
           if($selectcity['city_id'] == $row->consignee_city){
            $selectedCity='selected="selected"'; 
           }
@@ -375,11 +379,30 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                               
                                <div class="form-group">
                                  <div class="row">
+                                 
                                    <div class="col-md-4">
                               <label style="color: blue">Front and back of title and Invoice</label>
-                                    <input type="file" name="file[]" class=" file"  id="file" accept=".png,.PNG,.JPG,.jpg,.jpeg,.JPEG,.gif"  multiple>
+                                    <input type="file" name="file[]" onchange="preview_image()" class=" file"  id="file" accept=".png,.PNG,.JPG,.jpg,.jpeg,.JPEG,.gif"  multiple>
+                                      <div class="col-md-12">
+                                   <div id="preview_image"></div>
+                                   </div> 
+                                    
+                                    <?php if(isset($row)){
+                                      foreach($files as $image){
+                                        $src = base_url() . 'uploads/' . $image->file; { ?>
+                        <div class="col-xs-4 col-md-4  box-primary  img_wrap_<?php echo $image->id ?>">
+                          <img id="img_<?php echo $image->id ?>" src="<?php echo $src ?>" class="img-responsive"><br>
+                          <center>
+                            <a onclick="getImage('<?php echo $image->id ?>','shipment_orders_files')" class="btn btn-xs btn-success" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Edit">
+                              <i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-xs btn-danger" onclick="deleteImage('<?php echo $image->id ?>','shipment_orders_files')" href="javascript:void(0)" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Delete"><i class="fa fa-times"></i>
+                            </a>
+                          </center>
+
+                        </div>
+                                     <?php }}}?>
                      </div>
-                                
+                               
                                   </div><hr>
                                  <h3>Shipment Details</h3>
                                  <div class="form-group">
@@ -394,30 +417,34 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                      </div>
                                      <div class="col-md-4">
                                        <label>Shipment Date</label>
-                                       <input type="date" name="shipment_date" class="form-control">
+                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
                                      <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
                                      </div>
                                    </div>
                                  </div>
-                                 <?php if(isset($row)){?>
+                                 <?php
+                                 if(isset($row)){
+                                 foreach ($vehicles as $vehicle) {
+                                    if($vehicles->num_rows()>0){
+                                    ?>
                              <div class="form-group field_wrapper">
                                    <div class="row">
                                     <div class="col-md-3">
                                        <label>Vehicle Description</label>
-                                       <input type="text" name="vehicle_description[]" value="<?php echo $row->vehicle_description?>" class="form-control">
+                                       <input type="text" name="vehicle_description[]" value="<?php echo $vehicle->vehicle_description?>" class="form-control">
                                      </div>
                                      <div class="col-md-3">
                                        <label>Vin Number</label>
-                                       <input type="text" name="vin_number[]" value="<?php echo $row->vin_number?>" class="form-control">
+                                       <input type="text" name="vin_number[]" value="<?php echo $vehicle->vin_number?>" class="form-control">
                                      </div>
                                      <div class="col-md-2">
                                        <label>Vehicle Purchase Cost</label>
-                                       <input type="text" name="purchase_cost[]" value="<?php echo $row->purchase_cost?>" class="form-control">
+                                       <input type="text" name="purchase_cost[]" value="<?php echo $vehicle->purchase_cost?>" class="form-control">
                                    
                                      </div>
                                      <div class="col-md-3">
                                        <label>Company Preference</label>
-                                       <input type="text" name="company_preference[]" value="<?php echo $row->company_preference?>" class="form-control">
+                                       <input type="text" name="company_preference[]" value="<?php echo $vehicle->company_preference?>" class="form-control">
                                    
                                      </div>
                                      <div class="col-md-1">
@@ -428,9 +455,9 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
 
                                        
                                    </div>
-                                 <?php }?>
+                                 <?php }}}
                                  
-                                  
+                                  else{?>
                                  <div class="form-group field_wrapper">
                                    <div class="row">
                                     <div class="col-md-3">
@@ -461,7 +488,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                    </div>
                                   
 
-                                 </div>
+                                 </div><?php }?>
                                   </section>
                                         <div class="clearfix">&nbsp;</div>
              <div class="col-xs-12 col-md-12">
@@ -511,6 +538,16 @@ $(function(){
   });
 
 });
+</script>
+<script type="text/javascript">
+function preview_image() 
+{
+ var total_file=document.getElementById("file").files.length;
+ for(var i=0;i<total_file;i++)
+ {
+  $('#preview_image').append("<div class='col-md-3'><img width='100' height='100' c src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
+ }
+}
 </script>
 <script type="text/javascript">
 $(document).ready(function(){

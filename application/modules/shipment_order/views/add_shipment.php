@@ -369,7 +369,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                                  
                                     </div>       
                               </div></section>
-                              <section id="shipment">
+                              
                               
                                <div class="form-group">
                                  <div class="row">
@@ -409,6 +409,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                        <label>To City</label>
                                        <input type="text" name="shipment_to" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_to;} ?>">
                                      </div>
+
                                      <div class="col-md-4">
                                        <label>Shipment Date</label>
                                        <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
@@ -452,7 +453,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                  <?php }}}
                                  
                                   else{?>
-                                 <div class="form-group field_wrapper">
+                                 <div class="form-group field_wrapper" id="shipment">
                                    <div class="row">
                                     <div class="col-md-3">
                                        <label>Vehicle Description</label>
@@ -483,7 +484,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                   
 
                                  </div><?php }?>
-                                  </section>
+                                  
                                         <div class="clearfix">&nbsp;</div>
              <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>
@@ -658,7 +659,7 @@ $(document).ready(function(){
      $("#shipment_type").val(1);
     var h = "Personal Effect";
     $('#heading').html(h);
-    $('#shipper_phone').hide();
+    $('#shipper_phone').show();
     $('#package_details').show();
     $('#shipment').hide();
     $('#select_packaging').show();
@@ -677,9 +678,9 @@ $(document).ready(function(){
     var h = "Air Freight";
     $('#heading').html(h);
     $('#shipper_phone').show();
-     $('#package_details').hide();
+     $('#package_details').show();
     $('#shipment').hide();
-    $('#select_packaging').hide();
+    $('#select_packaging').show();
     $('#shipper_address').show();
     $('#request_pickup').show();
     $('#pickup_location').show();
@@ -695,15 +696,15 @@ $(document).ready(function(){
     var h = "Vehicle Shipment";
     $('#heading').html(h);
     $('#shipper_phone').show();
-     $('#package_details').hide();
+     $('#package_details').show();
     $('#shipment').show();
-    $('#select_packaging').hide();
+    $('#select_packaging').show();
     $('#shipper_address').show();
-    $('#request_pickup').hide();
-    $('#pickup_location').hide();
-    $('#request_insurance').hide();
-     $('#delivery_option').hide();
-     $('#contact_details').hide();
+    $('#request_pickup').show();
+    $('#pickup_location').show();
+    $('#request_insurance').show();
+     $('#delivery_option').show();
+     $('#contact_details').show();
 });
 </script>
 <script type="text/javascript">
@@ -713,9 +714,9 @@ $(document).ready(function(){
     var h = "Ocean Freight";
     $('#heading').html(h);
     $('#shipper_phone').show();
-     $('#package_details').hide();
+     $('#package_details').show();
     $('#shipment').hide();
-    $('#select_packaging').hide();
+    $('#select_packaging').show();
     $('#shipper_address').show();
     $('#request_pickup').show();
     $('#pickup_location').show();

@@ -123,7 +123,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 		//echo $PrimaryID;exit;
 			//Multiple Images
 	//pre();
-		pre($_POST);
+		//pre($_POST);
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
 	    if(empty($PrimaryID)){
 				$insrtID = $this->db->insert_id();
@@ -141,7 +141,8 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 			  }
 
 			if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])>0){
-                
+              $id = $this->db->insert_id();
+              //alert($id);exit();
               $totalvehicle =   count($vehicleDescriptionArr);
                // $_POST['company_preference'] = implode(',', $_POST['company_preference']);
                 //$company_preference =  $_POST['company_preference'];
@@ -149,7 +150,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
               	$dataArr = array(
                       'vin_number'=>$vin_numberArr[$i],
                       'vehicle_description'=>$vehicleDescriptionArr[$i],
-                      'order_id'=> $insrtID,
+                      'order_id'=> $id,
                       'purchase_cost'=>$purchase_costArr[$i],
                       'company_preference' => $company_preferenceArr[$i]
                       

@@ -28,6 +28,7 @@ class Shipment_order extends MX_Controller {
 	public function add(){  
 		
 		$aData['tbl'] =$this->tbl;
+		$aData['add'] =1;
 		$aData["countries"] = $this->country_model->get_country();
 	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
 		$aData['module_heading'] =$this->module_heading;

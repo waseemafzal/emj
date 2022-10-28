@@ -63,10 +63,10 @@ background-color: #fff;
 <input type="text" value="<?php if(isset($row)){ echo $row->phone;} ?>" class="form-control"  name="phone">
                     </div>
                     
-                    <div class="col-xs-12 col-md-12">
+                    <!--<div class="col-xs-12 col-md-12">
                       <label >App links in share button</label>
 <textarea class="form-control"  name="share_message"><?php if(isset($row)){ echo $row->share_message;} ?></textarea>
-                    </div>
+                    </div>-->
 
                       <div class="clearfix">&nbsp;</div>
                       

@@ -22,11 +22,11 @@
 
             	
         <li class="<?=getActive('setting')?>"><a href="setting/edit" ><i class="fa fa-gear"></i>Account settings</a></li>
-            <li class="class="<?=getActive('contacts')?>><a href="contacts"><i class="fa fa-phone"></i>Contacts</a></li>
+            <!--<li class="class="<?=getActive('contacts')?>><a href="contacts"><i class="fa fa-phone"></i>Contacts</a></li>-->
 
         <li class="<?= getActive('countries_management') ?>"><a href="countries_management"><i class="fa fa-th"></i> <span>Countries /State /city </span></a></li>
 
-          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fas fa-shipping-fast'></i> <span>Shipment</span></a></li>      
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa-shopping-cart'></i> <span>Shipment Orders</span></a></li>      
       
         <li class="treeview hidden">
           <a href="#">

@@ -142,8 +142,9 @@ if($url==$record_num){
 	}
 	
 function lasturi(){
-	$CI = &get_instance();
-	return end($CI->uri->segment_array());
+	$refrerlink=$_SERVER['HTTP_REFERER'];
+		$link_array = explode('/',$refrerlink);
+		return end($link_array);
 	}	
 function prelasturi(){
 	$refrerlink=$_SERVER['HTTP_REFERER'];

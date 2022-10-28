@@ -73,7 +73,7 @@ background-color: #fff;
              <div class="alert hidden"></div>
              <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
-                                <h2 id="heading" style="text-align: center">Personal Effect</h2>
+                                <h2 id="heading" >Personal Effect</h2>
                                 <hr>
                                 <!--Body-->
                                   <h3>Contact Details</h3>
@@ -101,14 +101,13 @@ background-color: #fff;
    <select name="shipper_state" id="shipper_state" class="form-control">
     <option value="">Select State</option>
      <?php
-    if(isset($row)){
     foreach($nigerianStates as $state)
     {
       $stateSelected='';
-      
-if($state['state_id']==$row->shipper_state){
-  $stateSelected='selected="selected"';
-}
+			  if(isset($row)){
+		if($state['state_id']==$row->shipper_state){
+		  $stateSelected='selected="selected"';
+		}
       }
      echo '<option '.$stateSelected.' value="'.$state['state_id'].'">'.$state['state'].'</option>';
     }
@@ -315,42 +314,42 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                               
                                          <div class="form-group">
                                         <div class="row">
-                                          <div class="col-md-3">
+                                          <div class="col-md-2">
                                     <label>Quantity</label>
                                     
-                                    <input type="text" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
+                                    <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
                                     
                                     </div>                                      
-                                        <div class="col-md-3">       
-                                    <label>Length</label>
+                                        <div class="col-md-2">       
+                                    <label>Length (cm)</label>
                                     
                                     <input type="text" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
                                     
                                          </div>
-                                           <div class="col-md-3"> 
-                                    <label>Width</label>
+                                           <div class="col-md-2"> 
+                                    <label>Width (cm)</label>
                                     
                                     <input type="text" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
                                     </div>
-                                          <div class="col-md-3">
+                                          <div class="col-md-2">
                                             
-                                    <label>Height</label>
+                                    <label>Height (cm)</label>
                                     
                                     <input type="text" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
                                     
-                                       </div> </div></div> 
-                                               <div class="form-group">
-                                                <div class="row">
-                                                <div id="select_packaging" class="col-md-4">
+                                       </div> 
+                                       <div id="select_packaging" class="col-md-3">
                                     <label>Please Select Your Packaging</label>
                                     
-                                   <select name="package_type">
+                                   <select class="form-control" name="package_type">
                                        <option value="extra large box" <?php if(isset($row)){ echo setSelect($row->package_type,'extra large box');}?>>Extra Large Box</option>
                                        <option value="large box"  <?php if(isset($row)){ echo setSelect($row->package_type,'large box');}?>>Large Box</option>
                                        <option value="medium box" <?php if(isset($row)){ echo setSelect($row->package_type,'medium box');}?>>Medium Box</option>
                                        <option value="letter" <?php if(isset($row)){ echo setSelect($row->package_type,'letter');}?>>Letter</option> 
                                    </select>
-                                        </div></div></div><hr>
+                                        </div>
+                                       </div></div> 
+                                               <hr>
                                         <section id="package_details">
                                         <h3>Package Details</h3>
                                              <div class="form-group">
@@ -367,12 +366,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                     <input type="text" class="form-control" id="carriage_value" name="carriage_value" value="<?php if(isset($row)){ echo $row->carriage_value;} ?>">
                                     
                                         </div> 
-                                                <div class="col-md-4">
-                                    <label>Ship Date</label>
-                                    
-                                    <input type="date" class="form-control" id="ship_date" name="ship_date" value="<?php if(isset($row)){ echo $row->ship_date;} ?>">
-                                    
-                                        </div> 
+                                                 
                                     </div>       
                               </div></section>
                               <section id="shipment">
@@ -393,9 +387,9 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                         <div class="col-xs-4 col-md-4  box-primary  img_wrap_<?php echo $image->id ?>">
                           <img id="img_<?php echo $image->id ?>" src="<?php echo $src ?>" class="img-responsive"><br>
                           <center>
-                            <a onclick="getImage('<?php echo $image->id ?>','shipment_orders_files')" class="btn btn-xs btn-success" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Edit">
-                              <i class="fa fa-pencil"></i></a>
-                            <a class="btn btn-xs btn-danger" onclick="deleteImage('<?php echo $image->id ?>','shipment_orders_files')" href="javascript:void(0)" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Delete"><i class="fa fa-times"></i>
+                            <!--<a onclick="getImage('<?php echo $image->id ?>','shipment_orders_files')" class="btn btn-xs btn-success" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Edit">
+                              <i class="fa fa-pencil"></i></a>-->
+                            <a class="btn btn-xs btn-danger" onclick="deleteImg('<?php echo $image->id ?>','shipment_orders_files')" href="javascript:void(0)" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Delete"><i class="fa fa-times"></i>
                             </a>
                           </center>
 
@@ -521,15 +515,98 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
   <?php  getFooter(); ?>
 
     <!-- Scroll to Top Button-->
- <?php commonjs() ?>
-    <!-- Page level plugins -->
- <script type="text/javascript" src="bower_components/ckeditor/ckeditor.js"></script>   
+ <?php // commonjs() ?>
+   
+   
  
 
 </body>
 
 </html>
+ <script type="text/javascript" src="bower_components/ckeditor/ckeditor.js"></script>   
+ 	 
+
 <script type="text/javascript">
+function deleteImg(id, table) {
+console.log('table'+table);
+console.log('id'+id);
+		$.confirm({
+
+			title: 'Confirmation!',
+
+			content: 'Are you sure to delete!',
+
+			animation: 'zoom',
+
+			closeAnimation: 'scale',
+
+			autoClose: 'cancel|5000',
+
+			type: 'red',
+
+			buttons: {
+
+				deleteUser: {
+
+					text: 'Yes',
+
+					btnClass: 'btn-primary',
+
+					action: function() {
+
+						//ajax call to delete	
+
+						$.ajax({
+
+							url: "<?php echo base_url() . 'crud/deleteImage'; ?>",
+
+							type: 'POST',
+
+							data: {
+								id: id,
+								table: table
+							},
+
+							dataType: "json",
+
+							success: function(response) {
+
+								if (response.status == 1) {
+
+									$(".img_wrap_" + id).hide('slow');
+
+								} else if (response.status == 0) {
+
+									showAlert('Error :You could not delete');
+
+								} else {
+
+									showAlert(response);
+
+								}
+
+							}
+
+						});
+
+					}
+
+				},
+
+				cancel: function() {
+
+					text: 'Yes'
+
+				},
+
+			}
+
+
+
+		});
+
+	}
+
 $(function(){
 
   $('.button').click(function () {
@@ -599,7 +676,7 @@ $(document).ready(function(){
     $("#shipment_type").val(3);
     var h = "Air Freight";
     $('#heading').html(h);
-    $('#shipper_phone').hide();
+    $('#shipper_phone').show();
      $('#package_details').hide();
     $('#shipment').hide();
     $('#select_packaging').hide();
@@ -621,7 +698,7 @@ $(document).ready(function(){
      $('#package_details').hide();
     $('#shipment').show();
     $('#select_packaging').hide();
-    $('#shipper_address').hide();
+    $('#shipper_address').show();
     $('#request_pickup').hide();
     $('#pickup_location').hide();
     $('#request_insurance').hide();
@@ -635,7 +712,7 @@ $(document).ready(function(){
     $("#shipment_type").val(2);
     var h = "Ocean Freight";
     $('#heading').html(h);
-    $('#shipper_phone').hide();
+    $('#shipper_phone').show();
      $('#package_details').hide();
     $('#shipment').hide();
     $('#select_packaging').hide();
@@ -856,7 +933,9 @@ $("#<?=$btn?>").addClass('active');
 
 
 <?php 
-}
+}else{?>
+	$("#personal_effects").click();
+	<?php }
 ?>
 </script>
 

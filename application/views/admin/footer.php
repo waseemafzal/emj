@@ -276,6 +276,7 @@ $('.data-table').DataTable( {
 
 
 $(document).ready(function(){
+	$('.fancybox').fancybox();
 /************************** edit user ***********************************/
 	function eidt_user(){
 	//alert(id);

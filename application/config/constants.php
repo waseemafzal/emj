@@ -12,6 +12,8 @@ define('TBL_SLIDER','slider');
 /***************************/
 define('SUPER_ADMIN',1);
 define('ADMIN',2);
+define('AGENT',2);
+
 define('USER',3);
 /*************************/
 //define('USER_ID',user_id());

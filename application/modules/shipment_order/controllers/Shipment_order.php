@@ -6,6 +6,8 @@ class Shipment_order extends MX_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model("country_model");
+		$this->load->model( 'Api_model', 'AM' );
+        
 		if(!$this->session->userdata('login')==true){
 			redirect('auth/login', 'refresh');
 			
@@ -55,8 +57,8 @@ class Shipment_order extends MX_Controller {
 		$aData["countries"] = $this->country_model->get_country();
 
 $aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
-$aData['vehicles'] = $this->db->where('order_id', $query->id)->get('shipment_orders_oceanfreight')->result();	
-$aData['files'] = $this->db->where('order_id', $query->id)->get('shipment_orders_files')->result();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
 	
 	$shipper_state=	$query->shipper_state;
@@ -99,7 +101,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		}
 	}
 	function save(){ 
-		//extract($_POST);
+		extract($_POST);
 		//pre($_POST);
 
 		$PrimaryID = $_POST['id'];
@@ -124,9 +126,20 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 			//Multiple Images
 	//pre();
 		//pre($_POST);
+		if($PrimaryID==''){
+			$track_number=$this->AM->randomKey(8);
+			if(!checkExist('shipment_orders',array('track_number'=>$track_number))){
+				$_POST['track_number']=$track_number;
+				}
+			}
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
-	    if(empty($PrimaryID)){
+		if($PrimaryID==''){
+			
 				$insrtID = $this->db->insert_id();
+		}
+	    if($PrimaryID!=''){
+			
+				$insrtID = $PrimaryID;
 			
 	    if (!empty($_FILES)){ 
 			$nameArray = $this->crud->upload_files($_FILES);
@@ -140,23 +153,30 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 				}
 			  }
 
-			if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])>0){
-              $id = $this->db->insert_id();
-              //alert($id);exit();
+			if( count($vehicleDescriptionArr)>0){
+             //alert($id);exit();
+			// pre($_POST['vehicle_description']);
               $totalvehicle =   count($vehicleDescriptionArr);
                // $_POST['company_preference'] = implode(',', $_POST['company_preference']);
                 //$company_preference =  $_POST['company_preference'];
+				
               for ($i=0; $i < $totalvehicle; $i++) { 
               	$dataArr = array(
                       'vin_number'=>$vin_numberArr[$i],
                       'vehicle_description'=>$vehicleDescriptionArr[$i],
-                      'order_id'=> $id,
+                      'order_id'=> $insrtID,
                       'purchase_cost'=>$purchase_costArr[$i],
                       'company_preference' => $company_preferenceArr[$i]
                       
 
                 );  
-                $this->db->insert('shipment_orders_oceanfreight', $dataArr);
+				
+				if($PrimaryID!=''){
+					$this->db->where('order_id',$PrimaryID)->delete('shipment_orders_oceanfreight');
+					}
+					$this->db->insert('shipment_orders_oceanfreight', $dataArr);
+						
+                
               }
                 
              //   lq();

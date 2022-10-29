@@ -62,7 +62,7 @@ $Heading=	$module_heading;
                 <i class="glyphicon glyphicon-edit icon-white"></i>
                
             </a>
-            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $row->id;?>','$tbl');">
+            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');">
                 <i class="glyphicon glyphicon-trash icon-white"></i>
             </a>
         </td>

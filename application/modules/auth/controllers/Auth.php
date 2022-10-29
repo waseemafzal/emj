@@ -1096,7 +1096,6 @@ class Auth extends MX_Controller {
 				'name' => $this->input->post('name'),
 				'email' => $this->input->post('email'),
 				'phone' => $this->input->post('phone'),
-				'mobile' => $this->input->post('mobile'),
 				'added_by' => $this->session->userdata('user_id'),
 				'user_type' => $this->input->post('user_type')
 			);
@@ -1115,16 +1114,12 @@ class Auth extends MX_Controller {
 				$error ='Profile pic not uploaded ' . $nameArray['upload_message'];
 				}
 			}
-			if($user_type==SCHOOL){
-			$redirect=base_url().'schools';	
-			}elseif($user_type==ADMIN){
+			if($user_type==ADMIN){
 				$redirect=base_url().'admins';	
 			}else{
 				$redirect=base_url().'super-admins';	
 				}
-			if(get_session('user_type')==AGENT){
-			$redirect=base_url().'auth/profile';
-		}
+			
 		
 		
 		if(prelasturi() =='profile'){

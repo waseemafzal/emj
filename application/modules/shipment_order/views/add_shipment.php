@@ -28,7 +28,7 @@ background-color: #fff;
     top: 10%;
     width: 50%;
 }
-.active{
+.button>.active{
   border-bottom: 2px solid red;
 }
 .button{
@@ -382,10 +382,11 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                    </div> 
                                     
                                     <?php if(isset($row)){
-                                      foreach($files as $image){
+										 if($files->num_rows()>0){
+                                      foreach($files->result() as $image){
                                         $src = base_url() . 'uploads/' . $image->file; { ?>
-                        <div class="col-xs-4 col-md-4  box-primary  img_wrap_<?php echo $image->id ?>">
-                          <img id="img_<?php echo $image->id ?>" src="<?php echo $src ?>" class="img-responsive"><br>
+                        <div style="margin-left:2px " class="col-xs-4 col-md-4 pad0    img_wrap_<?php echo $image->id ?>">
+                         <div class="thumbnail" style="margin-bottom: 2px;"><a class="fancybox" href="<?=$src?>">  <img id="img_<?php echo $image->id ?>" src="<?php echo $src ?>" class="img-responsive"></a></div>
                           <center>
                             <!--<a onclick="getImage('<?php echo $image->id ?>','shipment_orders_files')" class="btn btn-xs btn-success" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Edit">
                               <i class="fa fa-pencil"></i></a>-->
@@ -394,7 +395,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                           </center>
 
                         </div>
-                                     <?php }}}?>
+                                     <?php } }}}?>
                      </div>
                                
                                   </div><hr>
@@ -419,8 +420,10 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                  </div>
                                  <?php
                                  if(isset($row)){
-                                 foreach ($vehicles as $vehicle) {
-                                    if($vehicles->num_rows()>0){
+									  if($vehicles->num_rows()>0){
+										  $v=0;
+                                 foreach ($vehicles->result() as $vehicle) {
+                                   
                                     ?>
                              <div class="form-group field_wrapper">
                                    <div class="row">
@@ -443,14 +446,20 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                    
                                      </div>
                                      <div class="col-md-1">
+                                     <?php if($v==0){ ?>
  <a href="javascript:void(0);" class="add_button" title="Add field">
   <img width="30" height="30" src="<?php echo base_url()?>image/add-more.png">
                                                 </a>
+                                                <?php } else { ?>
+                                                <a  href="javascript:void(0);" class="remove_button"><img height="30" width="30" src="<?php echo base_url()?>image/remove.png"/></a>
+                                                <?php } ?>
                                      </div>
 
                                        
                                    </div>
-                                 <?php }}}
+                                 <?php 
+								 $v++;
+								 }}}
                                  
                                   else{?>
                                  <div class="form-group field_wrapper" id="shipment">
@@ -781,7 +790,7 @@ $(document).ready(function(){
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){
                 $(".alert").addClass('hidden');
-                $('#form_add_update')[0].reset();
+                //$('#form_add_update')[0].reset();
                 },3000);
             }
            else if (data.status ==0)

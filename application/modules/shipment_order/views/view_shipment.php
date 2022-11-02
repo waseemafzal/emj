@@ -38,6 +38,7 @@ $Heading=	$module_heading;
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
+        <th>Status</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -55,9 +56,17 @@ $Heading=	$module_heading;
     <td><?php echo $row->shipment_date;?></td>
     <td><?php echo $row->consignee_name;?></td>
     <td><?php echo $row->consignee_phone;?></td>   
-    <td><?php echo $row->consignee_address;?></td>   
+    <td><?php echo $row->consignee_address;?></td>
+    <td>  
+      <select id="status_change" onchange="updateStatus('row_<?php echo $row->id;?>', this.value)">
+           <?php 
+             $query = $this->db->get('shipment_status')->result_array();
+           foreach($query as $status){?>
+            <option value="<?php echo $status['id']?>"><?php echo $status['status_title'];?></option>
+          <?php }?>
+         </select></td> 
     <td class="center">
-         
+       
            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Edit'));?>" class="btn btn-info btn-xs" href="<?=$controller?>/edit/<?php echo $row->id;?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
                
@@ -98,7 +107,20 @@ $('#post_table').dataTable( {
   "ordering": false
 } );
 </script>
-  
+<script>
+  function updateStatus(id,status){
+var formdata = new formData();
+formdata.append('id', id,'status', status);
+$.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "<?php echo base_url()?>Shipment_order/updatestatus",
+          data: formdata,
+      
+        });
+
+  }
+</script>  
   
 
   

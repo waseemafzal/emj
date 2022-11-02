@@ -74,7 +74,6 @@ $consignee_state = $query->consignee_state;
 
 $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
 
-
 		//pre($aData);
 		$aData['tbl'] =$this->tbl;
 		
@@ -246,7 +245,9 @@ $mess = $e['message'];
 			break;	
 		}
 	}
-
+public function updatestatus($id, $status){
+       $this->db->where('id', $id)->update('shipment_orders', ['shipment_status'=>$status]);
+}
 
 
 

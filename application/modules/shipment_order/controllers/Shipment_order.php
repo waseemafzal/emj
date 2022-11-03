@@ -245,8 +245,14 @@ $mess = $e['message'];
 			break;	
 		}
 	}
-public function updatestatus($id, $status){
-       $this->db->where('id', $id)->update('shipment_orders', ['shipment_status'=>$status]);
+public function updateStatus(){
+	extract($_POST);//pre($_POST);
+       $response = array('status'=>201, 'message'=>'Not Updated');
+      $query = $this->db->where('id', $id)->update('shipment_orders', array('shipment_status'=>$status));
+      if($query){
+      	$response = array('status'=>200, 'message'=>'Updated Successfully');
+      }
+      echo json_encode($response);
 }
 
 

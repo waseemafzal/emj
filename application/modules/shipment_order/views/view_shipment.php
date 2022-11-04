@@ -18,6 +18,7 @@ $Heading=	$module_heading;
         
       </h1>
       <ol class="breadcrumb">
+
         <li > <a href="<?=$controller?>/add" class="btn btn-sm btn-success txt-white"><i class="fa fa-plus icon-white"></i> Add New Record</a></li>
       </ol>
     </section>
@@ -41,6 +42,7 @@ $Heading=	$module_heading;
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
         <th>Status</th>
+        <th>Invoice</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -78,9 +80,14 @@ $Heading=	$module_heading;
             
           
          </select></td> 
+         
+          <td>
+            <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Generate Invoice</a>
+         </td>
+         
     <td class="center">
             
-           <button data-target="#shipment_modal_<?php echo $row->id;?>" class="btn btn-primary btn-xs" data-toggle="modal" >View Details</button> 
+           <button data-target="#shipment_modal_<?php echo $row->id;?>" class="btn btn-primary btn-xs" data-toggle="modal" ><i class="fa fa-eye"></i></button> 
            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Edit'));?>" class="btn btn-info btn-xs" href="<?=$controller?>/edit/<?php echo $row->id;?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
             </a>
@@ -97,20 +104,20 @@ $Heading=	$module_heading;
        
        <div  class="modal-body">
         <div class="col-md-6">
-          <h5>Shipper Details</h5>
+          <h3>Shipper Details</h3>
        
           <table class="table table-striped">
             <tr>
-              <td>Name: <?php echo $row->shipper_name?></td>
-              <td>Phone: <?php echo $row->shipper_phone?></td>
+              <td><b>Name:</b> <?php echo $row->shipper_name?></td>
+              <td><b>Phone:</b> <?php echo $row->shipper_phone?></td>
             </tr>
             <tr>
-              <td>Trcking Number: <?php echo $row->track_number?></td>
-              <td>State: <?php echo $row->shipper_state?></td>
+              <td><b>Trcking Number:</b> <?php echo $row->track_number?></td>
+              <td><b>State:</b> <?php echo $row->shipper_state?></td>
             </tr>
             <tr>
-              <td>City: <?php echo $row->shipper_city?></td>
-              <td>Address: <?php echo $row->shipper_address?></td>
+              <td><b>City:</b> <?php echo $row->shipper_city?></td>
+              <td><b>Address:</b> <?php echo $row->shipper_address?></td>
             </tr>
            
           </table>
@@ -118,59 +125,72 @@ $Heading=	$module_heading;
        
 
         <div class="col-md-6">
-          <h5>Consignee Details</h5>
+          <h3>Consignee Details</h3>
        
           <table class="table table-striped">
             <tr>
-              <td>Name: <?php echo $row->consignee_name?></td>
-              <td>Country: <?php echo $row->consignee_country?></td>
+              <td><b>Name:</b> <?php echo $row->consignee_name?></td>
+              <td><b>Country:</b> <?php echo $row->consignee_country?></td>
             </tr>
              <tr>
-              <td>State: <?php echo $row->consignee_state?></td>
-              <td>City: <?php echo $row->consignee_city?></td>
+              <td><b>State:</b> <?php echo $row->consignee_state?></td>
+              <td><b>City:</b> <?php echo $row->consignee_city?></td>
             </tr>
              <tr>
-              <td>Address: <?php echo $row->consignee_address?></td>
-              <td>Phone: <?php echo $row->consignee_phone?></td>
+              <td><b>Address:</b> <?php echo $row->consignee_address?></td>
+              <td><b>Phone:</b> <?php echo $row->consignee_phone?></td>
             </tr>
           </table>
         </div>
          <div class="col-md-12">
-          <h5>Item Details</h5>
+          <h3>Item Details</h3>
        
           <table class="table table-striped">
             <tr>
-              <td>Description: <?php echo $row->item_description?></td>
-              <td>Quantity: <?php echo $row->quantity?></td>
-              <td>Length: <?php echo $row->length?></td>
-              <td>Width: <?php echo $row->width?></td>
+              <td><b>Description:</b><?php echo $row->item_description?></td>
+              <td><b>Quantity:</b> <?php echo $row->quantity?></td>
+              <td><b>Length:</b> <?php echo $row->length?></td>
+              <td><b>Width:</b> <?php echo $row->width?></td>
             </tr>
              <tr>
-              <td>Height: <?php echo $row->height?></td>
-              <td>Package Type: <?php echo $row->package_type?></td>
-              <td>Package Weight: <?php echo $row->package_weight?></td>
-              <td>Carriage Value: <?php echo $row->carriage_value?></td>
+              <td><b>Height:</b> <?php echo $row->height?></td>
+              <td><b>Package Type:</b> <?php echo $row->package_type?></td>
+              <td><b>Package Weight:</b> <?php echo $row->package_weight?></td>
+              <td><b>Carriage Value:</b> <?php echo $row->carriage_value?></td>
             </tr>
              <tr>
-              <td>Amount: <?php echo $row->amount?></td>
-              <td>Shipment Type: <?php echo $row->shipment_type?></td>
-              <td>Shipment From: <?php echo $row->shipment_from?></td>
-              <td>Shipment To: <?php echo $row->shipment_to?></td>
+              <td><b>Amount:</b> <?php echo $row->amount?></td>
+              <td><b>Shipment Type:</b> <?php echo $row->shipment_type?></td>
+              <td><b>Shipment From:</b> <?php echo $row->shipment_from?></td>
+              <td><b>Shipment To:</b> <?php echo $row->shipment_to?></td>
             </tr>
              <tr>
-              <td>Shipment Date: <?php echo $row->shipment_date?></td>
-              <td>Request Pickup: <?php echo $row->request_pickup?></td>
-              <td>Request Insurance: <?php echo $row->request_insurance?></td>
-              <td>Pickup Location: <?php echo $row->pickup_location?></td>
+              <td><b>Shipment Date:</b> <?php echo $row->shipment_date?></td>
+              <td><b>Request Pickup:</b> <?php echo $row->request_pickup?></td>
+              <td><b>Request Insurance:</b> <?php echo $row->request_insurance?></td>
+              <td><b>Pickup Location:</b> <?php echo $row->pickup_location?></td>
             </tr>
              <tr>
-              <td>Delivery Type: <?php echo $row->delivery_type?></td>
+              <td><b>Delivery Type:</b> <?php echo $row->delivery_type?></td>
              
             </tr>
             
           </table>
         </div>
-         
+         <div class="col-md-6">
+          <h3>Images</h3>
+           
+             <?php 
+                   $select = $this->db->where('order_id', $row->id)->get('shipment_orders_files')->result_array();
+                  
+             ?>
+           <?php foreach($select as $image){?>
+            <div style="display: inline-block;">
+              <a href="<?php echo setImage($image['file'])?>" class='fancybox'><img src="<?php echo setImage($image['file']);?>" width="50"></a>
+                  </div>
+           <?php }?>
+           
+         </div>
      
        </div>
      <div class="modal-footer">

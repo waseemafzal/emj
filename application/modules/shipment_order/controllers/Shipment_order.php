@@ -254,7 +254,16 @@ public function updateStatus(){
       }
       echo json_encode($response);
 }
+public function generateinvoice($id){
+	$data['orders'] = $this->db->where('id', $id)->get('shipment_orders')->result_array();
+ //print_r($data);exit();
+	//$data = $data[0];
+   
+	$this->load->view('generate-invoice', $data);
 
-
-
+}
+public function saveinvoice(){
+	extract($_POST);
+	pre($_POST);
+}
 }

@@ -74,7 +74,6 @@ $consignee_state = $query->consignee_state;
 
 $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
 
-
 		//pre($aData);
 		$aData['tbl'] =$this->tbl;
 		
@@ -246,8 +245,100 @@ $mess = $e['message'];
 			break;	
 		}
 	}
+public function updateStatus(){
+	extract($_POST);//pre($_POST);
+       $response = array('status'=>201, 'message'=>'Not Updated');
+      $query = $this->db->where('id', $id)->update('shipment_orders', array('shipment_status'=>$status));
+      if($query){
+      	$response = array('status'=>200, 'message'=>'Updated Successfully');
+      }
+      echo json_encode($response);
+}
+public function generateinvoice($id){
+	$data = $this->db->where('id', $id)->get('shipment_orders')->result_array();
+ //print_r($data);exit();
+	$data['result'] = $data[0];
+   
+	$this->load->view('generate-invoice', $data);
 
+}
+function saveInvoice(){ 
+		extract($_POST);
+		//pre($_POST);
+		$tcpdfContent=$pdfcontent;
+		unset($_POST['pdfcontent']);
+		$mail=$ifmail;
+		unset($_POST['ifmail']);
+		
+		$_POST['detail']=array(
+		'items'=>$_POST['item'],
+		'quantities'=>$_POST['quantity'],
+		'rates'=>$_POST['rate'],
+		'subtotal'=>$_POST['subtotal']
+		);
+		$_POST['amount']=$_POST['total'];
+		$_POST['detail']=json_encode($_POST['detail']);
+		unset($_POST['total'],$_POST['item'],$_POST['quantity'],$_POST['rate'],$_POST['subtotal']);
+		$PrimaryID ='';
+		if(isset($_POST['id']) and $_POST['id']!=''){
+			$PrimaryID = $_POST['id'];
+			}
+		unset($_POST['action'],$_POST['id']);
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('created_date', 'created date', 'trim|required');
+		$this->form_validation->set_rules('due_date', 'due date', 'trim|required');
+		/*$this->form_validation->set_rules('start_date', 'start date', 'trim|required');
+		$this->form_validation->set_rules('end_date', 'end date', 'trim|required');*/
+		if ($this->form_validation->run()==false){
+			$arr = array("status"=>"validation_error" ,"message"=> validation_errors());
+			echo json_encode($arr);
+		}else{
+			$_POST['created_by']=get_session('id');
+		$dArr=	explode('/',$created_date);
+		
+  $_POST['created_date']= $dArr[2].'-'.$dArr[1].'-'.$dArr[0];
+  $dArr=	explode('/',$due_date);		
+  $_POST['due_date']= $dArr[2].'-'.$dArr[1].'-'.$dArr[0];
+  
+  if(isset($_POST['paid'])){
+	  $_POST['paid']='Yes';
+	  }else {
+	  $_POST['paid']='No';
+	  }
+			
+			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
+			
+			
+			
+			/*===============================================*/
+			if($mail){
+				// generate pdf
+				$filePath = $this->generatePdf($tcpdfContent);
+				// send email to this client
+				$m='<p>'.ucfirst(get_session('name')).' sent you an invoice. please find an attachment</p>';
+				//$this->seneMailtoUser($filePath,$m);
+			}
+		switch($result){
+			case 1:
+			
+			$arr = array('status' => 1,'message' => "Saved Succefully !");
+			echo json_encode($arr);
+			break;
+			case 2:
+			$arr = array('status' => 2,'message' => "Updated Succefully !");
+			echo json_encode($arr);
+			break;
+			case 0:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;
+			default:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;	
+		}
+	}	
 
-
+	}
 
 }

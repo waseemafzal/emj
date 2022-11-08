@@ -7,7 +7,9 @@ $Heading=	$module_heading;
  ?>
    <style>
    .txt-white{ color:#fff !important}
+  
    </style>
+  
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -16,6 +18,7 @@ $Heading=	$module_heading;
         
       </h1>
       <ol class="breadcrumb">
+
         <li > <a href="<?=$controller?>/add" class="btn btn-sm btn-success txt-white"><i class="fa fa-plus icon-white"></i> Add New Record</a></li>
       </ol>
     </section>
@@ -29,15 +32,17 @@ $Heading=	$module_heading;
             </div>
             <!-- /.box-header -->
              <div class="box-body">
-                <table id="post_table" class="table table-striped table-bordered   responsive">
+                <table id="post_table" class="table table-bordered responsive">
     <thead>
     <tr>
+        <th>Track Number</th>
         <th>Shipper Name</th>
 		    <th>Shipper Address</th>
-        <th>Shippment Date</th>
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
+        <th>Status</th>
+        <th>Invoice</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -50,21 +55,151 @@ $Heading=	$module_heading;
 		?>
 		<tr id="row_<?php echo $row->id;?>">
         
-		<td><?php echo $row->shipper_name;?></td>
+		<td align="center"><?php echo $row->track_number;?></td>
+    <td><?php echo $row->shipper_name;?></td>
     <td><?php echo $row->shipper_address;?></td>
-    <td><?php echo $row->shipment_date;?></td>
+    
+    
     <td><?php echo $row->consignee_name;?></td>
     <td><?php echo $row->consignee_phone;?></td>   
-    <td><?php echo $row->consignee_address;?></td>   
-    <td class="center">
+    <td><?php echo $row->consignee_address;?></td>
+    <td>  
+      <select id="status_change" onchange="updateStatus('<?php echo $row->id;?>', this.value)">
+           <?php 
+             $query = $this->db->get('shipment_status')->result_array();
+
+           foreach($query as $status){
+            $selected="";
+          if(isset($row)){
+            if($status['status_title']==$row->Shipment_status){
+              $selected='selected="selected"';
+            }
+          }
+           echo '<option '.$selected.'>'.$status['status_title'].'</option>';
+           } ?>
+            
+          
+         </select></td> 
          
+          <td>
+            <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Generate Invoice</a>
+         </td>
+         
+    <td class="center">
+            
+           <button data-target="#shipment_modal_<?php echo $row->id;?>" class="btn btn-primary btn-xs" data-toggle="modal" ><i class="fa fa-eye"></i></button> 
            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Edit'));?>" class="btn btn-info btn-xs" href="<?=$controller?>/edit/<?php echo $row->id;?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
-               
             </a>
             <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');">
                 <i class="glyphicon glyphicon-trash icon-white"></i>
             </a>
+            <div class="modal fade" id="shipment_modal_<?php echo $row->id;?>" tabindex="-1" data-backdrop="static">
+     <div class="modal-dialog-lg modal-dialog-centered">
+      <div class="modal-content">
+       <div class="modal-header">
+         <h4 class="modal-title">Shipment Details of <?=$row->shipper_name?></h4>
+       <button class="close" data-dismiss="modal"><span>&times;</span></button>
+       </div>
+       
+       <div  class="modal-body">
+        <div class="col-md-6">
+          <h3>Shipper Details</h3>
+       
+          <table class="table table-striped">
+            <tr>
+              <td><b>Name:</b> <?php echo $row->shipper_name?></td>
+              <td><b>Phone:</b> <?php echo $row->shipper_phone?></td>
+            </tr>
+            <tr>
+              <td><b>Trcking Number:</b> <?php echo $row->track_number?></td>
+              <td><b>State:</b> <?php echo $row->shipper_state?></td>
+            </tr>
+            <tr>
+              <td><b>City:</b> <?php echo $row->shipper_city?></td>
+              <td><b>Address:</b> <?php echo $row->shipper_address?></td>
+            </tr>
+           
+          </table>
+        </div>
+       
+
+        <div class="col-md-6">
+          <h3>Consignee Details</h3>
+       
+          <table class="table table-striped">
+            <tr>
+              <td><b>Name:</b> <?php echo $row->consignee_name?></td>
+              <td><b>Country:</b> <?php echo $row->consignee_country?></td>
+            </tr>
+             <tr>
+              <td><b>State:</b> <?php echo $row->consignee_state?></td>
+              <td><b>City:</b> <?php echo $row->consignee_city?></td>
+            </tr>
+             <tr>
+              <td><b>Address:</b> <?php echo $row->consignee_address?></td>
+              <td><b>Phone:</b> <?php echo $row->consignee_phone?></td>
+            </tr>
+          </table>
+        </div>
+         <div class="col-md-12">
+          <h3>Item Details</h3>
+       
+          <table class="table table-striped">
+            <tr>
+              <td><b>Description:</b><?php echo $row->item_description?></td>
+              <td><b>Quantity:</b> <?php echo $row->quantity?></td>
+              <td><b>Length:</b> <?php echo $row->length?></td>
+              <td><b>Width:</b> <?php echo $row->width?></td>
+            </tr>
+             <tr>
+              <td><b>Height:</b> <?php echo $row->height?></td>
+              <td><b>Package Type:</b> <?php echo $row->package_type?></td>
+              <td><b>Package Weight:</b> <?php echo $row->package_weight?></td>
+              <td><b>Carriage Value:</b> <?php echo $row->carriage_value?></td>
+            </tr>
+             <tr>
+              <td><b>Amount:</b> <?php echo $row->amount?></td>
+              <td><b>Shipment Type:</b> <?php echo $row->shipment_type?></td>
+              <td><b>Shipment From:</b> <?php echo $row->shipment_from?></td>
+              <td><b>Shipment To:</b> <?php echo $row->shipment_to?></td>
+            </tr>
+             <tr>
+              <td><b>Shipment Date:</b> <?php echo $row->shipment_date?></td>
+              <td><b>Request Pickup:</b> <?php echo $row->request_pickup?></td>
+              <td><b>Request Insurance:</b> <?php echo $row->request_insurance?></td>
+              <td><b>Pickup Location:</b> <?php echo $row->pickup_location?></td>
+            </tr>
+             <tr>
+              <td><b>Delivery Type:</b> <?php echo $row->delivery_type?></td>
+             
+            </tr>
+            
+          </table>
+        </div>
+         <div class="col-md-6">
+          <h3>Images</h3>
+           
+             <?php 
+                   $select = $this->db->where('order_id', $row->id)->get('shipment_orders_files')->result_array();
+                  
+             ?>
+           <?php foreach($select as $image){?>
+            <div style="display: inline-block;">
+              <a href="<?php echo setImage($image['file'])?>" class='fancybox'><img src="<?php echo setImage($image['file']);?>" width="50"></a>
+                  </div>
+           <?php }?>
+           
+         </div>
+     
+       </div>
+     <div class="modal-footer">
+     <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+     </div>
+     
+     </div>
+</div>
+</div>
         </td>
     </tr>
     
@@ -94,11 +229,40 @@ $Heading=	$module_heading;
 
   <?php  getFooter(); ?>
 <script>
+ function updateStatus(id,status){
+
+var formData = new FormData();
+ formData.append("id", id);
+ formData.append("status", status);
+  // ajax start
+        $.ajax({
+      type: "POST",
+      url: "<?php echo base_url()?>Shipment_order/updateStatus",
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'JSON',
+      beforeSend: function() {
+      $('#loader').removeClass('hidden');
+    //  $('#form_add_update .btn_au').addClass('hidden');
+      },
+      success: function(data){
+        $('#loader').addClass('hidden');
+        if(data.status==200){
+          window.location.href = "<?php echo base_url() .'Shipment_order' ?>";
+        }
+           }
+   });
+
+  }
+</script>  
+<script>
 $('#post_table').dataTable( {
   "ordering": false
 } );
 </script>
-  
+
   
 
   

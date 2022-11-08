@@ -71,11 +71,11 @@ $Heading=	$module_heading;
            foreach($query as $status){
             $selected="";
           if(isset($row)){
-            if($status['status_title']==$row->Shipment_status){
+            if($status['status_id']==$row->shipment_status){
               $selected='selected="selected"';
             }
           }
-           echo '<option '.$selected.'>'.$status['status_title'].'</option>';
+           echo '<option value = "'.$status['status_id'].'" '.$selected.'>'.$status['status_title'].'</option>';
            } ?>
             
           

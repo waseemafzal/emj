@@ -1029,7 +1029,7 @@ $geolocation = $lat.','.$lon;
 	/*******************/
     function shipmentOrders(){ 
         extract($_POST);
-        //pre($_FILES);
+        //pre($_POST);
 $this->AM->verifyRequiredParams( array(
              "shipper_name", 
              "shipper_phone",
@@ -1092,7 +1092,9 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
                 $insrtID = $PrimaryID;
             
         if (!empty($_FILES)){ 
+            //pre($_FILES);
             $nameArray = $this->crud->upload_files($_FILES);
+           // pre($nameArray);
             $nameData = explode(',',$nameArray);
             foreach($nameData as $file){
                 $file_data = array(

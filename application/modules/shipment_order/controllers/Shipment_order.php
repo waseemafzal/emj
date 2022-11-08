@@ -101,6 +101,9 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	}
 	function save(){ 
 		extract($_POST);
+		// echo "<pre>";
+		// print_r($_POST);
+		// pre($_FILES);
 		//pre($_POST);
 
 		$PrimaryID = $_POST['id'];
@@ -139,8 +142,10 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 	    if($PrimaryID!=''){
 			
 				$insrtID = $PrimaryID;
+
 			
 	    if (!empty($_FILES)){ 
+	    	pre($_FILES);
 			$nameArray = $this->crud->upload_files($_FILES);
 			$nameData = explode(',',$nameArray);
 			foreach($nameData as $file){

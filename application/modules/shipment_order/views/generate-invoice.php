@@ -264,11 +264,11 @@ if($('#disount, #tax').val()==""){
   }
 
 if(($('#tax').val()!="")){
-    var subtotal = parseFloat( $('.subtotal').val());
-var taxRate = parseFloat( $('#tax').val());
-var discount = parseFloat( $('#discount').val());
+    var subtotal = parseInt( $('.subtotal').val());
+var taxRate = parseInt( $('#tax').val());
+var discount = parseInt( $('#discount').val());
 
-var taxAmount = subtotal * (taxRate/parseFloat("100")); //15000 * .1
+var taxAmount = subtotal * (taxRate/parseInt("100")); //15000 * .1
 //console.log(disc);
 var tax = subtotal + (taxAmount);
 $("#total").val(tax);

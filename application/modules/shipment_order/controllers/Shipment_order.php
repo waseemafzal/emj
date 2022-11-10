@@ -260,10 +260,17 @@ public function updateStatus(){
       echo json_encode($response);
 }
 public function generateinvoice($id){
-	$data = $this->db->where('id', $id)->get('shipment_orders')->result_array();
+	$data['result'] = $this->db->where('id', $id)->get('shipment_orders')->row();
+	$invoice = $this->db->where('order_id', $id)->get('clients_invoice')->result_array();
  //print_r($data);exit();
-	$data['result'] = $data[0];
-   
+	//lq();exit();
+	//echo "<pre>";
+	//print_r($invoice);exit();
+	//$data['result'] = $data[0];
+  if(count($invoice)>0){
+  	$data['row'] = $invoice;
+  //echo "<pre>";print_r($data['row']);exit();
+  	 }  
 	$this->load->view('generate-invoice', $data);
 
 }

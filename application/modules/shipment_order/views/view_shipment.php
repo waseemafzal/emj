@@ -82,7 +82,7 @@ $Heading=	$module_heading;
          </select></td> 
          
           <td>
-            <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Generate Invoice</a>
+            <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Invoice</a>
          </td>
          
     <td class="center">

@@ -80,7 +80,7 @@ background-color: #fff;
         <div class="col-sm-4 invoice-col">
           From
           <address>
-            <strong>Admin</strong><br>
+            <strong>EmjayGlobal</strong><br>
             Chowk Shah Abbass Multan<br>
             Phone: 0341-1663111<br>
             Email: admin@admin.com
@@ -93,11 +93,15 @@ background-color: #fff;
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          <b>Invoice #</b><br>
+          <b>Invoice # <?php if(isset($row)){
+            echo $row[0]['id'];
+          echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
+          } ?></b><br>
           <br>
-          <b>Created Date:</b><input type="date" name="created_date"><br>
-          <b>Payment Due:</b><input type="date" name="due_date">
-          <input type="hidden" name="order_id" value="<?php echo $result['id']?>">
+  <?php if(isset($row)){$row=$row[0];} ?>
+          <b>Created Date:</b><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"><br>
+          <b>Payment Due:</b><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>">
+          <input type="hidden" name="order_id" value="<?php echo $result->id?>">
           
         </div>
         <!-- /.col -->
@@ -117,32 +121,62 @@ background-color: #fff;
             </tr>
             </thead>
             <tbody class="field_wrapper">
-             <tr id="row_0">
-             <td> <input type="text" class="form-control noprint" name="item[]" /></td>
-              <td><input type="number" class="form-control quantity noprint" name="quantity[]"/>
-               
+              <?php 
+                   if(isset($row)){
+                $detail = json_decode($row['detail']);
+         $count = count($detail->rates);
+     for($i=0;$i<$count;$i++){
+         $item = $detail->items[$i];
+         $quantity = $detail->quantities[$i];
+         $rate = $detail->rates[$i];
+         $subtotal = $detail->subtotal[$i];
+        
+          ?>
+          <tr id="row_0">
+              <td><input type="text" class="form-control noprint" name="item[]" value="<?=$item?>" />
+              <p  class="showpdf hidden"><?=$item?></p>
               </td>
-              <td><input type="text" class="form-control rate noprint" name="rate[]"/>
+              <td><input type="number" class="form-control quantity noprint" name="quantity[]" value="<?=$quantity?>" />
+               <p  class="showpdf hidden"><?=$quantity?></p>
               </td>
-              <td><input type="text" class="form-control subtotal noprint" readonly="readonly" name="subtotal[]"/>
+              <td><input type="text" class="form-control rate noprint" name="rate[]" value="<?=$rate?>" />
+               <p  class="showpdf hidden"><?=$rate?></p>
+              </td>
+              <td><input type="text" class="form-control subtotal noprint" readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
+              <?php 
+        if($subtotal!=''){
+        ?>
+                <b class="showpdf hidden"><?=$subtotal?></b>
+                <?php } ?>
+              </td>
             </tr>
+         <?php  }
+      }else{
+        ?>
+            <tr id="row_0">
+              <td><input type="text" class="form-control" name="item[]" /></td>
+              <td><input type="number" class="form-control quantity" name="quantity[]" /></td>
+              <td><input type="text" class="form-control rate" name="rate[]" /></td>
+              <td><input type="text" class="form-control subtotal" readonly="readonly" name="subtotal[]" /></td>
+            </tr>
+        <?php } ?>
            </tbody>
             <tfoot>
             <tr>
               <td colspan="3" style="text-align: right;">Tax %</td>
-              <td><input type="number" class="form-control noprint" id="tax" onchange="taxadd()" name="tax" />
+              <td><input type="number" class="form-control noprint" id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
                 </td>
             </tr>
            <tr>
               <td colspan="3" style="text-align: right;">Discount</td>
-              <td><input type="number" class="form-control" id="discount" name="discount" /></td>
+              <td><input type="number" class="form-control" id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
             </tr>
            <tr>
               <td colspan="3" style="text-align: right;">Total</td>
               <td>
                 <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control noprint" id="total" name="total" />
+                <input type="text" class="form-control noprint" id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
                 
               </div>
                 </td>
@@ -152,27 +186,32 @@ background-color: #fff;
               </tr>   
          <tr>
               <td colspan="4" ><b>Payment Terms</b>
-                <textarea class="form-control noprint" id="payment_terms"  name="payment_terms" rows="2" /><?=$payment_terms?></textarea>
-                <?php 
-        if($payment_terms!=''){
-        ?>
-                <p class="showpdf hidden"><?=$payment_terms?></p>
-                <?php } ?>
+                <textarea class="form-control noprint" id="payment_terms"  name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
+              
                 </td>
             </tr>
         <tr>
               <td colspan="4" ><b>Notes</b>
-                <textarea class="form-control noprint" id="notes" name="notes" rows="2" /><?=$notes?></textarea>
-                <?php 
-        if($notes!=''){
-        ?>
-                <p class="showpdf hidden"><?=$notes?></p>
-                <?php } ?>
+                <textarea class="form-control noprint" id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
+                
                 </td>
             </tr>
         <tr>
+          <?php 
+             $Checked = '';
+          if(isset($row)){
+            
+           switch($row['paid']){
+            case 'Yes':
+            $Checked = 'Checked';
+            break;
+            case 'No':
+            $Checked = '';
+           }
+         }
+            ?>
               <td colspan="4" class="noprint" >
-               <input type="checkbox" name="paid" id="paid"  data-toggle="tooltip" title="Mark True if paid" /><b>Paid </b></td>
+               <input type="checkbox" name="paid" id="paid"  data-toggle="tooltip" title="Mark True if paid" <?php echo $Checked;?>><b>Paid </b></td>
             </tr>
                    
             </tfoot>
@@ -234,97 +273,44 @@ $('textarea').change(function(){
   $(this).parent().append('<div  class="showpdf hidden"><p>'+$(this).val()+'</p></div>');
   });
   
-   function update_amounts()
-{
-    var sum = 0;
+
+  $('#items').change(function(){
+   var sum = 0;
+   /***********loop through trs****************/
     $('#items > tbody  > tr').each(function() {
         var qty = $(this).find(".quantity").val();
         var price = $(this).find('.rate').val();
-    if(qty==undefined){
-      qty=0;
-      }
-      if(price==undefined){
-      price=0;
-      }
-      //console.log('qty '+qty);
-      //console.log('price '+price);
+        if(qty==undefined){
+        qty=0;
+        }
+        if(price==undefined){
+        price=0;
+        }
         var amount = (qty*price);
-        //sum+=amount;
-        //alert(sum);
-    //console.log('sum '+sum);
         $(this).find('.subtotal').val(amount);
-        //alert('.subtotal')
-          // if(!isNaN(amount))
-          
-            sum+=amount;
+        sum+=amount;
     });
-    //just update the total to sum  
-if($('#disount, #tax').val()==""){
-    $('#total').val(sum);
-  }
-
-if(($('#tax').val()!="")){
-    var subtotal = parseInt( $('.subtotal').val());
-var taxRate = parseInt( $('#tax').val());
-var discount = parseInt( $('#discount').val());
-
-var taxAmount = subtotal * (taxRate/parseInt("100")); //15000 * .1
-//console.log(disc);
-var tax = subtotal + (taxAmount);
-$("#total").val(tax);
-}
-
-// if(($('#disount').val()!="")){
-//   var subtotal = parseFloat( $('.subtotal').val());
-//   var disc = parseFloat( $('#discount').val());
-// var disount = subtotal - (disc);
-// $("#total").val(disount);
-// }
-//update div with the val
-//$('#grandtotal').text(yourGrandTotal);
-  // discount();
-  // taxadd();
-}
-$('#total').on('click',function(){
-    var val1 = parseInt($('#discount').val()); 
-    var val2 = parseInt($(this).val());
-    var tot = val2 - (val1);
- // var percentval = val1 * (val2 / 100);
-  //$("#discount_1").val(percentval);
-    //console.log(tot);
-    $('#total').val(tot);
-});
-// $(function(){
-// $('#discount').on('change', function(){
-//   var total = parseInt($('#total').val());
-//   var discount = parseInt($(this).val());
-//   var discountvalue = total - disount;
-//   $('#total').val(discountvalue);
-// });
-// });
-function taxadd(){
-  var amount =  parseInt($('#total').val());
-  var taxPercent = parseInt($('#tax').val());
-  var grand =amount + (taxPercent * amount)/100;
-  $('#total').val(grand);
-  
-  }
-function discount(){
-  var total =  parseInt($('#total').val());
-  var discount = parseInt($('#discount').val());
-  var discount = total- discount;
-  $('#total').val(discount);
-  
-  }
-
-
-$('.quantity').change(function(){
-  update_amounts();
+    /***********loop through trs end****************/
+   
+    //just subtract discount  
+    if($('#disount').val()!=""){
+        var discount = parseInt($('#discount').val());
+        sum=sum-discount;
+        $('#total').val(sum);
+      }
+ /***********Add tax start****************/
+   
+      if(($('#tax').val()!="")){
+        var taxRate = parseInt( $('#tax').val());
+        var taxAmount = sum * (taxRate/parseInt("100")); //15000 * .1
+        //console.log(disc);
+        var sum = sum + taxAmount;
+        $("#total").val(sum);
+      }
+ /***********Add tax end ****************/
+   
   });
-$('.rate').change(function(){
-  update_amounts();
-  });
-  
+
   
 $(document).ready(function(){
 
@@ -403,7 +389,7 @@ if(type==1){
         setTimeout(function(){
         $(".alert").addClass('hidden');
         $('#form_add_update')[0].reset();
-        window.location='<?php echo base_url()?>shipment_order';
+        window.location='shipment_order';
         },2000);
             }
            else if (data.status ==0)
@@ -421,7 +407,7 @@ if(type==1){
         $(".alert").html(data.message);
         $(".alert").removeClass('hidden');
         setTimeout(function(){
-        window.location='shipment_order/generateinvoice';
+        window.location='shipment_order';
         },1000);
             }
       else if (data.status == "validation_error")

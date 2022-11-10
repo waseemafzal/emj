@@ -53,7 +53,7 @@ class Api_model extends CI_Model {
     }
 public function getUserObject($id) {
         $user = $this->db
-                ->select("id as user_id,username,name,email,mobile,CONCAT('".base_url()."uploads/',image) AS profilePic,plan_id,referal_code")
+                ->select("id as user_id,CONCAT(name,' ',sur_name)as name ,email,mobile,CONCAT('".base_url()."uploads/',image) AS profilePic,referal_code")
                 ->where('id', $id)
                 ->limit(1)
                 ->get('users')
@@ -121,7 +121,7 @@ public function getUserByEmail($email) {
 }
     public function getUserById($id) {
         $user = $this->db
-                ->select("id as user_id,name,phone,address,device_id,devicetype,latitude,longitude,CONCAT('".base_url()."uploads/', image) as image")
+                ->select("id as user_id,name as first_name,sur_name,email,mobile,address,address1,secret_qestion_id,answer,country_id,city_id,state_id,CONCAT('".base_url()."uploads/', image) as image")
                 ->where('id', $id)
                 ->limit(1)
                 ->get('users')

@@ -66,6 +66,17 @@ class EmjApi extends CI_Controller
 	$this->data['data']= $this->db->select('*')->get('secret_questions')->result_array();  
 	$this->response($this->data);
     }
+	
+	public function getInvoices(){ 	
+	$dataArr = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
+	->join('shipment_orders o','o.id=i.order_id')
+	->where(array('o.user_id'=>USER_ID))
+	->get('clients_invoice as i ')->result_array(); 
+	
+	$this->data['data'] =$dataArr;
+	$this->response($this->data);
+    }
+	
 	public function getStates(){  
 	if(!isset($_GET['country_id'])){
 		$this->error('country is required');
@@ -791,7 +802,7 @@ $geolocation = $lat.','.$lon;
                     if ( $user != NULL ) {
                         $response["status"]  = 200;
                         $response['message'] = "Successfully Login";
-                       $user['plan_title']= $this->db->select( 'name' )->where( 'id', $user['plan_id'] )->get('plans')->row()->name;
+                       
                         $response['user']    = $user;
                         
                        
@@ -823,8 +834,8 @@ $geolocation = $lat.','.$lon;
         ////    $this->response(array('POST'=>$_POST,'header'=>$header));
         $this->checkLogin();
         extract( $_POST );
-        // get the user by id
-        $user = $this->AM->getUserById( USER_ID );
+		 // get the user by id
+        $user = $this->AM->getUserById(USER_ID);
         //removing password from response
         if ( $user != NULL ) {
             $this->data['message'] = "User Profile";
@@ -850,6 +861,7 @@ $geolocation = $lat.','.$lon;
             "phone",
             "address" 
         ) ) );
+		
         if ( isset( $_FILES['image']['name'] ) ) {
             $info    = pathinfo( $_FILES['image']['name'] );
             $ext     = $info['extension']; // get the extension of the file
@@ -860,6 +872,9 @@ $geolocation = $lat.','.$lon;
             }
         }
         extract( $_POST );
+		$response['post']=$_POST;
+		$response['files']=$_FILES;
+       
         if ( isset( $_POST['password'] ) and $_POST['password'] != '' ) {
             $_POST['password'] = $this->hashPassword( $_POST['password'] );
         }
@@ -986,46 +1001,15 @@ $geolocation = $lat.','.$lon;
             }
         }
     }
-	public function _shipmentOrders(){
-         $array = array('status'=>201, 'message'=>'not inserted successfully');
-        extract($_POST);
-        $this->AM->verifyRequiredParams( array(
-             "shipper_name", 
-             "shipper_phone",
-             "shipper_address",
-             "shipper_state",
-             "shipper_city",
-             "pickup_location",
-             "delivery_type",
-             "consignee_name",
-             "consignee_address",
-             "consignee_phone",
-             "item_description",
-             "consignee_country",
-             "consignee_state", 
-             "consignee_city", 
-             "quantity",
-             "length",
-             "width",
-             "height",
-             "package_type",
-             "package_weight",
-             "shipment_from",
-             "shipment_to"
-        ));
-        $track_number=$this->AM->randomKey(8);
-            if(!checkExist('shipment_orders',array('track_number'=>$track_number))){
-                $_POST['track_number']=$track_number;
-                }else{
-
-                }
-
-       $insert =  $this->db->insert('shipment_orders', $_POST);
-        if($insert){
-           $array = array('status'=>200, 'message'=>'inserted successfully');
-        }
-        echo json_encode($array);
-    }
+	
+	function emptyOrders(){
+		echo 'shipment_orders '. $this->db->query("TRUNCATE `shipment_orders` ");
+		
+		echo ' shipment_orders_files '.$this->db->query("TRUNCATE `shipment_orders_files`");
+		echo ' shipment_orders_oceanfreight '.$this->db->query("TRUNCATE `shipment_orders_oceanfreight`");
+		
+		
+		}
 	/*******************/
     function shipmentOrders(){ 
         extract($_POST);
@@ -1049,18 +1033,21 @@ $this->AM->verifyRequiredParams( array(
              "length",
              "width",
              "height",
-             "package_type",
              "package_weight",
              "shipment_from",
              "shipment_to"
         ));
+		if($shipment_type!=4){
+			 $this->AM->verifyRequiredParams(array("package_type"));
+			}
         $PrimaryID = $_POST['id'];
         $vehicleDescriptionArr=array();
         $vin_numberArr=array();
         $purchase_costArr=array();
         $company_preferenceArr=array();
+		
 if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])>0){
-    //pre($_POST);
+   
                 $vehicleDescriptionArr=$_POST['vehicle_description'];
     $vin_numberArr=$_POST['vin_number'];
     $purchase_costArr=$_POST['purchase_cost'];
@@ -1082,24 +1069,21 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
                 $_POST['track_number']=$track_number;
                 }
             }
+			$_POST['user_id']=USER_ID;
         $result = $this->crud->saveRecord($PrimaryID,$_POST,'shipment_orders');
         if($PrimaryID==''){
             
-                $insrtID = $this->db->insert_id();
+                $PrimaryID = $this->db->insert_id();
         }
-        if($PrimaryID!=''){
-            
-                $insrtID = $PrimaryID;
-            
-        if (!empty($_FILES)){ 
-            //pre($_FILES);
+       if (!empty($_FILES)){ 
+           
             $nameArray = $this->crud->upload_files($_FILES);
            // pre($nameArray);
             $nameData = explode(',',$nameArray);
             foreach($nameData as $file){
                 $file_data = array(
                 'file' => $file,
-                'order_id' => $insrtID
+                'order_id' => $PrimaryID
                 );
                 $this->db->insert('shipment_orders_files', $file_data);
                 }
@@ -1116,7 +1100,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
                 $dataArr = array(
                       'vin_number'=>$vin_numberArr[$i],
                       'vehicle_description'=>$vehicleDescriptionArr[$i],
-                      'order_id'=> $insrtID,
+                      'order_id'=> $PrimaryID,
                       'purchase_cost'=>$purchase_costArr[$i],
                       'company_preference' => $company_preferenceArr[$i]
                       
@@ -1134,7 +1118,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
              //   lq();
             }
 
-        }
+        
                 $e = $this->db->error(); // Gets the last error that has occured
 $num = $e['code'];
 $mess = $e['message'];

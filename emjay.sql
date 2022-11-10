@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2022 at 09:50 AM
+-- Generation Time: Nov 10, 2022 at 05:11 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -307,7 +307,13 @@ INSERT INTO `app_user_session` (`access_token`, `user_id`, `created_date`, `id`)
 ('294231664999052', 167, '2022-10-05 19:44:12', 181),
 ('423111664999126', 165, '2022-10-05 19:45:26', 182),
 ('156791667033072', 2, '2022-10-29 08:44:32', 183),
-('655201667033109', 2, '2022-10-29 08:45:09', 184);
+('655201667033109', 2, '2022-10-29 08:45:09', 184),
+('773521668015498', 3, '2022-11-09 17:38:18', 185),
+('382411668015572', 3, '2022-11-09 17:39:32', 186),
+('275581668015671', 3, '2022-11-09 17:41:11', 187),
+('430991668015700', 3, '2022-11-09 17:41:40', 188),
+('380831668015768', 3, '2022-11-09 17:42:48', 189),
+('327961668016143', 3, '2022-11-09 17:49:03', 190);
 
 -- --------------------------------------------------------
 
@@ -321,6 +327,41 @@ CREATE TABLE `ci_sessions` (
   `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients_invoice`
+--
+
+CREATE TABLE `clients_invoice` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `item_description` varchar(255) NOT NULL,
+  `amount` double NOT NULL,
+  `detail` text NOT NULL,
+  `payment_terms` text DEFAULT NULL,
+  `tax` double DEFAULT NULL,
+  `discount` double DEFAULT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `paid` enum('Yes','No') NOT NULL,
+  `created_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `order_no` varchar(255) NOT NULL,
+  `notes` text NOT NULL,
+  `order_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clients_invoice`
+--
+
+INSERT INTO `clients_invoice` (`id`, `client_id`, `item_description`, `amount`, `detail`, `payment_terms`, `tax`, `discount`, `created_on`, `created_by`, `paid`, `created_date`, `due_date`, `order_no`, `notes`, `order_id`) VALUES
+(1, 0, '', 20, '{\"items\":[\"hello from me\"],\"quantities\":[\"1\"],\"rates\":[\"20\"],\"subtotal\":[\"20\"]}', '', 0, 0, '2022-11-09 18:30:41', NULL, 'No', '0000-00-00', '0000-00-00', '', '', 1),
+(2, 0, '', 222, '{\"items\":[\"josh\"],\"quantities\":[\"2\"],\"rates\":[\"111\"],\"subtotal\":[\"222\"]}', 'cash', 0, 0, '2022-11-09 18:33:28', NULL, 'Yes', '0000-00-00', '0000-00-00', '', 'this is really easy ', 1),
+(3, 0, '', 44, '{\"items\":[\"goods\"],\"quantities\":[\"2\"],\"rates\":[\"22\"],\"subtotal\":[\"44\"]}', 'please pay from app', 0, 0, '2022-11-09 18:43:36', NULL, 'No', '0000-00-00', '0000-00-00', '', '', 1),
+(4, 0, '', 275, '{\"items\":[\"hello from me\"],\"quantities\":[\"5\"],\"rates\":[\"55\"],\"subtotal\":[\"275\"]}', '', 0, 0, '2022-11-09 18:53:02', NULL, 'No', '2022-11-10', '2022-11-10', '1668019982', '', 1);
 
 -- --------------------------------------------------------
 
@@ -624,6 +665,7 @@ INSERT INTO `setting` (`id`, `description`, `image`, `banner`, `phone`, `status`
 CREATE TABLE `shipment_orders` (
   `id` int(11) NOT NULL,
   `shipment_type` int(11) NOT NULL COMMENT '1=personal effect,2=ocean frieght,3=Air Frieght,4=Vehicle Shipment',
+  `shipment_status` varchar(255) NOT NULL,
   `shipper_name` varchar(255) NOT NULL,
   `shipper_phone` varchar(255) NOT NULL,
   `shipper_address` varchar(255) NOT NULL,
@@ -651,16 +693,17 @@ CREATE TABLE `shipment_orders` (
   `shipment_from` varchar(255) NOT NULL,
   `shipment_to` varchar(255) NOT NULL,
   `shipment_date` varchar(255) NOT NULL,
-  `track_number` double NOT NULL
+  `track_number` double NOT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `shipment_orders`
 --
 
-INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `track_number`) VALUES
-(2, 4, 'waseem', '3417090031', 'Hussain town Multan\r\ntown', '2647', 'Select City', 'yes', 'nishter college', 'yes', 'Home', 'mr ben', 'jsksjds', '03417090031', '<p>skjsdkj</p>\r\n', '1', '42', '5909', '2', '3', '3', '3', 'Extra Large Box', '1', '1', NULL, 'Lahore', 'Lahore', '2022-10-29', 0),
-(3, 1, 'waseem', '341709003', 'xyz', '2648', '48510', 'yes', 'xys', 'yes', 'Home', 'mr ben', 'Hussain town Multan\r\ntown', '3417090031', '<p>hellof</p>\r\n', '17', '327', '7255', '2', '2', '2', '2', 'Extra Large Box', '1', '1', NULL, 'liaqatpur', 'liaqatpur', '2022-10-29', 40960587);
+INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipment_status`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `track_number`, `user_id`) VALUES
+(1, 4, '', 'Seyaam', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', 25606085, 3),
+(2, 1, '', 'Wajid', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', 54488243, 3);
 
 -- --------------------------------------------------------
 
@@ -679,10 +722,8 @@ CREATE TABLE `shipment_orders_files` (
 --
 
 INSERT INTO `shipment_orders_files` (`id`, `file`, `order_id`) VALUES
-(1, '47eb1b0f2818ceb42c18fab4d7d232bf.png', 1),
-(2, '5c60e9c1c3ad9ed9963082f042046ecb.png', 1),
-(3, '43491d0a59f225f0aa58a71c9cd8e557.png', 2),
-(4, '6dc0fcf525333f1d7b1a64642e2b1f36.png', 2);
+(1, '1c7b8b5a2a441ac044ca3a6dff351dfa.jpg', 2),
+(2, 'd7a9ba1d5cf8d2f62e59eba3cb61765c.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -704,7 +745,7 @@ CREATE TABLE `shipment_orders_oceanfreight` (
 --
 
 INSERT INTO `shipment_orders_oceanfreight` (`id`, `company_preference`, `order_id`, `vin_number`, `purchase_cost`, `vehicle_description`) VALUES
-(5, 'Cyphersol', 2, '11', 22, 'nissan');
+(1, 'uyui', 1, '67', 789798, 'hjkhgj');
 
 -- --------------------------------------------------------
 
@@ -726,7 +767,7 @@ INSERT INTO `shipment_status` (`id`, `status_title`, `status_id`) VALUES
 (1, 'Received', 0),
 (2, 'Processing', 1),
 (3, 'Shipped', 2),
-(4, 'Processing', 3),
+(4, 'Cancelled', 3),
 (5, 'Ready for pickup', 4),
 (6, 'Delayed', 5);
 
@@ -53831,8 +53872,8 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL COMMENT 'mobile or cell number',
   `address` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
+  `country_id` varchar(255) NOT NULL,
+  `city_id` varchar(255) NOT NULL,
   `uniq_id` varchar(255) NOT NULL,
   `image` varchar(500) NOT NULL DEFAULT 'noimg.png',
   `device_id` text NOT NULL,
@@ -53861,16 +53902,18 @@ CREATE TABLE `users` (
   `sur_name` varchar(255) DEFAULT NULL,
   `address1` varchar(255) DEFAULT NULL,
   `secret_qestion_id` int(11) NOT NULL,
-  `answer` varchar(255) NOT NULL
+  `answer` varchar(255) NOT NULL,
+  `state_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `country`, `city`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`) VALUES
-(1, 1, 'admin', '', 'admin@admin.com', NULL, 'Chowk Shah Abbass', 'Pakistan', 'Multan', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1667033193, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, ''),
-(2, 3, 'waseem', 'waf@gmail.com', 'waf@gmail.com', '0232434343', '', '', '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '$2y$08$KTbZN7.rZU8BxkQNnbJkuu/hlhpZP9vQZ.ltPWHKzZXmuPUHJvTeu', NULL, NULL, 1667033021, 1667033109, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '', 'afzal', NULL, 0, '');
+INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `country_id`, `city_id`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`, `state_id`) VALUES
+(1, 1, 'admin', '', 'admin@admin.com', '03411663111', 'Chowk Shah Abbass', 'Pakistan', 'Multan', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1668016925, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, '', NULL),
+(2, 3, 'waseem', 'waf@gmail.com', 'waf@gmail.com', '0232434343', '', '', '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '$2y$08$KTbZN7.rZU8BxkQNnbJkuu/hlhpZP9vQZ.ltPWHKzZXmuPUHJvTeu', NULL, NULL, 1667033021, 1667033109, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '', 'afzal', NULL, 0, '', NULL),
+(3, 3, 'waseem', 'smfood@gmail.com', 'smfood@gmail.com', '0232434343', '', '', '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '$2y$08$sW572DAJUcgHKYLz9uPR3eW4at62POz3BcLYIjWGoUUys9Ye06Jpy', NULL, NULL, 1668015479, 1668016142, '', 0, '', '', '', '', 0, '636be5772c5a7', '636be5772c98f', 0, '', 'afzal', NULL, 0, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -53942,6 +53985,12 @@ ALTER TABLE `app_user_session`
 --
 ALTER TABLE `ci_sessions`
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `clients_invoice`
+--
+ALTER TABLE `clients_invoice`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cms`
@@ -54093,7 +54142,13 @@ ALTER TABLE `app_routes`
 -- AUTO_INCREMENT for table `app_user_session`
 --
 ALTER TABLE `app_user_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+
+--
+-- AUTO_INCREMENT for table `clients_invoice`
+--
+ALTER TABLE `clients_invoice`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cms`
@@ -54165,19 +54220,19 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `shipment_orders`
 --
 ALTER TABLE `shipment_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_files`
 --
 ALTER TABLE `shipment_orders_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_oceanfreight`
 --
 ALTER TABLE `shipment_orders_oceanfreight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `shipment_status`
@@ -54207,7 +54262,7 @@ ALTER TABLE `tbl_payment_notifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users_groups`

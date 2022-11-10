@@ -299,18 +299,20 @@ function saveInvoice(){
 			echo json_encode($arr);
 		}else{
 			$_POST['created_by']=get_session('id');
-		$dArr=	explode('/',$created_date);
-		
-  $_POST['created_date']= $dArr[2].'-'.$dArr[1].'-'.$dArr[0];
+/*		$dArr=	explode('/',$created_date);
+$_POST['created_date']= $dArr[2].'-'.$dArr[1].'-'.$dArr[0];
   $dArr=	explode('/',$due_date);		
   $_POST['due_date']= $dArr[2].'-'.$dArr[1].'-'.$dArr[0];
-  
+*/  
+
+$_POST['created_date']=date('Y-m-d',strtotime($_POST['created_date']));
+$_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
   if(isset($_POST['paid'])){
 	  $_POST['paid']='Yes';
 	  }else {
 	  $_POST['paid']='No';
 	  }
-			
+			$_POST['order_no']=time();
 			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
 			
 			

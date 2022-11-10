@@ -399,8 +399,9 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                      </div>
                                
                                   </div><hr>
-                                 <h3>Shipment Details</h3>
+                                 
                                  <div class="form-group">
+                                  <h3>Shipment Details</h3>
                                    <div class="row">
                                      <div class="col-md-4">
                                        <label>From City</label>
@@ -462,7 +463,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
 								 }}}
                                  
                                   else{?>
-                                 <div class="form-group field_wrapper" id="shipment">
+                                 <div class="form-group field_wrapper" id="vehicles">
                                    <div class="row">
                                     <div class="col-md-3">
                                        <label>Vehicle Description</label>
@@ -678,24 +679,26 @@ $(document).ready(function(){
     $('#request_insurance').show();
     $('#delivery_option').show();
     $('#contact_details').show();
+    $("#vehicles").hide();
 });
 </script>
 <script type="text/javascript">
  $("#air_freight").click(function(){
-    $('#form_add_update').show('slow');
-    $("#shipment_type").val(3);
-    var h = "Air Freight";
-    $('#heading').html(h);
-    $('#shipper_phone').show();
-     $('#package_details').show();
-    $('#shipment').hide();
-    $('#select_packaging').show();
-    $('#shipper_address').show();
-    $('#request_pickup').show();
-    $('#pickup_location').show();
-    $('#request_insurance').show();
-     $('#delivery_option').show();
-     $('#contact_details').show();
+      $('#form_add_update').show('slow');
+      $("#shipment_type").val(3);
+      var h = "Air Freight";
+      $('#heading').html(h);
+      $('#shipper_phone').show();
+      $('#package_details').show();
+      $('#shipment').hide();
+      $('#select_packaging').show();
+      $('#shipper_address').show();
+      $('#request_pickup').show();
+      $('#pickup_location').show();
+      $('#request_insurance').show();
+      $('#delivery_option').show();
+      $('#contact_details').show();
+      $("#vehicles").hide();
 });
 </script>
 <script type="text/javascript">
@@ -714,6 +717,7 @@ $(document).ready(function(){
     $('#request_insurance').show();
      $('#delivery_option').show();
      $('#contact_details').show();
+     $("#vehicles").show();
 });
 </script>
 <script type="text/javascript">
@@ -723,15 +727,16 @@ $(document).ready(function(){
     var h = "Ocean Freight";
     $('#heading').html(h);
     $('#shipper_phone').show();
-     $('#package_details').show();
+    $('#package_details').show();
     $('#shipment').hide();
     $('#select_packaging').show();
     $('#shipper_address').show();
     $('#request_pickup').show();
     $('#pickup_location').show();
     $('#request_insurance').show();
-     $('#delivery_option').show();
-     $('#contact_details').show();
+    $('#delivery_option').show();
+    $('#contact_details').show();
+    $("#vehicles").hide();
 });
 </script>
 <script type="text/javascript">

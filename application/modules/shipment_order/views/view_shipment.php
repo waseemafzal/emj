@@ -97,14 +97,14 @@ $Heading=	$module_heading;
             <div class="modal fade" id="shipment_modal_<?php echo $row->id;?>" tabindex="-1" data-backdrop="static">
      <div class="modal-dialog-lg modal-dialog-centered">
       <div class="modal-content">
-       <div class="modal-header">
-         <h4 class="modal-title">Shipment Details of <?=$row->shipper_name?></h4>
+       <div class="modal-header bg-green">
+         <h4 class="modal-title text-center" style="font-weight: bolder">Shipment Details of <?php echo ucfirst($row->shipper_name)?></h4>
        <button class="close" data-dismiss="modal"><span>&times;</span></button>
        </div>
        
        <div  class="modal-body">
         <div class="col-md-6">
-          <h3>Shipper Details</h3>
+          <h4 class="bg-red text-center"><b>Shipper Details</b></h4>
        
           <table class="table table-striped">
             <tr>
@@ -112,7 +112,7 @@ $Heading=	$module_heading;
               <td><b>Phone:</b> <?php echo $row->shipper_phone?></td>
             </tr>
             <tr>
-              <td><b>Trcking Number:</b> <?php echo $row->track_number?></td>
+              <td><b>Tracking Number:</b> <?php echo $row->track_number?></td>
               <td><b>State:</b> <?php echo $row->shipper_state?></td>
             </tr>
             <tr>
@@ -125,7 +125,7 @@ $Heading=	$module_heading;
        
 
         <div class="col-md-6">
-          <h3>Consignee Details</h3>
+          <h4 class="bg-red text-center"><b>Consignee Details</b></h4>
        
           <table class="table table-striped">
             <tr>
@@ -143,7 +143,7 @@ $Heading=	$module_heading;
           </table>
         </div>
          <div class="col-md-12">
-          <h3>Item Details</h3>
+          <h4 class="bg-red text-center"><b>Item Details</b></h4>
        
           <table class="table table-striped">
             <tr>
@@ -178,7 +178,7 @@ $Heading=	$module_heading;
           </table>
         </div>
          <div class="col-md-6">
-          <h3>Images</h3>
+          <h4 class="bg-red text-center"><b>Images</b></h4>
            
              <?php 
                    $select = $this->db->where('order_id', $row->id)->get('shipment_orders_files')->result_array();
@@ -186,12 +186,32 @@ $Heading=	$module_heading;
              ?>
            <?php foreach($select as $image){?>
             <div style="display: inline-block;">
-              <a href="<?php echo setImage($image['file'])?>" class='fancybox'><img src="<?php echo setImage($image['file']);?>" width="50"></a>
+              <a href="<?php echo setImage($image['file'])?>" class='fancybox'><img src="<?php echo setImage($image['file']);?>" width="70"></a>
                   </div>
            <?php }?>
            
          </div>
      
+       </div>
+        <div class="col-md-6">
+          <h4 class="bg-red text-center"><b>Vehicle Details</b></h4>
+           
+             <?php 
+                   $vehicles = $this->db->where('order_id', $row->id)->get('shipment_orders_oceanfreight')->result_array();
+                  
+             ?>
+            <table class="table table-striped">
+               <?php foreach($vehicles as $vehicle){?>
+              <tr>
+                <td><b>Vin Number:</b> <?php echo $vehicle['vin_number']?></td>
+                <td><b>Vehicle Description:</b> <?php echo $vehicle['vehicle_description']?></td>
+                </tr>
+                <tr>
+                <td><b>Purchase Cost:</b> <?php echo $vehicle['purchase_cost']?></td>
+                <td><b>Company Preference:</b> <?php echo $vehicle['company_preference']?></td>
+              </tr>
+            <?php }?>
+            </table>
        </div>
      <div class="modal-footer">
      <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>

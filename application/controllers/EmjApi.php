@@ -68,12 +68,44 @@ class EmjApi extends CI_Controller
     }
 	
 	public function getInvoices(){ 	
-	$dataArr = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
+	$paidInvoices = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
 	->join('shipment_orders o','o.id=i.order_id')
-	->where(array('o.user_id'=>USER_ID))
+	->where(array('o.user_id'=>USER_ID,'i.paid'=>'Yes'))
+	->get('clients_invoice as i ')->result_array(); 
+	$openInvoices = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
+	->join('shipment_orders o','o.id=i.order_id')
+	->where(array('o.user_id'=>USER_ID,'i.paid'=>'No'))
 	->get('clients_invoice as i ')->result_array(); 
 	
-	$this->data['data'] =$dataArr;
+	$this->data['openInvoices'] =$openInvoices;
+	$this->data['paidInvoices'] =$paidInvoices;
+	$this->response($this->data);
+    }
+	
+	public function getShipments(){ 	
+$data =$this->db->select('st.type as shipmentType,s.status_title as shipmentStatus,o.*')
+	->join('shipment_status s','s.status_id=o.shipment_status')
+	->join('shipment_types st','st.id=o.shipment_type')
+	->where(array('o.user_id'=>USER_ID))
+	->get('shipment_orders as o ')->result_array(); 
+	
+	$arr=array();
+	
+	foreach($data as $row){
+	    $detail=array(
+	        'shipmentType'=>$row['shipmentType'],
+	        'shipmentStatus'=>$row['shipmentStatus'],
+	        'shipmentFrom'=>$row['shipment_from'],
+	        'shipmentTo'=>$row['shipment_to'],
+	        'item_description'=>$row['item_description'],
+	        'consignee_name'=>$row['consignee_name'],
+	        'consignee_phone'=>$row['consignee_phone'],
+	        'shipment_date'=>$row['shipment_date'],
+	        'track_number'=>$row['track_number']
+	        );
+	     $arr[]=$detail;
+	}
+ $this->data['data']=$arr;
 	$this->response($this->data);
     }
 	
@@ -102,7 +134,16 @@ class EmjApi extends CI_Controller
 	
 	
 	function payInvoice(){
-		$this->validateCard();
+		$Token = $this->validateCard();
+		$payment_id = $this->stripePayment($Token,$_POST['amount']);
+		$this->data['message']='Payment done';
+		if($payment_id!=0 and $payment_id>0){
+		$orderData = array('payment_id' => $payment_id,'paid' => 'Yes');
+		if($this->db->where('id',$_POST['invoice_id'])->update('clients_invoice',$orderData)){
+			$this->data['message']='Invoice Paid successfuly ';
+			}
+		}
+		$this->response($this->data);
 		}
 	/*****emj apis ******/
     function validateCard()
@@ -112,7 +153,9 @@ class EmjApi extends CI_Controller
              "card",
             "exp_month",
             "exp_year",
-            "cvc" 
+            "cvc" ,
+			 "invoice_id",
+            "amount"
         ) ) == true ) {
             require_once APPPATH . "third_party/stripe-php/init.php";
             \Stripe\Stripe::setApiKey( STRIPE_PUBLISH_KEY_TEST );
@@ -127,8 +170,9 @@ class EmjApi extends CI_Controller
                      "card" => $card 
                 ) );
                 $chargeJson           = $charge->jsonSerialize();
-                $chargeJson['status'] = 200;
-                echo json_encode( $chargeJson );
+				return $chargeJson['id'];// This is stripeToken
+                //$chargeJson['status'] = 200;
+               // echo json_encode( $chargeJson['id'] );
             }
             catch ( Exception $e ) {
                 $response['message'] = $e->getMessage();
@@ -199,19 +243,12 @@ class EmjApi extends CI_Controller
                 $subjectLineSeller = 'Order has been Received';
                 //	$this->crud->send_mail('waseemafzal31@gmail.com',FROM,HEADING,$subjectLineSeller,$sellerHtml);
                 /*********************************************************************************/
+			$TransactionData['order_id']=	$this->db->where('id',$_POST['invoice_id'])->get('clients_invoice')->row()->order_id;
                 if ( $this->db->insert( 'order_card_detail', $TransactionData ) ) {
                     $payment_id = $this->db->insert_id();
                     return $payment_id;
                     // save data into order table
-                    $orderData = array(
-                         'amount' => $amount,
-                        'payment_id' => $payment_id,
-                        //'seller_offer_request_id'=>$offer_id,
-                        'user_id' => USER_ID,
-                        'orderNo' => $orderNo,
-                        'status' => 1,
-                        'payment_method' => 'stripe' 
-                    );
+                    
                 } else {
                     return 0;
                 }

@@ -15,8 +15,8 @@ define('ADMIN',2);
 define('AGENT',2);
 define('USER',3);
 
- define('STRIPE_PUBLISH_KEY_TEST', 'pk_test_51GtJA8BJkjUjfyZTpILjYsSdtHukal6CQ68ETKmcBG4KIspPQJR7XgT2DnCwAnqPyFpGvsUFQrCxJLVUUyU3E8uF00yPaQdqnQ');
- define('STRIPE_SECRET_KEY_TEST', 'sk_test_51GtJA8BJkjUjfyZTzVFHSTbW3NtsHBh8GWpDUQw10V4rdNbwQVRp1pRrXkFL854e48UPfaWuPyjl4xTZVPODcdg900bYA5O7VB');
+ define('STRIPE_PUBLISH_KEY_TEST', 'pk_test_51KxtMhAj5MXORqkL1gQXwVneLmBKTgglkb06Sz2IGnoC5R08py4Cq89ccKr7GFi4lr6gUhgy0swLDPg3Q48dHDW900gITdIvo6');
+ define('STRIPE_SECRET_KEY_TEST', 'sk_test_51KxtMhAj5MXORqkLYfEGQVLZSj5kIICkvC4rONMnvOoQpGQOMISq5TxifQ819UA8AO5bQlvi76gVYW8rY65UfLLc00cFkujxwR');
 
 /*************************/
 //define('USER_ID',user_id());

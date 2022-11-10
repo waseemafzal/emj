@@ -101,7 +101,9 @@ class EmjApi extends CI_Controller
     }
 	
 	
-	
+	function payInvoice(){
+		$this->validateCard();
+		}
 	/*****emj apis ******/
     function validateCard()
     {
@@ -112,7 +114,7 @@ class EmjApi extends CI_Controller
             "exp_year",
             "cvc" 
         ) ) == true ) {
-            require_once APPPATH . "third_party/stripe/init.php";
+            require_once APPPATH . "third_party/stripe-php/init.php";
             \Stripe\Stripe::setApiKey( STRIPE_PUBLISH_KEY_TEST );
             try {
                 $card                 = array(
@@ -139,7 +141,7 @@ class EmjApi extends CI_Controller
     
     function stripePayment( $stripeToken, $amount )
     {
-        require_once APPPATH . "third_party/stripe/init.php";
+        require_once APPPATH . "third_party/stripe-php/init.php";
         //pre($this->session);		//set api key
         extract( $_POST ); //set api key
         $stripe = array(

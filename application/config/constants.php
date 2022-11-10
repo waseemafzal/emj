@@ -13,8 +13,11 @@ define('TBL_SLIDER','slider');
 define('SUPER_ADMIN',1);
 define('ADMIN',2);
 define('AGENT',2);
-
 define('USER',3);
+
+ define('STRIPE_PUBLISH_KEY_TEST', 'pk_test_51GtJA8BJkjUjfyZTpILjYsSdtHukal6CQ68ETKmcBG4KIspPQJR7XgT2DnCwAnqPyFpGvsUFQrCxJLVUUyU3E8uF00yPaQdqnQ');
+ define('STRIPE_SECRET_KEY_TEST', 'sk_test_51GtJA8BJkjUjfyZTzVFHSTbW3NtsHBh8GWpDUQw10V4rdNbwQVRp1pRrXkFL854e48UPfaWuPyjl4xTZVPODcdg900bYA5O7VB');
+
 /*************************/
 //define('USER_ID',user_id());
 

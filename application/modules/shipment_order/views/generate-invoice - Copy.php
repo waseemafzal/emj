@@ -289,31 +289,27 @@ $('textarea').change(function(){
         var amount = (qty*price);
         $(this).find('.subtotal').val(amount);
         sum+=amount;
-        
-        $('#total').val(sum);
     });
-  });
     /***********loop through trs end****************/
    
     //just subtract discount  
-    $('#discount').on('keyup', function(){
-        var total = parseInt($("#total").val());
-        var discount = parseInt($(this).val());
-        var discounted=total-discount;
-        $('#total').val(discounted);
-      });
+    if($('#disount').val()!=""){
+        var discount = parseInt($('#discount').val());
+        sum=sum-discount;
+        $('#total').val(sum);
+      }
  /***********Add tax start****************/
    
-     // $('#tax').on('keyup', function(){
-     //    var taxRate = parseInt( $('#tax').val());
-     //    var total = parseInt($("#total").val());
-     //    var taxAmount = total * (taxRate/parseInt("100")); //15000 * .1
-     //    //console.log(disc);
-     //    var totaltax = sum + taxAmount;
-     //    $("#total").val(totaltax);
-     //  }
+      if(($('#tax').val()!="")){
+        var taxRate = parseInt( $('#tax').val());
+        var taxAmount = sum * (taxRate/parseInt("100")); //15000 * .1
+        //console.log(disc);
+        var sum = sum + taxAmount;
+        $("#total").val(sum);
+      }
  /***********Add tax end ****************/
    
+  });
 
   
 $(document).ready(function(){

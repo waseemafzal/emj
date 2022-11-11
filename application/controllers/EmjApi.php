@@ -66,7 +66,17 @@ class EmjApi extends CI_Controller
 	$this->data['data']= $this->db->select('*')->get('secret_questions')->result_array();  
 	$this->response($this->data);
     }
-	
+	function getSum(){
+ $sum=  $this->db->select_sum('i.amount')
+	->join('shipment_orders o','o.id=i.order_id')
+	->where(array('o.user_id'=>USER_ID,'i.paid'=>'No'))
+	->get('clients_invoice as i ')->row()->amount; 
+    if($sum!=NULL){
+		return (float)$sum;
+		}else{
+			return 0;
+			}
+		}
 	public function getInvoices(){ 	
 	$paidInvoices = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
 	->join('shipment_orders o','o.id=i.order_id')
@@ -76,7 +86,8 @@ class EmjApi extends CI_Controller
 	->join('shipment_orders o','o.id=i.order_id')
 	->where(array('o.user_id'=>USER_ID,'i.paid'=>'No'))
 	->get('clients_invoice as i ')->result_array(); 
-	
+	$this->data['openCount'] =count($openInvoices);
+	$this->data['totalAmount'] =$this->getSum();
 	$this->data['openInvoices'] =$openInvoices;
 	$this->data['paidInvoices'] =$paidInvoices;
 	$this->response($this->data);
@@ -128,7 +139,10 @@ $data =$this->db->select('st.type as shipmentType,s.status_title as shipmentStat
 	$this->AM->verifyRequiredParams( array(
              "track_number"
         ));
-	$this->data['data']= $this->db->select('*')->where('track_number',$_POST['track_number'])->get('shipment_orders')->result_array();  
+		if(!is_numeric($_POST['track_number'])){
+			$this->error('number must be numeric');
+			}
+	$this->data['data']= $this->db->select('*')->where(array('track_number'=>$_POST['track_number'],'track_number!='=>0))->get('shipment_orders')->result_array();  
 	$this->response($this->data);
     }
 	
@@ -896,8 +910,9 @@ $geolocation = $lat.','.$lon;
     {
         $this->checkLogin();
         if ( $this->AM->verifyRequiredParams( array(
-             "name",
-            "phone",
+             "first_name",
+             "sur_name",
+            "mobile",
             "address" 
         ) ) );
 		
@@ -911,6 +926,8 @@ $geolocation = $lat.','.$lon;
             }
         }
         extract( $_POST );
+		$_POST['name']=$_POST['first_name'];
+		unset($_POST['first_name']);
 		$response['post']=$_POST;
 		$response['files']=$_FILES;
        

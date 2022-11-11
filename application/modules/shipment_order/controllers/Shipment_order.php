@@ -145,7 +145,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 
 			
 	    if (!empty($_FILES)){ 
-	    	pre($_FILES);
+	    	//pre($_FILES);
 			$nameArray = $this->crud->upload_files($_FILES);
 			$nameData = explode(',',$nameArray);
 			foreach($nameData as $file){

@@ -88,7 +88,7 @@ background-color: #fff;
                                         </div>
                                           <div id="shipper_phone" class="col-md-4">
                                     <label>Shipper's Phone</label>
-                                    <input type="text" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>">
+                                    <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>">
                                   </div>
                                  </div></div>
                                  
@@ -227,7 +227,7 @@ if($city['city_id']==$row->shipper_city){
                                         <div class="col-md-4">
                                     <label>Consignee's Phone</label>
                                     
-                                    <input type="text" class="form-control" id="consignee_phone" name="consignee_phone" value="<?php if(isset($row)){ echo $row->consignee_phone;} ?>">
+                                    <input type="number" class="form-control" id="consignee_phone" name="consignee_phone" value="<?php if(isset($row)){ echo $row->consignee_phone;} ?>">
                                     
                                         </div>   
                                       </div></div>
@@ -323,19 +323,19 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                         <div class="col-md-2">       
                                     <label>Length (cm)</label>
                                     
-                                    <input type="text" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
+                                    <input type="number" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
                                     
                                          </div>
                                            <div class="col-md-2"> 
                                     <label>Width (cm)</label>
                                     
-                                    <input type="text" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
+                                    <input type="number" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
                                     </div>
                                           <div class="col-md-2">
                                             
                                     <label>Height (cm)</label>
                                     
-                                    <input type="text" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
+                                    <input type="number" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
                                     
                                        </div> 
                                        <div id="select_packaging" class="col-md-3">
@@ -357,13 +357,13 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                                 <div class="col-md-4">
                                     <label>Package Weight</label>
                                     
-                                    <input type="text" class="form-control" id="package_weight" name="package_weight"  value="<?php if(isset($row)){ echo $row->package_weight;} ?>">
+                                    <input type="number" class="form-control" id="package_weight" name="package_weight"  value="<?php if(isset($row)){ echo $row->package_weight;} ?>">
                                     
                                         </div>
                                                 <div class="col-md-4">
                                     <label>Carriage Value</label>
                                     
-                                    <input type="text" class="form-control" id="carriage_value" name="carriage_value" value="<?php if(isset($row)){ echo $row->carriage_value;} ?>">
+                                    <input type="number" class="form-control" id="carriage_value" name="carriage_value" value="<?php if(isset($row)){ echo $row->carriage_value;} ?>">
                                     
                                         </div> 
                                                  
@@ -438,7 +438,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                      </div>
                                      <div class="col-md-2">
                                        <label>Vehicle Purchase Cost</label>
-                                       <input type="text" name="purchase_cost[]" value="<?php echo $vehicle->purchase_cost?>" class="form-control">
+                                       <input type="number" name="purchase_cost[]" value="<?php echo $vehicle->purchase_cost?>" class="form-control">
                                    
                                      </div>
                                      <div class="col-md-3">

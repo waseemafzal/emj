@@ -70,7 +70,8 @@ background-color: #fff;
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> Client Invoices
+              <?php $setting = $this->db->get('setting')->row();?>
+            <img height="60" src="uploads/<?php echo $setting->image;?>">Client Invoices
               </h2>
         </div>
         <!-- /.col -->
@@ -78,13 +79,13 @@ background-color: #fff;
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-          From
-          <address>
+          From:
+          
             <strong>EmjayGlobal</strong><br>
-            Chowk Shah Abbass Multan<br>
-            Phone: 0341-1663111<br>
-            Email: admin@admin.com
-          </address>
+           Address: <?php echo $setting->address;?><br>
+            Phone: <?php echo $setting->phone;?><br>
+            Email: <?php echo $setting->email;?>
+          
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">

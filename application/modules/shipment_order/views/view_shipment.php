@@ -7,7 +7,10 @@ $Heading=	$module_heading;
  ?>
    <style>
    .txt-white{ color:#fff !important}
-  
+  .close {
+    color: #fff; 
+    opacity: 1;
+}
    </style>
   
 <div class="content-wrapper">
@@ -98,8 +101,8 @@ $Heading=	$module_heading;
      <div class="modal-dialog-lg modal-dialog-centered">
       <div class="modal-content">
        <div class="modal-header bg-green">
-         <h4 class="modal-title text-center" style="font-weight: bolder">Shipment Details of <?php echo ucfirst($row->shipper_name)?></h4>
-       <button class="close" data-dismiss="modal"><span>&times;</span></button>
+         <h4 class="modal-title pull-left" style="font-weight: bolder">Shipment Details of <?php echo ucfirst($row->shipper_name)?></h4>
+       <button class="close" data-dismiss="modal">x</button>
        </div>
        
        <div  class="modal-body">
@@ -193,6 +196,7 @@ $Heading=	$module_heading;
          </div>
      
        </div>
+       <?php if($row->shipment_type==4){?>
         <div class="col-md-6">
           <h4 class="bg-red text-center"><b>Vehicle Details</b></h4>
            
@@ -213,6 +217,7 @@ $Heading=	$module_heading;
             <?php }?>
             </table>
        </div>
+     <?php }?>
      <div class="modal-footer">
      <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
      </div>

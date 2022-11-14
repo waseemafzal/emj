@@ -290,19 +290,57 @@ $('textarea').change(function(){
         var amount = (qty*price);
         $(this).find('.subtotal').val(amount);
         sum+=amount;
+         $('#total').val(sum);
+   if($('#tax, #discount').val()!=''){
+        var tax = parseInt($('#tax').val());
+        var total = parseInt($('#total').val());
+        var discount = $('#discount').val();
+        var taxamount = total - discount + (total*tax)/100;
+
+        $('#total').val(taxamount);
+        }
+  // if($('#discount').val()!=''){
+  //       var total = $('#total').val();
+  //       var discount = $(this).val();
+  //       var discounted = total - discount;
+  //       $('#total').val(discounted);
+  // }
         
-        $('#total').val(sum);
+//         if($('#tax').val()!=''){
+//        // var total = parseInt( $('#total').val());
+// var taxRate = parseInt( $(this).val());
+// var disc = parseInt( $('#discount').val());
+
+// var taxAmount = total * (taxRate/parseInt("100")); //15000 * .1
+
+// var sum = total + (taxAmount) - (disc);
+
+// //update div with the val
+// $('#total').val(sum);
+// }
     });
   });
+  //$(document).ready(function(){
+           //         $("#tax").on('kepress', function(){
+           //          var amt = parseInt($("#total").val());
+           //          var tax = parseInt($(this).val()); 
+           //    var total = (amt * tax)/100;
+           //    //alert(total);
+           //    //$("#tax_amount").val(total);
+           //    var grand_total = amt + total;
+           //    $("#total").val(grand_total);
+           // });
+
+
     /***********loop through trs end****************/
    
     //just subtract discount  
-    $('#discount').on('keyup', function(){
-        var total = parseInt($("#total").val());
-        var discount = parseInt($(this).val());
-        var discounted=total-discount;
-        $('#total').val(discounted);
-      });
+    // $('#discount').on('click', function(){
+    //     var total = parseInt($("#total").val());
+    //     var discount = parseInt($(this).val());
+    //     var discounted=total-discount;
+    //     $('#total').val(discounted);
+    //   });
  /***********Add tax start****************/
    
      // $('#tax').on('keyup', function(){

@@ -27,6 +27,10 @@
         <li class="<?= getActive('countries_management') ?>"><a href="countries_management"><i class="fa fa-th"></i> <span>Countries /State /city </span></a></li>
 
           <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa-shopping-cart'></i> <span>Shipment Orders</span></a></li>      
+          
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><span>Purchase Orders</span></a></li>
+          
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><span>Bill of Landing</span></a></li>
       
         <li class="treeview hidden">
           <a href="#">

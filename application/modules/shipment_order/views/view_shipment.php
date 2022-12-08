@@ -11,6 +11,12 @@ $Heading=	$module_heading;
     color: #fff; 
     opacity: 1;
 }
+thead>tr>th{
+background-color:#000; color:#fff;font-size: 12px; text-transform:capitalize	
+	}
+tbody>tr>td.bg{
+background-color:#8b8383; color:#fff;font-size: 11px; text-transform:capitalize	
+	}
    </style>
   
 <div class="content-wrapper">
@@ -35,10 +41,11 @@ $Heading=	$module_heading;
             </div>
             <!-- /.box-header -->
              <div class="box-body">
-                <table id="post_table" class="table table-bordered responsive">
+                <table id="post_table" cellpadding="0" cellspacing="0" class="table table-bordered responsive">
     <thead>
-    <tr>
-        <th>Track Number</th>
+    <tr><th  class="bghead">Ref#</th>
+        
+        <th class="bghead" >Track Number</th>
         <th>Shipper Name</th>
 		    <th>Shipper Address</th>
         <th>Consignee Name</th>
@@ -56,9 +63,9 @@ $Heading=	$module_heading;
 	foreach ($data->result() as $row){
 		
 		?>
-		<tr id="row_<?php echo $row->id;?>">
-        
-		<td align="center"><?php echo $row->track_number;?></td>
+		<tr  id="row_<?php echo $row->id;?>" class="<?php echo $row->shipmentStatus;?>">
+        <td  class="bg"><?php echo $row->id;?></td>
+		<td  class="bg" align="center"><?php echo $row->track_number;?></td>
     <td><?php echo $row->shipper_name;?></td>
     <td><?php echo $row->shipper_address;?></td>
     

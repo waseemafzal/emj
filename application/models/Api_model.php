@@ -433,7 +433,7 @@ public function setEmailTemplate($userName,$activationLink){
                                                             <td   style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px"> Hi '.$userName.', </td>
                                                          </tr>
                                                          <tr>
-                                                            <td   style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px"> Welcome to pick4delivery! </td>
+                                                            <td   style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px"> Welcome to Emjay Global! </td>
                                                          </tr>
                                                          <tr>
                                                             <td   style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px"> Please verify your email address so you can get full access to the app. </td>
@@ -467,7 +467,7 @@ public function setEmailTemplate($userName,$activationLink){
                                                          </tr>
                                                          <tr>
                                                             <td   style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:30px">
-                                                               <div style="padding-top:10px">Thanks for your time,<br>The pick4delivery Team</div>
+                                                               <div style="padding-top:10px">Thanks for your time,<br>The Emjay Global Team</div>
                                                             </td>
                                                          </tr>
                                                       </tbody>
@@ -489,10 +489,10 @@ public function setEmailTemplate($userName,$activationLink){
                      <tr>
                         <td align="center" width="100%" style="color:#656565;font-size:12px;line-height:24px;padding-bottom:30px;padding-top:30px"><a href="" style="color:#656565;text-decoration:underline" target="_blank" >Privacy Policy</a> &nbsp; | &nbsp; <a href="" style="color:#656565;text-decoration:underline" target="_blank" >Contact Support</a> 
                            <div style="font-family:Helvetica,Arial,sans-serif!important;word-break:break-all" >
-                              New York, Canal Road Thokar, USA
+                              
                            </div>
                            <div style="font-family:Helvetica,Arial,sans-serif!important;word-break:break-all">
-                              © 2019 pick4delivery Inc.
+                              © 2019 Emjay Global Inc.
                            </div>
                         </td>
                      </tr>

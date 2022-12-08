@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 05:11 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Host: localhost:3306
+-- Generation Time: Dec 08, 2022 at 12:46 PM
+-- Server version: 5.7.40-cll-lve
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `emjay`
+-- Database: `cypherso_emj`
 --
 
 -- --------------------------------------------------------
@@ -126,7 +127,7 @@ INSERT INTO `app_routes` (`id`, `slug`, `controller`, `type`, `resource_id`) VAL
 CREATE TABLE `app_user_session` (
   `access_token` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -308,12 +309,24 @@ INSERT INTO `app_user_session` (`access_token`, `user_id`, `created_date`, `id`)
 ('423111664999126', 165, '2022-10-05 19:45:26', 182),
 ('156791667033072', 2, '2022-10-29 08:44:32', 183),
 ('655201667033109', 2, '2022-10-29 08:45:09', 184),
-('773521668015498', 3, '2022-11-09 17:38:18', 185),
-('382411668015572', 3, '2022-11-09 17:39:32', 186),
-('275581668015671', 3, '2022-11-09 17:41:11', 187),
-('430991668015700', 3, '2022-11-09 17:41:40', 188),
-('380831668015768', 3, '2022-11-09 17:42:48', 189),
-('327961668016143', 3, '2022-11-09 17:49:03', 190);
+('369171667589151', 4, '2022-11-04 19:12:31', 185),
+('434271667983818', 4, '2022-11-09 08:50:18', 186),
+('761671667994514', 4, '2022-11-09 11:48:34', 188),
+('512721668007813', 4, '2022-11-09 15:30:13', 194),
+('237211668008022', 2, '2022-11-09 15:33:42', 196),
+('429541668021941', 8, '2022-11-09 19:25:41', 198),
+('829371668073961', 9, '2022-11-10 09:52:41', 202),
+('984141668080802', 10, '2022-11-10 11:46:42', 203),
+('234181669802979', 17, '2022-11-30 10:09:39', 220),
+('334521669467228', 17, '2022-11-26 12:53:48', 219),
+('287081669463750', 10, '2022-11-26 11:55:50', 218),
+('650501668407058', 9, '2022-11-14 06:24:18', 210),
+('317331668487867', 9, '2022-11-15 04:51:07', 211),
+('134681668487871', 9, '2022-11-15 04:51:11', 212),
+('136591668491777', 10, '2022-11-15 05:56:17', 213),
+('606121668500278', 10, '2022-11-15 08:17:58', 214),
+('266631668510028', 10, '2022-11-15 11:00:28', 215),
+('271151669110424', 16, '2022-11-22 09:47:04', 216);
 
 -- --------------------------------------------------------
 
@@ -324,7 +337,7 @@ INSERT INTO `app_user_session` (`access_token`, `user_id`, `created_date`, `id`)
 CREATE TABLE `ci_sessions` (
   `id` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `ip_address` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -340,28 +353,33 @@ CREATE TABLE `clients_invoice` (
   `item_description` varchar(255) NOT NULL,
   `amount` double NOT NULL,
   `detail` text NOT NULL,
-  `payment_terms` text DEFAULT NULL,
+  `payment_terms` text,
   `tax` double DEFAULT NULL,
   `discount` double DEFAULT NULL,
-  `created_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) DEFAULT NULL,
   `paid` enum('Yes','No') NOT NULL,
   `created_date` date NOT NULL,
   `due_date` date NOT NULL,
   `order_no` varchar(255) NOT NULL,
   `notes` text NOT NULL,
-  `order_id` int(11) NOT NULL
+  `order_id` int(11) NOT NULL,
+  `payment_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clients_invoice`
 --
 
-INSERT INTO `clients_invoice` (`id`, `client_id`, `item_description`, `amount`, `detail`, `payment_terms`, `tax`, `discount`, `created_on`, `created_by`, `paid`, `created_date`, `due_date`, `order_no`, `notes`, `order_id`) VALUES
-(1, 0, '', 20, '{\"items\":[\"hello from me\"],\"quantities\":[\"1\"],\"rates\":[\"20\"],\"subtotal\":[\"20\"]}', '', 0, 0, '2022-11-09 18:30:41', NULL, 'No', '0000-00-00', '0000-00-00', '', '', 1),
-(2, 0, '', 222, '{\"items\":[\"josh\"],\"quantities\":[\"2\"],\"rates\":[\"111\"],\"subtotal\":[\"222\"]}', 'cash', 0, 0, '2022-11-09 18:33:28', NULL, 'Yes', '0000-00-00', '0000-00-00', '', 'this is really easy ', 1),
-(3, 0, '', 44, '{\"items\":[\"goods\"],\"quantities\":[\"2\"],\"rates\":[\"22\"],\"subtotal\":[\"44\"]}', 'please pay from app', 0, 0, '2022-11-09 18:43:36', NULL, 'No', '0000-00-00', '0000-00-00', '', '', 1),
-(4, 0, '', 275, '{\"items\":[\"hello from me\"],\"quantities\":[\"5\"],\"rates\":[\"55\"],\"subtotal\":[\"275\"]}', '', 0, 0, '2022-11-09 18:53:02', NULL, 'No', '2022-11-10', '2022-11-10', '1668019982', '', 1);
+INSERT INTO `clients_invoice` (`id`, `client_id`, `item_description`, `amount`, `detail`, `payment_terms`, `tax`, `discount`, `created_on`, `created_by`, `paid`, `created_date`, `due_date`, `order_no`, `notes`, `order_id`, `payment_id`) VALUES
+(1, 0, '', 100, '{\"items\":[\"Pateesa\"],\"quantities\":[\"2\"],\"rates\":[\"50\"],\"subtotal\":[\"100\"]}', '', 0, 0, '2022-11-10 05:43:34', NULL, 'Yes', '2022-11-11', '2022-11-12', '1668059014', 'sukkia rotian tey patisa, loye lelon tey patisa', 4, 3),
+(2, 0, '', 40, '{\"items\":[\"kulfi khoye aal\"],\"quantities\":[\"2\"],\"rates\":[\"20\"],\"subtotal\":[\"40\"]}', 'stripe sey pay kro bhai debit card sey', 0, 0, '2022-11-10 05:44:46', NULL, 'Yes', '2022-11-10', '2022-11-15', '1668059086', 'Kulfi banai j dodh tey lachian paa k', 5, 69),
+(3, 0, '', 14.28, '{\"items\":[\"hello from me\"],\"quantities\":[\"3\"],\"rates\":[\"5\"],\"subtotal\":[\"15\"]}', 'no term', 2, 1, '2022-11-10 11:56:38', NULL, 'Yes', '2022-11-03', '2022-11-12', '1668081398', 'no notes', 6, 2),
+(5, 0, '', 1180, '{\"items\":[\"hello from me\"],\"quantities\":[\"12\"],\"rates\":[\"100\"],\"subtotal\":[\"1200\"]}', 'card', 0, 20, '2022-11-10 16:27:35', NULL, 'No', '2022-11-10', '2022-11-12', '1668097655', 'please pay today', 8, NULL),
+(6, 0, '', 22.44, '{\"items\":[\"The onchange JavaScript event is triggered when an element is changed and then loses focus. In the context of a textarea , this happens when the  content of \"],\"quantities\":[\"2\"],\"rates\":[\"21\"],\"subtotal\":[\"42\"]}', 'By debit card', 2, 20, '2022-11-12 13:01:02', NULL, 'Yes', '2022-11-12', '2022-11-19', '1668258062', 'No notes for now just testing', 9, 70),
+(7, 0, '', 8.16, '{\"items\":[\"this item is hot\"],\"quantities\":[\"2\"],\"rates\":[\"5\"],\"subtotal\":[\"10\"]}', 'card', 2, 2, '2022-11-12 13:01:42', NULL, 'Yes', '2022-11-12', '2022-11-21', '1668258102', 'cash', 10, 71),
+(8, 0, '', 200, '{\"items\":[\"cnic\"],\"quantities\":[\"1\"],\"rates\":[\"200\"],\"subtotal\":[\"200\"]}', '', 0, 0, '2022-11-16 10:51:17', NULL, 'Yes', '2022-11-16', '2022-11-20', '1668595877', '', 12, 73),
+(9, 0, '', 300, '{\"items\":[\"it was one item\"],\"quantities\":[\"1\"],\"rates\":[\"300\"],\"subtotal\":[\"300\"]}', 'bank', 0, 0, '2022-11-26 12:39:09', NULL, 'Yes', '2022-11-26', '2022-11-27', '1669466349', 'no notes for now', 25, 74);
 
 -- --------------------------------------------------------
 
@@ -380,7 +398,7 @@ CREATE TABLE `cms` (
   `meta_keyword` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `meta_title` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `meta_description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  `created_on` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -388,7 +406,7 @@ CREATE TABLE `cms` (
 --
 
 INSERT INTO `cms` (`id`, `post_title`, `short_heading`, `post_banner`, `post_description`, `displaysidebar`, `sidebar`, `meta_keyword`, `meta_title`, `meta_description`, `created_on`) VALUES
-(53, 'Le frelon asiatique', 'Le frelon asiatique', '1736860717446.jpg', '<p>Le frelon asiatique est arriv&eacute; accidentellement en France en 2004 et avait colonis&eacute;, en janvier 2020, sur tout l&#39;Hexagone, &agrave; l&rsquo;exception du Bas-Rhin, du Territoire-de-Belfort et de la Corse. On le retrouve aussi d&eacute;sormais en Espagne, au Portugal, en Italie, en Belgique, aux Pays-Bas, en Allemagne et jusqu&rsquo;en Angleterre. Cette esp&egrave;ce invasive a &eacute;t&eacute; class&eacute;e comme &laquo;&nbsp;danger sanitaire de 2e cat&eacute;gorie&nbsp;&raquo; en France en 2012. L&rsquo;union europ&eacute;enne l&rsquo;a quant &agrave; elle class&eacute; &laquo;&nbsp;nuisible&nbsp;&raquo; en juin 2016. Mais le frelon asiatique continue sa progression, contribuant au d&eacute;clin des abeilles mellif&egrave;res et des pollinisateurs sauvages.</p>\n', 0, 0, 'Le frelon asiatique', 'Le frelon asiatique', 'Le frelon asiatique', '2020-09-05 15:21:01');
+(1, 'Terms', 'Terms', 'defaultbanner.png', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 0, '', '', '', '2022-11-21 14:56:40');
 
 -- --------------------------------------------------------
 
@@ -423,6 +441,28 @@ INSERT INTO `contacts` (`id`, `user_id`, `name`, `contact`, `email`, `address`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `conversations`
+--
+
+CREATE TABLE `conversations` (
+  `conversation_id` int(11) UNSIGNED NOT NULL,
+  `owner_id` int(11) UNSIGNED NOT NULL,
+  `modified` datetime NOT NULL,
+  `receiver_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `conversations`
+--
+
+INSERT INTO `conversations` (`conversation_id`, `owner_id`, `modified`, `receiver_id`) VALUES
+(1, 10, '2022-11-29 15:24:49', 1),
+(2, 8, '2022-11-26 20:53:27', 1),
+(3, 7, '2022-11-30 00:53:09', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `groups`
 --
 
@@ -450,7 +490,7 @@ CREATE TABLE `helpcenter` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `message` text NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -498,6 +538,64 @@ CREATE TABLE `login_attempts` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `message_id` int(11) UNSIGNED NOT NULL,
+  `conversation_id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `body` text COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '1=deleted for one,2 deleted for everyone',
+  `deleted_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `conversation_id`, `user_id`, `body`, `date`, `read`, `type`, `status`, `deleted_by`) VALUES
+(1, 1, 10, 'hello how are you', '2022-11-26 07:02:26', 1, 'text', 0, 0),
+(2, 1, 10, 'hello how are you', '2022-11-26 07:04:43', 1, 'text', 0, 0),
+(3, 2, 8, '1adasd', '2022-11-26 15:53:27', 0, 'text', 0, 0),
+(4, 1, 10, 'hi', '2022-11-29 10:24:21', 0, 'text', 0, 0),
+(5, 1, 10, 'hi', '2022-11-29 10:24:26', 0, 'text', 0, 0),
+(6, 1, 10, 'hi', '2022-11-29 10:24:29', 0, 'text', 0, 0),
+(7, 1, 10, 'hi', '2022-11-29 10:24:31', 0, 'text', 0, 0),
+(8, 1, 10, 'hi', '2022-11-29 10:24:32', 0, 'text', 0, 0),
+(9, 1, 10, 'hi', '2022-11-29 10:24:33', 0, 'text', 0, 0),
+(10, 1, 10, 'hi', '2022-11-29 10:24:34', 0, 'text', 0, 0),
+(11, 1, 10, 'how r', '2022-11-29 10:24:35', 0, 'text', 0, 0),
+(12, 1, 10, 'how', '2022-11-29 10:24:37', 0, 'text', 0, 0),
+(13, 1, 10, 's', '2022-11-29 10:24:45', 0, 'text', 0, 0),
+(14, 1, 10, 's', '2022-11-29 10:24:45', 0, 'text', 0, 0),
+(15, 1, 10, 's', '2022-11-29 10:24:45', 0, 'text', 0, 0),
+(16, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(17, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(18, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(19, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(20, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(21, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(22, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(23, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(24, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(25, 1, 10, 's', '2022-11-29 10:24:48', 0, 'text', 0, 0),
+(26, 1, 10, 's', '2022-11-29 10:24:48', 0, 'text', 0, 0),
+(27, 1, 10, 's', '2022-11-29 10:24:48', 0, 'text', 0, 0),
+(28, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(29, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(30, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(31, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(32, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(33, 3, 7, 'hu', '2022-11-29 10:51:39', 0, 'text', 0, 0),
+(34, 3, 7, 'hi', '2022-11-29 19:53:09', 0, 'text', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `notifications`
 --
 
@@ -508,7 +606,7 @@ CREATE TABLE `notifications` (
   `receiver_id` int(11) NOT NULL,
   `resource_id` int(11) NOT NULL,
   `resource_type` varchar(50) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `readed` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -525,13 +623,138 @@ INSERT INTO `notifications` (`id`, `body`, `sender_id`, `receiver_id`, `resource
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification_types`
+--
+
+CREATE TABLE `notification_types` (
+  `notification_id` int(11) NOT NULL,
+  `type` varchar(64) NOT NULL,
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_card_detail`
+--
+
+CREATE TABLE `order_card_detail` (
+  `id` int(11) NOT NULL,
+  `txn_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `address_zip` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address_zip_check` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `brand` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `exp_month` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `exp_year` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fingerprint` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `funding` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last4` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `currency` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `amount` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `object` text COLLATE utf8_unicode_ci NOT NULL,
+  `paid` int(11) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `card_num` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `card_cvc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `card_exp_month` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `card_exp_year` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `paid_amount` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `paid_amount_currency` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `order_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_card_detail`
+--
+
+INSERT INTO `order_card_detail` (`id`, `txn_id`, `address_zip`, `address_zip_check`, `brand`, `country`, `exp_month`, `exp_year`, `fingerprint`, `funding`, `last4`, `description`, `currency`, `amount`, `object`, `paid`, `created_on`, `card_num`, `card_cvc`, `card_exp_month`, `card_exp_year`, `paid_amount`, `paid_amount_currency`, `payment_status`, `order_id`) VALUES
+(1, 'ch_3M2UMEAj5MXORqkL07D3kF2l', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636c9bade63ca', 'usd', '100', 'charge', 1, '2022-11-10 06:35:27', '', '', '', '', '', '', '', 4),
+(3, 'ch_3M3IMXAj5MXORqkL04JjjVuX', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f8a8915a74', 'usd', '1111', 'charge', 1, '2022-11-12 11:59:06', '', '', '', '', '', '', '', 4),
+(4, 'ch_3M3J9zAj5MXORqkL1Vivv3th', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968342e85', 'usd', '40', 'charge', 1, '2022-11-12 12:50:12', '', '', '', '', '', '', '', 5),
+(5, 'ch_3M3JA2Aj5MXORqkL0JxjI7jK', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9685c4403', 'usd', '40', 'charge', 1, '2022-11-12 12:50:15', '', '', '', '', '', '', '', 5),
+(6, 'ch_3M3JA3Aj5MXORqkL1oWa4TZc', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96878f5fe', 'usd', '40', 'charge', 1, '2022-11-12 12:50:16', '', '', '', '', '', '', '', 5),
+(7, 'ch_3M3JA4Aj5MXORqkL0qDPcEhY', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96883db86', 'usd', '40', 'charge', 1, '2022-11-12 12:50:17', '', '', '', '', '', '', '', 5),
+(8, 'ch_3M3JA9Aj5MXORqkL1S1QXaeg', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968db952f', 'usd', '40', 'charge', 1, '2022-11-12 12:50:22', '', '', '', '', '', '', '', 5),
+(9, 'ch_3M3JAAAj5MXORqkL0WaFTlnX', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968e1b3cb', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(10, 'ch_3M3JAAAj5MXORqkL104pKEM7', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968e55f88', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(11, 'ch_3M3JAAAj5MXORqkL0pcy5mHJ', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968e874c8', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(12, 'ch_3M3JAAAj5MXORqkL0UabnwMY', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968eb679d', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(13, 'ch_3M3JABAj5MXORqkL1q85hI1q', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968f9ac01', 'usd', '40', 'charge', 1, '2022-11-12 12:50:24', '', '', '', '', '', '', '', 5),
+(14, 'ch_3M3JACAj5MXORqkL1dmm86dq', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968ff3056', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(15, 'ch_3M3JACAj5MXORqkL06GddVau', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96904a02b', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(16, 'ch_3M3JACAj5MXORqkL0spvcVSZ', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969074c59', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(17, 'ch_3M3JACAj5MXORqkL1aXRguHc', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9690afe2a', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(18, 'ch_3M3JADAj5MXORqkL0siKCeab', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969175d64', 'usd', '40', 'charge', 1, '2022-11-12 12:50:26', '', '', '', '', '', '', '', 5),
+(19, 'ch_3M3JAEAj5MXORqkL1Xr4MGN3', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9691c8ef9', 'usd', '40', 'charge', 1, '2022-11-12 12:50:26', '', '', '', '', '', '', '', 5),
+(20, 'ch_3M3JAEAj5MXORqkL0YC2V8HE', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96923e150', 'usd', '40', 'charge', 1, '2022-11-12 12:50:27', '', '', '', '', '', '', '', 5),
+(21, 'ch_3M3JAEAj5MXORqkL0qVJAkQR', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969259a5e', 'usd', '40', 'charge', 1, '2022-11-12 12:50:27', '', '', '', '', '', '', '', 5),
+(22, 'ch_3M3JAEAj5MXORqkL16BFtCTO', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9692b02e0', 'usd', '40', 'charge', 1, '2022-11-12 12:50:27', '', '', '', '', '', '', '', 5),
+(23, 'ch_3M3JAFAj5MXORqkL0zYi1LHK', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96936507c', 'usd', '40', 'charge', 1, '2022-11-12 12:50:28', '', '', '', '', '', '', '', 5),
+(24, 'ch_3M3JAFAj5MXORqkL0vs3fb6U', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9693b7bb2', 'usd', '40', 'charge', 1, '2022-11-12 12:50:28', '', '', '', '', '', '', '', 5),
+(25, 'ch_3M3JANAj5MXORqkL1DLqKYPY', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969b2ef26', 'usd', '40', 'charge', 1, '2022-11-12 12:50:36', '', '', '', '', '', '', '', 5),
+(26, 'ch_3M3JANAj5MXORqkL18PbgI3J', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969baa76b', 'usd', '40', 'charge', 1, '2022-11-12 12:50:36', '', '', '', '', '', '', '', 5),
+(27, 'ch_3M3JAOAj5MXORqkL1ZKs3VxT', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969bde59c', 'usd', '40', 'charge', 1, '2022-11-12 12:50:37', '', '', '', '', '', '', '', 5),
+(28, 'ch_3M3JAnAj5MXORqkL03QEEuQg', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b5274eb', 'usd', '40', 'charge', 1, '2022-11-12 12:51:02', '', '', '', '', '', '', '', 5),
+(29, 'ch_3M3JAoAj5MXORqkL0LAQijvO', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b693171', 'usd', '40', 'charge', 1, '2022-11-12 12:51:03', '', '', '', '', '', '', '', 5),
+(30, 'ch_3M3JApAj5MXORqkL13jqE1Wm', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b71a721', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(31, 'ch_3M3JApAj5MXORqkL1kkghdyJ', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b74ed28', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(32, 'ch_3M3JApAj5MXORqkL0NO2TK39', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b777d31', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(33, 'ch_3M3JApAj5MXORqkL0mk3ATK3', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b7b29a4', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(34, 'ch_3M3JC5Aj5MXORqkL1fbQykM6', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f970551111', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(35, 'ch_3M3JC5Aj5MXORqkL0bW6EBGT', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97053f736', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(36, 'ch_3M3JC5Aj5MXORqkL147ZSaRf', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97056b416', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(37, 'ch_3M3JC5Aj5MXORqkL12DbLKww', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97057a2fc', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(38, 'ch_3M3JC7Aj5MXORqkL1M6ZtMbW', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97071a31a', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(39, 'ch_3M3JC7Aj5MXORqkL1aKCyVsV', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f9707670d9', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(40, 'ch_3M3JC7Aj5MXORqkL1mnVCNFs', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97078db19', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(41, 'ch_3M3JC7Aj5MXORqkL01twepn5', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f9707b55cc', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(42, 'ch_3M3JC8Aj5MXORqkL1d5el7BL', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f970837aed', 'usd', '40', 'charge', 1, '2022-11-12 12:52:25', '', '', '', '', '', '', '', 5),
+(43, 'ch_3M3JC9Aj5MXORqkL1sAjYpG6', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f9709032bf', 'usd', '40', 'charge', 1, '2022-11-12 12:52:26', '', '', '', '', '', '', '', 5),
+(44, 'ch_3M3JCzAj5MXORqkL1z2Venqi', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f973d09802', 'usd', '40', 'charge', 1, '2022-11-12 12:53:18', '', '', '', '', '', '', '', 5),
+(45, 'ch_3M3JD4Aj5MXORqkL19YTNi71', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9741d9fe3', 'usd', '40', 'charge', 1, '2022-11-12 12:53:23', '', '', '', '', '', '', '', 5),
+(46, 'ch_3M3JD4Aj5MXORqkL1Yeb0pRo', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9742c7636', 'usd', '40', 'charge', 1, '2022-11-12 12:53:23', '', '', '', '', '', '', '', 5),
+(47, 'ch_3M3JD5Aj5MXORqkL1qRcvQ3O', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97432ab86', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(48, 'ch_3M3JD5Aj5MXORqkL0ld19AY1', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974379fdf', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(49, 'ch_3M3JD5Aj5MXORqkL0yUeYMUe', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97434c0e6', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(50, 'ch_3M3JD6Aj5MXORqkL1IrfNmrQ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9743ca366', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(51, 'ch_3M3JD6Aj5MXORqkL0HEtRjE5', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974487600', 'usd', '40', 'charge', 1, '2022-11-12 12:53:25', '', '', '', '', '', '', '', 5),
+(52, 'ch_3M3JD7Aj5MXORqkL0n7HMKgG', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974541526', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(53, 'ch_3M3JD7Aj5MXORqkL0Xg9oeMg', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974562718', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(54, 'ch_3M3JD7Aj5MXORqkL10mJ0PSk', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97456289d', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(55, 'ch_3M3JD7Aj5MXORqkL1mBe8VWl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9745a763a', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(56, 'ch_3M3JD8Aj5MXORqkL1tJJGBTZ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974661e50', 'usd', '40', 'charge', 1, '2022-11-12 12:53:27', '', '', '', '', '', '', '', 5),
+(57, 'ch_3M3JD9Aj5MXORqkL14Ev80HZ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97472bc67', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(58, 'ch_3M3JD9Aj5MXORqkL1ugSFPYX', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974755761', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(59, 'ch_3M3JD9Aj5MXORqkL1aYEvsSx', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97475118e', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(60, 'ch_3M3JD9Aj5MXORqkL1rvo3WcJ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97477eea8', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(61, 'ch_3M3JDAAj5MXORqkL1uwOUZgh', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9748872a7', 'usd', '40', 'charge', 1, '2022-11-12 12:53:29', '', '', '', '', '', '', '', 5),
+(62, 'ch_3M3JDBAj5MXORqkL1yMenxfG', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974911a1c', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(63, 'ch_3M3JDBAj5MXORqkL1y2IRN9h', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974930a85', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(64, 'ch_3M3JDBAj5MXORqkL0BRGc4zA', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974928e74', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(65, 'ch_3M3JDBAj5MXORqkL0LMVl9bM', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974961897', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(66, 'ch_3M3JDCAj5MXORqkL03g5VSms', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974a56cfa', 'usd', '40', 'charge', 1, '2022-11-12 12:53:31', '', '', '', '', '', '', '', 5),
+(67, 'ch_3M3JDDAj5MXORqkL1hHY2htf', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974ad937c', 'usd', '40', 'charge', 1, '2022-11-12 12:53:31', '', '', '', '', '', '', '', 5),
+(68, 'ch_3M3JDDAj5MXORqkL09eHuBWT', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974b1912b', 'usd', '40', 'charge', 1, '2022-11-12 12:53:32', '', '', '', '', '', '', '', 5),
+(69, 'ch_3M3JDDAj5MXORqkL1BHBlmwT', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974b47ae9', 'usd', '40', 'charge', 1, '2022-11-12 12:53:32', '', '', '', '', '', '', '', 5),
+(70, 'ch_3M3LUgAj5MXORqkL1ivJpJIk', '0', '0', 'Visa', 'US', '2', '2023', '', 'credit', '4242', 'orderNo:636fb98e44bdb', 'usd', '22.44', 'charge', 1, '2022-11-12 15:19:43', '', '', '', '', '', '', '', 9),
+(71, 'ch_3M3LYHAj5MXORqkL0RgVMErw', '0', '0', 'Visa', 'US', '2', '2042', '', 'credit', '4242', 'orderNo:636fba6ce4a9d', 'usd', '8.16', 'charge', 1, '2022-11-12 15:23:26', '', '', '', '', '', '', '', 10),
+(72, 'ch_3M4jDeAj5MXORqkL0qnhfm12', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:6374c0c699398', 'usd', '14.5', 'charge', 1, '2022-11-16 10:51:51', '', '', '', '', '', '', '', 12),
+(73, 'ch_3M4jDoAj5MXORqkL02FRNmjl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:6374c0d0a62b0', 'usd', '200', 'charge', 1, '2022-11-16 10:52:01', '', '', '', '', '', '', '', 12),
+(74, 'ch_3M8NfpAj5MXORqkL1Jn6Dtyl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63820921c16d9', 'usd', '300', 'charge', 1, '2022-11-26 12:40:03', '', '', '', '', '', '', '', 25);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `plans`
 --
 
 CREATE TABLE `plans` (
   `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `price` float(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Minimum amount is $0.50 US',
+  `price` float(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Minimum amount is $0.50 US',
   `interval` enum('week','month','year') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'month',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `paystack_plan_code` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
@@ -580,8 +803,8 @@ CREATE TABLE `requests` (
   `request_type` enum('Report','Medical','Physical','Fire','Kidnapping','Accident','Road Robbery') NOT NULL,
   `description` varchar(255) NOT NULL,
   `latlon` varchar(255) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` int(11) NOT NULL DEFAULT 0
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -608,6 +831,25 @@ INSERT INTO `requests` (`id`, `user_id`, `request_type`, `description`, `latlon`
 (17, 168, 'Kidnapping', 'send help', '6.6388644,6.6388644', '2022-10-05 13:31:46', 2),
 (18, 165, 'Fire', 'send help', '30.1654582,30.1654582', '2022-10-05 19:53:54', 0),
 (19, 165, 'Medical', 'send help', '30.1654582,30.1654582', '2022-10-05 19:53:58', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `search_history`
+--
+
+CREATE TABLE `search_history` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `search_history`
+--
+
+INSERT INTO `search_history` (`id`, `user_id`, `order_id`) VALUES
+(1, 7, 5);
 
 -- --------------------------------------------------------
 
@@ -665,7 +907,6 @@ INSERT INTO `setting` (`id`, `description`, `image`, `banner`, `phone`, `status`
 CREATE TABLE `shipment_orders` (
   `id` int(11) NOT NULL,
   `shipment_type` int(11) NOT NULL COMMENT '1=personal effect,2=ocean frieght,3=Air Frieght,4=Vehicle Shipment',
-  `shipment_status` varchar(255) NOT NULL,
   `shipper_name` varchar(255) NOT NULL,
   `shipper_phone` varchar(255) NOT NULL,
   `shipper_address` varchar(255) NOT NULL,
@@ -693,17 +934,41 @@ CREATE TABLE `shipment_orders` (
   `shipment_from` varchar(255) NOT NULL,
   `shipment_to` varchar(255) NOT NULL,
   `shipment_date` varchar(255) NOT NULL,
+  `expected_delivery_date` date DEFAULT NULL,
   `track_number` double NOT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `shipment_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `shipment_orders`
 --
 
-INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipment_status`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `track_number`, `user_id`) VALUES
-(1, 4, '', 'Seyaam', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', 25606085, 3),
-(2, 1, '', 'Wajid', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', 54488243, 3);
+INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `expected_delivery_date`, `track_number`, `user_id`, `shipment_status`) VALUES
+(2, 4, 'waseem', '3417090031', 'Hussain town Multan\r\ntown', '2647', 'Select City', 'yes', 'nishter college', 'yes', 'Home', 'mr ben', 'jsksjds', '03417090031', '<p>skjsdkj</p>\r\n', '1', '42', '5909', '2', '3', '3', '3', 'Extra Large Box', '1', '1', NULL, 'Lahore', 'Lahore', '2022-10-29', NULL, 0, NULL, 0),
+(3, 1, 'waseem', '341709003', 'xyz', '2648', '48510', 'yes', 'xys', 'yes', 'Home', 'mr ben', 'Hussain town Multan\r\ntown', '3417090031', '<p>hellof</p>\r\n', '17', '327', '7255', '2', '2', '2', '2', 'Extra Large Box', '1', '1', NULL, 'liaqatpur', 'liaqatpur', '2022-10-29', NULL, 40960587, NULL, 0),
+(4, 1, 'Wajid', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 61210695, 7, 0),
+(5, 4, 'Seyaam', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 40080218, 7, 0),
+(6, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 97399963, 10, 0),
+(7, 4, 'Jawad khan', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 75713930, 10, 0),
+(8, 4, 'Jawad days', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 73769471, 10, 0),
+(9, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 95889687, 7, 0),
+(10, 4, 'wajid ali', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14943, 7, 0),
+(11, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 15250955, 10, 0),
+(12, 3, 'Seyaam kaka', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 12830078, 7, 0),
+(13, 2, 'Ismail khan niazi', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14225224, 7, 0),
+(14, 1, 'Naveed ', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 43205899, 7, 0),
+(15, 1, 'haha', '+234676466', 'gagag', 'Bashshar', 'Bani Wanif', 'yes', 'gahaha', 'yes', 'Home', 'bahah', 'bahsj', '+2346767', 'hahah', 'Andorra', 'Canillo', 'Canillo', '2', '6494', '4', '4', '', '1', '1', NULL, 'gaha', 'haha', '2022-11-17', NULL, 46335237, 7, 0),
+(16, 1, 'seeeeema', '15', 'XXX', 'Pind Pondri', 'Chak 42', 'yes', 'chowk jalebi wala', 'yes', 'Home', 'jajajajaj', 'm', '1', 'good', 'p', '42', '2', '1', '1', '1', '1', 'Extra Large Box', '56', '7', NULL, 'multan', 'lahore', '2022-11-08', NULL, 89099449, 7, 0),
+(17, 1, 'wajid', '+23431313', '1jaj', 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 21141464, 7, 0),
+(18, 1, 'wajid', '+23431313', '1jaj', 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 55004198, 7, 0),
+(19, 1, 'hwwh', '+23466464', 'bbsh', 'Baglan', 'Baghlan', 'yes', 'bb', 'yes', 'Home', 'bhw', 'bshh', '+2349464', 'babs', 'Algeria', 'Adrar', 'Adrar', '2', '9494', '4', '4', '', '123', '1', NULL, 'hhshs', 'hshs', '2022-11-17', NULL, 93712401, 7, 0),
+(20, 1, 'Abdul Wajid', '+2343331245671', 'Lahore Sector Z1', 'New York', 'Brookhaven', 'yes', 'Same as above', 'yes', 'Home', 'Bilal Razaq Kashmiri', 'Township', '+2343481072184', 'This packet has large as', 'Afghanistan', 'Baglan', 'Baghlan', '3', '6', '1', '6', '', '65', '12', NULL, 'Lahore', 'Jaranwala', '2022-11-18', NULL, 91466675, 7, 0),
+(21, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 19385476, 7, 0),
+(22, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 69094402, 7, 0),
+(23, 1, 'seema', '+234123', 'xxxx', 'Farah', 'Farah', 'yes', 'gagay', 'yes', 'Home', 'gg', 'hh', '+23499', 'haha', 'Afghanistan', 'Badgis', 'Bala Morghab', '2', '47', '4', '4', '', '64', '4', NULL, 'haha', 'nanaj', '2022-11-19', NULL, 1132491, 7, 0),
+(24, 4, 'gg', '+23499', 'vv', 'Manu\'a', 'Ofu', 'yes', 'hb', 'yes', 'Home', 'bb', 'b', '+23456', 'h', 'Algeria', 'Batnah', '\'Ayn Tutah', '1', '4', '4', '4', 'Letter', '11', '22', NULL, 'ao', 'a', '2022-11-22', NULL, 9801762, 7, 0),
+(25, 1, 'seyam', '+923417090031', 'new shah shams colony', 'Punjab', 'Multan', 'yes', 'new shah shams', 'yes', 'Home', 'Mr ben', 'Nigeria', '+234319739494', 'one pair of shoes', 'Nigeria', 'Abia', 'Amaigbo', '1', '2', '1', '2', '', '1', '45', NULL, 'Pakistan', 'nigeria', '2022-11-22', NULL, 64342, 16, 0);
 
 -- --------------------------------------------------------
 
@@ -722,8 +987,29 @@ CREATE TABLE `shipment_orders_files` (
 --
 
 INSERT INTO `shipment_orders_files` (`id`, `file`, `order_id`) VALUES
-(1, '1c7b8b5a2a441ac044ca3a6dff351dfa.jpg', 2),
-(2, 'd7a9ba1d5cf8d2f62e59eba3cb61765c.jpg', 2);
+(1, '47eb1b0f2818ceb42c18fab4d7d232bf.png', 1),
+(2, '5c60e9c1c3ad9ed9963082f042046ecb.png', 1),
+(3, '43491d0a59f225f0aa58a71c9cd8e557.png', 2),
+(4, '6dc0fcf525333f1d7b1a64642e2b1f36.png', 2),
+(5, 'd65f54bf90f026e783da90ea5c91874d.jpg', 4),
+(6, '820e18fc627327b7696a90ec314c0f4a.jpg', 4),
+(7, '4a6a2e14dc712682d49428c688c2d8a3.jpg', 6),
+(8, 'dfce9662d21266fa9115492fb4e06f73.jpg', 6),
+(9, 'd4631456606d7384ab0da28690e30cbe.png', 7),
+(10, 'ecec4c9760edbdadf4e12122e9beafda.png', 7),
+(11, 'bca465781467038c42867d461e6af874.jpg', 8),
+(12, 'b28317af2f947946dee6108255ab84c3.jpg', 9),
+(13, '2f63c3c079c61f60301a65d535e00510.jpg', 9),
+(14, '15c89581709ce31dda728f6c4c964662.jpg', 10),
+(15, '5b144e4cf2161a46ab4bcb9871bb8836.png', 12),
+(16, 'ae2e0f29ee0ada086ee9b0078790f603.png', 12),
+(17, 'b5298898ba86f3d929d40c7903776de6.png', 13),
+(18, '237379a09aa3fcc8c541004c454c8829.png', 13),
+(19, '8cc001471aa45b6b805413bd50cf43e8.png', 14),
+(20, 'ccf8b54a85a6c5aeb93e1d26c3c37305.png', 14),
+(21, '323738923378.png', 21),
+(22, '323738923378.png', 22),
+(23, '936173294100.jpg', 22);
 
 -- --------------------------------------------------------
 
@@ -745,7 +1031,12 @@ CREATE TABLE `shipment_orders_oceanfreight` (
 --
 
 INSERT INTO `shipment_orders_oceanfreight` (`id`, `company_preference`, `order_id`, `vin_number`, `purchase_cost`, `vehicle_description`) VALUES
-(1, 'uyui', 1, '67', 789798, 'hjkhgj');
+(5, 'Cyphersol', 2, '11', 22, 'nissan'),
+(6, 'uyui', 5, '67', 789798, 'hjkhgj'),
+(7, 'uyui', 7, '67', 789798, 'hjkhgj'),
+(8, 'uyui', 8, '67', 789798, 'hjkhgj'),
+(9, 'uyui', 10, '67', 789798, 'hjkhgj'),
+(10, '\"22\"', 24, '\"11\"', 0, '\"');
 
 -- --------------------------------------------------------
 
@@ -767,7 +1058,7 @@ INSERT INTO `shipment_status` (`id`, `status_title`, `status_id`) VALUES
 (1, 'Received', 0),
 (2, 'Processing', 1),
 (3, 'Shipped', 2),
-(4, 'Cancelled', 3),
+(4, 'Processing', 3),
 (5, 'Ready for pickup', 4),
 (6, 'Delayed', 5);
 
@@ -49714,7 +50005,7 @@ CREATE TABLE `tbl_payment_notifications` (
   `id` int(11) NOT NULL,
   `body` text NOT NULL,
   `type` varchar(255) DEFAULT NULL,
-  `ondate` timestamp NOT NULL DEFAULT current_timestamp()
+  `ondate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -49726,7 +50017,7 @@ CREATE TABLE `tbl_payment_notifications` (
 CREATE TABLE `tbl_states` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `country_id` int(11) NOT NULL DEFAULT 1
+  `country_id` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -53872,8 +54163,9 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL COMMENT 'mobile or cell number',
   `address` varchar(255) NOT NULL,
-  `country_id` varchar(255) NOT NULL,
   `city_id` varchar(255) NOT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `country_id` varchar(255) NOT NULL,
   `uniq_id` varchar(255) NOT NULL,
   `image` varchar(500) NOT NULL DEFAULT 'noimg.png',
   `device_id` text NOT NULL,
@@ -53881,7 +54173,7 @@ CREATE TABLE `users` (
   `social_id` varchar(255) NOT NULL,
   `social_type` varchar(255) NOT NULL,
   `added_by` int(11) NOT NULL,
-  `active` tinyint(1) UNSIGNED DEFAULT 1,
+  `active` tinyint(1) UNSIGNED DEFAULT '1',
   `ip_address` varchar(45) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `salt` varchar(255) DEFAULT NULL,
@@ -53894,7 +54186,7 @@ CREATE TABLE `users` (
   `player_id` varchar(255) NOT NULL,
   `latitude` varchar(255) NOT NULL,
   `longitude` varchar(255) NOT NULL,
-  `online` int(11) NOT NULL DEFAULT 0,
+  `online` int(11) NOT NULL DEFAULT '0',
   `activation_code` varchar(255) NOT NULL,
   `referal_code` varchar(255) NOT NULL,
   `plan_id` int(11) NOT NULL,
@@ -53902,18 +54194,31 @@ CREATE TABLE `users` (
   `sur_name` varchar(255) DEFAULT NULL,
   `address1` varchar(255) DEFAULT NULL,
   `secret_qestion_id` int(11) NOT NULL,
-  `answer` varchar(255) NOT NULL,
-  `state_id` int(11) DEFAULT NULL
+  `answer` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `country_id`, `city_id`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`, `state_id`) VALUES
-(1, 1, 'admin', '', 'admin@admin.com', '03411663111', 'Chowk Shah Abbass', 'Pakistan', 'Multan', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1668016925, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, '', NULL),
-(2, 3, 'waseem', 'waf@gmail.com', 'waf@gmail.com', '0232434343', '', '', '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '$2y$08$KTbZN7.rZU8BxkQNnbJkuu/hlhpZP9vQZ.ltPWHKzZXmuPUHJvTeu', NULL, NULL, 1667033021, 1667033109, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '', 'afzal', NULL, 0, '', NULL),
-(3, 3, 'waseem', 'smfood@gmail.com', 'smfood@gmail.com', '0232434343', '', '', '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '$2y$08$sW572DAJUcgHKYLz9uPR3eW4at62POz3BcLYIjWGoUUys9Ye06Jpy', NULL, NULL, 1668015479, 1668016142, '', 0, '', '', '', '', 0, '636be5772c5a7', '636be5772c98f', 0, '', 'afzal', NULL, 0, '', NULL);
+INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `city_id`, `state_id`, `country_id`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`) VALUES
+(1, 1, 'admin', '', 'admin@admin.com', NULL, 'Chowk Shah Abbass', '30644', 2639, '159', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1670390281, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, ''),
+(2, 3, 'waseem afzal', 'waseemafzal31@gmail.com', 'waf@gmail.com', '0232434343', 'multan', '30644', 2639, '159', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '', NULL, NULL, 1667033021, 1668008022, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '2121254', 'afzal', NULL, 0, ''),
+(3, 3, 'ads', 'adas@gmail.com', 'adas@gmail.com', 'ad', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$NH0ZJBr.NTAYX8sKujc99.Uyf093WwwcipmC2Sk.4jZ.Igmyxryd2', NULL, NULL, 1667589094, NULL, '', 0, '', '', '', '', 0, '636563e6ac9bd', '636563e6ac9be', 0, '', 'asd', NULL, 0, ''),
+(4, 3, '', '', 'adas@gmail.com', NULL, '', '30644', 2639, '159', '', 'noimg.png', '23131', 'android', '23', 'adasda', 0, 1, '', '12323123idk', NULL, NULL, 0, NULL, '', 0, '', '', '', '', 0, '', '6365641fbc91c', 0, '', NULL, NULL, 0, ''),
+(5, 3, 'ads', 'adadsadaas@gmail.com', 'adadsadaas@gmail.com', 'ad', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$2ZM2WV1xHTnMF7bx5ea5zO83b9tLjnDT3soI5dWs7JTHr3yeiMI4O', NULL, NULL, 1667689122, NULL, '', 0, '', '', '', '', 0, '6366eaa2269aa', '6366eaa2269ac', 0, '', 'asd', NULL, 0, ''),
+(6, 3, 'w', 'aaa@gamil.com', 'aaa@gamil.com', '94', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$645aYNTzzz4p/hkJSmr3M.ZUSkNuoyqRrMDtz8fdXRTRRyWq1u79m', NULL, NULL, 1667692015, NULL, '', 0, '', '', '', '', 0, '6366f5efbfa29', '6366f5efbfa2a', 0, '', 'a', NULL, 0, ''),
+(7, 3, 'Abdul', 'devwajid@gmail.com', 'devwajid@gmail.com', '155', 'Lahore townshipppppp', '30644', 2639, '159', '', 'RIFF[WEBPVP8 [*>FI%&&,glֿ	zOqfBZ7Mp\\<qg[aeO+Y]#T+[_^o=yjGzfwp3_~NA)<cS9BTv|;;RRcYxjx{Y>Oƿ)_b{\"SgĩPFELX?xC:ۊEUy<^@}1 4\n,eҫ@\r] 	*W%6\\MpvDn.=c8\"l/}\"rp@&Јvma/Df,$a~\\fqӷmL{fӝ`;\n:5k7P%f:r<G	;\"&bޭ!a@cX\'oGe,6G;Le4Tz|{LSKuȯWlF_M);}1D5˔=pJH,hjMYړTvcQg5:miz0;LNHTߔ	T)b%Cm`qiTw-H>K57$xgr1@4gBbEPҦgJ.v\\m=BC|s$jX01$GU=1λ?@L.GROAq`W##\\}	Q\n%AsDh+\r+JVtAM\"ݏ\rR\"RO,,S\\#/dem<vrsd3fGB/NK Ġ_#di	{io$[/?|xSZ!1s1ȒŒl\nf۝a(g6KzNdX=+K,ЛwAU`6$h\nsԇK?xm~dh\rayBb׊q#ՠcVIű<OPb(10<	\nׅ}%gQLRKR5fɖ.	޶oE>cWAIV)\rw_GJQ\r%w@St2îZnp~3]c56tȪM+r', 'fEXI5hh2Ssy_bClObQLvbC:APA91bE96312IfkuYbNwR6Fy5X8Vxb8ffE_RsNEOM8U_aPxpC90PlgD9xGrWW8ea1d9TbkLt5IPIlOQFDUONPSbteIjaYtp1MtolkForspV8JC1eNVawdtmI3Xn61B1ZZS13mRadQ5pF', 'android', '', '', 0, 1, '103.181.132.9', '$2y$08$3PvAmSPuKTW2gkaUfp9SWOaqqzcYVTRoknjOLqaFKPZSXmF0hrFHa', NULL, NULL, 1667984295, 1669154381, '', 0, '', '', '', '', 0, '636b6ba78817a', '636b6ba78817c', 0, '15', 'wajid', NULL, 0, ''),
+(8, 3, 'Abdul', 'miankhalifa@gmail.com', 'miankhalifa@gmail.com', '15', 'Haha', '', NULL, '', '', 'noimg.png', '12312321', 'android', '', '', 0, 1, '103.181.132.9', '$2y$08$XZutxq0St0rlX2ORWoY4v.ulBW6cHAEsSJfMo2N.ncL6WpZH464XW', NULL, NULL, 1668021917, 1668021941, '', 0, '', '', '', '', 0, '636bfe9dd8721', '636bfe9dd8722', 0, 'XXX', 'Wajid', NULL, 0, ''),
+(9, 3, 'waseem', 'a@a.com', 'a@a.com', '0232434343', '', '', NULL, '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'ios', '', '', 0, 1, '39.42.99.136', '$2y$08$loLH5QNx9aoW5i5mJmYaleuHI/bJKhvkj.FtfvrqJFWn5c0SNaVlm', NULL, NULL, 1668073791, 1668487871, '', 0, '', '', '', '', 0, '636cc93f7503b', '636cc93f7503d', 0, '', 'afzal', NULL, 0, ''),
+(10, 3, 'ahmad', 'ahmadjawad78992@gmail.com', 'ahmadjawad78992@gmail.com', '0232434343', '', '', NULL, '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$.x0T5PSmnbcD9tj1E51sFujGIsWQc1EYz4.K.R5OGGQnYX19oRWB2', NULL, NULL, 1668080784, 1669463750, '', 0, '', '', '', '', 0, '636ce490759fa', '636ce490759fb', 0, '', 'jawad', NULL, 0, ''),
+(11, 3, 'test', 'a1@a.com', 'a1@a.com', '1234556785553', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$Leg42J3hOi/T2fvysayP3eCSIHQ3qmhJ2RvfUZKf6ps05mq0bqZgO', NULL, NULL, 1668405930, NULL, '', 0, '', '', '', '', 0, '6371daaab1f7b', '6371daaab1f7d', 0, '', 'ad', NULL, 0, ''),
+(12, 3, 'asd', 'a2@a.com', 'a2@a.com', '121242134234123', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$OQlxjXzotMvHFZgBkHTP8ua90lGsCxDrWU8EtugKPBvY3yLodeqUy', NULL, NULL, 1668406067, NULL, '', 0, '', '', '', '', 0, '6371db33752be', '6371db33752bf', 0, '', 'asdf', NULL, 0, ''),
+(13, 3, 'ddas', 'a3@a.com', 'a3@a.com', '121332132312312', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$BYcJhKi/7ercwH8/br4pRO4pAdIDgrkAuE4Ls0eYmlvvz1JWC4rKa', NULL, NULL, 1668406242, NULL, '', 0, '', '', '', '', 0, '6371dbe26ecd8', '6371dbe26ecd9', 0, '', 'adsaa', NULL, 0, ''),
+(14, 3, 'wdsa', 'a4@a.com', 'a4@a.com', '122434322434213', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$o.ZuTpyfb43QFEd7OW.XpeGNDDRwBq2eov9Vioy9vlBsjRQbraE26', NULL, NULL, 1668406474, NULL, '', 0, '', '', '', '', 0, '6371dcca45c85', '6371dcca45c87', 0, '', 'asfasfa', NULL, 0, ''),
+(15, 3, 'daseq', 'a5@a.com', 'a5@a.com', '121324324232134', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$OaF3DGGdfBnEtY484vnHQejmLteGC/5Bnic3qH/6VgPx2/lPC.6Rm', NULL, NULL, 1668406815, NULL, '', 0, '', '', '', '', 0, '6371de1ef2cc2', '6371de1ef2cc3', 0, '', 'sad', NULL, 0, ''),
+(16, 3, 'seyaam', 'hr.cyphersol@gmail.com', 'hr.cyphersol@gmail.com', '0347#94664', 'Multan', '', NULL, '', '', '᷽ExifMM*0@(12iipp\"HUAWEIJKM-LX1HHJKM-LX1 9.1.0.309(C185E2R1P1)2022:11:19 23:06:57.\r\\\"\"\'0210\"\"\"|\nd\"\nL\nT\"t	\n<|\"\n|8|d\"|l|\"\"\"Ē\"̠01000@\"ԢD	\n$dd\n;\'#*#*201811081600($+\'K8Pvd($+\'K8Pvd($+\'K8Pvd($+)K8Pwd($2)K8Pxd($+(K8Pxd($+(K8Pxd($+\'K8Pxd 4p2PJB.+jGKU7%nzE4*>>-45[b<|r-VOBGB.::5.`~i$\"&)!*;*1YVQ8<5%S?!5u@2%(ju1&=pkO:\'	6$ YD]<	! E`\"2*[b3F<\r<dJ&3;aD-\n2bb:pF??=>#>bSG:JE;4Z5\r\r6<ZKk89uG?)+N4>/R<h9RdDb^m_\'iUK_UȾR2mKZ4(KYYj(@0d-h@	*:*:(^,,zz<hIOVh<jHNUg&<Um+]W\n!6HZypps\r@@p\"\'+048=BFKOSX\\aeimquy}#\'+/36:>BEJNQVZ^bfj', 'eyB_U-joQduW8bbbHwL9_S:APA91bH3c-bMi0WiRDs9xWk_xP0dvJVNeeMBh0R9JAAoI5ciBnAMvYJE4eUquNdf0WIx9aMdSLG37lwRVWFkugs9TTIW7uvhS6nPgGx0MP5Xk9laYzFfrc-aRKQKhE8K65ux9tNZSuBV', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$4fNtnqH32U..vs2oXxvpUOYgwiyiFNi8vKU82CQ2WXocEoaipnMDq', NULL, NULL, 1669110414, 1669110424, '', 0, '', '', '', '', 0, '637c9a8e5a2bd', '637c9a8e5a2be', 0, '', 'Muhammad', NULL, 0, ''),
+(17, 3, 'waseem', 'waseemafzal31@gmail.com', 'waseemafzal31@gmail.com', '03417090031', '', '', NULL, '', '', 'noimg.png', 'fc7ZCnNqQ6-mxRdtXGkyO5:APA91bG-Sk8rkiwomkcD91vIHChNLqBh5w71LxGuLzo30wCq-Wu3SHif08v_Vt4E9Q2Hg9TYkspkjh1ElOg6yxr18iIPmklBAInINMbihi_DGmyE_1nnuGPY_-IuIQm4dvb0Q7YMkc2c', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$6WcGrxmOIIg.KM3DvIYqi.vKv452vU/ocBns1lxFuV7X82bRLLHMm', NULL, NULL, 1669466851, 1669802979, '', 0, '', '', '', '', 0, '63820ae35deee', '63820ae35deef', 0, '', 'afzal', NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -53961,7 +54266,7 @@ CREATE TABLE `user_devices` (
   `user_id` int(11) NOT NULL,
   `push_id` varchar(512) NOT NULL,
   `type` varchar(16) NOT NULL DEFAULT 'android',
-  `active` tinyint(3) UNSIGNED NOT NULL DEFAULT 1
+  `active` tinyint(3) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -54005,6 +54310,12 @@ ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `conversations`
+--
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`conversation_id`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
@@ -54023,9 +54334,28 @@ ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`message_id`),
+  ADD UNIQUE KEY `CONVERSATIONS` (`conversation_id`,`message_id`);
+
+--
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification_types`
+--
+ALTER TABLE `notification_types`
+  ADD PRIMARY KEY (`notification_id`);
+
+--
+-- Indexes for table `order_card_detail`
+--
+ALTER TABLE `order_card_detail`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54044,6 +54374,12 @@ ALTER TABLE `post_images`
 -- Indexes for table `requests`
 --
 ALTER TABLE `requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `search_history`
+--
+ALTER TABLE `search_history`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54142,25 +54478,31 @@ ALTER TABLE `app_routes`
 -- AUTO_INCREMENT for table `app_user_session`
 --
 ALTER TABLE `app_user_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 
 --
 -- AUTO_INCREMENT for table `clients_invoice`
 --
 ALTER TABLE `clients_invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `cms`
 --
 ALTER TABLE `cms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `conversations`
+--
+ALTER TABLE `conversations`
+  MODIFY `conversation_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -54181,10 +54523,28 @@ ALTER TABLE `login_attempts`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `notification_types`
+--
+ALTER TABLE `notification_types`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_card_detail`
+--
+ALTER TABLE `order_card_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `plans`
@@ -54205,6 +54565,12 @@ ALTER TABLE `requests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `search_history`
+--
+ALTER TABLE `search_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `secret_questions`
 --
 ALTER TABLE `secret_questions`
@@ -54220,19 +54586,19 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `shipment_orders`
 --
 ALTER TABLE `shipment_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_files`
 --
 ALTER TABLE `shipment_orders_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_oceanfreight`
 --
 ALTER TABLE `shipment_orders_oceanfreight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `shipment_status`
@@ -54262,7 +54628,7 @@ ALTER TABLE `tbl_payment_notifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users_groups`

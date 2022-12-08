@@ -1,0 +1,1812 @@
+{
+	"info": {
+		"_postman_id": "83b46f62-3e7c-4dbf-b263-18e2714a6594",
+		"name": "emj",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8463706"
+	},
+	"item": [
+		{
+			"name": "messages",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "receiverId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "timezone",
+							"value": "Europe/Newyork",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/messages"
+			},
+			"response": []
+		},
+		{
+			"name": "sendmessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "receiverId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "hello how are you",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/chat"
+			},
+			"response": []
+		},
+		{
+			"name": "getNotifications",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/getNotifications"
+			},
+			"response": []
+		},
+		{
+			"name": "terms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/terms"
+			},
+			"response": []
+		},
+		{
+			"name": "homeData",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/homeData",
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": [
+				{
+					"name": "homeData",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accesstoken",
+								"value": "{{accesstoken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{base_url}}/homeData"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 16 Nov 2022 09:36:02 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.46 (Win64) OpenSSL/1.1.1g PHP/7.4.11"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.11"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1696"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"error\": false,\n    \"data\": {\n        \"paidInvoiceCount\": 0,\n        \"unpaidInvoiceCount\": 2,\n        \"receivedShipments\": 1,\n        \"processingShipments\": 0,\n        \"shippedShipments\": 1,\n        \"cancelledShipments\": 1,\n        \"recentSearch\": [\n            {\n                \"shipment_from\": \"multan\",\n                \"shipment_to\": \"lahore\",\n                \"track_number\": \"88579412\",\n                \"id\": \"4\",\n                \"shipment_type\": \"Personal Effects\",\n                \"shipment_status\": \"Received\",\n                \"shipper_name\": \"Jawad\",\n                \"shipper_phone\": \"03278178979\",\n                \"shipper_address\": \"Chowk Shah Abbass\",\n                \"shipper_state\": \"2682\",\n                \"shipper_city\": \"31136\",\n                \"request_pickup\": \"yes\",\n                \"pickup_location\": \"Chowk\",\n                \"request_insurance\": \"yes\",\n                \"delivery_type\": \"Home\",\n                \"consignee_name\": \"jawad\",\n                \"consignee_address\": \"multan\",\n                \"consignee_phone\": \"03411663111\",\n                \"item_description\": \"good\",\n                \"consignee_country\": \"1\",\n                \"consignee_state\": \"42\",\n                \"consignee_city\": \"5909\",\n                \"quantity\": \"2\",\n                \"length\": \"56\",\n                \"width\": \"35\",\n                \"height\": \"45\",\n                \"package_type\": \"Extra Large Box\",\n                \"package_weight\": \"56\",\n                \"carriage_value\": \"67\",\n                \"amount\": null,\n                \"shipment_date\": \"2022-11-08\",\n                \"user_id\": \"4\"\n            },\n            {\n                \"shipment_from\": \"multan\",\n                \"shipment_to\": \"lahore\",\n                \"track_number\": \"17137770\",\n                \"id\": \"5\",\n                \"shipment_type\": \"Vehicle Shipment\",\n                \"shipment_status\": \"Cancelled\",\n                \"shipper_name\": \"wajid ali\",\n                \"shipper_phone\": \"03278178979\",\n                \"shipper_address\": \"nishter road multan\",\n                \"shipper_state\": \"2682\",\n                \"shipper_city\": \"31136\",\n                \"request_pickup\": \"yes\",\n                \"pickup_location\": \"Chowk\",\n                \"request_insurance\": \"yes\",\n                \"delivery_type\": \"Home\",\n                \"consignee_name\": \"jawad\",\n                \"consignee_address\": \"multan\",\n                \"consignee_phone\": \"03411663111\",\n                \"item_description\": \"good\",\n                \"consignee_country\": \"1\",\n                \"consignee_state\": \"42\",\n                \"consignee_city\": \"5909\",\n                \"quantity\": \"2\",\n                \"length\": \"56\",\n                \"width\": \"35\",\n                \"height\": \"45\",\n                \"package_type\": null,\n                \"package_weight\": \"56\",\n                \"carriage_value\": \"67\",\n                \"amount\": null,\n                \"shipment_date\": \"2022-11-08\",\n                \"user_id\": \"4\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "transactionHistory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/transactionHistory"
+			},
+			"response": [
+				{
+					"name": "transactionHistory",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accesstoken",
+								"value": "{{accesstoken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "{{base_url}}/transactionHistory"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "content-length",
+							"value": "283"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Wed, 16 Nov 2022 11:45:52 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"error\": false,\n    \"data\": [\n        {\n            \"arrival_date\": \"2022-11-19\",\n            \"departure_date\": \"2022-11-08\",\n            \"consignee_name\": \"jawad\",\n            \"consignee_address\": \"multan\",\n            \"amount\": \"1111\",\n            \"track_number\": \"61210695\",\n            \"shipment_from\": \"multan\",\n            \"shipment_to\": \"lahore\",\n            \"trnasit_time\": \"2 days\",\n            \"qr_image\": \"https://project.cyphersol.com/emj/uploads/qr.png\"\n        },\n        {\n            \"arrival_date\": \"2022-11-19\",\n            \"departure_date\": \"2022-11-08\",\n            \"consignee_name\": \"jawad\",\n            \"consignee_address\": \"multan\",\n            \"amount\": \"40\",\n            \"track_number\": \"40080218\",\n            \"shipment_from\": \"multan\",\n            \"shipment_to\": \"lahore\",\n            \"trnasit_time\": \"2 days\",\n            \"qr_image\": \"https://project.cyphersol.com/emj/uploads/qr.png\"\n        },\n        {\n            \"arrival_date\": \"2022-11-19\",\n            \"departure_date\": \"2022-11-08\",\n            \"consignee_name\": \"jawad\",\n            \"consignee_address\": \"multan\",\n            \"amount\": \"22.44\",\n            \"track_number\": \"95889687\",\n            \"shipment_from\": \"multan\",\n            \"shipment_to\": \"lahore\",\n            \"trnasit_time\": \"2 days\",\n            \"qr_image\": \"https://project.cyphersol.com/emj/uploads/qr.png\"\n        },\n        {\n            \"arrival_date\": \"2022-11-19\",\n            \"departure_date\": \"2022-11-08\",\n            \"consignee_name\": \"jawad\",\n            \"consignee_address\": \"multan\",\n            \"amount\": \"8.16\",\n            \"track_number\": \"14943\",\n            \"shipment_from\": \"multan\",\n            \"shipment_to\": \"lahore\",\n            \"trnasit_time\": \"2 days\",\n            \"qr_image\": \"https://project.cyphersol.com/emj/uploads/qr.png\"\n        },\n        {\n            \"arrival_date\": \"2022-11-19\",\n            \"departure_date\": \"2022-11-08\",\n            \"consignee_name\": \"jawad\",\n            \"consignee_address\": \"multan\",\n            \"amount\": \"200\",\n            \"track_number\": \"12830078\",\n            \"shipment_from\": \"multan\",\n            \"shipment_to\": \"lahore\",\n            \"trnasit_time\": \"2 days\",\n            \"qr_image\": \"https://project.cyphersol.com/emj/uploads/qr.png\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "shipmentOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shipper_name",
+							"value": "Jawad",
+							"type": "text"
+						},
+						{
+							"key": "shipment_type",
+							"value": "1",
+							"description": "1/2/3 ",
+							"type": "text"
+						},
+						{
+							"key": "shipper_phone",
+							"value": "03278178979",
+							"type": "text"
+						},
+						{
+							"key": "shipper_address",
+							"value": "Chowk Shah Abbass",
+							"type": "text"
+						},
+						{
+							"key": "shipper_state",
+							"value": "2682",
+							"type": "text"
+						},
+						{
+							"key": "shipper_city",
+							"value": "31136",
+							"type": "text"
+						},
+						{
+							"key": "request_pickup",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "pickup_location",
+							"value": "Chowk",
+							"type": "text"
+						},
+						{
+							"key": "request_insurance",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "delivery_type",
+							"value": "Home",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "jawad",
+							"type": "text"
+						},
+						{
+							"key": "consignee_address",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "consignee_phone",
+							"value": "03411663111",
+							"type": "text"
+						},
+						{
+							"key": "item_description",
+							"value": "good",
+							"type": "text"
+						},
+						{
+							"key": "consignee_country",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "consignee_state",
+							"value": "42",
+							"type": "text"
+						},
+						{
+							"key": "consignee_city",
+							"value": "5909",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "length",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "width",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "package_type",
+							"value": "Extra Large Box",
+							"type": "text"
+						},
+						{
+							"key": "package_weight",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "carriage_value",
+							"value": "67",
+							"type": "text"
+						},
+						{
+							"key": "shipment_from",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "shipment_to",
+							"value": "lahore",
+							"type": "text"
+						},
+						{
+							"key": "shipment_date",
+							"value": "2022-11-08",
+							"type": "text"
+						},
+						{
+							"key": "file[]",
+							"type": "file",
+							"src": "/C:/Users/Waseem/Pictures/Crypto-Analysis-Tools.jpg"
+						},
+						{
+							"key": "file[]",
+							"type": "file",
+							"src": "/C:/Users/Waseem/Pictures/perdesi/worldwide cargo.jpg"
+						}
+					]
+				},
+				"url": "{{base_url}}/shipmentOrders"
+			},
+			"response": []
+		},
+		{
+			"name": "shipmentOrder IOS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shipper_name",
+							"value": "Naveed file",
+							"type": "text"
+						},
+						{
+							"key": "shipment_type",
+							"value": "1",
+							"description": "1/2/3 ",
+							"type": "text"
+						},
+						{
+							"key": "shipper_phone",
+							"value": "03278178979",
+							"type": "text"
+						},
+						{
+							"key": "shipper_address",
+							"value": "Chowk Shah Abbass",
+							"type": "text"
+						},
+						{
+							"key": "shipper_state",
+							"value": "2682",
+							"type": "text"
+						},
+						{
+							"key": "shipper_city",
+							"value": "31136",
+							"type": "text"
+						},
+						{
+							"key": "request_pickup",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "pickup_location",
+							"value": "Chowk",
+							"type": "text"
+						},
+						{
+							"key": "request_insurance",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "delivery_type",
+							"value": "Home",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "jawad",
+							"type": "text"
+						},
+						{
+							"key": "consignee_address",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "consignee_phone",
+							"value": "03411663111",
+							"type": "text"
+						},
+						{
+							"key": "item_description",
+							"value": "good",
+							"type": "text"
+						},
+						{
+							"key": "consignee_country",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "consignee_state",
+							"value": "42",
+							"type": "text"
+						},
+						{
+							"key": "consignee_city",
+							"value": "5909",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "length",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "width",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "package_type",
+							"value": "Extra Large Box",
+							"type": "text"
+						},
+						{
+							"key": "package_weight",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "carriage_value",
+							"value": "67",
+							"type": "text"
+						},
+						{
+							"key": "shipment_from",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "shipment_to",
+							"value": "lahore",
+							"type": "text"
+						},
+						{
+							"key": "shipment_date",
+							"value": "2022-11-08",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"value": "323738923378.png,936173294100.jpg",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/shipmentOrders"
+			},
+			"response": []
+		},
+		{
+			"name": "shipmentOrder vehicle",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shipper_name",
+							"value": "wajid ali",
+							"type": "text"
+						},
+						{
+							"key": "shipment_type",
+							"value": "4",
+							"description": "in case vehicle ",
+							"type": "text"
+						},
+						{
+							"key": "shipper_phone",
+							"value": "03278178979",
+							"type": "text"
+						},
+						{
+							"key": "shipper_address",
+							"value": "nishter road multan",
+							"type": "text"
+						},
+						{
+							"key": "shipper_state",
+							"value": "2682",
+							"type": "text"
+						},
+						{
+							"key": "shipper_city",
+							"value": "31136",
+							"type": "text"
+						},
+						{
+							"key": "request_pickup",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "pickup_location",
+							"value": "Chowk",
+							"type": "text"
+						},
+						{
+							"key": "request_insurance",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "delivery_type",
+							"value": "Home",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "jawad",
+							"type": "text"
+						},
+						{
+							"key": "consignee_address",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "consignee_phone",
+							"value": "03411663111",
+							"type": "text"
+						},
+						{
+							"key": "item_description",
+							"value": "good",
+							"type": "text"
+						},
+						{
+							"key": "consignee_country",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "consignee_state",
+							"value": "42",
+							"type": "text"
+						},
+						{
+							"key": "consignee_city",
+							"value": "5909",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "length",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "width",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "package_type",
+							"value": "Extra Large Box",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "package_weight",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "carriage_value",
+							"value": "67",
+							"type": "text"
+						},
+						{
+							"key": "shipment_from",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "shipment_to",
+							"value": "lahore",
+							"type": "text"
+						},
+						{
+							"key": "shipment_date",
+							"value": "2022-11-08",
+							"type": "text"
+						},
+						{
+							"key": "vehicle_description[]",
+							"value": "hjkhgj",
+							"type": "text"
+						},
+						{
+							"key": "vin_number[]",
+							"value": "67",
+							"type": "text"
+						},
+						{
+							"key": "purchase_cost[]",
+							"value": "789798",
+							"type": "text"
+						},
+						{
+							"key": "company_preference[]",
+							"value": "uyui",
+							"type": "text"
+						},
+						{
+							"key": "file[]",
+							"type": "file",
+							"src": "/C:/Users/Waseem/Pictures/perdesi/dhl.jpg"
+						}
+					]
+				},
+				"url": "{{base_url}}/shipmentOrders"
+			},
+			"response": []
+		},
+		{
+			"name": "shipmentOrder vehicle IOS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shipper_name",
+							"value": "wajid ali",
+							"type": "text"
+						},
+						{
+							"key": "shipment_type",
+							"value": "4",
+							"description": "in case vehicle ",
+							"type": "text"
+						},
+						{
+							"key": "shipper_phone",
+							"value": "03278178979",
+							"type": "text"
+						},
+						{
+							"key": "shipper_address",
+							"value": "nishter road multan",
+							"type": "text"
+						},
+						{
+							"key": "shipper_state",
+							"value": "2682",
+							"type": "text"
+						},
+						{
+							"key": "shipper_city",
+							"value": "31136",
+							"type": "text"
+						},
+						{
+							"key": "request_pickup",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "pickup_location",
+							"value": "Chowk",
+							"type": "text"
+						},
+						{
+							"key": "request_insurance",
+							"value": "yes",
+							"description": "yes/no",
+							"type": "text"
+						},
+						{
+							"key": "delivery_type",
+							"value": "Home",
+							"type": "text"
+						},
+						{
+							"key": "consignee_name",
+							"value": "jawad",
+							"type": "text"
+						},
+						{
+							"key": "consignee_address",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "consignee_phone",
+							"value": "03411663111",
+							"type": "text"
+						},
+						{
+							"key": "item_description",
+							"value": "good",
+							"type": "text"
+						},
+						{
+							"key": "consignee_country",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "consignee_state",
+							"value": "42",
+							"type": "text"
+						},
+						{
+							"key": "consignee_city",
+							"value": "5909",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "length",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "width",
+							"value": "35",
+							"type": "text"
+						},
+						{
+							"key": "height",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "package_type",
+							"value": "Extra Large Box",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "package_weight",
+							"value": "56",
+							"type": "text"
+						},
+						{
+							"key": "carriage_value",
+							"value": "67",
+							"type": "text"
+						},
+						{
+							"key": "shipment_from",
+							"value": "multan",
+							"type": "text"
+						},
+						{
+							"key": "shipment_to",
+							"value": "lahore",
+							"type": "text"
+						},
+						{
+							"key": "shipment_date",
+							"value": "2022-11-08",
+							"type": "text"
+						},
+						{
+							"key": "vehicle_description[]",
+							"value": "hjkhgj",
+							"type": "text"
+						},
+						{
+							"key": "vin_number[]",
+							"value": "67",
+							"type": "text"
+						},
+						{
+							"key": "purchase_cost[]",
+							"value": "789798",
+							"type": "text"
+						},
+						{
+							"key": "company_preference[]",
+							"value": "uyui",
+							"type": "text"
+						},
+						{
+							"key": "file[]",
+							"type": "file",
+							"src": "/C:/Users/Waseem/Pictures/perdesi/dhl.jpg"
+						}
+					]
+				},
+				"url": "{{base_url}}/shipmentOrders"
+			},
+			"response": []
+		},
+		{
+			"name": "countries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/countries",
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "payInvoice",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "card",
+							"value": "4242424242424242",
+							"type": "text"
+						},
+						{
+							"key": "exp_month",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "exp_year",
+							"value": "24",
+							"type": "text"
+						},
+						{
+							"key": "cvc",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "invoice_id",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "200",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/payInvoice"
+			},
+			"response": [
+				{
+					"name": "payInvoice",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accesstoken",
+								"type": "text",
+								"value": "{{accesstoken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "card",
+									"value": "4242424242424242",
+									"type": "text"
+								},
+								{
+									"key": "exp_month",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "exp_year",
+									"value": "24",
+									"type": "text"
+								},
+								{
+									"key": "cvc",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "invoice_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{base_url}}/payInvoice"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "content-length",
+							"value": "65"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Thu, 10 Nov 2022 06:35:27 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"error\": false,\n    \"message\": \"Invoice Paid successfuly \"\n}"
+				}
+			]
+		},
+		{
+			"name": "getInvoices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/getInvoices",
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "getShipments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/getShipments",
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "getCountries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/getCountries",
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "getStates?country_id=159",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/getStates?country_id=159",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getStates"
+					],
+					"query": [
+						{
+							"key": "country_id",
+							"value": "159"
+						}
+					]
+				},
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "getCities?state_id=2639",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/getCities?state_id=2639",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getCities"
+					],
+					"query": [
+						{
+							"key": "state_id",
+							"value": "2639"
+						}
+					]
+				},
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "getSecretQuestion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accesstoken",
+						"value": "{{accesstoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/getSecretQuestion",
+				"description": "{\r\n    \r\n    \"status\": 200,\r\n    \"error\": false,\r\n    \"message\": \"Comment Posted!\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "signup ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "ahmad",
+							"type": "text"
+						},
+						{
+							"key": "sur_name",
+							"value": "jawad",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "ahmadjawad78992@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "0232434343",
+							"type": "text"
+						},
+						{
+							"key": "devicetype",
+							"value": "android",
+							"type": "text"
+						},
+						{
+							"key": "device_id",
+							"value": "postman",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "address1",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "country_id",
+							"value": "159",
+							"type": "text"
+						},
+						{
+							"key": "state_id",
+							"value": "2639",
+							"type": "text"
+						},
+						{
+							"key": "city_id",
+							"value": "30644",
+							"type": "text"
+						},
+						{
+							"key": "secret_qestion_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "answer",
+							"value": "Liaqatpur",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "forgotPassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "ceo.cyphersol@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/forgotPassword"
+			},
+			"response": []
+		},
+		{
+			"name": "trackShipment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "track_number",
+							"value": "15250955",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/trackShipment"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "ahmadjawad78992@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "devicetype",
+							"value": "android",
+							"description": "android/ios",
+							"type": "text"
+						},
+						{
+							"key": "device_id",
+							"value": "fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0",
+							"type": "text"
+						},
+						{
+							"key": "social_type",
+							"value": "normal",
+							"description": "normal/facebook/google",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/login"
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "wajid khan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "waseemafzal31@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "0232434343",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "Lahore",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "2121254",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/updateProfile"
+			},
+			"response": []
+		},
+		{
+			"name": "uploadFile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Waseem/Pictures/perdesi/dhl.jpg"
+						}
+					]
+				},
+				"url": "{{base_url}}/uploadFile"
+			},
+			"response": [
+				{
+					"name": "uploadFile",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accesstoken",
+								"type": "text",
+								"value": "{{accesstoken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Waseem/Pictures/perdesi/dhl.jpg"
+								}
+							]
+						},
+						"url": "{{base_url}}/uploadFile"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-store, no-cache, must-revalidate"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "content-length",
+							"value": "100"
+						},
+						{
+							"key": "content-encoding",
+							"value": "br"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "date",
+							"value": "Fri, 18 Nov 2022 07:57:01 GMT"
+						},
+						{
+							"key": "server",
+							"value": "LiteSpeed"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"error\": false,\n    \"file\": \"4070101301019.jpg\",\n    \"full_url\": \"https://project.cyphersol.com/emj/uploads/4070101301019.jpg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accesstoken",
+						"type": "text",
+						"value": "{{accesstoken}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "{{base_url}}/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "testNotification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deviceToken",
+							"value": "fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/testNotification"
+			},
+			"response": []
+		},
+		{
+			"name": "testiosNotification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deviceToken",
+							"value": "cWzd2c5_STuJcrxfqDBYcc:APA91bHdm3boec7SteCrJ0QPyxVnsilCRRuqtCEeTCf9boKze3ybXCa897JUj77hCCqJHYCqAvzslqOakyx9Uhjebj3nB0YCOwRD9Sc5rT7pehwtwG8HbPQENba_R0eqHJMfc2vh9YZU",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{base_url}}/testiosNotification"
+			},
+			"response": []
+		},
+		{
+			"name": "subscribe",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://project.cyphersol.com/safelify/paystack/"
+			},
+			"response": []
+		},
+		{
+			"name": "verify",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://project.cyphersol.com/safelify/paystack/"
+			},
+			"response": []
+		},
+		{
+			"name": "callback",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://project.cyphersol.com/safelify/safelyApi/paystackCallback?trxref=szc263lum5&reference=szc263lum5",
+					"protocol": "https",
+					"host": [
+						"project",
+						"cyphersol",
+						"com"
+					],
+					"path": [
+						"safelify",
+						"safelyApi",
+						"paystackCallback"
+					],
+					"query": [
+						{
+							"key": "trxref",
+							"value": "szc263lum5"
+						},
+						{
+							"key": "reference",
+							"value": "szc263lum5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://project.cyphersol.com/emj/emjApi",
+			"type": "string"
+		},
+		{
+			"key": "accesstoken",
+			"value": "287081669463750",
+			"type": "string"
+		}
+	]
+}

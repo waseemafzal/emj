@@ -271,7 +271,7 @@
 
                                     <!-- Chat Tab Pane Title Start -->
 
-                                    <h5 class="font-weight-semibold mb-0 "><a class="customColor" href="<?php echo base_url(); ?>">SafeLify</a></h5>
+                                    <h5 class="font-weight-semibold mb-0 "><a class="customColor" href="<?php echo base_url(); ?>"><?php echo APP_NAME;  ?></a></h5>
                                     <h5  class="font-weight-semibold mb-0  "><a class="customColor" href="<?php echo base_url(); ?>"> <- Home</a></h5>
 
                                     <!-- Chat Tab Pane Title End -->

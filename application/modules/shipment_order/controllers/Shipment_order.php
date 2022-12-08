@@ -21,7 +21,11 @@ class Shipment_order extends MX_Controller {
 	/************Configuration of form and End*********************/
 	public function index(){  
 
-		$aData['data'] =$this->db->query("SELECT p.* FROM ".$this->tbl." as p");
+		$aData['data'] =$this->db->select('o.*,s.status_title as shipmentStatus,t.type as shipment_type')
+	->join('shipment_status s','s.status_id=o.shipment_status')
+	->join('shipment_types t','t.id=o.shipment_type')
+	->order_by('o.id','desc')
+	->get('shipment_orders o');
 		$aData['tbl'] =$this->tbl;
 		$aData['module_heading'] =$this->module_heading;
 	    

@@ -41,6 +41,27 @@ class EmjApi extends CI_Controller
 	$this->data['data']= $this->db->select('id as country_id,name as country')->get('tbl_countries')->result_array();  
 	$this->response($this->data);
     }
+	public function countries(){ 
+	echo file_get_contents(base_url()."countries.txt");
+	}
+	public function signupData(){ 	
+	$countries= $this->db->select('id as country_id,name as country')->get('tbl_countries'); 
+	
+	foreach($countries->result() as $country){
+		$states =$this->db->query("SELECT id as state_id,name as state  FROM tbl_states as p where country_id= ".$country->country_id);  
+		
+				foreach($states->result() as $s){
+					$s->cities =$this->db->query("SELECT p.* FROM tbl_cities as p where state_id= ".$s->state_id)->result_array();
+					$country->states[]=$s;
+				 
+				
+				}
+		
+		$data[]=$country;
+		} 
+	$this->response($data);
+    }
+	
 	public function getSecretQuestion(){ 	
 	$this->data['data']= $this->db->select('*')->get('secret_questions')->result_array();  
 	$this->response($this->data);

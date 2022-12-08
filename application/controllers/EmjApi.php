@@ -1387,7 +1387,7 @@ $this->data['full_url'] =base_url().$target;
 
     {
 
-        $termsData          = $this->db->select( 'post_description' )->where( 'id', 3 )->get( 'cms' )->row()->post_description;
+        $termsData          = $this->db->select( 'post_description' )->where( 'id', 1 )->get( 'cms' )->row()->post_description;
 
         $this->data['data'] = $termsData;
 
@@ -2955,7 +2955,6 @@ if(defined('USER_ID')){
     
 	
 }
-
 /***********************************************************************************/
 /***
  * Send online or offline status

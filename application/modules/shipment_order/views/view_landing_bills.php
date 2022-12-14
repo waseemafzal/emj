@@ -95,7 +95,7 @@ $Heading= $module_heading;
             </tr>
             <tr>
               <td><b>Document Number:</b> <?php echo $row['document_number']?></td>
-              <td><b>B/L Number:</b> <?php echo $row['b/l_number']?></td>
+              <td><b>B/L Number:</b> <?php echo $row['bl_number']?></td>
             </tr>
           </table>
         </div>

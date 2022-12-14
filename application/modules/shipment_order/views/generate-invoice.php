@@ -26,8 +26,7 @@ background-color: #fff;
     padding: 11px;
     position: absolute;
     top: 10%;
-    width: 50%;
-}
+    width: 50%;}
 .button>.active{
   border-bottom: 2px solid red;
 }

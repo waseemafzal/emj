@@ -40,9 +40,9 @@
 
           <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa-shopping-cart'></i> <span>Shipment Orders</span></a></li>      
           
-          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><span>Purchase Orders</span></a></li>
+          <li class="<?= getActive('purchase_order') ?>"><a href="shipment_order/view_purchase_orders"><span>Purchase Orders</span></a></li>
           
-          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><span>Bill of Landing</span></a></li>
+          <li class="<?= getActive('landing_bill') ?>"><a href="shipment_order/view_landing_bill"><span>Bill of Landing</span></a></li>
       
         <li class="treeview hidden">
           <a href="#">

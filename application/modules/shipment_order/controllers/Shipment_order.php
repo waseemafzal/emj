@@ -21,11 +21,7 @@ class Shipment_order extends MX_Controller {
 	/************Configuration of form and End*********************/
 	public function index(){  
 
-		$aData['data'] =$this->db->select('o.*,s.status_title as shipmentStatus,t.type as shipment_type')
-	->join('shipment_status s','s.status_id=o.shipment_status')
-	->join('shipment_types t','t.id=o.shipment_type')
-	->order_by('o.id','desc')
-	->get('shipment_orders o');
+		$aData['data'] =$this->db->query("SELECT p.* FROM ".$this->tbl." as p");
 		$aData['tbl'] =$this->tbl;
 		$aData['module_heading'] =$this->module_heading;
 	    
@@ -56,6 +52,22 @@ class Shipment_order extends MX_Controller {
    echo $this->country_model->get_city($this->input->post('state_id'));
   }
  }
+ public function add_purchase_order(){
+ 	$this->load->view('purchase_order');
+ }
+ public function add_landing_bill(){
+ 	$this->load->view('landing_bill');
+ }
+ public function view_landing_bill(){
+ 	$data['result'] = $this->db->get('landing_bills')->result_array();
+ 	$this->load->view('view_landing_bills', $data);
+ }
+ public function view_purchase_orders(){
+ 	$data['result'] = $this->db->get('purchase_orders')->result_array();
+ 	$this->load->view('view_purchase_orders', $data);
+
+ }
+ //public function 
 	public function edit($id){
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
@@ -358,5 +370,74 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
 	}	
 
 	}
+	function save_landing_bill(){ 
+		extract($_POST);
+		$_POST['commodities'] = json_encode($_POST['commodities']);
+		$_POST['gross_weight'] = json_encode($_POST['gross_weight']);
+		$_POST['measurement'] = json_encode($_POST['measurement']);
+		 $PrimaryID ='';
+		if(isset($_POST['id']) and $_POST['id']!=''){
+			$PrimaryID = $_POST['id'];
+			}
+			unset($_POST['id']);
+			$result = $this->crud->saveRecord($PrimaryID,$_POST,'landing_bills');
+switch($result){
+			case 1:
+			
+			$arr = array('status' => 1,'message' => "Saved Succefully !");
+			echo json_encode($arr);
+			break;
+			case 2:
+			$arr = array('status' => 2,'message' => "Updated Succefully !");
+			echo json_encode($arr);
+			break;
+			case 0:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;
+			default:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;	
+		}	
 
+}
+function save_purchase_orders(){
+	extract($_POST);
+ $PrimaryID ='';
+		if(isset($_POST['id']) and $_POST['id']!=''){
+			$PrimaryID = $_POST['id'];
+			}
+			unset($_POST['id']);
+			$result = $this->crud->saveRecord($PrimaryID,$_POST,'purchase_orders');
+switch($result){
+			case 1:
+			
+			$arr = array('status' => 1,'message' => "Saved Succefully !");
+			echo json_encode($arr);
+			break;
+			case 2:
+			$arr = array('status' => 2,'message' => "Updated Succefully !");
+			echo json_encode($arr);
+			break;
+			case 0:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;
+			default:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;	
+		}	
+
+}
+public function edit_purchase_order($id){
+		$query['row'] =$this->crud->edit($id,'purchase_orders');
+        $this->load->view('purchase_order', $query);
+
+}
+public function edit_landing_bill($id){
+	$query['row'] =$this->crud->edit($id,'landing_bills');
+        $this->load->view('landing_bill', $query);
+}
 }

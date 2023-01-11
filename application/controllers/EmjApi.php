@@ -877,6 +877,7 @@ if(count($orders)>0){
 
             'Content-Type: application/json' 
 
+
         );
 
         $ch      = curl_init();
@@ -1383,16 +1384,15 @@ $this->data['full_url'] =base_url().$target;
 
     
 
-    function terms()
-
-    {
-
-        $termsData          = $this->db->select( 'post_description' )->where( 'id', 1 )->get( 'cms' )->row()->post_description;
-
+    function terms(){
+ 		$termsData  = $this->db->select( 'post_description' )->where( 'id', 1 )->get( 'cms' )->row()->post_description;
         $this->data['data'] = $termsData;
-
         $this->response( $this->data );
-
+    }
+ function privacy(){
+ 		$termsData  = $this->db->select( 'post_description' )->where( 'id', 2 )->get( 'cms' )->row()->post_description;
+        $this->data['data'] = $termsData;
+        $this->response( $this->data );
     }
 
     public function error( $message )
@@ -1943,6 +1943,7 @@ $this->data['full_url'] =base_url().$target;
 
         $this->db->update( $this->tbl_user, $_POST );
 
+
         if ( $this->db->affected_rows() == true ) {
 
             $result = $this->db->select( 'image' )->from( $this->tbl_user )->where( array(
@@ -1983,6 +1984,25 @@ $this->data['full_url'] =base_url().$target;
 
         }
 
+    }
+    function deleteAccount(){
+        $this->checkLogin();
+        $this->db->where( 'id', USER_ID );
+        $this->db->update( $this->tbl_user, array('active'=>0) );
+        if ( $this->db->affected_rows() == true ) {
+				$response['status']  = 200;
+                $response['error']   = false;
+                $response['message'] = 'Account deleted!';
+            echo json_encode( $response );
+            exit;
+        } else {
+            $response["status"]  = 204;
+            $response["error"]   = true;
+            $response['message'] = 'Error something wrong';
+            echo json_encode( $response );
+
+            exit;
+        }
     }
 
     function logout()
@@ -2151,6 +2171,7 @@ $this->data['full_url'] =base_url().$target;
 
                     $this->email->to( $email );
 
+
                     $this->email->subject( 'PASSWORD RESET' );
 
                     $this->email->message( $body );
@@ -2243,19 +2264,14 @@ $this->AM->verifyRequiredParams( array(
 
              "quantity",
 
-             "length",
-
-             "width",
-
-             "height",
-
-             "package_weight",
 
              "shipment_from",
 
              "shipment_to"
 
         ));
+
+
 
 		if($shipment_type!=4){
 
@@ -2315,6 +2331,16 @@ if( ! is_array($_POST['vehicle_description'])){
 $nameArray=$_POST['file'];
 unset($_POST['file']);
 			}
+			if(isset($length) and is_array($length) ){
+				$length= implode(',',$length);
+				}
+			if(isset($width) and is_array($width) ){
+				$width= implode(',',$width);
+				}
+			if(isset($height) and is_array($height) ){
+				$height= implode(',',$height);
+				}
+			
         $result = $this->crud->saveRecord($PrimaryID,$_POST,'shipment_orders');
 
         if($PrimaryID==''){
@@ -2424,7 +2450,7 @@ $mess = $e['message'];
 
             
 
-            $arr = array('status' => 200,'message' => "Inserted Succefully !");
+            $arr = array('status' => 200,'message' => "Request received we will reach you within 1 business day !");
 
             echo json_encode($arr);
 

@@ -99,6 +99,7 @@ function transactionHistory(){
 $data=	$this->db->query("SELECT o.expected_delivery_date as arrival_date,o.shipment_date as departure_date,o.consignee_name,o.consignee_address,c.amount,o.track_number,o.shipment_from,o.shipment_to FROM `clients_invoice`  as i 
 JOIN order_card_detail as c on c.id=i.payment_id
 JOIN shipment_orders as o on o.id=i.order_id
+where o.user_id='".USER_ID."'
  ")->result_array();
  foreach($data as $row){
 	 if($row['arrival_date']==NULL ){
@@ -878,6 +879,7 @@ if(count($orders)>0){
             'Content-Type: application/json' 
 
 
+
         );
 
         $ch      = curl_init();
@@ -1571,7 +1573,7 @@ $this->data['full_url'] =base_url().$target;
 
                 $to           = $email;
 
-                $from         = 'noreply@safely.com';
+                $from         = 'noreply@emjayglobal.com';
 
                 $from_heading = 'emjglobal';
 
@@ -1944,6 +1946,7 @@ $this->data['full_url'] =base_url().$target;
         $this->db->update( $this->tbl_user, $_POST );
 
 
+
         if ( $this->db->affected_rows() == true ) {
 
             $result = $this->db->select( 'image' )->from( $this->tbl_user )->where( array(
@@ -2279,7 +2282,7 @@ $this->AM->verifyRequiredParams( array(
 
 			}
 			if($shipment_type==4){
-				 $this->AM->verifyRequiredParams(array("vehicle_description"));
+				// $this->AM->verifyRequiredParams(array("vehicle_description"));
 				}
 if(isset($_POST['id'])){
         $PrimaryID = $_POST['id'];

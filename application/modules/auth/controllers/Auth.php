@@ -76,17 +76,16 @@ class Auth extends MX_Controller {
 		}
 	}
 	
-	public function userslist($type=4){
+	public function userslist($type=3){
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login', 'refresh');// redirect them to the login page
 		}
 		else{
 			$title='App Users';
-		$data =  $this->db->select('users.*,plans.name as planName ')
+		$data =  $this->db->select('users.*')
 		->from(TBL_USER)
-		->join('plans','plans.id=users.plan_id')
-		->where('users.user_type',USER)
+		
 		->get();
 			$segmentArr = $this->uri->segment_array();
 

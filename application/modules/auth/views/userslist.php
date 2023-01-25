@@ -30,7 +30,6 @@
                             <th><?php echo ucwords(this_lang('EMAIL'));?></th>
                             <th><?php echo ucwords(this_lang('Image'));?></th>
                             <th><?php echo ucwords(this_lang('status'));?></th>
-                            <th><?php echo ucwords(this_lang('Plan'));?></th>
                             <th><?php echo ucwords(this_lang('action'));?></th>
                         </tr>
                     </thead>
@@ -79,10 +78,7 @@
                         </a>
                         </span>   
                     </td> 
-                    <td>
-                       
-                        <?PHP echo $user->planName;?>
-                    </td>
+                    
                     <td>
                     <?php
 					$hide='';
@@ -91,59 +87,8 @@
 					}
 					?>
                                             <!------------->
-            <div class="modal fade" id="contact_modal_<?php echo $user->id;?>" tabindex="-1" data-backdrop="static">
-     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-       <div class="modal-header">
-         <h4 class="modal-title">Contacts of <?=$user->name?></h4>
-       <button class="close" data-dismiss="modal"><span>&times;</span></button>
-       </div>
-       <div  class="modal-body">
-          <?php
-       $data= $this->db->where('user_id', $user->id)->get('contacts')->result();
-       
-          ?>
-        <table class="table table-bordered table-striped">
-          <thead>
-           <tr> 
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Email</th>
             
-            <th>Address</th>
-          </tr>
-          </thead>
-<tbody>
-  <?php
-   if($data){
-          foreach($data as $row){
-            ?>
-  <tr>
-     <td><?php echo $row->name?></td>
-     <td><?php echo $row->contact?></td>
-     <td><?php echo $row->email?></td>
-     
-     <td><?php echo $row->address?></td>
-  </tr>
- <?php }}?>
-</tbody>
-
-
-
-        </table>
-     
-       </div>
-     <div class="modal-footer">
-
-       <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
-     </div>
-     
-     </div>
-</div>
-</div>
-                         <button data-target="#contact_modal_<?php echo $user->id;?>" data-toggle="modal" class="btn btn-success btn-xs">
-          <i class="fa fa-phone"></i> Contacts <span class="badge"><?php echo count($data)?></span></button>
-
+                        
 
                         <a href="auth/edit/<?php echo $user->id;?>"  data-toggle="tooltip" title="Edit User" class="<?php echo $hide ?> btn btn-effect-ripple btn-xs btn-success ">
                         <i class="fa fa-pencil"></i></a>

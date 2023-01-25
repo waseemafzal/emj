@@ -170,8 +170,8 @@ function html_cut($text, $max_length)
 
     while ($i < strlen($text) && $stripped < strlen($stripped_text) && $stripped < $max_length)
     {
-        $symbol  = $text{$i};
-        $result .= $symbol;
+        // $symbol  = $text{$i};
+        // $result .= $symbol;
 
         switch ($symbol)
         {

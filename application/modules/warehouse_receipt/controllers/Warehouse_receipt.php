@@ -32,6 +32,10 @@ class Warehouse_receipt extends MX_Controller {
 		$aData['add'] =1;
 		$aData['general'] = $this->db->get('warehouse')->result_array();
 		$aData['shipment'] = $this->db->get('shipment_orders')->result_array();
+		$aData['suppliers'] = $this->db->get('suppliers')->result_array();
+		$aData['drivers'] = $this->db->get('drivers')->result_array();
+		$aData['containers'] = $this->db->get('containers')->result_array();
+		$aData['charges'] = $this->db->get('charges')->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add-warehouse-receipt',$aData);

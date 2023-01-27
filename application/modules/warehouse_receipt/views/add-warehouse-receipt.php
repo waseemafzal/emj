@@ -709,7 +709,7 @@ background-color: #fff;
   <div class='row'>
     <div class='col-md-6'>
 <label>Image</label>
-<input type='file' class='form-control' name='file'>
+<input type='file' class='form-control' name='file' id='file'>
                                     </div>
                                   </div> <br>
         <div class='row'>
@@ -757,6 +757,9 @@ background-color: #fff;
         $.each(other_data,function(key,input){
         formData.append(input.name,input.value);
         });
+        if($('#file').val()!=''){
+		formData.append("file", document.getElementById('file').files[0]);
+		}
     // ajax start
             $.ajax({
             type: "POST",

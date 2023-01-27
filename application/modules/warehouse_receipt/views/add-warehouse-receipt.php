@@ -80,7 +80,7 @@ background-color: #fff;
                                     <label>Warehouse Name</label>
                       <?php if(isset($general)){?>
                           
-                          <input type='text' disabled name='warehouse_name' class='form-control' value='<?php echo $general[0]["warehouse_name"];?>'>
+                          <input type='text' readonly name='warehouse_name' class='form-control' value='<?php echo $general[0]["warehouse_name"];?>'>
                                                       
                                     <?php }?>
                                         </div>
@@ -88,7 +88,7 @@ background-color: #fff;
                                           <label>Employ Name</label>
                       <?php if(isset($general)){?>
                           
-                          <input type='text' disabled name='employ_name' class='form-control' value='<?php echo $general[0]["employ_name"];?>'>
+                          <input type='text' readonly name='employ_name' class='form-control' value='<?php echo $general[0]["employ_name"];?>'>
                                                       
                                     <?php }?>
                                   </div>
@@ -97,12 +97,12 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                  <label>Issued by</label>
-                                    <input type="text" disabled name="issued_by" id="issued_by"  class="form-control" value= "<?php echo $general[0]['issued_by'];?>">
+                                    <input type="text" readonly name="issued_by" id="issued_by"  class="form-control" value= "<?php echo $general[0]['issued_by'];?>">
                                         </div>
                                           <div class="col-md-6">
                                           <label>Date</label>
                                     
-                                    <input type="date" disabled class="form-control" id="date" name="date"  value= "<?php echo $general[0]['date'];?>">
+                                    <input type="date" readonly class="form-control" id="date" name="date"  value= "<?php echo $general[0]['date'];?>">
                                 
                                   </div>
                                  </div></div>
@@ -110,13 +110,13 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                  <label>Time</label>
-                                    <input type="time" name="time" id="time" disabled  class="form-control" value= "<?php echo $general[0]['time'];?>">
+                                    <input type="time" name="time" id="time" readonly  class="form-control" value= "<?php echo $general[0]['time'];?>">
                                     
                                         </div>
                                           <div class="col-md-6">
                                           <label>Entry No</label>
                                     
-                                    <input type="number" disabled class="form-control" id="entry_no" name="entry_no"  value= "<?php echo $general[0]['entry_no'];?>">
+                                    <input type="number" readonly class="form-control" id="entry_no" name="entry_no"  value= "<?php echo $general[0]['entry_no'];?>">
                                    
                                   </div>
                                  </div></div>
@@ -125,7 +125,7 @@ background-color: #fff;
                                  <div class="col-xs-12 col-md-6">
                                  <label>Transaction Number</label>
                                     
-                                    <input type="number" disabled class="form-control" id="transaction_number" name="transaction_number"  value= "<?php echo $general[0]['transaction_number'];?>">
+                                    <input type="number" readonly class="form-control" id="transaction_number" name="transaction_number"  value= "<?php echo $general[0]['transaction_number'];?>">
                                     
                                         </div>
                                         <div class="col-md-6">
@@ -178,11 +178,11 @@ background-color: #fff;
                     </div>
     <div class='col-md-6'>
       <label>Address</label>
-       <textarea type='text' class='form-control' name='shipper_address'>Address</textarea>
+       <textarea type='text' class='form-control' name='shipper_address'></textarea>
     </div>
     <div class='col-md-6'>
       <label>Address</label>
-       <textarea type='text' class='form-control' name='consignee_address'>Address</textarea>
+       <textarea type='text' class='form-control' name='consignee_address'></textarea>
     </div>
     <div class='col-md-6'>
       <label>Client to bill</label>
@@ -326,11 +326,11 @@ background-color: #fff;
                                  <div class="col-xs-12 col-md-6">
                                     <label>Package Type</label>
                                     <select name='package_type' class='form-control'>
-                                      <option selected>Choose Package Type</option>
-                                    <option name='extra large box'>Extra Large Box</option>
-                                    <option name='large box'>Large Box</option>
-                                    <option name='medium box'>Medium Box</option>
-                                    <option name='letter'>Letter</option>
+                                      <option selected value='Not Selected'>Choose Package Type</option>
+                                    <option value='extra large box'>Extra Large Box</option>
+                                    <option value='large box'>Large Box</option>
+                                    <option value='medium box'>Medium Box</option>
+                                    <option value='letter'>Letter</option>
                                     </select>
                                     
                                         </div>
@@ -387,7 +387,7 @@ background-color: #fff;
                                         </div><div class="col-xs-12 col-md-3">
                                           <label>Unit</label>
                                     <select name='dimension_unit' class='form-control'>
-                                      <option>Choose Unit</option>
+                                      <option value='Not Selected'>Choose Unit</option>
                                       <option value='inches'>Inches</option>
                                       <option value='cm'>cm</option>
                                     </select>

@@ -91,6 +91,7 @@ class Warehouse_receipt extends MX_Controller {
 		//pre($_POST);
 		if (!empty($_FILES)){ 
 			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'jpeg|jpg|gif|png';
 			$config['encrypt_name'] = TRUE;
 			$this->load->library('upload');
 			$this->upload->initialize($config);

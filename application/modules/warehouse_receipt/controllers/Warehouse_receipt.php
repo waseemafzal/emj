@@ -6,13 +6,14 @@ class Warehouse_receipt extends MX_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model( 'Api_model', 'AM' );
-        
+		$this->load->library('phpqrcode/qrlib');
+
 		if(!$this->session->userdata('login')==true){
 			redirect('auth/login', 'refresh');
 			
 		}
 	}
-	public $view = "view_suppliers";
+	public $view = "view_receipts";
 	/************Configuration of form and dataTable*********************/
 	public $tbl = 'warehouse_receipts';
 	
@@ -26,6 +27,14 @@ class Warehouse_receipt extends MX_Controller {
 	    
 		$this->load->view($this->view, $aData);
 	}
+	public function pdf_document($id){  
+		$this->load->library('pdf');
+		$aData['data'] =$this->db->where('id', $id)->get('warehouse_receipts')->result_array();
+		$aData['settings'] = $this->db->get('setting')->result_array();
+        // $html = $this->load->view('receipt-pdf', [], true, $aData);
+        // $this->pdf->createPDF($html, 'mypdf', false);
+		$this->load->view('receipt-pdf', $aData);
+	   }
 	public function add(){  
 		
 		$aData['tbl'] =$this->tbl;
@@ -51,7 +60,7 @@ class Warehouse_receipt extends MX_Controller {
 		
 		$aData['module_heading'] =$this->module_heading;
 		//pre($aData);
-		$this->load->view('add-supplier',$aData);
+		$this->load->view('add-warehouse-receipt',$aData);
 	}
 	public function delete(){ 
 		extract($_POST);
@@ -77,7 +86,24 @@ class Warehouse_receipt extends MX_Controller {
 		// print_r($_POST);
 		// pre($_FILES);
 		//pre($_POST);
-
+		$config['cacheable']    = true; //boolean, the default is true
+		$config['cachedir']    = ''; //string, the default is application/cache/
+		$config['errorlog']    = ''; //string, the default is application/logs/
+		$config['quality']      = true; //boolean, the default is true
+		$config['size']        = '1024'; //interger, the default is 1024
+		$config['black']        = array(224,255,255); // array, default is array(255,255,255)
+		$config['white']        = array(70,130,180); // array, default is array(0,0,0)
+		$this->qrlib->initialize($config);
+		
+		//GenerateQR
+		$params['data']  = base_url().'warehouse_receipt/'.$id;
+		$params['level'] = 'H';
+		$params['size'] = 10;
+		$image_name = $id.'.png';
+		$params['savename'] = FCPATH.'uploads/qr_image/'.$image_name;
+		
+		$this->qrlib->generate($params);
+		
 		$PrimaryID = $_POST['id'];
 		unset($_POST['id']);
 	//pre($_POST);
@@ -89,6 +115,9 @@ class Warehouse_receipt extends MX_Controller {
 			//Multiple Images
 	//pre();
 		//pre($_POST);
+		if(isset($_POST['qr_image'])){
+			$_POST['qr_image'] = $image_name;
+		}
 		if (!empty($_FILES)){ 
 			$config['upload_path']          = './uploads/';
 			$config['allowed_types']        = 'jpeg|jpg|gif|png';
@@ -335,14 +364,5 @@ switch($result){
 			break;	
 		}	
 
-}
-public function edit_purchase_order($id){
-		$query['row'] =$this->crud->edit($id,'purchase_orders');
-        $this->load->view('purchase_order', $query);
-
-}
-public function edit_landing_bill($id){
-	$query['row'] =$this->crud->edit($id,'landing_bills');
-        $this->load->view('landing_bill', $query);
 }
 }

@@ -78,31 +78,43 @@ background-color: #fff;
                                 
                                 <div class="col-xs-12 col-md-6">
                                     <label>Warehouse Name</label>
-                      <?php if(isset($general)){?>
-                          
-                          <input type='text' readonly name='warehouse_name' class='form-control' value='<?php echo $general[0]["warehouse_name"];?>'>
-                                                      
-                                    <?php }?>
+                                    <select name='warehouse_name' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['warehouse_name']?>'><?php echo $warehouse['warehouse_name']?></option>          
+                                    <?php }}?>
+                      </select>
                                         </div>
                                           <div  class="col-md-6">
                                           <label>Employ Name</label>
-                      <?php if(isset($general)){?>
-                          
-                          <input type='text' readonly name='employ_name' class='form-control' value='<?php echo $general[0]["employ_name"];?>'>
-                                                      
-                                    <?php }?>
+                                          <select name='employ_name' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['employ_name']?>'><?php echo $warehouse['employ_name']?></option>          
+                                    <?php }}?>
+                      </select>
+                      <input type='hidden' name='qr_image'>
                                   </div>
                                  </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                  <label>Issued by</label>
-                                    <input type="text" readonly name="issued_by" id="issued_by"  class="form-control" value= "<?php echo $general[0]['issued_by'];?>">
+                                 <select name='issued_by' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['issued_by']?>'><?php echo $warehouse['issued_by']?></option>          
+                                    <?php }}?>
+                      </select>
                                         </div>
                                           <div class="col-md-6">
                                           <label>Date</label>
-                                    
-                                    <input type="date" readonly class="form-control" id="date" name="date"  value= "<?php echo $general[0]['date'];?>">
+                                          <select name='date' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['date']?>'><?php echo $warehouse['date']?></option>          
+                                    <?php }}?>
+                      </select> 
                                 
                                   </div>
                                  </div></div>
@@ -110,13 +122,21 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                  <label>Time</label>
-                                    <input type="time" name="time" id="time" readonly  class="form-control" value= "<?php echo $general[0]['time'];?>">
-                                    
+                                 <select name='time' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['time']?>'><?php echo $warehouse['time']?></option>          
+                                    <?php }}?>
+                      </select>  
                                         </div>
                                           <div class="col-md-6">
                                           <label>Entry No</label>
-                                    
-                                    <input type="number" readonly class="form-control" id="entry_no" name="entry_no"  value= "<?php echo $general[0]['entry_no'];?>">
+                                          <select name='entry_no' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['entry_no']?>'><?php echo $warehouse['entry_no']?></option>          
+                                    <?php }}?>
+                      </select>
                                    
                                   </div>
                                  </div></div>
@@ -124,8 +144,12 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                  <label>Transaction Number</label>
-                                    
-                                    <input type="number" readonly class="form-control" id="transaction_number" name="transaction_number"  value= "<?php echo $general[0]['transaction_number'];?>">
+                                 <select name='transaction_number' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){?>
+                                            <option value='<?php echo $warehouse['transaction_number']?>'><?php echo $warehouse['transaction_number']?></option>          
+                                    <?php }}?>
+                      </select>
                                     
                                         </div>
                                         <div class="col-md-6">
@@ -197,9 +221,7 @@ background-color: #fff;
     <div class='row'>
     <div class='col-md-6'>
       <label>Model of Transp</label>
-        <select name='model_of_transp' class='form-control'>
-          <option value=''></option>
-        </select>
+        <input type='text' name='model_of_transp' class='form-control'>
     </div>
     <div class='col-md-6'>
     <label></label>
@@ -209,15 +231,11 @@ background-color: #fff;
     <div class='row'>
     <div class='col-md-6'>
       <label>Origin</label>
-         <select name='origin' class='form-control'>
-          <option vlaue=''></option>
-         </select>
+         <input type='text' name='origin' class='form-control'>
     </div>
     <div class='col-md-6'>
       <label>Destination</label>
-         <select name='destination' class='form-control'>
-          <option vlaue=''></option>
-         </select>
+         <input type='text' name='destination' class='form-control'>
     </div>
     </div></div>
 <div class="tab-pane" id="tab_3">

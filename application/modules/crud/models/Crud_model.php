@@ -221,6 +221,7 @@ function send_mail($to,$from,$from_heading,$subject,$htmlContent){
 			// add new record
 		//	echo $table;pre($data_array);
 			$dbExi=$this->db->insert($table,$data_array); 
+			 
 		//	echo $this->db->_error_message();die();
 			$result =0;
 			if($dbExi){

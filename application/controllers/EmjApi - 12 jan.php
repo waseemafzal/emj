@@ -1057,15 +1057,10 @@ if(count($orders)>0){
 
     public function getNotifications(){ 	
 
-	$this->data['data']= $this->db->select('`body`,  `resource_id`, `resource_type`, `created_date`, `readed`')
-	->where('receiver_id',USER_ID)
-	->get('notifications')
-	->result_array();  
-
-
+	$this->data['data']= $this->db->select('`body`,  `resource_id`, `resource_type`, `created_date`, `readed`')->get('notifications')->result_array();  
 
 	$this->response($this->data);
- 
+
     }
 
 
@@ -2001,7 +1996,7 @@ $this->data['full_url'] =base_url().$target;
     function deleteAccount(){
         $this->checkLogin();
         $this->db->where( 'id', USER_ID );
-        $this->db->delete( $this->tbl_user);
+        $this->db->update( $this->tbl_user, array('active'=>0) );
         if ( $this->db->affected_rows() == true ) {
 				$response['status']  = 200;
                 $response['error']   = false;
@@ -2242,7 +2237,6 @@ $this->data['full_url'] =base_url().$target;
     function shipmentOrders(){ 
 
         extract($_POST);
-       
 
         //pre($_POST);
 
@@ -2346,21 +2340,17 @@ $nameArray=$_POST['file'];
 unset($_POST['file']);
 			}
 			if(isset($length) and is_array($length) ){
-				$_POST['length']= implode(',',$length);
+				$length= implode(',',$length);
 				}
 			if(isset($width) and is_array($width) ){
-				$_POST['width']= implode(',',$width);
+				$width= implode(',',$width);
 				}
 			if(isset($height) and is_array($height) ){
-				$_POST['height']= implode(',',$height);
+				$height= implode(',',$height);
 				}
 			
         $result = $this->crud->saveRecord($PrimaryID,$_POST,'shipment_orders');
-        $query = $this->db->last_query();
-       // print_r($query);
-       // echo '<pre>';
-         $this->db->insert('json_logs', array('body'=>json_encode($query)));
-        //print_r($query);
+
         if($PrimaryID==''){
 
             

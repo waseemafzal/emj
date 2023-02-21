@@ -949,7 +949,7 @@ class Auth extends MX_Controller {
                                                       <tbody>
                                                          <tr>
                                                             <td align="center" style="padding-top:0;padding-bottom:20px"> <a >
-															 <img src="'.base_url().'assets/logo.png" alt="" width="104" height="30" style="vertical-align:middle; background:#254c33ad !important; padding:5px;" class="CToWUd"> </a> </td>
+															 <img src="'.base_url().'assets/company_logo.jpg" alt="" width="50%" height="20%" style="vertical-align:middle; background:#254c33ad !important; padding:5px;" class="CToWUd"> </a> </td>
                                                          </tr>
                                                          <tr>
                                                             <td  style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px">
@@ -957,6 +957,7 @@ class Auth extends MX_Controller {
                                                             </td>
                                                          </tr>
                                                          <tr>
+                                               
                                                             <td   style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px"> Hi '.$userName.', </td>
                                                          </tr>
                                                          <tr>

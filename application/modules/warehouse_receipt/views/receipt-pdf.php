@@ -6,27 +6,22 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css">
 <title>Warehouse Receipt</title>
 </head>
-<body>
-    <div class='container'>
-    <section>
-        <div class='row'>
-          <div class='col-md-6'>
+<body style='padding:0 5%'>
+    <div id='pdf'>
+        <div>
+          <div style='float:left;'>
           <h2>EMJ Global</h2>
           <h4>Address:&nbsp;<?php echo $settings[0]['address'];?></h4>
           <h4>Email:&nbsp;<?php echo $settings[0]['email'];?></h4>
           <h4>Phone:&nbsp;<?php echo $settings[0]['phone'];?></h4>
 </div>
-<div class='col-md-6'>
+<div style='float:right;'>
     <h2>Warehouse Receipt</h2>
-    <img src='<?php echo base_url()?>/uploads/barcode.png' height='100' width='400'>
+    <img src='<?php echo base_url()?>/uploads/barcode.png' height='50' width='200'>
 </div>
-</div>
-    </section>
-</div>
-<br>
-<div class='container'>
-    <div class='row'>
-        <div class='col-md-12'>
+    </div>
+<br><br>
+        <div>
             <table border='1' style='width:100%'>
                 <thead>
                     <tr style='background-color:silver'>
@@ -123,8 +118,21 @@
             </table>
 </div>
 </div>
-</div>
+<button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>
 </body>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 </html>
+ <!-- Script to print the content of a div -->
+    <script>
+        function printDiv() {
+            var divContents = document.getElementById("pdf").innerHTML;
+            var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body >');
+            a.document.write(divContents);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        }
+    </script>

@@ -422,7 +422,7 @@ public function setEmailTemplate($userName,$activationLink){
                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                       <tbody>
                                                          <tr>
-                                                            <td align="center" style="padding-top:0;padding-bottom:20px"> <a > <img src="'.base_url().'assets/logo.png" alt="" width="104" height="30" style="vertical-align:middle" class="CToWUd"> </a> </td>
+                                                            <td align="center" style="padding-top:0;padding-bottom:20px"> <a > <img src="'.base_url().'assets/company_logo.jpg" alt="" width="50%" height="20%" style="vertical-align:middle" class="CToWUd"> </a> </td>
                                                          </tr>
                                                          <tr>
                                                             <td  style="font-family:Helvetica,Arial,sans-serif!important;font-size:16px;line-height:24px;word-break:break-word;padding-left:20px;padding-right:20px;padding-top:20px;padding-bottom:20px">

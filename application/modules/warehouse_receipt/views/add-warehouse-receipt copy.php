@@ -12,11 +12,6 @@ $Heading=   $module_heading;
     .box-primary {
     margin:5px 2px; 
         }
-        .modal-button{
-          border:none;
-          border-radius:7px 7px;
-          margin-top:18px;
-        }
     .box-primary img{
         min-width:200px;
         min-height: 200px;
@@ -70,9 +65,9 @@ background-color: #fff;
 <li><a href="#tab_3" data-toggle="tab">Supplier</a></li>
 <li><a href="#tab_4" data-toggle="tab">Carrier</a></li>
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
-<!-- <li><a href="#tab_6" data-toggle="tab">Container</a></li> -->
-<li><a href="#tab_6" data-toggle="tab">Charges</a></li>
-<li><a href="#tab_7" data-toggle="tab">Attachment</a></li>
+<li><a href="#tab_6" data-toggle="tab">Container</a></li>
+<li><a href="#tab_7" data-toggle="tab">Charges</a></li>
+<li><a href="#tab_8" data-toggle="tab">Attachment</a></li>
 
 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 </ul>
@@ -487,14 +482,8 @@ background-color: #fff;
                                     <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location">
                                     
                                         </div>
-                                        <div class="col-xs-12 col-md-6">
-           <button type='button' data-target="#container_modal" data-toggle="modal" class="btn btn-success btn-lg modal-button">
-                +Add Container</button>
-               
-                                        </div>
                                      
-                                 </div>
-                                 <div class="form-group">
+                                 </div></div> <div class="form-group">
                                 <h3>Dimensions(LxWxH)</h3>
                                 <div class="row"> 
                                 
@@ -566,7 +555,7 @@ background-color: #fff;
                                       </table>
                                     </div>
 </div>
-</div></div>
+</div>
                              <div class='form-group'>
                                 <div class='row'>
                                    <div class='col-sm-3'>
@@ -587,157 +576,8 @@ background-color: #fff;
 </div>
           </div>          </div></div>
 
-
 <div class="tab-pane" id="tab_6">
 <div class="form-group">
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Status</label>
-                                    
-                                    <input type='text' class="form-control" id="charges_status" name="charges_status">
-                                    
-                                    
-                                        </div>
-                                          <div  class="col-md-6">
-                                    <label>Description</label>
-                <textarea type="text" name="charges_description" id="charges_description"  class="form-control"><?php if(isset($row)){$row->charges_description;}?></textarea>
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Prepaid</label>
-                                    
-                                    <input type='text' class="form-control" id="prepaid" name="prepaid">
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Quantity</label>
-                                    <input type='text' class="form-control" id="quantity" name="quantity">
-                                                                               
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Price</label>
-                                    <input type='number' class="form-control" id="price" name="price">
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Amount</label>
-                                    <input type='number' class="form-control" id="amount" name="amount">
-                                  
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Tax Code</label>
-                                    <input type='text' class="form-control" id="tax_code" name="tax_code">
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Tax Rate</label>
-                                    <input type='text' class="form-control" id="tax_rate" name="tax_rate">
-                                    
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Tax Amount</label>
-                                    <input type='number' class="form-control" id="tax_amount" name="tax_amount">
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Amount + Tax</label>
-                                    <input type='text' class="form-control" id="amount_with_tax" name="amount_with_tax">
-                                    
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Currency</label>
-                                    
-                                    <input type='text' class="form-control" id="currency" name="currency">
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Final Amount</label>
-                                    <input type='text' class="form-control" id="final_amount" name="final_amount">
-                                    
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Expense</label>
-                                    
-                                    <input type='text' class="form-control" id="expense" name="expense">
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Income</label>
-                                    <input type='text' class="form-control" id="income" name="income">
-                                    
-                                  </div>
-                                 </div></div>
-</div>
-<div class="tab-pane" id="tab_7">
-  <div class='row'>
-    <div class='col-md-6'>
-<label>Image</label>
- <?php if(isset($row)){
-   if($row->file){
-    echo '<img src="uploads/<?php echo $row->file?>" height="70">';
-    }}?>
-<input type='file' class='form-control' name='file' id='file'>
-                                    </div>
-                                  </div> <br>
-        <div class='row'>
-            <div class="col-md-6">
-                                                  <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-
-                           <button type="submit" class="btn btn-info">Submit</button>
-                                    </div>
-                                    </div>
-                                  </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-       </section>
-                          
-      </form>
-                      </div>
-    <!-- /.content -->
-  </div>
-   
-
-  <?php  getFooter(); ?>
-
-    <!-- Scroll to Top Button-->
- <?php // commonjs() ?>
-   
- <div class="modal fade" id="container_modal" tabindex="-1" data-backdrop="static">
-     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-       <div class="modal-header bg-black">
-         <h4 class="modal-title text-white">Add Container</h4>
-       <button class="close" data-dismiss="modal"><span>&times;</span></button>
-       </div>
-       <div  class="modal-body">
-       <form id="form_add_container" name="form_add_container" role="form">
-             <!-- <div class="alert hidden"></div> -->
-                    <div class="form-group wrap_form">
-                                <!--Body-->
-                                <div class="form-group">
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
@@ -896,91 +736,266 @@ background-color: #fff;
                                     </select>
 
                                   </div>
-                                          </div></div>
-                                  <div class="col-xs-12 col-md-12">
-                           <button type="submit" class="btn btn-info">Submit</button>
-                      
-                   </div>
-           </div> 
-                </form>
-           <script>
-                $('#form_add_container').on("submit",function(e) {
-         e.preventDefault();    
-         var formData = new FormData();
-          var other_data = $('#form_add_container').serializeArray();
-        $.each(other_data,function(key,input){
-        formData.append(input.name,input.value);
-        });
-    // ajax start
-            $.ajax({
-            type: "POST",
-            url: "<?php echo base_url()?>/container/save; ",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'JSON',
-            beforeSend: function() {
-            $('#loader').removeClass('hidden');
-        //  $('#form_add_update .btn_au').addClass('hidden');
-            },
-            success: function(data) {
-            $('#loader').addClass('hidden');
-            $('#form_add_update .btn_au').removeClass('hidden');
-            //alert(data.status);
-            //var obj = jQuery.parseJSON(data);
-            if (data.status == 1)
-            {   
-                $(".alert").addClass('alert-success');
-                $(".alert").html(data.message);
-                $(".alert").removeClass('hidden');
-                setTimeout(function(){
-                $(".alert").addClass('hidden');
-                //$('#form_add_update')[0].reset();
-                },3000);
-            }
-           else if (data.status ==0)
-            {  
-            $(".alert").addClass('alert-danger');
-                $(".alert").html(data.message);
-                $(".alert").removeClass('hidden');
-                setTimeout(function(){
-                $(".alert").addClass('hidden');
-                },3000);
-            }
-            else if (data.status == 2)
-            {   
-            $(".alert").addClass('alert-success');
-                $(".alert").html(data.message);
-                $(".alert").removeClass('hidden');
-                setTimeout(function(){
-                window.location='<?php echo base_url().'warehouse_receipt'?>';
-                },1000);
-            }
-            else if (data.status == "validation_error")
-            {   
-            $(".alert").addClass('alert-warning');
-                $(".alert").html(data.message);
-                $(".alert").removeClass('hidden');
-                
-            }
-            
-           }
-     });
-
-    //ajax end    
-    });
- 
-  /******************************/
-  </script>
-       </div>
-     <div class="modal-footer">
-     <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
-     </div>
-     
-     </div>
+                                 </div></div>
 </div>
-</div>   
+<div class="tab-pane" id="tab_7">
+<div class="form-group">
+                                <div class="row"> 
+                                
+                                <div class="col-xs-12 col-md-6">
+                                    <label>Status</label>
+                                    
+                                    <select class="form-control" id="charges_status" name="charges_status">
+                                    <?php if(isset($charges)){
+                                       foreach($charges as $charge){
+                                        $selected='';
+                                         if(isset($row)){
+                                           if($row->charges_status==$charge['status']){
+                                             $selected='selected';
+                                             }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['status']?>'><?php echo $charge['status']?></option>
+                                    <?php }}?>
+                                    </select>
+                                    
+                                        </div>
+                                          <div  class="col-md-6">
+                                    <label>Description</label>
+                <textarea type="text" name="charges_description" id="charges_description"  class="form-control"><?php if(isset($row)){$row->charges_description;}?></textarea>
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Prepaid</label>
+                                    
+                                    <select class="form-control" id="prepaid" name="prepaid">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                         if($row->prepaid==$charge['prepaid']){
+                                           $selected='selected';
+                                           }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['prepaid']?>'><?php echo $charge['prepaid']?></option>
+                                     <?php }?>
+                                       </select>
+                                    
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Quantity</label>
+                                    <select class="form-control" id="quantity" name="quantity">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                        if(isset($row)){
+                                          if($row->quantity==$charge['quantity']){
+                                          $selected='selected';
+                                           }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['quantity']?>'><?php echo $charge['quantity']?></option>
+                                     <?php }?>
+                                       </select>
+                                                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Price</label>
+                                    <select class="form-control" id="price" name="price">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                         if($row->price==$charge['price']){
+                                           $selected='selected';
+                                           }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['price']?>'><?php echo $charge['price']?></option>
+                                     <?php }?>
+                                       </select>
+                                    
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Amount</label>
+                                    <select class="form-control" id="amount" name="amount">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                         if($row->amount==$charge['amount']){
+                                           $selected='selected';
+                                           }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['amount']?>'><?php echo $charge['amount']?></option>
+                                     <?php }?>
+                                       </select>
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Tax Code</label>
+                                    <select class="form-control" id="tax_code" name="tax_code">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                        if($row->tax_code==$charge['tax_code']){
+                                         $selected='selected';
+                                         }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['tax_code']?>'><?php echo $charge['tax_code']?></option>
+                                     <?php }?>
+                                       </select>
+                                    
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Tax Rate</label>
+                                    <select class="form-control" id="tax_rate" name="tax_rate">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                        if($row->tax_rate==$charge['tax_rate']){
+                                          $selected='selected';
+                                          }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['tax_rate']?>'><?php echo $charge['tax_rate']?></option>
+                                     <?php }?>
+                                       </select>
+                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Tax Amount</label>
+                                    <select class="form-control" id="tax_amount" name="tax_amount">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                        if($row->tax_amount==$charge['tax_amount']){
+                                         $selected='selected';
+                                         }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['tax_amount']?>'><?php echo $charge['tax_amount']?></option>
+                                     <?php }?>
+                                       </select>
+                                    
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Amount + Tax</label>
+                                    <select class="form-control" id="amount_with_tax" name="amount_with_tax">
+                                    <?php foreach($charges as $charge){
+                                      $selected='selected';
+                                       if(isset($row)){
+                                           if($row->amount_with_tax==$charge['amount_with_tax']){
+                                               $selected='selected';
+                                     }
+                                      }
+                                      ?>
+                                    <option <?php echo $selected?> value='<?php echo $charge['amount_with_tax']?>'><?php echo $charge['amount_with_tax']?></option>
+                                     <?php }?>
+                                       </select>
+                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Currency</label>
+                                    
+                                    <select class="form-control" id="currency" name="currency">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                         if($row->currency==$charge['currency']){
+                                           $selected='selected';
+                                           }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['currency']?>'><?php echo $charge['currency']?></option>
+                                     <?php }?>
+                                       </select>
+                                   
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Final Amount</label>
+                                    <select class="form-control" id="final_amount" name="final_amount">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                        if($row->final_amount==$charge['final_amount']){
+                                         $selected='selected';
+                                         }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['final_amount']?>'><?php echo $charge['final_amount']?></option>
+                                     <?php }?>
+                                       </select>
+                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Expense</label>
+                                    
+                                    <select class="form-control" id="expense" name="expense">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                         if($row->expense==$charge['expense']){
+                                          $selected='selected';
+                                          }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['expense']?>'><?php echo $charge['expense']?></option>
+                                     <?php }?>
+                                       </select>
+                                   
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Income</label>
+                                    <select class="form-control" id="income" name="income">
+                                    <?php foreach($charges as $charge){
+                                      $selected='';
+                                       if(isset($row)){
+                                           if($row->income==$charge['income']){
+                                                $selected='selected';                                   
+                                                }}
+                                       ?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['income']?>'><?php echo $charge['income']?></option>
+                                     <?php }?>
+                                       </select>
+                                  </div>
+                                 </div></div>
+</div>
+<div class="tab-pane" id="tab_8">
+  <div class='row'>
+    <div class='col-md-6'>
+<label>Image</label>
+ <?php if(isset($row)){
+   if($row->file){
+    echo '<img src="uploads/<?php echo $row->file?>" height="70">';
+    }}?>
+<input type='file' class='form-control' name='file' id='file'>
+                                    </div>
+                                  </div> <br>
+        <div class='row'>
+            <div class="col-md-6">
+                                                  <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
+
+                           <button type="submit" class="btn btn-info">Submit</button>
+                                    </div>
+                                    </div>
+                                  </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+       </section>
+                          
+      </form>
+                      </div>
+    <!-- /.content -->
+  </div>
+   
+
+  <?php  getFooter(); ?>
+
+    <!-- Scroll to Top Button-->
+ <?php // commonjs() ?>
+   
+   
  
 
 </body>

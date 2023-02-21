@@ -45,6 +45,8 @@
 
           <li class="<?= getActive('warehouse_receipts') ?>" style='background-color:yellow'><a href="warehouse_receipt"><span>Warehouse Receipt</span></a></li>
 
+          <li class="<?= getActive('secret_questions') ?>" style='background-color:yellow'><a href="secret_questions"><span>Secret Questions</span></a></li>
+
           <li class="treeview hidden">
           <a href="#">
             <i class="fa fa-cog"></i>

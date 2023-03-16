@@ -87,6 +87,7 @@ background-color: #fff;
                                     <input type="number" class="form-control" id="pro_number" name="pro_number"  value= "<?php if(isset($row)){echo $row->pro_number;}?>">
                                     
                                         </div>
+
                                  </div></div>
                                 
                                         <div class="clearfix">&nbsp;</div>

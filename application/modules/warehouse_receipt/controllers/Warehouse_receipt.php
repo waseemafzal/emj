@@ -112,6 +112,7 @@ class Warehouse_receipt extends MX_Controller {
 		// $this->qrlib->generate($params);
 		
 		$PrimaryID = $_POST['id'];
+		$_POST['notes'] = implode(',',$_POST['notes']);
 		unset($_POST['id']);
 	//pre($_POST);
         
@@ -122,9 +123,9 @@ class Warehouse_receipt extends MX_Controller {
 			//Multiple Images
 	//pre();
 		//pre($_POST);
-		if(isset($_POST['qr_image'])){
-			$_POST['qr_image'] = $image_name;
-		}
+		// if(isset($_POST['qr_image'])){
+		// 	$_POST['qr_image'] = $image_name;
+		// }
 		if (!empty($_FILES)){ 
 			$config['upload_path']          = './uploads/';
 			$config['allowed_types']        = 'jpeg|jpg|gif|png';

@@ -67,7 +67,9 @@ background-color: #fff;
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
 <li><a href="#tab_6" data-toggle="tab">Container</a></li>
 <li><a href="#tab_7" data-toggle="tab">Charges</a></li>
-<li><a href="#tab_8" data-toggle="tab">Attachment</a></li>
+<li><a href="#tab_8" data-toggle="tab">Notes</a></li>
+<li><a href="#tab_9" data-toggle="tab">Attachment</a></li>
+
 
 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 </ul>
@@ -913,6 +915,20 @@ background-color: #fff;
 </div>
 <div class="tab-pane" id="tab_8">
   <div class='row'>
+  <div class='col-md-12' id='inputFormRow'>
+            <h4>Notes</h4>
+                <div class="notes">
+                    <input style="width:50%"type="text" name="notes[]" autocomplete="off">
+                        <button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>
+                </div>
+
+            <div id="newRow"></div>
+            <button id="addRow" type="button" class="btn btn-info btn-sm">Add Row</button>
+                                  </div> <br>
+        
+                                  </div></div>
+                                  <div class="tab-pane" id="tab_9">
+  <div class='row'>
     <div class='col-md-6'>
 <label>Image</label>
  <?php if(isset($row)){
@@ -930,6 +946,7 @@ background-color: #fff;
                                     </div>
                                     </div>
                                   </div>
+                                  
 
 </div>
 
@@ -1033,3 +1050,21 @@ background-color: #fff;
  
   /******************************/
   </script>
+<script>
+  $("#addRow").click(function () {
+            var html = '';
+            html += '<div id="inputFormRow">';
+            html += '<div class="notes">';
+            html += '<input type="text" name="notes[]" style="width:50%" autocomplete="off">&nbsp';
+            html += '<button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>';
+            html += '</div>';
+            html += '</div>';
+
+            $('#newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('#inputFormRow').remove();
+        });
+</script>

@@ -25,40 +25,35 @@
             <table border='1' style='width:100%'>
                 <thead>
                     <tr style='background-color:silver'>
-                    <th colspan='2' style='text-align:center'>Shipper Details</th>
-                    <th colspan='2' style='text-align:center'>Consignee Details</th>
+                    <th colspan='3' style='text-align:center'>Shipper Details</th>
+                    <th colspan='3' style='text-align:center'>Consignee Details</th>
 </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <td colspan='2'><b>Name:</b>&nbsp;<?php echo $data[0]['shipper_name'].'<br><b>Address:</b>&nbsp;'.$data[0]['shipper_address']?></td>
-                    <td colspan='2'><b>Name:</b>&nbsp;<?php echo $data[0]['consignee_name'].'<br><b>Address:</b>&nbsp;'.$data[0]['consignee_address']?></td>
+                    <td colspan='3'><b>Name:</b>&nbsp;<?php echo $data[0]['shipper_name'].'<br><b>Address:</b>&nbsp;'.$data[0]['shipper_address']?></td>
+                    <td colspan='3'><b>Name:</b>&nbsp;<?php echo $data[0]['consignee_name'].'<br><b>Address:</b>&nbsp;'.$data[0]['consignee_address']?></td>
                 </tr>
                      <tr>
-                        <th style='background-color:silver;text-align:center' colspan='4'>Inland Carrier and Supplier Information</th>
+                        <th style='background-color:silver;text-align:center' colspan='6'>Inland Carrier and Supplier Information</th>
                         
 </tr>
                   <tr>
-                    <th width='10%'>Carrier Name:</th>
-                    <td width='25%'><?php echo $data[0]['carrier']?></td>
-                    <th width='10%'>Driver License:</th>
-                    <td width='25%'><?php echo $data[0]['driver_license_number']?></td>
+                    <th>Carrier Name:</th>
+                    <td><?php echo $data[0]['carrier']?></td>
+                    <th colspan='1'>Driver Name:</th>
+                    <td colspan='1'><?php echo $data[0]['driver_name']?></td>
                   </tr>
                   <tr>
-                    <th width='10%'>PRO Number:</th>
-                    <td width='25%'><?php echo $data[0]['pro_number']?></td>
-                    <th width='10%'>Supplier Name:</th>
-                    <td width='25%'><?php echo $data[0]['supplier_name']?></td>
-                  </tr><tr>
-                    <th width='10%'>Tracking Number:</th>
-                    <td width='25%'><?php echo $data[0]['tracking_number']?></td>
-                    <th width='10%'>Invoice Number:</th>
-                    <td width='25%'><?php echo $data[0]['invoice_number']?></td>
-                  </tr><tr>
-                    <th width='10%'>Driver Name:</th>
-                    <td width='25%'><?php echo $data[0]['driver_name']?></td>
-                    <th width='10%'>PO Number:</th>
-                    <td width='25%'><?php echo $data[0]['purchase_order_number']?></td>
+                  <th>Driver License:</th>
+                    <td colspan='1'><?php echo $data[0]['driver_license_number']?></td>
+                    <th colspan='1'>PRO Number:</th>
+                    <td colspan='1'><?php echo $data[0]['pro_number']?></td>
+                  </tr>
+                  <tr>
+                  <th colspan='1'>Supplier Name:</th>
+                    <td colspan='1'><?php echo $data[0]['supplier_name']?></td>
+                  
                   </tr>
                   <tr>
                         <th style='background-color:silver;text-align:center' colspan='4'>Applicable Charges</th>
@@ -102,14 +97,11 @@
 </tr>
                   <tr style='background-color:silver'>
                     <th width='25%'>Location:&nbsp;<?php echo $data[0]['location']?></th>
-                    <th width='25%'>Invoice Number:&nbsp;<?php echo $data[0]['invoice_number']?></th>
                     <th width='25%'>Quantity:&nbsp;<?php echo $data[0]['quantity']?></th>
-                    <th width='25%'>PO Number:&nbsp;<?php echo $data[0]['purchase_order_number']?></th>
-                    
-</tr>
-                  <tr style='background-color:silver'>
                     <th width='25%'>Part Number:&nbsp;<?php echo $data[0]['part_number']?></th>
                     <th width='25%'>Model:&nbsp;<?php echo $data[0]['model']?></th>
+</tr>
+                  <tr style='background-color:silver'>
                     <th width='25%'>Serial no. 1:&nbsp;<?php echo $data[0]['serial_number_1']?></th>
                     <th width='25%'>Serial no. 2:&nbsp;<?php echo $data[0]['serial_number_2']?></th>
                     

@@ -41,7 +41,6 @@ $Heading=	$module_heading;
         <th>Driver Name</th>
         <th>License Number</th>
 		    <th>Pro Number</th>
-        <th>Tracking Number</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -56,10 +55,7 @@ $Heading=	$module_heading;
         
     <td><?php echo $row->driver_name;?></td>
     <td><?php echo $row->driver_license_number;?></td>
-    
-    
     <td><?php echo $row->pro_number;?></td>
-    <td><?php echo $row->tracking_number;?></td>   
     <td>
       <a href="<?=$controller?>/edit/<?php echo $row->id;?>" class='btn btn-warning'>Edit</a>
       <a onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');" class='btn btn-danger'>Delete</a>

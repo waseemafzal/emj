@@ -268,8 +268,8 @@ background-color: #fff;
     </div></div>
     <div class='row'>
     <div class='col-md-6'>
-      <label>Model of Transp</label>
-        <input type='text' name='model_of_transp' value='<?php if(isset($row)){echo $row->model_of_transp;}?>' class='form-control'>
+      <label>Mode of Transp</label>
+        <input type='text' name='mode_of_transp' value='<?php if(isset($row)){echo $row->mode_of_transp;}?>' class='form-control'>
     </div>
     <div class='col-md-6'>
     <label></label>

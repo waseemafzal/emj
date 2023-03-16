@@ -79,21 +79,6 @@ background-color: #fff;
                                     <textarea type="text" name="address" id="address"  class="form-control"><?php if(isset($row)){echo $row->address;}?></textarea>
                                   </div>
                                  </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Invoice Number</label>
-                                    
-                                    <input type="number" class="form-control" id="invoice_number" name="invoice_number"  value= "<?php if(isset($row)){echo $row->invoice_number;}?>">
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Purchase Order Number</label>
-                                    <input type="number" name="purchase_order_number" id="purchase_order_number"  class="form-control" value= "<?php if(isset($row)){echo $row->purchase_order_number;}?>">
-                                    <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-                                
-                                  </div>
-                                 </div></div>
                                 
                                         <div class="clearfix">&nbsp;</div>
              <div class="col-xs-12 col-md-12">

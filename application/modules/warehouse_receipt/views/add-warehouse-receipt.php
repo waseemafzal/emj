@@ -268,8 +268,8 @@ background-color: #fff;
     </div></div>
     <div class='row'>
     <div class='col-md-6'>
-      <label>Model of Transp</label>
-        <input type='text' name='model_of_transp' value='<?php if(isset($row)){echo $row->model_of_transp;}?>' class='form-control'>
+      <label>Mode of Transp</label>
+        <input type='text' name='mode_of_transp' value='<?php if(isset($row)){echo $row->mode_of_transp;}?>' class='form-control'>
     </div>
     <div class='col-md-6'>
     <label></label>
@@ -302,41 +302,12 @@ background-color: #fff;
               <option <?php echo $selected?> value='<?php echo $supplier["supplier_name"];?>'><?php echo $supplier["supplier_name"];?></option>
               <?php }}?>
         </select>
-    </div>
+    </div><br><br><br>
     <div class='col-md-6'>
-      <br><br><br>
-      <label>Invoice Number</label>
-      <select name='invoice_number' class='form-control'>
-          <?php if(isset($suppliers)){
-            foreach($suppliers as $supplier){
-            $selected='';
-            if(isset($row)){
-              if($row->invoice_number==$supplier["invoice_number"]){
-              $selected ='selected';
-              }}?>
-              <option <?php echo $selected?> value='<?php echo $supplier["invoice_number"];?>'><?php echo $supplier["invoice_number"];?></option>
-              <?php }}?>
-        </select>
-   </div>
-   <div class='col-md-6'>
     <label>Address</label>
-     <textarea name='supplier_address' class='form-control'><?php if(isset($row)){echo $row->supplier_address;}?></textarea>
+     <textarea name='supplier_address' class='form-control'></textarea>
    </div>
-   <div class='col-md-6'>
-    <label>Purchase Order Number</label>
-    <select name='purchase_order_number' class='form-control'>
-          <?php if(isset($suppliers)){
-            foreach($suppliers as $supplier){
-              $selected='';
-              if(isset($row)){
-                if($row->purchase_order_number==$supplier["purchase_order_number"]){
-                $selected='selected';
-                }}?>
-              <option <?php echo $selected?> value='<?php echo $supplier["purchase_order_number"];?>'><?php echo $supplier["purchase_order_number"];?></option>
-              <?php }}?>
-        </select>
-   </div>
-            </div>
+  </div>
 </div>
 <div class="tab-pane" id="tab_4">
 <div class='row'>
@@ -389,20 +360,6 @@ background-color: #fff;
           <option <?php echo $selected?> value='<?php echo $driver['pro_number']?>'><?php echo $driver['pro_number']?></option>
           <?php }}?>
           </select>
-  </div>
-  <div class='col-md-6'>
-    <label>Tracking Number:</label>
-    <select name='tracking_number' class='form-control'>
-      <?php if(isset($drivers)){
-          foreach($drivers as $driver){
-          $selected='';
-          if(isset($row)){
-           if($row->tracking_number==$driver['tracking_number']){
-           $selected='selected';
-           }}?>
-          <option <?php echo $selected?> value='<?php echo $driver['tracking_number']?>'><?php echo $driver['tracking_number']?></option>
-          <?php }}?>
-              </select>
   </div>
           </div>
             </div>

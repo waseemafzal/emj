@@ -122,9 +122,9 @@ class Warehouse_receipt extends MX_Controller {
 			//Multiple Images
 	//pre();
 		//pre($_POST);
-		// if(isset($_POST['qr_image'])){
-		// 	$_POST['qr_image'] = $image_name;
-		// }
+		if(isset($_POST['qr_image'])){
+			$_POST['qr_image'] = $image_name;
+		}
 		if (!empty($_FILES)){ 
 			$config['upload_path']          = './uploads/';
 			$config['allowed_types']        = 'jpeg|jpg|gif|png';

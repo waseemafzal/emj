@@ -40,7 +40,7 @@ $Heading=	$module_heading;
     <tr>
         <th>Track Number</th>
         <th>Shipper Name</th>
-		    <th>Shipper Address</th>
+		<th>Shipper Address</th>
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
@@ -58,7 +58,7 @@ $Heading=	$module_heading;
 		?>
 		<tr id="row_<?php echo $row->id;?>">
         
-		<td align="center"><?php echo $row->track_number;?></td>
+	<td align="center"><?php echo $row->track_number;?></td>
     <td><?php echo $row->shipper_name;?></td>
     <td><?php echo $row->shipper_address;?></td>
     
@@ -262,7 +262,7 @@ var formData = new FormData();
   // ajax start
         $.ajax({
       type: "POST",
-      url: "<?php echo base_url()?>Shipment_order/updateStatus",
+      url: "<?php echo base_url()?>shipment_order/updateStatus",
       data: formData,
       cache: false,
       contentType: false,
@@ -275,7 +275,7 @@ var formData = new FormData();
       success: function(data){
         $('#loader').addClass('hidden');
         if(data.status==200){
-          window.location.href = "<?php echo base_url() .'Shipment_order' ?>";
+          alert('Status has been changed successfully');
         }
            }
    });

@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 4.9.11
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 08, 2022 at 12:46 PM
--- Server version: 5.7.40-cll-lve
+-- Generation Time: Mar 16, 2023 at 10:34 AM
+-- Server version: 5.7.41-cll-lve
 -- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -307,26 +307,89 @@ INSERT INTO `app_user_session` (`access_token`, `user_id`, `created_date`, `id`)
 ('696461664998216', 165, '2022-10-05 19:30:16', 180),
 ('294231664999052', 167, '2022-10-05 19:44:12', 181),
 ('423111664999126', 165, '2022-10-05 19:45:26', 182),
-('156791667033072', 2, '2022-10-29 08:44:32', 183),
-('655201667033109', 2, '2022-10-29 08:45:09', 184),
+('494341675792416', 10, '2023-02-07 17:53:36', 270),
+('328281674486221', 7, '2023-01-23 15:03:41', 266),
 ('369171667589151', 4, '2022-11-04 19:12:31', 185),
 ('434271667983818', 4, '2022-11-09 08:50:18', 186),
+('500431673548217', 19, '2023-01-12 18:30:17', 249),
 ('761671667994514', 4, '2022-11-09 11:48:34', 188),
+('451891673508183', 30, '2023-01-12 07:23:03', 248),
+('043241673507085', 30, '2023-01-12 07:04:45', 247),
+('489011673502709', 28, '2023-01-12 05:51:49', 245),
+('888941673440301', 27, '2023-01-11 12:31:41', 244),
+('280641673432179', 26, '2023-01-11 10:16:19', 242),
 ('512721668007813', 4, '2022-11-09 15:30:13', 194),
-('237211668008022', 2, '2022-11-09 15:33:42', 196),
+('067951673431222', 25, '2023-01-11 10:00:22', 241),
+('998021675745405', 10, '2023-02-07 04:50:05', 269),
+('158001673430874', 24, '2023-01-11 09:54:34', 240),
 ('429541668021941', 8, '2022-11-09 19:25:41', 198),
+('449421673418824', 23, '2023-01-11 06:33:44', 231),
+('864471673406422', 17, '2023-01-11 03:07:02', 229),
+('087091673587272', 31, '2023-01-13 05:21:12', 250),
 ('829371668073961', 9, '2022-11-10 09:52:41', 202),
 ('984141668080802', 10, '2022-11-10 11:46:42', 203),
-('234181669802979', 17, '2022-11-30 10:09:39', 220),
-('334521669467228', 17, '2022-11-26 12:53:48', 219),
+('657001673378687', 21, '2023-01-10 19:24:47', 227),
+('346741673364806', 10, '2023-01-10 15:33:26', 225),
+('551111671027599', 18, '2022-12-14 14:19:59', 222),
+('708141671027991', 19, '2022-12-14 14:26:31', 223),
 ('287081669463750', 10, '2022-11-26 11:55:50', 218),
+('846181675403298', 2, '2023-02-03 05:48:18', 268),
 ('650501668407058', 9, '2022-11-14 06:24:18', 210),
 ('317331668487867', 9, '2022-11-15 04:51:07', 211),
 ('134681668487871', 9, '2022-11-15 04:51:11', 212),
 ('136591668491777', 10, '2022-11-15 05:56:17', 213),
 ('606121668500278', 10, '2022-11-15 08:17:58', 214),
 ('266631668510028', 10, '2022-11-15 11:00:28', 215),
-('271151669110424', 16, '2022-11-22 09:47:04', 216);
+('271151669110424', 16, '2022-11-22 09:47:04', 216),
+('870481673588044', 19, '2023-01-13 05:34:04', 251),
+('126271673591850', 31, '2023-01-13 06:37:30', 252),
+('194961673592501', 31, '2023-01-13 06:48:21', 253),
+('657551674988451', 9, '2023-01-29 10:34:11', 267),
+('477781673871325', 31, '2023-01-16 12:15:25', 255),
+('641351673871356', 31, '2023-01-16 12:15:56', 256),
+('749941674420897', 33, '2023-01-22 20:54:57', 265),
+('544371674196440', 32, '2023-01-20 06:34:00', 258),
+('617781674196622', 10, '2023-01-20 06:37:02', 259),
+('213871676954288', 34, '2023-02-21 04:38:08', 271),
+('855551676954885', 35, '2023-02-21 04:48:05', 272),
+('137091676959747', 39, '2023-02-21 06:09:07', 273),
+('421541676961685', 41, '2023-02-21 06:41:25', 274),
+('238401676962394', 39, '2023-02-21 06:53:14', 275),
+('332731676962437', 41, '2023-02-21 06:53:57', 276),
+('771151676962487', 41, '2023-02-21 06:54:47', 277),
+('068151676962613', 39, '2023-02-21 06:56:53', 278),
+('473061676964146', 45, '2023-02-21 07:22:26', 279);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `charges`
+--
+
+CREATE TABLE `charges` (
+  `id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `prepaid` varchar(255) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `tax_code` varchar(255) NOT NULL,
+  `tax_rate` varchar(255) NOT NULL,
+  `tax_amount` varchar(255) NOT NULL,
+  `amount_with_tax` varchar(255) NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `final_amount` varchar(255) NOT NULL,
+  `expense` varchar(255) NOT NULL,
+  `income` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `charges`
+--
+
+INSERT INTO `charges` (`id`, `status`, `description`, `prepaid`, `quantity`, `price`, `amount`, `tax_code`, `tax_rate`, `tax_amount`, `amount_with_tax`, `currency`, `final_amount`, `expense`, `income`) VALUES
+(1, 'Active', 'New Shipment', '897', '6', '56', '789', '897', '768', '565', '1200', 'Pkr', '1050', '200', '900');
 
 -- --------------------------------------------------------
 
@@ -379,7 +442,11 @@ INSERT INTO `clients_invoice` (`id`, `client_id`, `item_description`, `amount`, 
 (6, 0, '', 22.44, '{\"items\":[\"The onchange JavaScript event is triggered when an element is changed and then loses focus. In the context of a textarea , this happens when the  content of \"],\"quantities\":[\"2\"],\"rates\":[\"21\"],\"subtotal\":[\"42\"]}', 'By debit card', 2, 20, '2022-11-12 13:01:02', NULL, 'Yes', '2022-11-12', '2022-11-19', '1668258062', 'No notes for now just testing', 9, 70),
 (7, 0, '', 8.16, '{\"items\":[\"this item is hot\"],\"quantities\":[\"2\"],\"rates\":[\"5\"],\"subtotal\":[\"10\"]}', 'card', 2, 2, '2022-11-12 13:01:42', NULL, 'Yes', '2022-11-12', '2022-11-21', '1668258102', 'cash', 10, 71),
 (8, 0, '', 200, '{\"items\":[\"cnic\"],\"quantities\":[\"1\"],\"rates\":[\"200\"],\"subtotal\":[\"200\"]}', '', 0, 0, '2022-11-16 10:51:17', NULL, 'Yes', '2022-11-16', '2022-11-20', '1668595877', '', 12, 73),
-(9, 0, '', 300, '{\"items\":[\"it was one item\"],\"quantities\":[\"1\"],\"rates\":[\"300\"],\"subtotal\":[\"300\"]}', 'bank', 0, 0, '2022-11-26 12:39:09', NULL, 'Yes', '2022-11-26', '2022-11-27', '1669466349', 'no notes for now', 25, 74);
+(9, 0, '', 300, '{\"items\":[\"it was one item\"],\"quantities\":[\"1\"],\"rates\":[\"300\"],\"subtotal\":[\"300\"]}', 'bank', 0, 0, '2022-11-26 12:39:09', NULL, 'Yes', '2022-11-26', '2022-11-27', '1669466349', 'no notes for now', 25, 74),
+(12, 0, '', 2890, '{\"items\":[\"New\",\"New\"],\"quantities\":[\"1\",\"2\"],\"rates\":[\"2500\",\"200\"],\"subtotal\":[\"2500\",\"400\"]}', '', 10, 300, '2023-01-11 08:21:28', NULL, 'Yes', '2023-01-11', '2023-01-28', '1673425288', '', 35, 75),
+(13, 0, '', 510, '{\"items\":[\"New\"],\"quantities\":[\"2\"],\"rates\":[\"250\"],\"subtotal\":[\"500\"]}', '', 10, 40, '2023-01-11 09:01:50', NULL, 'Yes', '2023-01-11', '2023-01-29', '1673427811', '', 34, 76),
+(14, 0, '', 6090, '{\"items\":[\"cloth\"],\"quantities\":[\"7\"],\"rates\":[\"800\"],\"subtotal\":[\"5600\"]}', '', 10, 70, '2023-02-21 06:20:15', NULL, 'No', '2023-02-21', '2023-03-10', '1676960415', '', 73, NULL),
+(15, 0, '', 82636, '{\"items\":[\"toys\"],\"quantities\":[\"78\"],\"rates\":[\"900\"],\"subtotal\":[\"70200\"]}', '', 18, 200, '2023-02-21 06:49:49', NULL, 'No', '2023-02-28', '2023-02-21', '1676962189', '', 74, NULL);
 
 -- --------------------------------------------------------
 
@@ -406,7 +473,37 @@ CREATE TABLE `cms` (
 --
 
 INSERT INTO `cms` (`id`, `post_title`, `short_heading`, `post_banner`, `post_description`, `displaysidebar`, `sidebar`, `meta_keyword`, `meta_title`, `meta_description`, `created_on`) VALUES
-(1, 'Terms', 'Terms', 'defaultbanner.png', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 0, '', '', '', '2022-11-21 14:56:40');
+(1, 'Terms', 'Terms', 'defaultbanner.png', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 0, '', '', '', '2022-11-21 14:56:40'),
+(2, 'Privacy', 'Privacy', 'defaultbanner.png', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 0, '', '', '', '2022-11-21 14:56:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commodities`
+--
+
+CREATE TABLE `commodities` (
+  `id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `package_type` varchar(255) NOT NULL,
+  `pieces` varchar(255) NOT NULL,
+  `part_number` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `length` varchar(255) NOT NULL,
+  `width` varchar(255) NOT NULL,
+  `height` varchar(255) NOT NULL,
+  `dimension_unit` varchar(255) NOT NULL,
+  `weight_unit` varchar(255) NOT NULL,
+  `volume_unit` varchar(255) NOT NULL,
+  `weight` varchar(255) NOT NULL,
+  `volume` varchar(255) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `unitary_value` varchar(255) NOT NULL,
+  `total_value` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -441,6 +538,35 @@ INSERT INTO `contacts` (`id`, `user_id`, `name`, `contact`, `email`, `address`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `containers`
+--
+
+CREATE TABLE `containers` (
+  `id` int(11) NOT NULL,
+  `container_type` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `number` varchar(255) NOT NULL,
+  `serial_number_1` varchar(255) NOT NULL,
+  `serial_number_2` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `length` varchar(255) NOT NULL,
+  `weight` varchar(255) NOT NULL,
+  `width` varchar(255) NOT NULL,
+  `height` varchar(255) NOT NULL,
+  `volume` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `containers`
+--
+
+INSERT INTO `containers` (`id`, `container_type`, `description`, `number`, `serial_number_1`, `serial_number_2`, `location`, `length`, `weight`, `width`, `height`, `volume`) VALUES
+(1, 'Cargo', '22 Wheeler', '23', '89', '787', 'Multan', '230', '440', '34', '239', '449'),
+(3, 'Mini Goods', 'New 10 Wheels', '8900', '7867', '6786', 'Lahore', '789', '786', '555', '432', '755');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `conversations`
 --
 
@@ -458,7 +584,34 @@ CREATE TABLE `conversations` (
 INSERT INTO `conversations` (`conversation_id`, `owner_id`, `modified`, `receiver_id`) VALUES
 (1, 10, '2022-11-29 15:24:49', 1),
 (2, 8, '2022-11-26 20:53:27', 1),
-(3, 7, '2022-11-30 00:53:09', 1);
+(3, 7, '2022-11-30 00:53:09', 1),
+(4, 17, '2022-12-14 14:20:03', 1),
+(5, 18, '2022-12-14 14:39:30', 1),
+(6, 23, '2023-01-11 05:03:12', 1),
+(7, 24, '2023-01-11 08:56:50', 1),
+(8, 2, '2023-01-20 18:25:20', 1),
+(9, 33, '2023-01-20 19:59:26', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drivers`
+--
+
+CREATE TABLE `drivers` (
+  `id` int(11) NOT NULL,
+  `driver_name` varchar(255) NOT NULL,
+  `driver_license_number` varchar(255) NOT NULL,
+  `pro_number` int(11) NOT NULL,
+  `tracking_number` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `drivers`
+--
+
+INSERT INTO `drivers` (`id`, `driver_name`, `driver_license_number`, `pro_number`, `tracking_number`) VALUES
+(1, 'Jawad', '798', 789798, '78900');
 
 -- --------------------------------------------------------
 
@@ -520,7 +673,81 @@ INSERT INTO `helpcenter` (`id`, `user_id`, `message`, `created_date`) VALUES
 (21, 143, 'i need help', '2020-09-30 14:36:21'),
 (22, 156, 'Hello I need help', '2020-10-01 18:38:41'),
 (23, 156, 'Hello', '2020-10-02 18:48:36'),
-(24, 160, 'Hello from me other side', '2020-10-08 18:27:53');
+(24, 160, 'Hello from me other side', '2020-10-08 18:27:53'),
+(25, 7, 'gg', '2023-01-22 09:53:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `json_logs`
+--
+
+CREATE TABLE `json_logs` (
+  `id` int(11) NOT NULL,
+  `body` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `json_logs`
+--
+
+INSERT INTO `json_logs` (`id`, `body`) VALUES
+(1, '{\"consignee_country\":\"1\",\"package_weight\":\"3\",\"item_description\":\"sdsd\",\"width\":\"7,3\",\"shipment_from\":\"as\",\"shipper_phone\":\"2231321\",\"consignee_address\":\"svdvds\",\"pickup_location\":\"ssvd\",\"shipper_country\":\"1\",\"length\":\"4,2\",\"carriage_value\":\"3\",\"quantity\":\"2\",\"request_insurance\":\"yes\",\"delivery_type\":\"Home\",\"request_pickup\":\"yes\",\"shipment_to\":\"vsd\",\"shipment_date\":\"2023-02-04\",\"consignee_name\":\"sdvsdv\",\"shipper_address\":\"sdvsvd\",\"consignee_city\":\"5909\",\"consignee_state\":\"42\",\"package_type\":\"Extra Large Box\",\"shipper_state\":\"42\",\"consignee_phone\":\"2323\",\"shipment_type\":\"1\",\"height\":\"8,6\",\"shipper_name\":\"sasa\",\"shipper_city\":\"5912\",\"track_number\":\"66884421\",\"shipment_status\":0,\"user_id\":10}'),
+(2, '\"INSERT INTO `shipment_orders` (`consignee_country`, `package_weight`, `item_description`, `width`, `shipment_from`, `shipper_phone`, `consignee_address`, `pickup_location`, `shipper_country`, `length`, `carriage_value`, `quantity`, `request_insurance`, `delivery_type`, `request_pickup`, `shipment_to`, `shipment_date`, `consignee_name`, `shipper_address`, `consignee_city`, `consignee_state`, `package_type`, `shipper_state`, `consignee_phone`, `shipment_type`, `height`, `shipper_name`, `shipper_city`, `track_number`, `shipment_status`, `user_id`) VALUES (\' 1\', \' 3\', \' sdsd\', \' 73\', \' as\', \' 2231321\', \' svdvds\', \' ssvd\', \' 1\', \' 42\', \' 3\', \' 2\', \' yes\', \' Home\', \' yes\', \' vsd\', \' 2023-02-04\', \' sdvsdv\', \' sdvsvd\', \' 5909\', \' 42\', \' Extra Large Box\', \' 42\', \' 2323\', \' 1\', \' 86\', \' sasa\', \' 5912\', \'69583499\', 0, 10)\"'),
+(3, '{\"first_name\":\"Jawad\",\"sur_name\":\"Ahmad\",\"email\":\"jawadahmad78692@gmail.com\",\"password\":\"12345678\",\"mobile\":\"03411663111\",\"devicetype\":\"android\",\"device_id\":\"eQGXJPwIQAOuD_VoY9pW6m:APA91bH4A7g2BnZf4f21IJ7OBWud8TRG69Oa4vYN4bR0MIlKwCuFxZ77SgnutCNtztPpj2O-RVYToO-NADH-MT1dti9XbJOp056Uaj-LBioSuKnQPxXLNUHmgocENb2gOJd37xP8oN9S\",\"address\":\"Chowk Shah Abbass\",\"country_id\":\"166\",\"state_id\":\"2728\",\"city_id\":\"31464\",\"answer\":\"2022\"}'),
+(4, '{\"address\":\"Chowk\",\"address1\":\"Shah Abbass\",\"answer\":\"Sir Ali\",\"city_id\":\"31464\",\"country_id\":\"166\",\"device_id\":\"0DF3FABE-4BD3-4964-8CC1-99574D95F9ED\",\"devicetype\":\"ios\",\"email\":\"jawad.cyphersol@gmail.com\",\"first_name\":\"Jawad\",\"mobile\":\"03124555886\",\"password\":\"12345678\",\"secret_qestion_id\":\"3\",\"state_id\":\"2728\",\"sur_name\":\"Ahmad\"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `landing_bills`
+--
+
+CREATE TABLE `landing_bills` (
+  `id` int(11) NOT NULL,
+  `exporter_name` varchar(255) NOT NULL,
+  `exporter_address` varchar(255) NOT NULL,
+  `consigned_to` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `notify_party` varchar(255) NOT NULL,
+  `notify_party_address` varchar(255) NOT NULL,
+  `document_number` varchar(255) NOT NULL,
+  `bl_number` varchar(255) NOT NULL,
+  `forwording_agent` varchar(255) NOT NULL,
+  `agent_address` varchar(255) NOT NULL,
+  `point_of_origin` varchar(255) NOT NULL,
+  `loading_pier` varchar(255) NOT NULL,
+  `domestic_routing` varchar(255) NOT NULL,
+  `type_of_move` varchar(255) NOT NULL,
+  `containarized` varchar(255) DEFAULT NULL,
+  `pre_carriage_by` varchar(255) NOT NULL,
+  `exporting_carrier` varchar(255) NOT NULL,
+  `place_of_receipt` varchar(255) NOT NULL,
+  `foreign_port` varchar(255) NOT NULL,
+  `port_of_loading` varchar(255) NOT NULL,
+  `place_of_delivery` varchar(255) NOT NULL,
+  `marks_and_numbers` varchar(255) NOT NULL,
+  `number_of_package` varchar(255) NOT NULL,
+  `commodities` varchar(255) NOT NULL,
+  `gross_weight` varchar(255) NOT NULL,
+  `measurement` varchar(255) NOT NULL,
+  `commodity_description` varchar(255) NOT NULL,
+  `prepaid` varchar(255) NOT NULL,
+  `collect` varchar(255) NOT NULL,
+  `date_by` varchar(255) NOT NULL,
+  `dated_at` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `landing_bills`
+--
+
+INSERT INTO `landing_bills` (`id`, `exporter_name`, `exporter_address`, `consigned_to`, `address`, `notify_party`, `notify_party_address`, `document_number`, `bl_number`, `forwording_agent`, `agent_address`, `point_of_origin`, `loading_pier`, `domestic_routing`, `type_of_move`, `containarized`, `pre_carriage_by`, `exporting_carrier`, `place_of_receipt`, `foreign_port`, `port_of_loading`, `place_of_delivery`, `marks_and_numbers`, `number_of_package`, `commodities`, `gross_weight`, `measurement`, `commodity_description`, `prepaid`, `collect`, `date_by`, `dated_at`, `date`) VALUES
+(3, 'kuhy', 'uiy', 'iuy', 'uiy', 'iuyui', 'yiu', 'y', 'uiy', 'iuy', 'iuy', 'iuy', 'iuy', 'ui', 'yiu', 'no', 'hkj', 'h', 'jkh', 'kjh', 'kjh', 'kjh', 'kj', 'hk', '[\"jh\",\"jkh\",\"jkh\",\"jkh\"]', '[\"jh\",\"kj\",\"hjk\",\"hj\"]', '[\"kh\",\"jh\",\"jkh\",\"jkh\"]', 'jk', 'hjk', 'hj', 'kh', 'kjh', '2021-02-02'),
+(7, 'kuhy', 'uiy', 'iuy', 'uiy', 'iuyui', 'yiu', 'y', 'uiy', 'Shaheer', 'iuy', 'iuy', 'iuy', 'ui', 'yiu', 'no', 'hkj', 'h', 'jkh', 'kjh', 'kjh', 'kjh', 'kj', 'hk', '[\"<div style=\"]', 'null', 'null', 'jk', 'hjk', 'hj', 'kh', 'kjh', '2021-02-02'),
+(4, 'igug', 'g', 'hjg', 'hj', 'gjh', 'gj', 'hg', 'hjg', 'jh', 'gjh', 'gj', 'hg', 'jhg', 'jhg', '', 'hj', 'g', 'hjg', 'hj', 'ghj', 'gh', 'jg', 'jhg', '[\"jhg\",\"jh\",\"ghj\",\"ghjg\"]', '[\"jhgjhg\",\"ghj\",\"ghj\",\"g\"]', '[\"hjg\",\"hj\",\"gjh\",\"g\"]', 'jhg', 'hg', 'jh', 'gj', 'hg', '2022-01-01'),
+(5, 'hyu', 'uy', 'iu', 'y', 'iuy', 'iuy', 'iuy', 'iuy', 'iu', 'yui', 'yu', 'iy', 'iuy', 'uiy', '', 'y', 'iuy', 'uy', 'iu', 'yiu', 'y', 'iuy', 'iuy', '[\"iuy\",\"i\",\"yiu\",\"y\"]', '[\"iuy\",\"uy\",\"iuy\",\"iu\"]', '[\"yi\",\"yi\",\"uy\",\"iuy\"]', 'iuy', 'iuy', 'iu', 'yiu', 'yi', '2021-11-30');
 
 -- --------------------------------------------------------
 
@@ -591,7 +818,8 @@ INSERT INTO `messages` (`message_id`, `conversation_id`, `user_id`, `body`, `dat
 (31, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
 (32, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
 (33, 3, 7, 'hu', '2022-11-29 10:51:39', 0, 'text', 0, 0),
-(34, 3, 7, 'hi', '2022-11-29 19:53:09', 0, 'text', 0, 0);
+(34, 3, 7, 'hi', '2022-11-29 19:53:09', 0, 'text', 0, 0),
+(35, 7, 24, 'Hello', '2023-01-11 03:56:50', 0, 'text', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -743,7 +971,9 @@ INSERT INTO `order_card_detail` (`id`, `txn_id`, `address_zip`, `address_zip_che
 (71, 'ch_3M3LYHAj5MXORqkL0RgVMErw', '0', '0', 'Visa', 'US', '2', '2042', '', 'credit', '4242', 'orderNo:636fba6ce4a9d', 'usd', '8.16', 'charge', 1, '2022-11-12 15:23:26', '', '', '', '', '', '', '', 10),
 (72, 'ch_3M4jDeAj5MXORqkL0qnhfm12', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:6374c0c699398', 'usd', '14.5', 'charge', 1, '2022-11-16 10:51:51', '', '', '', '', '', '', '', 12),
 (73, 'ch_3M4jDoAj5MXORqkL02FRNmjl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:6374c0d0a62b0', 'usd', '200', 'charge', 1, '2022-11-16 10:52:01', '', '', '', '', '', '', '', 12),
-(74, 'ch_3M8NfpAj5MXORqkL1Jn6Dtyl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63820921c16d9', 'usd', '300', 'charge', 1, '2022-11-26 12:40:03', '', '', '', '', '', '', '', 25);
+(74, 'ch_3M8NfpAj5MXORqkL1Jn6Dtyl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63820921c16d9', 'usd', '300', 'charge', 1, '2022-11-26 12:40:03', '', '', '', '', '', '', '', 25),
+(75, 'ch_3MP07oAj5MXORqkL0vbx4rbq', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63be7a008a26e', 'usd', '2890', 'charge', 1, '2023-01-11 08:57:37', '', '', '', '', '', '', '', 35),
+(76, 'ch_3MP0E3Aj5MXORqkL1rqOGZt4', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63be7b839500b', 'usd', '510', 'charge', 1, '2023-01-11 09:04:04', '', '', '', '', '', '', '', 34);
 
 -- --------------------------------------------------------
 
@@ -790,6 +1020,37 @@ INSERT INTO `post_images` (`id`, `file`, `post_id`) VALUES
 (26, 'd1065d15cc13e07fd7648f3c4782f22b.jpg', 15),
 (27, 'dba335508dd5d42d081a2fc2f5ff0056.jpg', 16),
 (28, '61ac16a3299e50a5b6c334bdcfacc2b8.jpg', 17);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchase_orders`
+--
+
+CREATE TABLE `purchase_orders` (
+  `id` int(11) NOT NULL,
+  `seller_name` varchar(255) NOT NULL,
+  `contact_address` varchar(255) NOT NULL,
+  `phone_no` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `payment_terms` varchar(255) NOT NULL,
+  `shop_via` varchar(255) NOT NULL,
+  `receiver_name` varchar(255) NOT NULL,
+  `receiver_address` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `reference_number` varchar(255) NOT NULL,
+  `part_number` varchar(255) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `additional_information` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `purchase_orders`
+--
+
+INSERT INTO `purchase_orders` (`id`, `seller_name`, `contact_address`, `phone_no`, `email`, `payment_terms`, `shop_via`, `receiver_name`, `receiver_address`, `date`, `reference_number`, `part_number`, `quantity`, `description`, `additional_information`) VALUES
+(2, 'Haider', 'Mumtazabad Multan', '03087508587', 'haiderabbass@gmail.com', 'Credit Card', 'Main Shop', 'Asad ', 'Kabir wala', '2023-01-01', '789', '9000', '7', 'Partially damage', 'Nothing special	      		      	');
 
 -- --------------------------------------------------------
 
@@ -896,7 +1157,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `description`, `image`, `banner`, `phone`, `status`, `address`, `terms`, `email`, `asocial_links`) VALUES
-(1, '<p>Sed Ut Perspiciatis Unde Omnis Iste Natus Error Sit Voluptatem.</p>\n\n<p>7860 North Park Place<br />\nSan Francisco, CA 94120</p>\n\n<p><strong>Email:</strong>&nbsp;Support@skillsquared</p>\n\n<p><strong>Call:</strong>&nbsp;<a href=\"tel:+15555555555\">555-555-1234</a></p>', '2933203954178.png', '5068095178430.jpg', '01 123 456 7895', '1', '#1002 Sector 49 new york', '<p>Hello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHell</p>\n\n<p>o this is test message</p>\n', 'info@safelify.com', '{\"fb\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"tw\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"go\":\"https:\\/\\/www.google.com\\/emjayglobal\",\"li\":\"https:\\/\\/www.linkedIn.com\\/emjayglobal\",\"yo\":\"https:\\/\\/www.youtube.com\\/emjayglobal\"}');
+(1, '<p>Sed Ut Perspiciatis Unde Omnis Iste Natus Error Sit Voluptatem.</p>\n\n<p>7860 North Park Place<br />\nSan Francisco, CA 94120</p>\n\n<p><strong>Email:</strong>&nbsp;Support@skillsquared</p>\n\n<p><strong>Call:</strong>&nbsp;<a href=\"tel:+15555555555\">555-555-1234</a></p>', '3467389993150.jpg', '5068095178430.jpg', '01 123 456 7895', '1', '#1002 Sector 49 new york', '<p>Hello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHell</p>\n\n<p>o this is test message</p>\n', 'info@emjayglobal.com', '{\"fb\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"tw\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"go\":\"https:\\/\\/www.google.com\\/emjayglobal\",\"li\":\"https:\\/\\/www.linkedIn.com\\/emjayglobal\",\"yo\":\"https:\\/\\/www.youtube.com\\/emjayglobal\"}');
 
 -- --------------------------------------------------------
 
@@ -910,6 +1171,7 @@ CREATE TABLE `shipment_orders` (
   `shipper_name` varchar(255) NOT NULL,
   `shipper_phone` varchar(255) NOT NULL,
   `shipper_address` varchar(255) NOT NULL,
+  `shipper_country` int(11) NOT NULL DEFAULT '160',
   `shipper_state` varchar(255) NOT NULL,
   `shipper_city` varchar(255) NOT NULL,
   `request_pickup` varchar(255) NOT NULL DEFAULT 'No',
@@ -944,31 +1206,69 @@ CREATE TABLE `shipment_orders` (
 -- Dumping data for table `shipment_orders`
 --
 
-INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `expected_delivery_date`, `track_number`, `user_id`, `shipment_status`) VALUES
-(2, 4, 'waseem', '3417090031', 'Hussain town Multan\r\ntown', '2647', 'Select City', 'yes', 'nishter college', 'yes', 'Home', 'mr ben', 'jsksjds', '03417090031', '<p>skjsdkj</p>\r\n', '1', '42', '5909', '2', '3', '3', '3', 'Extra Large Box', '1', '1', NULL, 'Lahore', 'Lahore', '2022-10-29', NULL, 0, NULL, 0),
-(3, 1, 'waseem', '341709003', 'xyz', '2648', '48510', 'yes', 'xys', 'yes', 'Home', 'mr ben', 'Hussain town Multan\r\ntown', '3417090031', '<p>hellof</p>\r\n', '17', '327', '7255', '2', '2', '2', '2', 'Extra Large Box', '1', '1', NULL, 'liaqatpur', 'liaqatpur', '2022-10-29', NULL, 40960587, NULL, 0),
-(4, 1, 'Wajid', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 61210695, 7, 0),
-(5, 4, 'Seyaam', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 40080218, 7, 0),
-(6, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 97399963, 10, 0),
-(7, 4, 'Jawad khan', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 75713930, 10, 0),
-(8, 4, 'Jawad days', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 73769471, 10, 0),
-(9, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 95889687, 7, 0),
-(10, 4, 'wajid ali', '03278178979', 'nishter road multan', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14943, 7, 0),
-(11, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 15250955, 10, 0),
-(12, 3, 'Seyaam kaka', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 12830078, 7, 0),
-(13, 2, 'Ismail khan niazi', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14225224, 7, 0),
-(14, 1, 'Naveed ', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 43205899, 7, 0),
-(15, 1, 'haha', '+234676466', 'gagag', 'Bashshar', 'Bani Wanif', 'yes', 'gahaha', 'yes', 'Home', 'bahah', 'bahsj', '+2346767', 'hahah', 'Andorra', 'Canillo', 'Canillo', '2', '6494', '4', '4', '', '1', '1', NULL, 'gaha', 'haha', '2022-11-17', NULL, 46335237, 7, 0),
-(16, 1, 'seeeeema', '15', 'XXX', 'Pind Pondri', 'Chak 42', 'yes', 'chowk jalebi wala', 'yes', 'Home', 'jajajajaj', 'm', '1', 'good', 'p', '42', '2', '1', '1', '1', '1', 'Extra Large Box', '56', '7', NULL, 'multan', 'lahore', '2022-11-08', NULL, 89099449, 7, 0),
-(17, 1, 'wajid', '+23431313', '1jaj', 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 21141464, 7, 0),
-(18, 1, 'wajid', '+23431313', '1jaj', 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 55004198, 7, 0),
-(19, 1, 'hwwh', '+23466464', 'bbsh', 'Baglan', 'Baghlan', 'yes', 'bb', 'yes', 'Home', 'bhw', 'bshh', '+2349464', 'babs', 'Algeria', 'Adrar', 'Adrar', '2', '9494', '4', '4', '', '123', '1', NULL, 'hhshs', 'hshs', '2022-11-17', NULL, 93712401, 7, 0),
-(20, 1, 'Abdul Wajid', '+2343331245671', 'Lahore Sector Z1', 'New York', 'Brookhaven', 'yes', 'Same as above', 'yes', 'Home', 'Bilal Razaq Kashmiri', 'Township', '+2343481072184', 'This packet has large as', 'Afghanistan', 'Baglan', 'Baghlan', '3', '6', '1', '6', '', '65', '12', NULL, 'Lahore', 'Jaranwala', '2022-11-18', NULL, 91466675, 7, 0),
-(21, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 19385476, 7, 0),
-(22, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 69094402, 7, 0),
-(23, 1, 'seema', '+234123', 'xxxx', 'Farah', 'Farah', 'yes', 'gagay', 'yes', 'Home', 'gg', 'hh', '+23499', 'haha', 'Afghanistan', 'Badgis', 'Bala Morghab', '2', '47', '4', '4', '', '64', '4', NULL, 'haha', 'nanaj', '2022-11-19', NULL, 1132491, 7, 0),
-(24, 4, 'gg', '+23499', 'vv', 'Manu\'a', 'Ofu', 'yes', 'hb', 'yes', 'Home', 'bb', 'b', '+23456', 'h', 'Algeria', 'Batnah', '\'Ayn Tutah', '1', '4', '4', '4', 'Letter', '11', '22', NULL, 'ao', 'a', '2022-11-22', NULL, 9801762, 7, 0),
-(25, 1, 'seyam', '+923417090031', 'new shah shams colony', 'Punjab', 'Multan', 'yes', 'new shah shams', 'yes', 'Home', 'Mr ben', 'Nigeria', '+234319739494', 'one pair of shoes', 'Nigeria', 'Abia', 'Amaigbo', '1', '2', '1', '2', '', '1', '45', NULL, 'Pakistan', 'nigeria', '2022-11-22', NULL, 64342, 16, 0);
+INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_country`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `expected_delivery_date`, `track_number`, `user_id`, `shipment_status`) VALUES
+(2, 4, 'waseem', '3417090031', 'Hussain town Multan\r\ntown', 160, '2647', 'Select City', 'yes', 'nishter college', 'yes', 'Home', 'mr ben', 'jsksjds', '03417090031', '<p>skjsdkj</p>\r\n', '1', '42', '5909', '2', '3', '3', '3', 'Extra Large Box', '1', '1', NULL, 'Lahore', 'Lahore', '2022-10-29', NULL, 0, NULL, 2),
+(3, 1, 'waseem', '341709003', 'xyz', 160, '2648', '48510', 'yes', 'xys', 'yes', 'Home', 'mr ben', 'Hussain town Multan\r\ntown', '3417090031', '<p>hellof</p>\r\n', '17', '327', '7255', '2', '2', '2', '2', 'Extra Large Box', '1', '1', NULL, 'liaqatpur', 'liaqatpur', '2022-10-29', NULL, 40960587, NULL, 0),
+(4, 1, 'Wajid', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 61210695, 7, 1),
+(5, 4, 'Seyaam', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 40080218, 7, 0),
+(6, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 97399963, 10, 0),
+(7, 4, 'Jawad khan', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 75713930, 10, 0),
+(8, 4, 'Jawad days', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 73769471, 10, 0),
+(9, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 95889687, 7, 0),
+(10, 4, 'wajid ali', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14943, 7, 0),
+(13, 2, 'Ismail khan niazi', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14225224, 7, 1),
+(14, 1, 'Naveed ', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 43205899, 7, 0),
+(15, 1, 'haha', '+234676466', 'gagag', 160, 'Bashshar', 'Bani Wanif', 'yes', 'gahaha', 'yes', 'Home', 'bahah', 'bahsj', '+2346767', 'hahah', 'Andorra', 'Canillo', 'Canillo', '2', '6494', '4', '4', '', '1', '1', NULL, 'gaha', 'haha', '2022-11-17', NULL, 46335237, 7, 0),
+(16, 1, 'seeeeema', '15', 'XXX', 160, 'Pind Pondri', 'Chak 42', 'yes', 'chowk jalebi wala', 'yes', 'Home', 'jajajajaj', 'm', '1', 'good', 'p', '42', '2', '1', '1', '1', '1', 'Extra Large Box', '56', '7', NULL, 'multan', 'lahore', '2022-11-08', NULL, 89099449, 7, 0),
+(17, 1, 'wajid', '+23431313', '1jaj', 160, 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 21141464, 7, 0),
+(18, 1, 'wajid', '+23431313', '1jaj', 160, 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 55004198, 7, 0),
+(19, 1, 'hwwh', '+23466464', 'bbsh', 160, 'Baglan', 'Baghlan', 'yes', 'bb', 'yes', 'Home', 'bhw', 'bshh', '+2349464', 'babs', 'Algeria', 'Adrar', 'Adrar', '2', '9494', '4', '4', '', '123', '1', NULL, 'hhshs', 'hshs', '2022-11-17', NULL, 93712401, 7, 0),
+(20, 1, 'Abdul Wajid', '+2343331245671', 'Lahore Sector Z1', 160, 'New York', 'Brookhaven', 'yes', 'Same as above', 'yes', 'Home', 'Bilal Razaq Kashmiri', 'Township', '+2343481072184', 'This packet has large as', 'Afghanistan', 'Baglan', 'Baghlan', '3', '6', '1', '6', '', '65', '12', NULL, 'Lahore', 'Jaranwala', '2022-11-18', NULL, 91466675, 7, 0),
+(21, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 19385476, 7, 0),
+(22, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 69094402, 7, 0),
+(23, 1, 'seema', '+234123', 'xxxx', 160, 'Farah', 'Farah', 'yes', 'gagay', 'yes', 'Home', 'gg', 'hh', '+23499', 'haha', 'Afghanistan', 'Badgis', 'Bala Morghab', '2', '47', '4', '4', '', '64', '4', NULL, 'haha', 'nanaj', '2022-11-19', NULL, 1132491, 7, 0),
+(24, 4, 'gg', '+23499', 'vv', 160, 'Manu\'a', 'Ofu', 'yes', 'hb', 'yes', 'Home', 'bb', 'b', '+23456', 'h', 'Algeria', 'Batnah', '\'Ayn Tutah', '1', '4', '4', '4', 'Letter', '11', '22', NULL, 'ao', 'a', '2022-11-22', NULL, 9801762, 7, 0),
+(25, 1, 'seyam', '+923417090031', 'new shah shams colony', 160, 'Punjab', 'Multan', 'yes', 'new shah shams', 'yes', 'Home', 'Mr ben', 'Nigeria', '+234319739494', 'one pair of shoes', 'Nigeria', 'Abia', 'Amaigbo', '1', '2', '1', '2', '', '1', '45', NULL, 'Pakistan', 'nigeria', '2022-11-22', NULL, 64342, 16, 0),
+(26, 1, 'wasen', '+2349595', 'lahore', 160, 'Punjab', 'Abdul Hakim', 'yes', 'lahor', 'no', 'Home', 'Ebenzir', 'lagos', '+23434364', 'xjej', 'Nigeria', 'Abia', 'Aba', '2', '1299', '9', '8', '', '25', '2080', NULL, 'multan', 'anna', '2022-12-15', NULL, 79187420, 19, 0),
+(27, 1, 'ben', '+2344438548762', 'Huntington beach', 160, 'Maryland', 'Baltimore', 'yes', 'randallstown', 'no', 'Home', 'waseem', 'Pakistan', '+2344439858822', 'dhghjkk', 'Pakistan', 'Punjab', 'Alipur', '2', '2', '2', '2', '', '25', '500', NULL, 'Baltimore', 'Lagos', '2022-12-17', NULL, 53456434, 18, 0),
+(28, 1, 'ben', '+2344438548762', 'Huntington beach', 160, 'Maryland', 'Baltimore', 'yes', 'randallstown', 'no', 'Home', 'waseem', 'Pakistan', '+2344439858822', 'dhghjkk', 'Pakistan', 'Punjab', 'Alipur', '2', '2', '2', '2', '', '25', '500', NULL, 'Baltimore', 'Lagos', '2022-12-17', NULL, 65315053, 18, 0),
+(29, 3, 'waseem', '+923417090031', 'Lahore multan', 160, 'Punjab', 'Abdul Hakim', 'yes', 'Nishter road', 'yes', 'Home', 'adnan', '566 b Street2', '+92341079649', 'this is really important durex item', 'Pakistan', 'Punjab', 'Attock', '1', '19', '54', '21', '', '2', '25', NULL, 'multan', 'Lahore', '2023-1-10', NULL, 54457542, 19, 0),
+(38, 3, 'Junaid', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 71921314, 10, 0),
+(39, 2, 'Junaid', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 31639814, 10, 0),
+(41, 2, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 7129045, 10, 0),
+(42, 2, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 60272988, 30, 3),
+(43, 3, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 53099917, 30, 3),
+(44, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 32565635, 30, 1),
+(45, 4, 'Yousaf Aheer', '+923215548866', 'Chah Jammu wala', 160, 'Punjab', 'Multan', 'yes', 'Multan', 'no', 'Home', 'Hashim', 'Wilayatabad', '+923215666986', 'New', 'Pakistan', 'Punjab', 'Multan', '1', '', '', '', 'Letter', '858', '88588', NULL, 'Chah Jammu wala', 'wilayatabad', '2023-1-12', NULL, 23148991, 30, 0),
+(46, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 99377740, 30, 0),
+(47, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 99377740, 30, 0),
+(48, 4, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 39359183, 30, 0),
+(49, 4, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 39359183, 30, 0),
+(50, 4, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 73696506, 30, 0),
+(51, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 75596538, 19, 0),
+(52, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 70789127, 19, 0),
+(53, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 95651491, 19, 0),
+(54, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 16822376, 19, 0),
+(55, 4, 'Yousaf Aheer', '+9269888', 'jhb', 160, 'Punjab', 'Multan', 'no', 'gh', 'no', 'Home', 'nbv', 'nbhj', '+9369655', 'bjju', 'Afghanistan', 'Kabul', 'Kabul', '1', '', '', '', 'Letter', '66', '9369', NULL, 'bb', 'hhh', '2023-1-13', NULL, 44757295, 30, 0),
+(56, 4, 'Yousaf Aheer', '+9269888', 'jhb', 160, 'Punjab', 'Multan', 'no', 'gh', 'no', 'Home', 'nbv', 'nbhj', '+9369655', 'bjju', 'Afghanistan', 'Kabul', 'Kabul', '1', '', '', '', 'Letter', '66', '9369', NULL, 'bb', 'hhh', '2023-1-13', NULL, 44757295, 30, 0),
+(57, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 80013249, 31, 0),
+(58, 1, 'M seyaam ', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 62248151, 10, 0),
+(59, 0, 'wa', 'shipper_phone', 'shipper_address', 160, 'shipper_state', 'shipper_city', 'No', 'pickup_location', 'No', '', 'consignee_name', 'consignee_address', 'consignee_phone', 'item_description', 'consignee_country', 'consignee_state', 'consignee_city', 'quantity', '', '', '', '', '', '', NULL, 'shipment_from', 'shipment_to', '', NULL, 72112681, 7, 0),
+(60, 0, 'wa', 'shipper_phone', 'shipper_address', 160, 'shipper_state', 'shipper_city', 'No', 'pickup_location', 'No', '', 'consignee_name', 'consignee_address', 'consignee_phone', 'item_description', 'consignee_country', 'consignee_state', 'consignee_city', 'quantity', '', '', '', '', '', '', NULL, 'shipment_from', 'shipment_to', '', NULL, 57285666, 7, 0),
+(61, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 63102944, 31, 0),
+(62, 1, 'waseem afzal afzal', '+23494694', 'new shja', 160, 'Baluchistan', 'Dera Allah Yar', 'yes', '123 house new shah shams colony', 'yes', 'Home', 'Mr Ben', 'Lagos', '+23464673', 'no description', 'Nigeria', 'Abia', 'Aba', '2', '\"82\",\"82\"', '\"88\",\"82\"', '\"9\",\"920\"', '', '89', '99', NULL, 'multan', 'lagos', '2023-1-17', NULL, 45682030, 2, 0),
+(63, 1, 'waseem afzal afzal', '+234555', 'multan', 160, 'Badakhshan', 'Khandud', 'yes', 'new shah shams colony', 'yes', 'Home', 'naveed', 'na kana sahb', '+2346465', 'tables', 'Afghanistan', 'Gawr', 'Shahrak', '2', '\"6\",\"77\"', '\"6\",\"65\"', '\"7\",\"1\"', 'Extra Large Box', '77', '899', NULL, 'Lahore', 'kndar', '2023-1-19', NULL, 90245206, 2, 0),
+(64, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 43335552, 10, 0),
+(65, 1, ' sasa', ' 2231321', ' sdvsvd', 1, ' 42', ' 5912', ' yes', ' ssvd', ' yes', '', ' sdvsdv', ' svdvds', ' 2323', ' sdsd', ' 1', ' 42', ' 5909', ' 2', ' 42', ' 73', ' 86', '', ' 3', ' 3', NULL, ' as', ' vsd', ' 2023-02-04', NULL, 69583499, 10, 0),
+(66, 4, 'wajid ali', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '', '', NULL, '', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 60108495, 10, 0),
+(67, 4, 'wajid ali', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '', '', NULL, '', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 41862214, 10, 0),
+(68, 4, 'dADA2', '211234', 'DSVSD', 1, '45', '5922', 'yes', 'ASVVSD', 'yes', 'Home', 'SVDVSD', 'VSDA', '32RR32', 'VSDSVD', '3', '118', '6131', '1', '', '', '', NULL, '', '', NULL, 'CAS', 'CSA', '', NULL, 28622916, 10, 0),
+(69, 4, 'dADA2', '211234', 'DSVSD', 1, '45', '5922', 'yes', 'ASVVSD', 'yes', 'Home', 'SVDVSD', 'VSDA', '32RR32', 'VSDSVD', '3', '118', '6131', '1', '', '', '', NULL, '', '', NULL, 'CAS', 'CSA', '', NULL, 70449913, 10, 0),
+(70, 4, 'qfewf', '423', 'sdvvsd', 1, '49', '5938', 'yes', 'sdvvds', 'yes', 'Home', 'svdsdv', 'svdvd', '3r32', 'svdvds', '2', '76', '6023', '1', '', '', '', NULL, '', '', NULL, 'sdvvsd', 'svdvd', '', NULL, 48764156, 10, 0),
+(71, 1, 'Adnam', '03421996688', 'Gulgasht', 166, '2728', '31464', 'no', 'Vihari Chowk', 'no', 'Home', 'Shaheer', 'Sui Gas chiwk', '03255584155', 'New ', '166', '2728', '31464', '2', '2,5', '2,5', '2,5', 'Extra Large Box', '25', '5', NULL, 'Multan', 'Multan', '2023-03-22', NULL, 68959004, 10, 0),
+(72, 4, 'Waseem', '03412886636', 'Chowk', 166, '2728', '31464', 'no', 'Lahore Road', 'no', 'Home', 'wajahat', 'Mianwali', '03155663355', 'ghju', '166', '2728', '31464', '2', '', '', '', NULL, '', '', NULL, 'Multan', 'Mianwali', '', NULL, 39073883, 10, 0),
+(73, 3, 'jafir', '03422556325', 'Bosan Road ', 166, '2728', '31464', 'no', 'Sher Shah', 'no', 'Home', 'Gul', 'Gulgasht', '03215558835', 'hhh', '166', '2728', '31464', '2', '2,7', '8,2', '5,7', 'Extra Large Box', '258', '25', NULL, 'Lahore ', 'Multan', '2023-03-25', NULL, 96284268, 10, 0),
+(74, 3, 'Ghulam Ali', '03125566688', 'gulgasht', 166, '2728', '31464', 'no', 'bosan road', 'no', 'Home', 'Jaffir', 'Layyah', '03125866336', 'yugh', '166', '2728', '31444', '1', '2', '5', '8', 'Large Box', '588', '55', NULL, 'Multan', 'Layyah', '2023-03-23', NULL, 47254554, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -1009,7 +1309,18 @@ INSERT INTO `shipment_orders_files` (`id`, `file`, `order_id`) VALUES
 (20, 'ccf8b54a85a6c5aeb93e1d26c3c37305.png', 14),
 (21, '323738923378.png', 21),
 (22, '323738923378.png', 22),
-(23, '936173294100.jpg', 22);
+(23, '936173294100.jpg', 22),
+(24, '323738923378.png', 3),
+(25, '936173294100.jpg', 3),
+(26, '323738923378.png', 2),
+(27, '936173294100.jpg', 2),
+(28, '1159614608568.jpg', 68),
+(29, '1159614608568.jpg', 69),
+(30, '479262729946.jpg', 70),
+(31, '913940423770.jpg', 71),
+(32, '5532275211398.jpg', 72),
+(33, '4053202613328.jpg', 73),
+(34, '1214120270076.jpg', 74);
 
 -- --------------------------------------------------------
 
@@ -1036,7 +1347,24 @@ INSERT INTO `shipment_orders_oceanfreight` (`id`, `company_preference`, `order_i
 (7, 'uyui', 7, '67', 789798, 'hjkhgj'),
 (8, 'uyui', 8, '67', 789798, 'hjkhgj'),
 (9, 'uyui', 10, '67', 789798, 'hjkhgj'),
-(10, '\"22\"', 24, '\"11\"', 0, '\"');
+(10, '\"22\"', 24, '\"11\"', 0, '\"'),
+(11, '\"\"', 30, '\"\"', 0, '\"'),
+(12, '\"No\"', 31, '\"MLK -7896\"', 0, '\"New Vehicle \"'),
+(14, '\"No\"', 32, '\"MLK -7896\"', 0, '\"New Vehicle \"'),
+(17, '\"No\"', 33, '\"MLK -7896\"', 0, '\"New Vehicle \"'),
+(19, '\"\"', 34, '\"\"', 0, '\"\"'),
+(25, '\"No\"', 35, '\"MLF-6677\"', 0, '\"New\"'),
+(27, '\"\"', 36, '\"\"', 0, '\"\"'),
+(28, '\"No\"', 37, '\"MLF-7874\"', 0, '\"New\"'),
+(29, '\"No\"', 40, '\"MLK-6780\"', 0, '\"New\"'),
+(30, '\"No\"', 45, '\"MLK-4578\"', 0, '\"New\"'),
+(31, '\"bh\"', 26, '\"nnjh\"', 0, '\"bbj\"'),
+(32, 'uyui', 66, '67', 789798, 'hjkhgj'),
+(33, 'uyui', 67, '67', 789798, 'hjkhgj'),
+(34, 'Z', 68, '2', 2, 'S'),
+(35, 'Z', 69, '2', 2, 'S'),
+(36, 'd', 70, '3', 3, 's'),
+(37, 'h', 72, '7', 5, 'b');
 
 -- --------------------------------------------------------
 
@@ -1058,9 +1386,7 @@ INSERT INTO `shipment_status` (`id`, `status_title`, `status_id`) VALUES
 (1, 'Received', 0),
 (2, 'Processing', 1),
 (3, 'Shipped', 2),
-(4, 'Processing', 3),
-(5, 'Ready for pickup', 4),
-(6, 'Delayed', 5);
+(4, 'Cancelled', 3);
 
 -- --------------------------------------------------------
 
@@ -1082,6 +1408,27 @@ INSERT INTO `shipment_types` (`id`, `type`) VALUES
 (2, 'Ocean Freight'),
 (3, 'Air Freight'),
 (4, 'Vehicle Shipment');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suppliers`
+--
+
+CREATE TABLE `suppliers` (
+  `id` int(11) NOT NULL,
+  `supplier_name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `invoice_number` varchar(255) NOT NULL,
+  `purchase_order_number` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `supplier_name`, `address`, `invoice_number`, `purchase_order_number`) VALUES
+(1, 'Jawad Ahmad', 'Chowk Shah Abbass', '8098', '7990');
 
 -- --------------------------------------------------------
 
@@ -54157,7 +54504,7 @@ INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
-  `user_type` int(11) NOT NULL COMMENT '1=super admin,2=admin,3=Pro user,4=Normal user',
+  `user_type` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -54202,23 +54549,31 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `city_id`, `state_id`, `country_id`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`) VALUES
-(1, 1, 'admin', '', 'admin@admin.com', NULL, 'Chowk Shah Abbass', '30644', 2639, '159', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1670390281, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, ''),
-(2, 3, 'waseem afzal', 'waseemafzal31@gmail.com', 'waf@gmail.com', '0232434343', 'multan', '30644', 2639, '159', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '', NULL, NULL, 1667033021, 1668008022, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '2121254', 'afzal', NULL, 0, ''),
+(1, 1, 'admin', '', 'admin@admin.com', NULL, 'Chowk Shah Abbass', '30644', 2639, '159', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1678901040, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, ''),
+(2, 3, 'waseem afzal', 'waseemafzal31@gmail.com', 'waseemafzal31@gmail.com', '0232434343', 'multan', '30644', 2639, '159', '', 'noimg.png', 'd-fcAWldQGG7zjY6cCPMj1:APA91bFlR6r3kTyhT90itlolCNvT4cmFowjMnU-xJ57QsSZwu32GIRrb8sAtcCK3QxGxrnvw1CT4lcQ48skDx4jH5FW4xsWWyxNk77FNgsifhHOFNuN8tQbTS4rxdSuZm09IrZrNYZDG', 'android', '', '', 0, 1, '::1', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 1667033021, 1675403298, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '2121254', 'afzal', NULL, 0, ''),
 (3, 3, 'ads', 'adas@gmail.com', 'adas@gmail.com', 'ad', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$NH0ZJBr.NTAYX8sKujc99.Uyf093WwwcipmC2Sk.4jZ.Igmyxryd2', NULL, NULL, 1667589094, NULL, '', 0, '', '', '', '', 0, '636563e6ac9bd', '636563e6ac9be', 0, '', 'asd', NULL, 0, ''),
-(4, 3, '', '', 'adas@gmail.com', NULL, '', '30644', 2639, '159', '', 'noimg.png', '23131', 'android', '23', 'adasda', 0, 1, '', '12323123idk', NULL, NULL, 0, NULL, '', 0, '', '', '', '', 0, '', '6365641fbc91c', 0, '', NULL, NULL, 0, ''),
 (5, 3, 'ads', 'adadsadaas@gmail.com', 'adadsadaas@gmail.com', 'ad', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$2ZM2WV1xHTnMF7bx5ea5zO83b9tLjnDT3soI5dWs7JTHr3yeiMI4O', NULL, NULL, 1667689122, NULL, '', 0, '', '', '', '', 0, '6366eaa2269aa', '6366eaa2269ac', 0, '', 'asd', NULL, 0, ''),
 (6, 3, 'w', 'aaa@gamil.com', 'aaa@gamil.com', '94', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$645aYNTzzz4p/hkJSmr3M.ZUSkNuoyqRrMDtz8fdXRTRRyWq1u79m', NULL, NULL, 1667692015, NULL, '', 0, '', '', '', '', 0, '6366f5efbfa29', '6366f5efbfa2a', 0, '', 'a', NULL, 0, ''),
-(7, 3, 'Abdul', 'devwajid@gmail.com', 'devwajid@gmail.com', '155', 'Lahore townshipppppp', '30644', 2639, '159', '', 'RIFF[WEBPVP8 [*>FI%&&,glֿ	zOqfBZ7Mp\\<qg[aeO+Y]#T+[_^o=yjGzfwp3_~NA)<cS9BTv|;;RRcYxjx{Y>Oƿ)_b{\"SgĩPFELX?xC:ۊEUy<^@}1 4\n,eҫ@\r] 	*W%6\\MpvDn.=c8\"l/}\"rp@&Јvma/Df,$a~\\fqӷmL{fӝ`;\n:5k7P%f:r<G	;\"&bޭ!a@cX\'oGe,6G;Le4Tz|{LSKuȯWlF_M);}1D5˔=pJH,hjMYړTvcQg5:miz0;LNHTߔ	T)b%Cm`qiTw-H>K57$xgr1@4gBbEPҦgJ.v\\m=BC|s$jX01$GU=1λ?@L.GROAq`W##\\}	Q\n%AsDh+\r+JVtAM\"ݏ\rR\"RO,,S\\#/dem<vrsd3fGB/NK Ġ_#di	{io$[/?|xSZ!1s1ȒŒl\nf۝a(g6KzNdX=+K,ЛwAU`6$h\nsԇK?xm~dh\rayBb׊q#ՠcVIű<OPb(10<	\nׅ}%gQLRKR5fɖ.	޶oE>cWAIV)\rw_GJQ\r%w@St2îZnp~3]c56tȪM+r', 'fEXI5hh2Ssy_bClObQLvbC:APA91bE96312IfkuYbNwR6Fy5X8Vxb8ffE_RsNEOM8U_aPxpC90PlgD9xGrWW8ea1d9TbkLt5IPIlOQFDUONPSbteIjaYtp1MtolkForspV8JC1eNVawdtmI3Xn61B1ZZS13mRadQ5pF', 'android', '', '', 0, 1, '103.181.132.9', '$2y$08$3PvAmSPuKTW2gkaUfp9SWOaqqzcYVTRoknjOLqaFKPZSXmF0hrFHa', NULL, NULL, 1667984295, 1669154381, '', 0, '', '', '', '', 0, '636b6ba78817a', '636b6ba78817c', 0, '15', 'wajid', NULL, 0, ''),
+(7, 3, 'Abdul', 'devwajid@gmail.com', 'devwajid@gmail.com', '155', 'Lahore townshipppppp', '30644', 2639, '159', '', 'b12da25f6a0aeb4711d4a29c9448da2e.jpg', 'efnfJj84S7WhL1pniQkPBb:APA91bECDGHv0WFGvjiu1IlHPp8YwtZcFK-mNzI0DYW1AQbJORiC7n5fWOfilHeuUTA2cup2JV4empt1Y4SGHaf4rhVNMiJs5RGs0uIyvYXMmRS_k2mxwcQAryFvvI7ti63JUEug5L-d', 'android', '', '', 1, 0, '103.181.132.9', '$2y$08$3PvAmSPuKTW2gkaUfp9SWOaqqzcYVTRoknjOLqaFKPZSXmF0hrFHa', NULL, NULL, 1667984295, 1674486221, '', 0, '', '', '', '', 0, '636b6ba78817a', '636b6ba78817c', 0, '15', 'wajid', NULL, 0, ''),
 (8, 3, 'Abdul', 'miankhalifa@gmail.com', 'miankhalifa@gmail.com', '15', 'Haha', '', NULL, '', '', 'noimg.png', '12312321', 'android', '', '', 0, 1, '103.181.132.9', '$2y$08$XZutxq0St0rlX2ORWoY4v.ulBW6cHAEsSJfMo2N.ncL6WpZH464XW', NULL, NULL, 1668021917, 1668021941, '', 0, '', '', '', '', 0, '636bfe9dd8721', '636bfe9dd8722', 0, 'XXX', 'Wajid', NULL, 0, ''),
-(9, 3, 'waseem', 'a@a.com', 'a@a.com', '0232434343', '', '', NULL, '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'ios', '', '', 0, 1, '39.42.99.136', '$2y$08$loLH5QNx9aoW5i5mJmYaleuHI/bJKhvkj.FtfvrqJFWn5c0SNaVlm', NULL, NULL, 1668073791, 1668487871, '', 0, '', '', '', '', 0, '636cc93f7503b', '636cc93f7503d', 0, '', 'afzal', NULL, 0, ''),
-(10, 3, 'ahmad', 'ahmadjawad78992@gmail.com', 'ahmadjawad78992@gmail.com', '0232434343', '', '', NULL, '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$.x0T5PSmnbcD9tj1E51sFujGIsWQc1EYz4.K.R5OGGQnYX19oRWB2', NULL, NULL, 1668080784, 1669463750, '', 0, '', '', '', '', 0, '636ce490759fa', '636ce490759fb', 0, '', 'jawad', NULL, 0, ''),
+(9, 3, 'waseem', 'a@a.com', 'a@a.com', '0232434343', '', '', NULL, '', '', 'noimg.png', 'fPoe5Y1aTWWHjiTryb4iK8:APA91bFFqxas2Lfyu8K39T2JWNkgarNb2bmwykx3Uwn-Uen5EpI0rbd76HogLKkKCBVyFJe5pN-mWriRmfI1NVpwDOoJPzBldU7IecZt73t0UNAnRuCk6yDye-gzk4Z802X0i9lHSuBw', 'android', '', '', 0, 1, '39.42.99.136', '$2y$08$loLH5QNx9aoW5i5mJmYaleuHI/bJKhvkj.FtfvrqJFWn5c0SNaVlm', NULL, NULL, 1668073791, 1674988451, '', 0, '', '', '', '', 0, '636cc93f7503b', '636cc93f7503d', 0, '', 'afzal', NULL, 0, ''),
+(10, 3, 'ahmad', 'ahmadjawad78992@gmail.com', 'ahmadjawad78992@gmail.com', '0232434343', '', '', NULL, '', '', 'noimg.png', '5173F3A6-1ACF-426D-BD5A-07156D181DD9', 'ios', '', '', 0, 1, '124.29.216.9', '$2y$08$.x0T5PSmnbcD9tj1E51sFujGIsWQc1EYz4.K.R5OGGQnYX19oRWB2', NULL, NULL, 1668080784, 1675792416, '', 0, '', '', '', '', 0, '636ce490759fa', '636ce490759fb', 0, '', 'jawad', NULL, 0, ''),
 (11, 3, 'test', 'a1@a.com', 'a1@a.com', '1234556785553', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$Leg42J3hOi/T2fvysayP3eCSIHQ3qmhJ2RvfUZKf6ps05mq0bqZgO', NULL, NULL, 1668405930, NULL, '', 0, '', '', '', '', 0, '6371daaab1f7b', '6371daaab1f7d', 0, '', 'ad', NULL, 0, ''),
 (12, 3, 'asd', 'a2@a.com', 'a2@a.com', '121242134234123', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$OQlxjXzotMvHFZgBkHTP8ua90lGsCxDrWU8EtugKPBvY3yLodeqUy', NULL, NULL, 1668406067, NULL, '', 0, '', '', '', '', 0, '6371db33752be', '6371db33752bf', 0, '', 'asdf', NULL, 0, ''),
 (13, 3, 'ddas', 'a3@a.com', 'a3@a.com', '121332132312312', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$BYcJhKi/7ercwH8/br4pRO4pAdIDgrkAuE4Ls0eYmlvvz1JWC4rKa', NULL, NULL, 1668406242, NULL, '', 0, '', '', '', '', 0, '6371dbe26ecd8', '6371dbe26ecd9', 0, '', 'adsaa', NULL, 0, ''),
 (14, 3, 'wdsa', 'a4@a.com', 'a4@a.com', '122434322434213', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$o.ZuTpyfb43QFEd7OW.XpeGNDDRwBq2eov9Vioy9vlBsjRQbraE26', NULL, NULL, 1668406474, NULL, '', 0, '', '', '', '', 0, '6371dcca45c85', '6371dcca45c87', 0, '', 'asfasfa', NULL, 0, ''),
 (15, 3, 'daseq', 'a5@a.com', 'a5@a.com', '121324324232134', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$OaF3DGGdfBnEtY484vnHQejmLteGC/5Bnic3qH/6VgPx2/lPC.6Rm', NULL, NULL, 1668406815, NULL, '', 0, '', '', '', '', 0, '6371de1ef2cc2', '6371de1ef2cc3', 0, '', 'sad', NULL, 0, ''),
-(16, 3, 'seyaam', 'hr.cyphersol@gmail.com', 'hr.cyphersol@gmail.com', '0347#94664', 'Multan', '', NULL, '', '', '᷽ExifMM*0@(12iipp\"HUAWEIJKM-LX1HHJKM-LX1 9.1.0.309(C185E2R1P1)2022:11:19 23:06:57.\r\\\"\"\'0210\"\"\"|\nd\"\nL\nT\"t	\n<|\"\n|8|d\"|l|\"\"\"Ē\"̠01000@\"ԢD	\n$dd\n;\'#*#*201811081600($+\'K8Pvd($+\'K8Pvd($+\'K8Pvd($+)K8Pwd($2)K8Pxd($+(K8Pxd($+(K8Pxd($+\'K8Pxd 4p2PJB.+jGKU7%nzE4*>>-45[b<|r-VOBGB.::5.`~i$\"&)!*;*1YVQ8<5%S?!5u@2%(ju1&=pkO:\'	6$ YD]<	! E`\"2*[b3F<\r<dJ&3;aD-\n2bb:pF??=>#>bSG:JE;4Z5\r\r6<ZKk89uG?)+N4>/R<h9RdDb^m_\'iUK_UȾR2mKZ4(KYYj(@0d-h@	*:*:(^,,zz<hIOVh<jHNUg&<Um+]W\n!6HZypps\r@@p\"\'+048=BFKOSX\\aeimquy}#\'+/36:>BEJNQVZ^bfj', 'eyB_U-joQduW8bbbHwL9_S:APA91bH3c-bMi0WiRDs9xWk_xP0dvJVNeeMBh0R9JAAoI5ciBnAMvYJE4eUquNdf0WIx9aMdSLG37lwRVWFkugs9TTIW7uvhS6nPgGx0MP5Xk9laYzFfrc-aRKQKhE8K65ux9tNZSuBV', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$4fNtnqH32U..vs2oXxvpUOYgwiyiFNi8vKU82CQ2WXocEoaipnMDq', NULL, NULL, 1669110414, 1669110424, '', 0, '', '', '', '', 0, '637c9a8e5a2bd', '637c9a8e5a2be', 0, '', 'Muhammad', NULL, 0, ''),
-(17, 3, 'waseem', 'waseemafzal31@gmail.com', 'waseemafzal31@gmail.com', '03417090031', '', '', NULL, '', '', 'noimg.png', 'fc7ZCnNqQ6-mxRdtXGkyO5:APA91bG-Sk8rkiwomkcD91vIHChNLqBh5w71LxGuLzo30wCq-Wu3SHif08v_Vt4E9Q2Hg9TYkspkjh1ElOg6yxr18iIPmklBAInINMbihi_DGmyE_1nnuGPY_-IuIQm4dvb0Q7YMkc2c', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$6WcGrxmOIIg.KM3DvIYqi.vKv452vU/ocBns1lxFuV7X82bRLLHMm', NULL, NULL, 1669466851, 1669802979, '', 0, '', '', '', '', 0, '63820ae35deee', '63820ae35deef', 0, '', 'afzal', NULL, 0, '');
+(18, 3, 'ben', 'olebint001@gmail.com', 'olebint001@gmail.com', '08108252661', 'Huntington beach', '', NULL, '', '', 'JFIFCC8\"	\n\r!!1	\"AQa2q#3BRb\n$4CSr%TVc5DUs89Edtwx&7:Xeu6Wv\'F(GYfiy襦g	U!1AQaq\"2BR#br$34ST%C5	D&EUc?JR(JR(JR(JR(JR(JxC\'b}*Q:Cx]v q\",P2Ic*ѱٯd	WЌeĔMs|R8Qz)DJRD)DJRD)DJRD)DJRD)DJRD)DJRD)DJRD)DJRD)DJR68tliӻcov0UvK]={,ɲ[![O`(٥iCbO͵4r)EK[\'+', 'd0t15zlWRh65oxCHHi48tW:APA91bHV5Fs18Qa6O6pQGw0TN1sHe8KOTijSrwgvjEQZcKP6sOIN2rpt1tMEKOz4tJpc7ZcGVliWFip20c7-7FCPDxrs_7_OpKOZAZjx6Co-b_8zKcxXkJWJ1XXdZphUElpobiDKule-', 'android', '', '', 0, 1, '62.210.211.183', '$2y$08$xexYhT1qmNZowRhLxKGr9uL1BFqiH.hWQlxZpzowoK/gUb5lTGNES', NULL, NULL, 1671027508, 1671027599, '', 0, '', '', '', '', 0, '6399db34e72d6', '6399db34e72d7', 0, '', 'ola', NULL, 0, ''),
+(19, 3, 'waseem', 'hr.cyphersol@gmail.com', 'hr.cyphersol@gmail.com', '03417090031', '', '', NULL, '', '', 'noimg.png', 'dtgSARAqQrCGMFBmYrX6Ab:APA91bF_o9DjnbgpFqGjROmEM7VB44GMACcIn3HrxIw2ncd3651MWGlVWrOerqGTZv47F6WYLJV6Jp24AFM48vvRNAR2uoX-5XbQIIDlXZRmFIg6OEDi6Jh143OSs2HFMdMvUYKs_UQ3', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$YcaTfAfhONEAF1rdB6Zx1eT0jMQEqz4L4Gais6NmYkezPENxbHXwm', NULL, NULL, 1671027928, 1673588044, '', 0, '', '', '', '', 0, '6399dcd85ff33', '6399dcd85ff34', 0, '', 'afzal', NULL, 0, ''),
+(20, 3, 'Abdul', 'nrwajid.leads@gmail.com', 'nrwajid.leads@gmail.com', '1,', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '103.148.154.62', '$2y$08$yNeSw2xOW4XpPR16mDEKPeyIKp7q2Ol6ALGeKvT6KOIW6qS7q/ika', NULL, NULL, 1673378510, NULL, '', 0, '', '', '', '', 0, '63bdbace3e847', '63bdbace3e848', 0, '', 'Wajid', NULL, 0, ''),
+(21, 3, 'babab', 'mrwajid.leads@gmail.com', 'mrwajid.leads@gmail.com', '6797', '', '', NULL, '', '', 'noimg.png', 'fEXI5hh2Ssy_bClObQLvbC:APA91bE96312IfkuYbNwR6Fy5X8Vxb8ffE_RsNEOM8U_aPxpC90PlgD9xGrWW8ea1d9TbkLt5IPIlOQFDUONPSbteIjaYtp1MtolkForspV8JC1eNVawdtmI3Xn61B1ZZS13mRadQ5pF', 'android', '', '', 0, 0, '103.148.154.62', '$2y$08$R9SlFcy2TwPf/guIu09lM.9FtcLOzsnnDIr/X46bfgh4VqEPw4cMC', NULL, NULL, 1673378664, 1673378687, '', 0, '', '', '', '', 0, '63bdbb6816d7d', '63bdbb6816d7f', 0, '', 'nsnsnsn', NULL, 0, ''),
+(22, 3, 'w', 'a@gmail.com', 'a@gmail.com', '646', '', '', NULL, '', '', 'noimg.png', 'fEXI5hh2Ssy_bClObQLvbC:APA91bE96312IfkuYbNwR6Fy5X8Vxb8ffE_RsNEOM8U_aPxpC90PlgD9xGrWW8ea1d9TbkLt5IPIlOQFDUONPSbteIjaYtp1MtolkForspV8JC1eNVawdtmI3Xn61B1ZZS13mRadQ5pF', 'android', '', '', 0, 1, '103.148.154.62', '$2y$08$CIzkJqGv1GYXhUh8KhDSTe4Idv5lnf3Fpvb1muKvdmMf7zPyY2Yja', NULL, NULL, 1673379649, 1673379659, '', 0, '', '', '', '', 0, '63bdbf41e1a4a', '63bdbf41e1a4b', 0, '', 'h', NULL, 0, ''),
+(32, 3, 'Test', 'miyiba4308@quamox.com', 'miyiba4308@quamox.com', '03045678907', '', '', NULL, '', '', 'noimg.png', '43492201-BD86-4BEA-8490-426FB0192534', 'ios', '', '', 0, 1, '119.160.99.220', '$2y$08$FOha1CsRqkoxNa3mj97GWut1oYQeLnYZm9weflgfS3GC36.ARHgLq', NULL, NULL, 1674196393, 1674196440, '', 0, '', '', '', '', 0, '63ca35a910bff', '63ca35a910c00', 0, '', 'User', NULL, 0, ''),
+(33, 3, 'Emmanuel', 'oziiperfect36@gmail.com', 'oziiperfect36@gmail.com', '08072314393', '', '', NULL, '', '', 'noimg.png', 'd5ZUkLMLSVa3wqtoKm5A0v:APA91bFzRKqQsTZv6iZEDAwlVmq7EANA9zkf0ygnTAHOQCbkplqrEYX7rhVqDLFhs7VndfV2o-qrcYGAEe83OZpsEbw-Nkzk4E_GVs35t9N8JLy-OJQj77qxl0tJ03gDYv9FMbQLA4AT', 'android', '', '', 0, 1, '102.88.34.14', '$2y$08$5WuDf9rbTbF2RHIpr76NreqEYBqf6UJGp/JKZzWwEjBs2FAHRx5ku', NULL, NULL, 1674237996, 1674420897, '', 0, '', '', '', '', 0, '63cad82cea30e', '63cad82cea310', 0, '', 'nnam', NULL, 0, ''),
+(34, 3, 'Jawad', 'ceo@cyphersol.com', 'ceo@cyphersol.com', '03155564886', '', '', NULL, '', '', 'noimg.png', '0DF3FABE-4BD3-4964-8CC1-99574D95F9ED', 'ios', '', '', 0, 1, '124.29.216.9', '$2y$08$tT4tbj.TUP5jJMZQGc0n.ONSW75ufFGMlZSBfljwO.PlDkb3UHVUe', NULL, NULL, 1676954021, 1676954288, '', 0, '', '', '', '', 0, '63f449a5b81f3', '63f449a5b81f4', 0, '', 'Ahmad', NULL, 0, ''),
+(39, 3, 'Shaheer', 'shaheerkhalid450@gmail.com', 'shaheerkhalid450@gmail.com', '03428546632', '', '', NULL, '', '', 'noimg.png', '0DF3FABE-4BD3-4964-8CC1-99574D95F9ED', 'ios', '', '', 0, 1, '124.29.216.9', '$2y$08$/wQRe/IgCHB0y7PfOhQ60e1Qjz3crfFNgTIYIn/kkdbNRAp/B4n5e', NULL, NULL, 1676958585, 1676962613, '', 0, '', '', '', '', 0, '63f45b79ca27e', '63f45b79ca280', 0, '', 'Khalid', NULL, 0, ''),
+(46, 3, 'Jawad', 'jawadahmad78692@gmail.com', 'jawadahmad78692@gmail.com', '03411663111', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '124.29.216.9', '$2y$08$Dqy3HM..J1tmDsApZ0Yy/eX3SC995SJojkK8tT9Ed/wb6qfK0ft/a', NULL, NULL, 1676976333, NULL, '', 0, '', '', '', '', 0, '63f4a0cd070ee', '63f4a0cd070f0', 0, '', 'Ahmad', NULL, 0, ''),
+(47, 3, 'Jawad', 'jawad.cyphersol@gmail.com', 'jawad.cyphersol@gmail.com', '03124555886', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '124.29.216.9', '$2y$08$fvI.m5TjN/6aIeYe7nz.auyDvyy44eodSeXv7AtrkK2OemK97dtz6', NULL, NULL, 1676976784, NULL, '', 0, '', '', '', '', 0, '63f4a29010f44', '63f4a29010f45', 0, '', 'Ahmad', NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -54269,6 +54624,122 @@ CREATE TABLE `user_devices` (
   `active` tinyint(3) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse`
+--
+
+CREATE TABLE `warehouse` (
+  `id` int(11) NOT NULL,
+  `warehouse_name` varchar(255) NOT NULL,
+  `transaction_number` varchar(255) NOT NULL,
+  `employ_name` varchar(255) NOT NULL,
+  `issued_by` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `entry_no` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `warehouse`
+--
+
+INSERT INTO `warehouse` (`id`, `warehouse_name`, `transaction_number`, `employ_name`, `issued_by`, `date`, `time`, `entry_no`) VALUES
+(1, 'Emj', '678', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796000'),
+(5, 'Local Warehouse', '687', 'hkj', 'kjhk', '2023-02-06', '16:13', '789');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_receipts`
+--
+
+CREATE TABLE `warehouse_receipts` (
+  `id` int(11) NOT NULL,
+  `warehouse_name` varchar(255) NOT NULL,
+  `employ_name` varchar(255) NOT NULL,
+  `issued_by` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  `entry_no` varchar(255) NOT NULL,
+  `transaction_number` varchar(255) NOT NULL,
+  `division` varchar(255) NOT NULL,
+  `bonded_warehouse` varchar(255) NOT NULL,
+  `destination_agent` varchar(255) NOT NULL,
+  `shipper_name` varchar(255) NOT NULL,
+  `consignee_name` varchar(255) NOT NULL,
+  `shipper_address` varchar(255) NOT NULL,
+  `consignee_address` varchar(255) NOT NULL,
+  `client_to_bill` varchar(255) NOT NULL,
+  `model_of_transp` varchar(255) NOT NULL,
+  `origin` varchar(255) NOT NULL,
+  `destination` varchar(255) NOT NULL,
+  `supplier_name` varchar(255) NOT NULL,
+  `invoice_number` varchar(255) NOT NULL,
+  `supplier_address` varchar(255) NOT NULL,
+  `purchase_order_number` varchar(255) NOT NULL,
+  `carrier` varchar(255) NOT NULL,
+  `driver_name` varchar(255) NOT NULL,
+  `driver_license_number` varchar(255) NOT NULL,
+  `pro_number` varchar(255) NOT NULL,
+  `tracking_number` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `package_type` varchar(255) NOT NULL,
+  `pieces` varchar(255) NOT NULL,
+  `part_number` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `length` varchar(255) NOT NULL,
+  `width` varchar(255) NOT NULL,
+  `height` varchar(255) NOT NULL,
+  `dimension_unit` varchar(255) NOT NULL,
+  `weight_unit` varchar(255) NOT NULL,
+  `volume_unit` varchar(255) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `unitary_value` varchar(255) NOT NULL,
+  `total_value` varchar(255) NOT NULL,
+  `container_type` varchar(255) NOT NULL,
+  `container_description` varchar(255) NOT NULL,
+  `container_number` varchar(255) NOT NULL,
+  `serial_number_1` varchar(255) NOT NULL,
+  `serial_number_2` varchar(255) NOT NULL,
+  `container_location` varchar(255) NOT NULL,
+  `container_length` varchar(255) NOT NULL,
+  `container_weight` varchar(255) NOT NULL,
+  `container_width` varchar(255) NOT NULL,
+  `container_height` varchar(255) NOT NULL,
+  `container_volume` varchar(255) NOT NULL,
+  `charges_status` varchar(15) NOT NULL,
+  `charges_description` varchar(50) NOT NULL,
+  `prepaid` varchar(15) NOT NULL,
+  `total_quantity` varchar(15) NOT NULL,
+  `price` varchar(15) NOT NULL,
+  `amount` varchar(15) NOT NULL,
+  `tax_code` varchar(15) NOT NULL,
+  `tax_rate` varchar(15) NOT NULL,
+  `tax_amount` varchar(15) NOT NULL,
+  `amount_with_tax` varchar(15) NOT NULL,
+  `currency` varchar(15) NOT NULL,
+  `final_amount` varchar(15) NOT NULL,
+  `expense` varchar(15) NOT NULL,
+  `income` varchar(15) NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `qr_image` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `warehouse_receipts`
+--
+
+INSERT INTO `warehouse_receipts` (`id`, `warehouse_name`, `employ_name`, `issued_by`, `date`, `time`, `entry_no`, `transaction_number`, `division`, `bonded_warehouse`, `destination_agent`, `shipper_name`, `consignee_name`, `shipper_address`, `consignee_address`, `client_to_bill`, `model_of_transp`, `origin`, `destination`, `supplier_name`, `invoice_number`, `supplier_address`, `purchase_order_number`, `carrier`, `driver_name`, `driver_license_number`, `pro_number`, `tracking_number`, `status`, `description`, `package_type`, `pieces`, `part_number`, `model`, `location`, `length`, `width`, `height`, `dimension_unit`, `weight_unit`, `volume_unit`, `quantity`, `unit`, `unitary_value`, `total_value`, `container_type`, `container_description`, `container_number`, `serial_number_1`, `serial_number_2`, `container_location`, `container_length`, `container_weight`, `container_width`, `container_height`, `container_volume`, `charges_status`, `charges_description`, `prepaid`, `total_quantity`, `price`, `amount`, `tax_code`, `tax_rate`, `tax_amount`, `amount_with_tax`, `currency`, `final_amount`, `expense`, `income`, `file`, `qr_image`) VALUES
+(1, 'Emj', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796000', '678', 'Multan', 'hkjhjk', 'Ahmad', 'waseem', 'mr ben', 'Shah Jamal ', 'Multan', 'ultimate_consignee', 'hjk', 'Shah Jamal ', 'Multan', 'Jawad Ahmad', '8098', 'chowk shah abbas', '7990', 'Speedocargo', 'Jawad', '798', '789798', '78900', '', '', 'large box', '', '', '', '', '', '', '', 'Not Selected', 'lb', 'ft3', '6', '', '', '', 'Mini Goods', '', '23', '89', '787', 'Multan', '230', '440', '34', '239', '449', 'Active', '', '897', '', '56', '789', '897', '768', '565', '1200', 'Pkr', '1050', '200', '900', 'a013a47ae0f0b90e9471902861ffaad8.jpg', NULL),
+(2, 'Local Warehouse', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796000', '678', '', '', '', 'waseem', 'mr ben', '', '', 'ultimate_consignee', '', '', '', 'Jawad Ahmad', '8098', '', '7990', '', 'Jawad', '798', '789798', '78900', '', '', 'Not Selected', '', '', '', '', '', '', '', 'Not Selected', 'lb', 'ft3', '6', '', '', '', 'Cargo', '', '23', '89', '787', 'Multan', '230', '440', '34', '239', '449', 'Active', '', '897', '', '56', '789', '897', '768', '565', '1200', 'Pkr', '1050', '200', '900', '', NULL),
+(5, 'Local Warehouse', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796000', '678', '', '', '', 'waseem', 'mr ben', 'xyz', 'xyz', 'ultimate_consignee', 'sdsd', 'sds', 'sdsd', 'Jawad Ahmad', '8098', 'sdsd', '7990', 'UPS', 'Jawad', '798', '789798', '78900', 'Unassigned', 'ssd', 'extra large box', '2', '12', '12', '12', '35', '2', '144', 'inches', 'lb', 'ft3', '6', '3', '3', '200', 'Cargo', 'sds', '8900', '89', '787', 'Multan', '230', '440', '34', '239', '449', 'Active', 'sds', '897', '', '56', '789', '897', '768', '565', '1200', 'Pkr', '1050', '200', '900', '', NULL),
+(4, 'Emj', 'Jawad Ahmad', 'kjhk', '2023-01-24', '16:19', '796000', '678', '', '', '', 'waseem', 'mr ben', '', '', 'ultimate_consignee', '', '', '', 'Jawad Ahmad', '8098', '', '7990', '', 'Jawad', '798', '789798', '78900', '', '', 'Not Selected', '', '', '', '', '', '', '', 'Not Selected', 'lb', 'ft3', '6', '', '', '', 'Cargo', '', '23', '89', '787', 'Multan', '230', '440', '34', '239', '449', 'Active', '', '897', '', '56', '789', '897', '768', '565', '1200', 'Pkr', '1050', '200', '900', '', NULL);
+
 --
 -- Indexes for dumped tables
 --
@@ -54283,6 +54754,12 @@ ALTER TABLE `app_routes`
 -- Indexes for table `app_user_session`
 --
 ALTER TABLE `app_user_session`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `charges`
+--
+ALTER TABLE `charges`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54304,9 +54781,21 @@ ALTER TABLE `cms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `commodities`
+--
+ALTER TABLE `commodities`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `containers`
+--
+ALTER TABLE `containers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54314,6 +54803,12 @@ ALTER TABLE `contacts`
 --
 ALTER TABLE `conversations`
   ADD PRIMARY KEY (`conversation_id`);
+
+--
+-- Indexes for table `drivers`
+--
+ALTER TABLE `drivers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `groups`
@@ -54325,6 +54820,18 @@ ALTER TABLE `groups`
 -- Indexes for table `helpcenter`
 --
 ALTER TABLE `helpcenter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `json_logs`
+--
+ALTER TABLE `json_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `landing_bills`
+--
+ALTER TABLE `landing_bills`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54368,6 +54875,12 @@ ALTER TABLE `plans`
 -- Indexes for table `post_images`
 --
 ALTER TABLE `post_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_orders`
+--
+ALTER TABLE `purchase_orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54425,6 +54938,12 @@ ALTER TABLE `shipment_types`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_cities`
 --
 ALTER TABLE `tbl_cities`
@@ -54465,6 +54984,18 @@ ALTER TABLE `user_devices`
   ADD UNIQUE KEY `device_id` (`device_id`);
 
 --
+-- Indexes for table `warehouse`
+--
+ALTER TABLE `warehouse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `warehouse_receipts`
+--
+ALTER TABLE `warehouse_receipts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -54478,19 +55009,31 @@ ALTER TABLE `app_routes`
 -- AUTO_INCREMENT for table `app_user_session`
 --
 ALTER TABLE `app_user_session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
+
+--
+-- AUTO_INCREMENT for table `charges`
+--
+ALTER TABLE `charges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `clients_invoice`
 --
 ALTER TABLE `clients_invoice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `cms`
 --
 ALTER TABLE `cms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `commodities`
+--
+ALTER TABLE `commodities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contacts`
@@ -54499,10 +55042,22 @@ ALTER TABLE `contacts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `containers`
+--
+ALTER TABLE `containers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `conversation_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `conversation_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `drivers`
+--
+ALTER TABLE `drivers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -54514,7 +55069,19 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `helpcenter`
 --
 ALTER TABLE `helpcenter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `json_logs`
+--
+ALTER TABLE `json_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `landing_bills`
+--
+ALTER TABLE `landing_bills`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `login_attempts`
@@ -54526,7 +55093,7 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `message_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -54544,7 +55111,7 @@ ALTER TABLE `notification_types`
 -- AUTO_INCREMENT for table `order_card_detail`
 --
 ALTER TABLE `order_card_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `plans`
@@ -54557,6 +55124,12 @@ ALTER TABLE `plans`
 --
 ALTER TABLE `post_images`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `purchase_orders`
+--
+ALTER TABLE `purchase_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -54586,31 +55159,37 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT for table `shipment_orders`
 --
 ALTER TABLE `shipment_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_files`
 --
 ALTER TABLE `shipment_orders_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `shipment_orders_oceanfreight`
 --
 ALTER TABLE `shipment_orders_oceanfreight`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `shipment_status`
 --
 ALTER TABLE `shipment_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `shipment_types`
 --
 ALTER TABLE `shipment_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_cities`
@@ -54628,7 +55207,7 @@ ALTER TABLE `tbl_payment_notifications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `users_groups`
@@ -54647,6 +55226,18 @@ ALTER TABLE `users_rights`
 --
 ALTER TABLE `user_devices`
   MODIFY `device_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `warehouse`
+--
+ALTER TABLE `warehouse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `warehouse_receipts`
+--
+ALTER TABLE `warehouse_receipts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

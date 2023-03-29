@@ -77,33 +77,49 @@ background-color: #fff;
 <div class="tab-pane active" id="tab_1">
 <div class="form-group">
                                 <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Warehouse Name</label>
-                                    <select name='warehouse_name' class='form-control'>
-                                    <?php 
-                                        if(isset($general)){
-                                     foreach($general as $warehouse){
-                                         $selected='';
-                                        if(isset($row)){
-                                        if($row->warehouse_name==$warehouse['warehouse_name']){
-                                        $selected='selected';
-                                        }}
+                                 <div class="col-xs-12 col-md-6">
+                                 <label>Transaction Number</label>
+                                 <select name='transaction_number' class='form-control'>
+                                    <?php if(isset($general)){
+                          foreach($general as $warehouse){
+                                  $selected='';
+                          if(isset($row)){
+                             if($row->transaction_number == $warehouse['transaction_number']){
+                                 $selected = 'selected';
+                             }}
                           ?>
-                                            <option <?php echo $selected?> value='<?php echo $warehouse['warehouse_name']?>'><?php echo $warehouse['warehouse_name']?></option>          
+                                            <option <?php echo $selected?> value='<?php echo $warehouse['transaction_number']?>'><?php echo $warehouse['transaction_number']?></option>          
                                     <?php }}?>
                       </select>
+                                    
                                         </div>
+                            </div></div>
+<div class="form-group">
+                                <div class="row"> 
+                                
+                                <div class="col-xs-12 col-md-6">
+                                <label>Date</label>
+                                          <input type='date' name='date' class='form-control' value='<?php if(isset($row)){echo $row->date;}?>'>
+                                  
+                                
+                                        </div>
+                                        <div class='col-md-6'>
+                                 <label>Time</label>
+                                 <input type='time' name='time' value='<?php if(isset($row)){echo $row->time;}?>' class='form-control'>
+                            
+                                        </div></div></div>
+                                        <div class='form-group'>
+                                          <div class='row'>
                                           <div  class="col-md-6">
-                                          <label>Employ Name</label>
+                                          <label>Employ</label>
                                           <select name='employ_name' class='form-control'>
                                     <?php if(isset($general)){
-                          foreach($general as $warehouse){?>
+                          foreach($general as $warehouse){
                              $selected = '';
                              if(isset($row)){
                                if($row->employ_name){
                                   $selected = 'selected';
-                                  }}?>
+                               }}?>
                                             <option <?php echo $selected?> value='<?php echo $warehouse['employ_name']?>'><?php echo $warehouse['employ_name']?></option>          
                                     <?php }}?>
                       </select>
@@ -126,96 +142,28 @@ background-color: #fff;
                                     <?php }}?>
                       </select>
                                         </div>
-                                          <div class="col-md-6">
-                                          <label>Date</label>
-                                          <select name='date' class='form-control'>
-                                    <?php if(isset($general)){
-                          foreach($general as $warehouse){
-                          $selected = '';
-                          if(isset($row)){
-                             if($row->date == $warehouse['date']){
-                                 $selected = 'selected';
-                             }}?>
-                                            <option <?php echo $selected?> value='<?php echo $warehouse['date']?>'><?php echo $warehouse['date']?></option>          
-                                    <?php }}?>
-                      </select> 
-                                
+                                          
                                   </div>
-                                 </div></div>
+                                 </div>
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
-                                 <label>Time</label>
-                                 <select name='time' class='form-control'>
-                                    <?php if(isset($general)){
-                          foreach($general as $warehouse){
-                              $selected='';                       
-                              if(isset($row)){
-                             if($row->time == $warehouse['time']){
-                                 $selected = 'selected';
-                             }}?>
-                                            <option <?php echo $selected?> value='<?php echo $warehouse['time']?>'><?php echo $warehouse['time']?></option>          
-                                    <?php }}?>
-                      </select>  
-                                        </div>
-                                          <div class="col-md-6">
-                                          <label>Entry No</label>
-                                          <select name='entry_no' class='form-control'>
-                                    <?php if(isset($general)){
-                          foreach($general as $warehouse){
-                              $selected='';
-                          if(isset($row)){
-                             if($row->entry_no == $warehouse['entry_no']){
-                                 $selected = 'selected';
-                             }}?>
-                                            <option <?php echo $selected?> value='<?php echo $warehouse['entry_no']?>'><?php echo $warehouse['entry_no']?></option>          
-                                    <?php }}?>
-                      </select>
-                                   
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                 <label>Transaction Number</label>
-                                 <select name='transaction_number' class='form-control'>
-                                    <?php if(isset($general)){
-                          foreach($general as $warehouse){
-                                  $selected='';
-                          if(isset($row)){
-                             if($row->transaction_number == $warehouse['transaction_number']){
-                                 $selected = 'selected';
-                             }}
-                          ?>
-                                            <option <?php echo $selected?> value='<?php echo $warehouse['transaction_number']?>'><?php echo $warehouse['transaction_number']?></option>          
-                                    <?php }}?>
-                      </select>
-                                    
-                                        </div>
-                                        <div class="col-md-6">
-                                          <label>Division</label>
-                                    
-                                    <input type="text" class="form-control" id="division" value='<?php if(isset($row)){echo $row->division;}?>' name="division">
-                                   
-                                  </div>
-                      </div>                      </div>
-<div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                 <label>Bonded Warehouse</label>
-                                    
-                                    <input type="text" value='<?php if(isset($row)){echo $row->bonded_warehouse;}?>' class="form-control" id="bonded_warehouse" name="bonded_warehouse">
-                                    
-                                        </div>
-                                        <div class="col-md-6">
                                           <label>Destination Agent</label>
-                                    
-                                    <input type="text" value='<?php if(isset($row)){echo $row->destination_agent;}?>' class="form-control" id="destination_agent" name="destination_agent">
+                                          <select name='destination_agent' class='form-control'>
+                                    <?php if(isset($destination_agents)){
+                          foreach($destination_agents as $agent){
+                             $selected = '';
+                             if(isset($row)){
+                               if($row->destination_agent==$agent['name']){
+                                  $selected = 'selected';
+                               }}?>
+                                            <option <?php echo $selected?> value='<?php echo $agent['name']?>'><?php echo $agent['name']?></option>          
+                                    <?php }}?>
+                      </select>
                                    
-                                  </div>
 </div></div>
 </div>
-
+                            </div>
 <div class="tab-pane" id="tab_2">
 <div class='row'>
   <div class='col-md-6'>
@@ -245,7 +193,7 @@ background-color: #fff;
      if($row->consignee_name==$detail['consignee_name']){
          $selected='selected';
      }}?>
-<option <?php echo $selected?> value='<?php echo $detail['consignee_name'];?>'><?php echo $detail['consignee_name'];?>
+        <option <?php echo $selected?> value='<?php echo $detail['consignee_name'];?>'><?php echo $detail['consignee_name'];?>
                       </option>
                       <?php }}?>
                       </select>
@@ -270,8 +218,19 @@ background-color: #fff;
     </div></div>
     <div class='row'>
     <div class='col-md-6'>
-      <label>Mode of Transp</label>
-        <input type='text' name='mode_of_transp' value='<?php if(isset($row)){echo $row->mode_of_transp;}?>' class='form-control'>
+      <label>Mode of Transport</label>
+        <select name='mode_of_transport' class='form-control'>
+            <option>Choose Mode</option>
+          <?php if(isset($mode_of_transport)){
+            foreach($mode_of_transport as $transport){
+              $selected='';
+              if(isset($row)){
+                if($row->mode_of_transport==$transport['method']){
+                  $selected='selected';
+                  }}?>
+          <option <?php echo $selected?> value='<?php echo $transport['method']?>'><?php echo $transport['method']?></option>
+          <?php }}?>
+    </select>
     </div>
     <div class='col-md-6'>
     <label></label>

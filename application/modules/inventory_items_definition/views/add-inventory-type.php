@@ -69,30 +69,49 @@ background-color: #fff;
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
-                                    <label>Driver's Name</label>
+                                    <label>Method</label>
                                     
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name"  value= "<?php if(isset($row)){echo $row->driver_name;}?>">
+                                    <select class="form-control" id="method" name="method">
+                                      <option>Choose Method</option>
+                                      <?php $ocean ='';
+                                            $rail ='';
+                                            $ground ='';
+                                            $mail ='';
+                                            $unknown ='';
+                                            $pipe ='';
+                                      if(isset($row)){
+                                        switch($row->method){
+                                            case "ocean": $ocean= 'selected';
+                                            break;
+                                            case "rail": $rail= 'selected';
+                                            break;
+                                            case "ground": $ground= 'selected';
+                                            break;
+                                            case "mail": $mail= 'selected';
+                                            break;
+                                            case "unknown": $unknown= 'selected';
+                                            break;
+                                            case "pipe": $pipe= 'selected';
+                                            break;
+
+
+                                        }
+                                      }
+                                      ?>
+                                      <option <?php echo $ocean?> value='ocean'>Ocean</option>
+                                      <option <?php echo $rail?> value='rail'>Rail</option>
+                                      <option <?php echo $ground?> value='ground'>Ground</option>
+                                      <option <?php echo $mail?> value='mail'>Mail</option>
+                                      <option <?php echo $unknown?> value='unknown'>Unknown</option>
+                                      <option <?php echo $pipe?> value='pipe'>Pipe</option>
+</select>
                                     
                                         </div>
                                           <div  class="col-md-6">
-                                    <label>License Number</label>
-                                    <input type="text" name="driver_license_number" id="driver_license_number"  class="form-control" value='<?php if(isset($row)){echo $row->driver_license_number;}?>'>
+                                    <label>Description</label>
+                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){echo $row->description;}?></textarea>
+                                  <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;} ?>'>
                                   </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Pro Number</label>
-                                    
-                                    <input type="number" class="form-control" id="pro_number" name="pro_number"  value= "<?php if(isset($row)){echo $row->pro_number;}?>">
-                                    
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                    <label>Tracking Number</label>
-                                    
-                                    <input type="number" class="form-control" id="tracking_number" name="tracking_number"  value= "<?php if(isset($row)){echo $row->tracking_number;}?>">
-                                    <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;}?>'>
-                                        </div>
                                  </div></div>
                                 
                                         <div class="clearfix">&nbsp;</div>

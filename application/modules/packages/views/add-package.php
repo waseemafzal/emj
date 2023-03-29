@@ -69,32 +69,93 @@ background-color: #fff;
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
-                                    <label>Driver's Name</label>
+                                    <label>Description</label>
                                     
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name"  value= "<?php if(isset($row)){echo $row->driver_name;}?>">
+                                    <input type="text" class="form-control" id="description" name="description"  value= "<?php if(isset($row)){echo $row->description;}?>">
                                     
                                         </div>
                                           <div  class="col-md-6">
-                                    <label>License Number</label>
-                                    <input type="text" name="driver_license_number" id="driver_license_number"  class="form-control" value='<?php if(isset($row)){echo $row->driver_license_number;}?>'>
+                                    <label>Container Code</label>
+                                    <input type="text" name="container_code" id="container_code"  class="form-control" value='<?php if(isset($row)){echo $row->container_code;}?>'>
                                   </div>
                                  </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
-                                    <label>Pro Number</label>
+                                    <label>Container Equip Type</label>
                                     
-                                    <input type="number" class="form-control" id="pro_number" name="pro_number"  value= "<?php if(isset($row)){echo $row->pro_number;}?>">
+                                    <input type="text" class="form-control" id="container_equip_type" name="container_equip_type"  value= "<?php if(isset($row)){echo $row->container_equip_type;}?>">
                                     
                                         </div>
                                         <div class="col-xs-12 col-md-6">
-                                    <label>Tracking Number</label>
+                                    <label>Method</label>
                                     
-                                    <input type="number" class="form-control" id="tracking_number" name="tracking_number"  value= "<?php if(isset($row)){echo $row->tracking_number;}?>">
+                                    <select name="method" class="form-control">
+                                    <option value=''>Choose Method</option>
+                                    <?php $air='';
+                                          $ocean='';
+                                          $ground='';
+                                    if(isset($row)){
+                                      switch($row->method){
+                                        case "air": $air='selected';
+                                        break;
+                                        case "ocean": $ocean='selected';
+                                        break;
+                                        case "ground": $ground = 'selected';
+                                        break;
+                                      }}
+                                      ?>
+                                      <option <?php echo $air?> value='air'>Air</option>
+                                      <option <?php echo $ocean?> value='ocean'>Ocean</option>
+                                      <option <?php echo $ground?> value='ground'>Ground</option>
+</select>
                                     <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;}?>'>
                                         </div>
                                  </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
                                 
+                                <div class="col-xs-12 col-md-3">
+                                    <label>Length</label>
+                                    
+                                    <input type="number" class="form-control" id="length" name="length"  value= "<?php if(isset($row)){echo $row->length;}?>">
+                                    
+                                        </div>
+                                          <div class="col-md-3">
+                                    <label>Width</label>
+                                    <input type="number" name="width" id="width"  class="form-control" value='<?php if(isset($row)){echo $row->width;}?>'>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <label>Height</label>
+                                    <input type="number" name="height" id="height"  class="form-control" value='<?php if(isset($row)){echo $row->height;}?>'>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <label>Volume</label>
+                                    <input type="number" name="volume" id="volume"  class="form-control" value='<?php if(isset($row)){echo $row->volume;}?>'>
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                
+                                <div class="col-xs-12 col-md-3">
+                                    <label>Weight</label>
+                                    
+                                    <input type="number" class="form-control" id="weight" name="weight"  value= "<?php if(isset($row)){echo $row->weight;}?>">
+                                    
+                                        </div>
+                                          <div class="col-md-3">
+                                    <label>Maximum Weight</label>
+                                    <input type="number" name="maximum_weight" id="maximum_weight"  class="form-control" value='<?php if(isset($row)){echo $row->maximum_weight;}?>'>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <label>Courier</label>
+                                    <input type="text" name="courier" id="courier"  class="form-control" value='<?php if(isset($row)){echo $row->courier;}?>'>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <label>Status</label>
+                                    <input type="text" name="status" id="status"  class="form-control" value='<?php if(isset($row)){echo $row->status;}?>'>
+                                  </div>
+                                 </div></div>
                                         <div class="clearfix">&nbsp;</div>
              <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>

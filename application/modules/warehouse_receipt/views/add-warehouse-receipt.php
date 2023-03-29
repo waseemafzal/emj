@@ -275,7 +275,17 @@ background-color: #fff;
   <div class='col-md-6'>
   <h3>Carrier</h3>
   <label>Carrier</label>
-     <input type='text' value='<?php if(isset($row)){ echo $row->carrier;}?>' name='carrier' class='form-control'>
+  <select name='carrier' class='form-control'>
+          <?php if(isset($carriers)){
+            foreach($carriers as $carrier){
+            $selected='';
+            if(isset($row)){
+              if($row->carrier==$carrier["name"]){
+              $selected='selected';
+              }}?>
+              <option <?php echo $selected?> value='<?php echo $carrier["id"];?>'><?php echo $carrier["name"];?></option>
+              <?php }}?>
+        </select>
   </div></div><br>
   <div class='row'>
   <div class='col-md-6'>
@@ -319,6 +329,20 @@ background-color: #fff;
            $selected='selected';
            }}?>
           <option <?php echo $selected?> value='<?php echo $driver['pro_number']?>'><?php echo $driver['pro_number']?></option>
+          <?php }}?>
+          </select>
+  </div>
+  <div class='col-md-6'>
+    <label>Driver's Tracking Number:</label>
+    <select name='driver_tracking_number' class='form-control'>
+      <?php if(isset($drivers)){
+          foreach($drivers as $driver){
+          $selected='';
+          if(isset($row)){
+           if($row->driver_tracking_number==$driver['tracking_number']){
+           $selected='selected';
+           }}?>
+          <option <?php echo $selected?> value='<?php echo $driver['tracking_number']?>'><?php echo $driver['tracking_number']?></option>
           <?php }}?>
           </select>
   </div>

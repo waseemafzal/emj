@@ -29,6 +29,16 @@
           
           <li class="<?= getActive('mode_of_transp') ?>"><a href="mode_of_transport"><span>Mode of Transport</span></a></li>
 
+          <li class="<?= getActive('packages') ?>"><a href="packages"><span>Packages</span></a></li>
+
+          <li class="<?= getActive('commodity_types') ?>"><a href="commodity_types"><span>Commodity Types</span></a></li>
+
+          <li class="<?= getActive('inventory_items_definition') ?>"><a href="inventory_items_definition"><span>inventory Items</span></a></li>
+
+          <li class="<?= getActive('carriers') ?>"><a href="carriers"><span>Carriers</span></a></li>
+
+          <li class="<?= getActive('ports') ?>"><a href="ports"><span>Ports</span></a></li>
+
           <li class="<?= getActive('purchase_order') ?>"><a href="shipment_order/view_purchase_orders"><span>Purchase Orders</span></a></li>
           
           <li class="<?= getActive('landing_bill') ?>"><a href="shipment_order/view_landing_bill"><span>Bill of Landing</span></a></li>

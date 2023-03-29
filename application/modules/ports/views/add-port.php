@@ -69,32 +69,70 @@ background-color: #fff;
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
-                                    <label>Driver's Name</label>
+                                    <label>Country</label>
                                     
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name"  value= "<?php if(isset($row)){echo $row->driver_name;}?>">
+                                    <input type="text" class="form-control" id="country" name="country"  value= "<?php if(isset($row)){echo $row->country;}?>">
                                     
                                         </div>
                                           <div  class="col-md-6">
-                                    <label>License Number</label>
-                                    <input type="text" name="driver_license_number" id="driver_license_number"  class="form-control" value='<?php if(isset($row)){echo $row->driver_license_number;}?>'>
+                                    <label>Port Id</label>
+                                    <input type="text" name="port_id" id="port_id"  class="form-control" value='<?php if(isset($row)){echo $row->port_id;}?>'>
                                   </div>
                                  </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Pro Number</label>
-                                    
-                                    <input type="number" class="form-control" id="pro_number" name="pro_number"  value= "<?php if(isset($row)){echo $row->pro_number;}?>">
-                                    
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                    <label>Tracking Number</label>
-                                    
-                                    <input type="number" class="form-control" id="tracking_number" name="tracking_number"  value= "<?php if(isset($row)){echo $row->tracking_number;}?>">
-                                    <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;}?>'>
-                                        </div>
-                                 </div></div>
                                 
+                                <div class="col-xs-12 col-md-6">
+                                    <label>Port Name</label>
+                                    
+                                    <input type="text" class="form-control" id="port_name" name="port_name"  value= "<?php if(isset($row)){echo $row->port_name;}?>">
+                                    
+                                        </div>
+                                          <div  class="col-md-6">
+                                    <label>Sub Division</label>
+                                    <input type="text" name="subdivision" id="subdivision"  class="form-control" value='<?php if(isset($row)){echo $row->subdivision;}?>'>
+                                  <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;} ?>'>
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                 <label>Transportation Method</label>
+                                 <div class="row"> 
+                                <div class="col-xs-12 col-md-2">
+                                    
+                                    <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Maritime'>Maritime
+                                    
+                                        </div>
+                                          <div  class="col-md-2">
+                                            <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Air'>Air
+                                  </div>
+                                  <div  class="col-md-2">
+                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Rail'>Rail
+                                  </div>
+                                  <div  class="col-md-2">
+                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Mail'>Mail
+                                  </div>
+                                  <div  class="col-md-2">
+                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Road'>Road
+                                  </div>
+                                  <div  class="col-md-2">
+                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Border Crossing Point'>Border Crossing Point
+                                  </div>
+                                 </div></div>
+                                    <div class='form-group'>
+                                        <div class='row'>
+                                           <div class='col-md-4'>
+                                             <label>Remarks</label>
+                                                <input type='text' name='remarks' class='form-control' value='<?php if(isset($row)){echo $row->remarks;} ?>'>
+                                    </div>
+                                    <div class='col-md-4'>
+                                             <label>US Custom Codes</label>
+                                                <input type='text' name='us_custom_codes' class='form-control' value='<?php if(isset($row)){echo $row->us_custom_codes;} ?>''>
+                                    </div>
+                                    <div class='col-md-4'>
+                                             <label>Notes</label>
+                                                <input type='text' name='notes' class='form-control' value='<?php if(isset($row)){echo $row->notes;} ?>'>
+                                    </div>
+                                    </div></div>
                                         <div class="clearfix">&nbsp;</div>
              <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>

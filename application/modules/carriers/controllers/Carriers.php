@@ -30,16 +30,15 @@ class Carriers extends MX_Controller {
 		
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
+		$aData['ports'] = $this->db->get('ports')->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add-carrier',$aData);
 	}
-	 
-
- 
- 	public function edit($id){
+	public function edit($id){
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData['row']=$query;
+		$aData['ports'] = $this->db->get('ports')->result_array();
 			//pre($aData);
 		$aData['tbl'] =$this->tbl;
 		

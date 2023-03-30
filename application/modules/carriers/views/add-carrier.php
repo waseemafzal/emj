@@ -198,7 +198,22 @@ background-color: #fff;
                                         </div>
                                         <div class='col-md-6'>
                                         <label>Port Id</label>
-                                       <input type='number' class="form-control" id="port_id" name="port_id" value='<?php if(isset($row)){echo $row->port_id;}?>'>                                   
+                                        <select class='form-control' name='port_id'>
+                                          <option>Choose Port</option>
+                                        <?php
+                                          if(isset($ports)){
+                                            $port_name='';
+                                            foreach($ports as $port){
+                                              if(isset($row)){
+                                                if($row->port_id==$port['id']){
+                                                  $port_name='selected';
+                                                }
+                                              }
+                                          
+                                        ?>
+                                        <option <?php echo $port_name?> value='<?php echo $port['id']?>'><?php echo $port['port_name']?></option>
+                                        <?php }}?>
+                                        </select>
                                         </div>
                             </div></div>
                             <div class="form-group">
@@ -239,7 +254,22 @@ background-color: #fff;
                                         </div>
                                         <div class='col-md-6'>
                                         <label>Billing Port Id</label>
-                                        <input type='number' class="form-control" id="billing_port_id" name="billing_port_id" value='<?php if(isset($row)){echo $row->billing_port_id;}?>'>
+                                        <select name='billing_port_id' class='form-control'>
+                                        <option>Choose Port</option>
+                                        <?php
+                                          if(isset($ports)){
+                                            $billing_port_name='';
+                                            foreach($ports as $business_port){
+                                              if(isset($row)){
+                                                if($row->billing_port_id==$business_port['id']){
+                                                  $billing_port_name='selected';
+                                                }
+                                              }
+                                          
+                                        ?>
+                                        <option <?php echo $billing_port_name?> value='<?php echo $port['id']?>'><?php echo $port['port_name']?></option>
+                                        <?php }}?>
+                                            </select>
                                       </div>
                                     </div>
                             </div>

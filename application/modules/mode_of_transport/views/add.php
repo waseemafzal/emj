@@ -83,6 +83,9 @@ background-color: #fff;
                                    $mail = '';
                                    $unknown = '';
                                    $pipe = '';
+                                   $vessel='';
+                                   $containarized='';
+                                   $barge='';
                                  if(isset($row)){
                                     switch($row->method){
                                        case "ocean": $ocean = 'selected';
@@ -97,6 +100,12 @@ background-color: #fff;
                                        break;
                                        case "pipe": $pipe = 'selected';
                                        break;        
+                                       case "vessel": $vessel='selected';
+                                       break;
+                                       case "vessel,containarized": $containarized='selected';
+                                       break;
+                                       case "barge": $barge='selected';
+                                       break;
                                    }   }                        
                                   ?>
                                 <option <?php echo $ocean?> value='ocean'>Ocean</option>
@@ -105,6 +114,9 @@ background-color: #fff;
                                 <option <?php echo $mail?> value='mail'>Mail</option>  
                                 <option <?php echo $unknown?> value='unknown'>Unknown</option>
                                 <option <?php echo $pipe?> value='pipe'>Pipe</option>
+                                <option <?php echo $vessel?> value='vessel'>Vessel</option>
+                                <option <?php echo $containarized?> value='vessel,containarized'>Vessel,Containarized</option>
+                                <option <?php echo $barge?> value='barge'>Barge</option>
                               </select>
                               </div>
                                  </div></div>

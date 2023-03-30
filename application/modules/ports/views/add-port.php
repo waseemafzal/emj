@@ -98,24 +98,77 @@ background-color: #fff;
                                  <label>Transportation Method</label>
                                  <div class="row"> 
                                 <div class="col-xs-12 col-md-2">
-                                    
-                                    <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Maritime'>Maritime
+                                <?php 
+                                  $Maritime = '';
+                                 if(isset($row)){
+                                      $method = explode(',', $row->transportation_method);
+                                    if(in_array('Maritime', $method)){
+                                      $Maritime = 'checked';
+                                    }
+                                     
+                                    }?>
+                                    <input type="checkbox" <?php echo $Maritime?> class="" id="transportation_method" name="transportation_method[]" value='Maritime'>Maritime
                                     
                                         </div>
                                           <div  class="col-md-2">
-                                            <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Air'>Air
+                                          <?php 
+                                  $Air = '';
+                                 if(isset($row)){
+                                      $method = explode(',', $row->transportation_method);
+                                    if(in_array('Air', $method)){
+                                      $Air = 'checked';
+                                    }
+                                     
+                                    }?>
+                                            <input type="checkbox" <?php echo $Air ?> class="" id="transportation_method" name="transportation_method[]" value='Air'>Air
                                   </div>
                                   <div  class="col-md-2">
-                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Rail'>Rail
+                                  <?php 
+                                  $Rail = '';
+                                 if(isset($row)){
+                                      $method = explode(',', $row->transportation_method);
+                                    if(in_array('Rail', $method)){
+                                      $Rail = 'checked';
+                                    }
+                                     
+                                    }?>
+                                  <input type="checkbox" <?php echo $Rail?> class="" id="transportation_method" name="transportation_method[]" value='Rail'>Rail
                                   </div>
                                   <div  class="col-md-2">
-                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Mail'>Mail
+                                  <?php 
+                                  $Mail = '';
+                                 if(isset($row)){
+                                      $method = explode(',', $row->transportation_method);
+                                    if(in_array('Mail', $method)){
+                                      $Mail = 'checked';
+                                    }
+                                     
+                                    }?>
+                                  <input type="checkbox" <?php echo $Mail?> class="" id="transportation_method" name="transportation_method[]" value='Mail'>Mail
                                   </div>
-                                  <div  class="col-md-2">
-                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Road'>Road
+                                  <div class="col-md-2">
+                                  <?php 
+                                  $Road = '';
+                                 if(isset($row)){
+                                      $method = explode(',', $row->transportation_method);
+                                    if(in_array('Road', $method)){
+                                      $Road = 'checked';
+                                    }
+                                     
+                                    }?>
+                                  <input type="checkbox" <?php echo $Road?> class="" id="transportation_method" name="transportation_method[]" value='Road'>Road
                                   </div>
-                                  <div  class="col-md-2">
-                                  <input type="checkbox" class="" id="transportation_method" name="transportation_method[]" value='Border Crossing Point'>Border Crossing Point
+                                  <div class="col-md-2">
+                                  <?php 
+                                  $border = '';
+                                 if(isset($row)){
+                                      $method = explode(',', $row->transportation_method);
+                                    if(in_array('Border Crossing Point', $method)){
+                                      $border = 'checked';
+                                    }
+                                     
+                                    }?>
+                                  <input type="checkbox" <?php echo $border?> class="" id="transportation_method" name="transportation_method[]" value='Border Crossing Point'>Border Crossing Point
                                   </div>
                                  </div></div>
                                     <div class='form-group'>

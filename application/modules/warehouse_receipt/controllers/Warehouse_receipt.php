@@ -39,7 +39,7 @@ class Warehouse_receipt extends MX_Controller {
 		
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
-		$aData['general'] = $this->db->get('warehouse')->result_array();
+		//$aData['general'] = $this->db->get('warehouse')->result_array();
 		$aData['destination_agents'] = $this->db->where(array('user_type'=>3))->get('users')->result_array();
 		$aData['shipment'] = $this->db->get('shipment_orders')->result_array();
 		$aData['carriers'] = $this->db->get('carriers')->result_array();

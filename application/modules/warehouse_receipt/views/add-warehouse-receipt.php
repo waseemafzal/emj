@@ -79,18 +79,8 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                  <label>Transaction Number</label>
-                                 <select name='transaction_number' class='form-control'>
-                                    <?php if(isset($general)){
-                          foreach($general as $warehouse){
-                                  $selected='';
-                          if(isset($row)){
-                             if($row->transaction_number == $warehouse['transaction_number']){
-                                 $selected = 'selected';
-                             }}
-                          ?>
-                                            <option <?php echo $selected?> value='<?php echo $warehouse['transaction_number']?>'><?php echo $warehouse['transaction_number']?></option>          
-                                    <?php }}?>
-                      </select>
+                                  <input type='text' name='transaction_number' class='form-control' value='<?php if(isset($row)){echo $row->transaction_number;}else{ echo uniqid();}?>'>
+                                  
                                     
                                         </div>
                             </div></div>

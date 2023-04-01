@@ -65,41 +65,22 @@ background-color: #fff;
              <div class="alert hidden"></div>
                     <div class="form-group wrap_form">
                                 <!--Body-->
+                                <div class="row">
+<div class="col-md-12">
+
+<div class="nav-tabs-custom">
+<ul class="nav nav-tabs">
+<li class="active"><a href="#tab_1" data-toggle="tab">General</a></li>
+<li><a href="#tab_2" data-toggle="tab">Identification</a></li>
+<li><a href="#tab_3" data-toggle="tab">Notes</a></li>
+<li><a href="#tab_4" data-toggle="tab">Attachment</a></li>
+
+
+<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="tab_1">
                                 <div class="form-group">
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Status</label>
-                                    
-                                    <input type="text" class="form-control" id="status" name="status"  value= "<?php if(isset($row)){echo $row->status;}?>">
-                                    
-                                        </div>
-                                          <div  class="col-md-6">
-                                    <label>Description</label>
-                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){echo $row->description;}?></textarea>
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Package Type</label>
-                                    <select name='package_type' class='form-control'>
-                                      <option selected>Choose Package Type</option>
-                                    <option name='extra large box'>Extra Large Box</option>
-                                    <option name='large box'>Large Box</option>
-                                    <option name='medium box'>Medium Box</option>
-                                    <option name='letter'>Letter</option>
-                                    </select>
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Pieces</label>
-                                    <input type="number" name="pieces" id="pieces"  class="form-control" value= "<?php if(isset($row)){echo $row->pieces;}?>">
-                                    <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-                                
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
@@ -113,26 +94,68 @@ background-color: #fff;
                                     <input type="text" name="model" id="model"  class="form-control" value='<?php if(isset($row)){echo $row->model;}?>'>
                                   </div>
                                  </div></div>
+                                <div class="form-group">
+                                <div class="row"> 
+                                <div  class="col-md-12">
+                                    <label>Description</label>
+                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){echo $row->description;}?></textarea>
+                                  </div>
+                                 </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Package Type</label>
+                                    <select name='package_type' class='form-control'>
+                                      <option disable>Choose Package Type</option>
+                                      <?php 
+                                       $extra_large = '';
+                                       $large = '';
+                                       $medium = '';
+                                       $letter = '';
+                                      if(isset($row)){
+                                          switch($row->package_type){
+                                              case "extra large box":$extra_large='selected';
+                                              break;
+                                              case "large box":$large='selected';
+                                              break;
+                                              case "medium box":$medium = 'selected';
+                                              break;
+                                              case "letter":$letter = 'selected';
+                                              break;
+                                          }
+                                      }
+                                       ?>
+                                    <option <?php echo $extra_large;?> value='extra large box'>Extra Large Box</option>
+                                    <option <?php echo $large;?> value='large box'>Large Box</option>
+                                    <option <?php echo $medium;?> value='medium box'>Medium Box</option>
+                                    <option <?php echo $letter;?>value='letter'>Letter</option>
+                                    </select>
+                               </div>
+                               <div class="col-md-6">
                                     <label>Location</label>
                                     
                                     <input type="text" class="form-control" id="location" name="location"  value= "<?php if(isset($row)){echo $row->location;}?>">
                                     
                                         </div>
-                                     
-                                 </div></div> <div class="form-group">
+                                    </div></div>
+                                 <div class='form-group'>
+                                  <div class='row'>     
+                                  <div class="col-xs-12 col-md-6">
+                                    
+                                    <label>Pieces</label>
+                                    <input type="number" name="pieces" id="pieces" id='pieces' class="form-control" value= "<?php if(isset($row)){echo $row->pieces;}?>">
+                                    <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
+                                    </div>
+                                 </div></div>
+                              <div class="form-group">
                                 <h3>Dimensions(LxWxH)</h3>
                                 <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-3">
-                                    <label>Length</label>
-                                    
-                                    <input type="text" class="form-control" id="length" name="length"  value= "<?php if(isset($row)){echo $row->length;}?>">
+                                    <div class="col-xs-12 col-md-3">
+                                       <label>Length</label>
+                                            <input type="text" class="form-control" id="length" name="length"  value= "<?php if(isset($row)){echo $row->length;}?>">
                                     
                                         </div>
+                                        
                                         <div class="col-xs-12 col-md-3">
                                     <label>Width</label>
                                     
@@ -146,9 +169,21 @@ background-color: #fff;
                                         </div><div class="col-xs-12 col-md-3">
                                           <label>Unit</label>
                                     <select name='dimension_unit' class='form-control'>
-                                      <option>Choose Unit</option>
-                                      <option value='inches'>Inches</option>
-                                      <option value='cm'>cm</option>
+                                      <option disable>Choose Unit</option>
+                                      <?php 
+                                      $inches='';
+                                      $cm='';
+                                      if(isset($row)){
+                                        if($row->dimension_unit='inches'){
+                                          $inches='selected';
+                                        }
+                                        if($row->dimension_unit='cm'){
+                                          $cm='selected';
+                                        }
+                                      }
+                                      ?>
+                                      <option <?php echo $inches;?> value='inches'>Inches</option>
+                                      <option <?php echo $cm;?> value='cm'>cm</option>
                                     </select>
                                     
                                         </div>
@@ -169,15 +204,23 @@ background-color: #fff;
                                         <tbody>
                                         <tr>
                                           <td style='text-align:center'>Weight</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='weight'></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='weight'></td>
-                                          <td><select class='form-control' name='weight_unit'><option value='lb'>lb</option></select></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number'id='unit_weight' name='unit_weight'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' id='total_weight' name='total_weight'></td>
+                                          <td><select class='form-control' name='weight_measure_unit'>
+                                          <option value='lb'>lb</option>
+                                          <option value='kg'>Kg</option>
+                                          </select></td>
                                         </tr>
                                         <tr>
                                           <td style='text-align:center'>Volume</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='volume'></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='volume'></td>
-                                          <td><select class='form-control' name='volume_unit'><option value='ft3'>ft<sup>3</sup></option></select></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_volume'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_volume'></td>
+                                          <td><select class='form-control' name='volume_measure_unit'>
+                                            <option value='ft3'>ft<sup>3</sup></option>
+                                            <option value='vlb'>vlb</option>
+                                            <option value='vkg'>vkg</option>
+                                            <option value='m3'>m<sup>3</sup></option>
+                                        </select></td>
                                         </tr>
                                         </tbody>
                                       </table>
@@ -203,22 +246,80 @@ background-color: #fff;
                                         <input type='number' class='form-control' name='total_value'>
 </div>
 </div>
-
-
-
-
+</div>
+</div>
+    <div class='tab-pane' id='tab_2'>
+                       <div class='form-group'>
+                           <div class='row'>
+                             <div class='col-md-6'>
+                               <h3>Definition</h3>
+                             <label>Commodity</label>    
+                             <input type='text' name='commodity' class='form-control'>       
                             </div>
-                                        <div class="clearfix">&nbsp;</div>
+                                    </div></div>
+                          <div class='form-group'>
+                            <h3>Identification</h3>
+                              <div class='row'>
+                                 <div class='col-md-3'>
+                                    <label>Serail #</label>
+                                       <input type='number' class='form-control' name='serial_no'>
+  </div>
+                                     <div class='col-md-3'>
+                                      <label>Identification #</label>
+                                      <input type='number' class='form-control' name='invoice_no'> 
+                                     </div>
+                                     <div class='col-md-3'>
+                                      <label>P.O #</label>
+                                      <input type='number' name='po_no' class='form-control'>
+                                     </div>
+                                     <div class='col-md-3'>
+                                      <label>Lot #</label>
+                                      <input type='number' name='lot_no' class='form-control'>
+                                     </div>
+                                    </div>
+                                    </div>
+                                  <div class='form-group'>
+                                    <div class='row'>
+                                      <div class='col-md-4'>
+                                         <label>Job</label>
+                                            <input type='text' name='job' class='form-control'>
+                                    </div>
+                                        <div class='col-md-4'>
+                                          <label>Expires</label>
+                                           <input type='date' name='expires_on' class='form-control'> 
+                                        </div>
+                                        <div class='col-md-4'>
+                                          <label>NCM Code</label>
+                                            <input type='number' name='ncm_code' class='form-control'>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+            <div class='tab-pane' id='tab_3'>
+                                  <div class='form-group'>
+                                     <div class='row'>
+                                        <div class='col-md-12'>
+                                           <label>Notes</label>
+                                              <input type='text' class='form-control' name='notes'>
+                                    </div></div></div>
+            </div>
+            <div class='tab-pane' id='tab_4'>
+              <div class='form-group'>
+                <div class='row'>
+                  <div class='col-md-12'>
+                    <label>Image</label>
+                      <input type='file' style='margin-bottom:10px;' name='image' class='form-control' id='file'>
+                  </div>
              <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>
                       
                    </div>
+                </div>
+              </div>
+            </div>
            </div> 
-
-                    
-                    
                 </form>
-              
+                                    </div></div></div>              
                  </div>
                
               
@@ -256,6 +357,9 @@ background-color: #fff;
         $.each(other_data,function(key,input){
         formData.append(input.name,input.value);
         });
+        if($('#file').val()!=''){
+		formData.append("file", document.getElementById('file').files[0]);
+		}
     // ajax start
             $.ajax({
             type: "POST",
@@ -317,4 +421,12 @@ background-color: #fff;
     });
  
   /******************************/
+  </script>
+  <script>
+    var pieces = $('#pieces').val();
+    var unit_weight = $('#unit_weight').val();
+    $('#pieces').on('change', function(){
+      var multiple = pieces*unit_weight;
+      $('#total_weight').val(multiple);
+    });
   </script>

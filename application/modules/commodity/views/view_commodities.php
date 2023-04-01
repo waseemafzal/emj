@@ -38,10 +38,12 @@ $Heading=	$module_heading;
                 <table id="post_table" class="table table-bordered responsive">
     <thead>
     <tr>
-        <th>Supplier Name</th>
-        <th>Supplier Address</th>
-		    <th>Invoice Number</th>
-        <th>Purchase Order Number</th>
+        <th>Status</th>
+        <th>Description</th>
+		    <th>Package Type</th>
+        <th>Pieces</th>
+        <th>Part Number</th>
+        <th>Model</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -54,12 +56,15 @@ $Heading=	$module_heading;
 		?>
 		<tr id="row_<?php echo $row->id;?>">
         
-    <td><?php echo $row->supplier_name;?></td>
-    <td><?php echo $row->address;?></td>
+    <td><?php echo $row->status;?></td>
+    <td><?php echo $row->description;?></td>
     
     
-    <td><?php echo $row->invoice_number;?></td>
-    <td><?php echo $row->purchase_order_number;?></td>   
+    <td><?php echo $row->package_type;?></td>
+    <td><?php echo $row->pieces;?></td>   
+    <td><?php echo $row->part_number;?></td> 
+    <td><?php echo $row->model;?></td>   
+
     <td>
       <a href="<?=$controller?>/edit/<?php echo $row->id;?>" class='btn btn-warning'>Edit</a>
       <a onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');" class='btn btn-danger'>Delete</a>

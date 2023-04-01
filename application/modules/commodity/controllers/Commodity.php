@@ -82,7 +82,21 @@ class Commodity extends MX_Controller {
 			//Multiple Images
 	//pre();
 		//pre($_POST);
-		
+		if (!empty($_FILES)){ 
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'jpeg|jpg|gif|png';
+			$config['encrypt_name'] = TRUE;
+			$this->load->library('upload');
+			$this->upload->initialize($config);
+			if (!$this->upload->do_upload('file')){
+			$arr = array('status' => 0,'message' => "Error ".$this->upload->display_errors());
+			echo json_encode($arr);exit;
+			}
+			else{
+			$upload_data = $this->upload->data();
+			$_POST['image']= $upload_data['file_name'];
+			}
+		}
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
 		
 	

@@ -96,7 +96,7 @@ background-color: #fff;
                                           <label>Employ Name</label>
                                           <select name='employ_name' class='form-control'>
                                     <?php if(isset($general)){
-                          foreach($general as $warehouse){?>
+                          foreach($general as $warehouse){
                              $selected = '';
                              if(isset($row)){
                                if($row->employ_name){

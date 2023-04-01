@@ -78,11 +78,8 @@ background-color: #fff;
 <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
-<<<<<<< Updated upstream
-                                 <label>Transaction Number</label>
-                                  <input type='text' name='transaction_number' class='form-control' value='<?php if(isset($row)){echo $row->transaction_number;}else{ echo uniqid();}?>'>
-                                  
-=======
+                                 <!-- <label>Transaction Number</label> -->
+                                  <!-- <input type='text' name='transaction_number' class='form-control' value='<?php if(isset($row)){echo $row->transaction_number;}else{ echo uniqid();}?>'> -->
                                  <!-- <label>Transaction Number</label> -->
                                  <input type='hidden' name='transaction_number' class='form-control'>
                                  <!-- <select name='transaction_number' class='form-control'>
@@ -97,7 +94,7 @@ background-color: #fff;
                                             <option <?php echo $selected?> value='<?php echo $warehouse['transaction_number']?>'><?php echo $warehouse['transaction_number']?></option>          
                                     <?php }}?>
                       </select> -->
->>>>>>> Stashed changes
+
                                     
                                         </div>
                             </div></div>
@@ -359,18 +356,25 @@ background-color: #fff;
 <div class="tab-pane" id="tab_5">
 <div class="form-group">
                                 <div class="row"> 
-                                
                                 <div class="col-xs-12 col-md-6">
-                                    <label>Status</label>
+                                    <label>Part Number</label>
                                     
-                                    <input type="text" class="form-control" value='<?php if(isset($row)){$row->status;}?>' id="status" name="status">
+                                    <input type="text" class="form-control" id="part_number" value='<?php if(isset($row)){$row->part_number;}?>' name="part_number">
                                     
                                         </div>
-                                          <div  class="col-md-6">
+                                        <div  class="col-md-6">
+                                    <label>Model</label>
+                                    <input type="text" name="model" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
+                                  </div>
+                                        
+                                 </div></div>
+                                 <div class='form-group'>
+                                   <div class='row'>
+                                 <div  class="col-md-12">
                                     <label>Description</label>
                                     <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
                                   </div>
-                                 </div></div>
+                                  </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
@@ -402,35 +406,24 @@ background-color: #fff;
                                     </select>
                                     
                                         </div>
-                                          <div class="col-md-6">
-                                    <label>Pieces</label>
-                                    <input type="number" name="pieces" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
-                                
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Part Number</label>
-                                    
-                                    <input type="text" class="form-control" id="part_number" value='<?php if(isset($row)){$row->part_number;}?>' name="part_number">
-                                    
-                                        </div>
-                                          <div  class="col-md-6">
-                                    <label>Model</label>
-                                    <input type="text" name="model" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
+                                        <div class="col-md-6">
                                     <label>Location</label>
                                     
                                     <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location">
                                     
                                         </div>
+                                                    </div></div>
+                                        <div class='form-group'>
+                                           <div class='row'>
+                                             <div class="col-xs-12 col-md-6">
+                                                 <label>Pieces</label>
+                                                    <input type="number" name="pieces" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
+                                  </div>
+                                 </div></div>
+                         
+                                 <div class="form-group">
+                                <div class="row"> 
+                                
                                      
                                  </div></div> <div class="form-group">
                                 <h3>Dimensions(LxWxH)</h3>

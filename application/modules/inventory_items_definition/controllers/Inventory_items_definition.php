@@ -12,7 +12,7 @@ class Inventory_items_definition extends MX_Controller {
 			
 		}
 	}
-	public $view = "view-inventory-types";
+	public $view = "view-inventory-items";
 	/************Configuration of form and dataTable*********************/
 	public $tbl = 'inventory_items_definition';
 	

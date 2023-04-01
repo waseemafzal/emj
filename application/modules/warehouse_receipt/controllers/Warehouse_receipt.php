@@ -119,6 +119,7 @@ class Warehouse_receipt extends MX_Controller {
 		
 		$PrimaryID = $_POST['id'];
 		$_POST['notes'] = implode(',',$_POST['notes']);
+		$_POST['transaction_number'] = rand(10000,9990000);
 		unset($_POST['id']);
 	//pre($_POST);
         

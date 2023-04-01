@@ -61,7 +61,7 @@
 
           <li class="<?= getActive('commodity_types') ?>"><a href="commodity_types"><span>Commodity Types</span></a></li>
 
-          <li class="<?= getActive('inventory_items_definition') ?>"><a href="inventory_items_definition"><span>inventory Items</span></a></li>
+          <li class="<?= getActive('inventory_items_definition') ?>"><a href="inventory_items_definition"><span>inventory Items Definition</span></a></li>
 
           <li class="<?= getActive('carriers') ?>"><a href="carriers"><span>Carriers</span></a></li>
 

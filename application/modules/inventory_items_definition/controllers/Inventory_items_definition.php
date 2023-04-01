@@ -14,9 +14,9 @@ class Inventory_items_definition extends MX_Controller {
 	}
 	public $view = "view-inventory-types";
 	/************Configuration of form and dataTable*********************/
-	public $tbl = 'inventory_types';
+	public $tbl = 'inventory_items_definition';
 	
-	public $module_heading='Inventory Types Management'; 
+	public $module_heading='Inventory Items Management'; 
 	/************Configuration of form and End*********************/
 	public function index(){  
 

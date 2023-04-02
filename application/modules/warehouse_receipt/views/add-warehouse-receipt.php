@@ -65,10 +65,9 @@ background-color: #fff;
 <li><a href="#tab_3" data-toggle="tab">Supplier</a></li>
 <li><a href="#tab_4" data-toggle="tab">Carrier</a></li>
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
-<li><a href="#tab_6" data-toggle="tab">Container</a></li>
-<li><a href="#tab_7" data-toggle="tab">Charges</a></li>
-<li><a href="#tab_8" data-toggle="tab">Notes</a></li>
-<li><a href="#tab_9" data-toggle="tab">Attachment</a></li>
+<li><a href="#tab_6" data-toggle="tab">Charges</a></li>
+<li><a href="#tab_7" data-toggle="tab">Notes</a></li>
+<li><a href="#tab_8" data-toggle="tab">Attachment</a></li>
 
 
 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
@@ -308,47 +307,17 @@ background-color: #fff;
   </div>
   <div class='col-md-6'>
     <label>Driver's License Number:</label>
-    <select name='driver_license_number' class='form-control'>
-      <?php if(isset($drivers)){
-          foreach($drivers as $driver){
-          $selected='';
-          if(isset($row)){
-           if($row->driver_license_number==$driver['driver_license_number']){
-           $selected='selected';
-           }}?>
-          <option <?php echo $selected?> value='<?php echo $driver['driver_license_number']?>'><?php echo $driver['driver_license_number']?></option>
-          <?php }}?>
-              </select>
+    <input type='number' name='driver_license_number' class='form-control' value='<?php if(isset($row)){echo $row->driver_license_number;}?>'>
   </div></div>
   <br>
   <div class='row'>
   <div class='col-md-6'>
     <label>PRO Number:</label>
-    <select name='pro_number' class='form-control'>
-      <?php if(isset($drivers)){
-          foreach($drivers as $driver){
-          $selected='';
-          if(isset($row)){
-           if($row->pro_number==$driver['pro_number']){
-           $selected='selected';
-           }}?>
-          <option <?php echo $selected?> value='<?php echo $driver['pro_number']?>'><?php echo $driver['pro_number']?></option>
-          <?php }}?>
-          </select>
+    <input type='number' name='pro_number' class='form-control' value='<?php if(isset($row)){echo $row->pro_number;}?>'>
   </div>
   <div class='col-md-6'>
     <label>Driver's Tracking Number:</label>
-    <select name='driver_tracking_number' class='form-control'>
-      <?php if(isset($drivers)){
-          foreach($drivers as $driver){
-          $selected='';
-          if(isset($row)){
-           if($row->driver_tracking_number==$driver['tracking_number']){
-           $selected='selected';
-           }}?>
-          <option <?php echo $selected?> value='<?php echo $driver['tracking_number']?>'><?php echo $driver['tracking_number']?></option>
-          <?php }}?>
-          </select>
+    <input type='number' name='driver_tracking_number' class='form-control' value='<?php if(isset($row)){echo $row->driver_tracking_number;}?>'>
   </div>
           </div>
             </div>
@@ -518,169 +487,8 @@ background-color: #fff;
 </div>
           </div>          </div></div>
 
+
 <div class="tab-pane" id="tab_6">
-<div class="form-group">
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Container Type</label>
-                                    <select class="form-control" id="container_type" name="container_type">
-                                    <?php if(isset($containers)){
-                                       foreach($containers as $container){
-                                       $selected='';
-                                        if(isset($row)){
-                                          if($row->container_type==$container['container_type']){
-                                            $selected='selected';
-                                            }}?>
-                                    <option <?php echo $selected?> value='<?php echo $container['container_type']?>'><?php echo $container['container_type']?></option>
-                                    <?php }}?>
-                                       </select>     
-                                  </div>
-                                          <div  class="col-md-6">
-                                    <label>Description</label>
-                                    <textarea type="text" name="container_description" id="container_description" class="form-control"><?php if(isset($row)){$row->container_description;}?></textarea>
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Number</label>
-                                    
-                                    <select class="form-control" id="container_number" name="container_number">
-                                       <?php foreach($containers as $container){
-                                          $selected='';
-                                           if(isset($row)){
-                                               if($row->number==$container['number']){
-                                                   $selected='selected';
-                                           }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['number']?>'><?php echo $container['number']?></option>
-                                    <?php }?>   
-                                    </select>
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Serial Number 1</label>
-                                    <select class="form-control" id="serial_number_1" name="serial_number_1">
-                                       <?php foreach($containers as $container){
-                                           $selected='';
-                                            if(isset($row)){
-                                              if($row->serial_number_1==$container['serial_number_1']){
-                                                $selected='selected';
-                                                }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['serial_number_1']?>'><?php echo $container['serial_number_1']?></option>
-                                    <?php }?>   
-                                    </select>
-                                
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Serial Number 2</label>
-                                    <select class="form-control" id="serial_number_2" name="serial_number_2">
-                                       <?php foreach($containers as $container){
-                                          $selected='';
-                                           if(isset($row)){
-                                             if($row->serial_number_2==$container['serial_number_2']){
-                                               $selected='selected';
-                                               }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['serial_number_2']?>'><?php echo $container['serial_number_2']?></option>
-                                    <?php }?>   
-                                    </select>                                 
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Location</label>
-                                    <select class="form-control" id="container_location" name="container_location">
-                                       <?php foreach($containers as $container){
-                                         $selected='';
-                                           if(isset($row)){
-                                             if($row->container_location==$container['location']){
-                                                $selected='selected';
-                                                }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['location']?>'><?php echo $container['location']?></option>
-                                    <?php }?>   
-                                    </select>
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                 <h4>Dimensions</h4>
-
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-4">
-                                    <label>Length</label>
-                                    <select class="form-control" id="container_length" name="container_length">
-                                       <?php foreach($containers as $container){
-                                         $selected='';
-                                           if(isset($row)){
-                                             if($row->container_length==$container['length']){
-                                               $selected='selected';
-                                               }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['length']?>'><?php echo $container['length']?></option>
-                                    <?php }?>   
-                                    </select>
-                                    
-                                        </div>
-                                          <div class="col-md-4">
-                                    <label>Weight</label>
-                                    <select class="form-control" id="container_weight" name="container_weight">
-                                       <?php foreach($containers as $container){
-                                         $selected='';
-                                          if(isset($row)){
-                                            if($row->container_weight==$container['weight']){
-                                              $selected='selected';
-                                              }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['weight']?>'><?php echo $container['weight']?></option>
-                                    <?php }?>   
-                                    </select>
-
-                                  </div>
-                                  <div class="col-md-4">
-                                    <label>Width</label>
-                                    <select class="form-control" id="container_width" name="container_width">
-                                       <?php foreach($containers as $container){
-                                         $selected='';
-                                          if(isset($row)){
-                                              if($row->container_width==$container['width']){
-                                                  $selected='selected';
-                                          }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['width']?>'><?php echo $container['width']?></option>
-                                    <?php }?>   
-                                    </select>
-
-                                  </div>
-</div></div>
-                          <div class='form-group'>
-                            <div class='row'>
-                                  <div class="col-md-4">
-                                    <label>Height</label>
-                                    <select class="form-control" id="container_height" name="container_height">
-                                       <?php foreach($containers as $container){
-                                       $selected='';
-                                         if(isset($row)){
-                                          if($row->container_height==$container['height']){
-                                            $selected='selected';
-                                            }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['height']?>'><?php echo $container['height']?></option>
-                                    <?php }?>   
-                                    </select>
-
-                                  </div>
-                                  <div class="col-md-4">
-                                    <label>Volume</label>
-                                    <select class="form-control" id="container_volume" name="container_volume">
-                                       <?php foreach($containers as $container){
-                                       $selected='';
-                                         if(isset($row)){
-                                          if($row->container_volume==$container['volume']){
-                                            $selected='selected';
-                                            }}?>
-                                     <option <?php echo $selected?> value='<?php echo $container['volume']?>'><?php echo $container['volume']?></option>
-                                    <?php }?>   
-                                    </select>
-
-                                  </div>
-                                 </div></div>
-</div>
-<div class="tab-pane" id="tab_7">
 <div class="form-group">
                                 <div class="row"> 
                                 
@@ -896,7 +704,7 @@ background-color: #fff;
                                   </div>
                                  </div></div>
 </div>
-<div class="tab-pane" id="tab_8">
+<div class="tab-pane" id="tab_7">
   <div class='row'>
   <div class='col-md-12' id='inputFormRow'>
             <h4>Notes</h4>
@@ -910,7 +718,7 @@ background-color: #fff;
                                   </div> <br>
         
                                   </div></div>
-                                  <div class="tab-pane" id="tab_9">
+                                  <div class="tab-pane" id="tab_8">
   <div class='row'>
     <div class='col-md-6'>
 <label>Image</label>

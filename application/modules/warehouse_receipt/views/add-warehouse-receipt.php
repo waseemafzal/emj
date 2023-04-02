@@ -121,7 +121,7 @@ background-color: #fff;
                           foreach($general as $warehouse){
                              $selected = '';
                              if(isset($row)){
-                               if($row->employ_name){
+                               if($row->employ_name==$warehouse['employ_name']){
                                   $selected = 'selected';
                                }}?>
                                             <option <?php echo $selected?> value='<?php echo $warehouse['employ_name']?>'><?php echo $warehouse['employ_name']?></option>          

@@ -79,7 +79,19 @@ background-color: #fff;
                                     <textarea type="text" name="address" id="address"  class="form-control"><?php if(isset($row)){echo $row->address;}?></textarea>
                                   </div>
                                  </div></div>
-                                
+                                <div class='form-group'>
+                                  <div class='row'>
+                                    <div class='col-md-6'>
+                                      <label>Invoice Number</label>
+                                        <input type='number' name='invoice_number' class='form-control' value='<?php if(isset($row)){echo $row->invoice_number;}?>'>
+                                    </div>
+                                    <div class='col-md-6'>
+                                      <label>Purchase Order Number</label>
+                                        <input type='number' name='purchase_order_number' class='form-control' value='<?php if(isset($row)){echo $row->purchase_order_number;}?>'>
+                                        <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;}?>'> 
+                                      </div>
+                                  </div>
+                                </div>
                                         <div class="clearfix">&nbsp;</div>
              <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>

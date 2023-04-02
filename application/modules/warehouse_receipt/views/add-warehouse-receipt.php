@@ -323,386 +323,45 @@ background-color: #fff;
             </div>
 
 <div class="tab-pane" id="tab_5">
-<div class="form-group">
-                                <div class="row"> 
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Part Number</label>
-                                    
-                                    <input type="text" class="form-control" id="part_number" value='<?php if(isset($row)){$row->part_number;}?>' name="part_number">
-                                    
-                                        </div>
-                                        <div  class="col-md-6">
-                                    <label>Model</label>
-                                    <input type="text" name="model" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
-                                  </div>
-                                        
-                                 </div></div>
-                                 <div class='form-group'>
-                                   <div class='row'>
-                                 <div  class="col-md-12">
-                                    <label>Description</label>
-                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
-                                  </div>
-                                  </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Package Type</label>
-                                    <select name='package_type' class='form-control'>
-                                        <?php 
-                                        $extralarge='';
-                                        $medium='';
-                                        $large='';
-                                        $letter='';
-                                        if(isset($row)){
-                                                   if($row->package_type=='extra large box'){
-                                                      $extralarge='selected';
-                                                      }
-                                                      if($row->package_type=='large box'){
-                                                      $large='selected';
-                                                      }
-                                                      if($row->package_type=='mediun box'){
-                                                      $medium='selected';
-                                                      }
-                                                      if($row->package_type=='letter'){
-                                                      $letter='selected';
-                                                      }}?>
-                                      <option selected value='Not Selected'>Choose Package Type</option>
-                                    <option <?php echo $extralarge?> value='extra large box'>Extra Large Box</option>
-                                    <option <?php echo $large?> value='large box'>Large Box</option>
-                                    <option <?php echo $medium?> value='medium box'>Medium Box</option>
-                                    <option <?php echo $letter?>value='letter'>Letter</option>
-                                    </select>
-                                    
-                                        </div>
-                                        <div class="col-md-6">
-                                    <label>Location</label>
-                                    
-                                    <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location">
-                                    
-                                        </div>
-                                                    </div></div>
-                                        <div class='form-group'>
-                                           <div class='row'>
-                                             <div class="col-xs-12 col-md-6">
-                                                 <label>Pieces</label>
-                                                    <input type="number" name="pieces" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
-                                  </div>
-                                 </div></div>
-                         
-                                 <div class="form-group">
-                                <div class="row"> 
-                                
-                                     
-                                 </div></div> <div class="form-group">
-                                <h3>Dimensions(LxWxH)</h3>
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-3">
-                                    <label>Length</label>
-                                    
-                                    <input type="text" class="form-control" id="length" value='<?php if(isset($row)){$row->length;}?>' name="length">
-                                    
-                                        </div>
-                                        <div class="col-xs-12 col-md-3">
-                                    <label>Width</label>
-                                    
-                                    <input type="text" class="form-control" id="width" value='<?php if(isset($row)){$row->width;}?>' name="width">
-                                    
-                                        </div><div class="col-xs-12 col-md-3">
-                                    <label>Height</label>
-                                    
-                                    <input type="text" class="form-control" id="height" value='<?php if(isset($row)){$row->height;}?>' name="height">
-                                    
-                                        </div><div class="col-xs-12 col-md-3">
-                                          <label>Unit</label>
-                                    <select name='dimension_unit' class='form-control'>
-                                        <?php
-                                        $inches='';
-                                        $cm='';
-                                        if(isset($row)){
-                                            if($row->dimension_unit=='inches'){
-                                                $inches='selected';
-                                            }
-                                            if($row->dimension_unit=='cm'){
-                                                $cm='selected';
-                                            }
-                                        }
-                                        ?>
-                                      <option value='Not Selected'>Choose Unit</option>
-                                      <option <?php echo $inches?> value='inches'>Inches</option>
-                                      <option <?php echo $cm?> value='cm'>cm</option>
-                                    </select>
-                                    
-                                        </div>
-                                          
-                                 </div></div>
-                                 <div class='form-group'>
-                                  <div class='row'>
-                                    <div class='col-xs-12'>
-                                      <table border='1' style='width:100%'>
-                                        <thead>
-                                        <tr>
-                                          <th style='text-align:center'>By totals</th>
-                                          <th style='text-align:center'>Piece</th>
-                                          <th style='text-align:center'>Total</th>
-                                          <th style='text-align:center'>Measure</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                          <td style='text-align:center'>Weight</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name=''></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name=''></td>
-                                          <td><select class='form-control' name='weight_unit'><option value='lb'>lb</option></select></td>
-                                        </tr>
-                                        <tr>
-                                          <td style='text-align:center'>Volume</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name=''></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name=''></td>
-                                          <td><select class='form-control' name='volume_unit'><option value='ft3'>ft<sup>3</sup></option></select></td>
-                                        </tr>
-                                        </tbody>
-                                      </table>
-                                    </div>
-</div>
-</div>
-                             <div class='form-group'>
-                                <div class='row'>
-                                   <div class='col-sm-3'>
-                                      <label>Quantity</label>
-                                        <input type='number' value='<?php if(isset($row)){echo $row->quantity;}?>' class='form-control' name='quantity'>
-</div>
-                                    <div class='col-sm-3'>
-                                      <label>Unit</label>
-                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unit;}?>' name='unit'>
-                  </div>
-                                    <div class='col-sm-3'>
-                                      <label>Unitary Value</label>
-                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unitary_value;}?>' name='unitary_value'>
-</div>
-                                    <div class='col-sm-3'>
-                                      <label>Total Value</label>
-                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->total_value;}?>' name='total_value'>
-</div>
-          </div>          </div></div>
-
-
+   <div class='form-group'>
+    <div class='row'>
+      <div class='col-md-12'>
+        <table class='table'>
+          <tbody>
+          <tr>
+          <div class='col-md-10'>
+             <td>Status</td>
+          </div>
+          <div class='col-md-2'>
+             <td><button type='button' class='btn btn-info' data-toggle='modal' data-target='#AddCommodityModal'>Add Commodity</button></td>
+          </div>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+   </div>
+          </div>
 <div class="tab-pane" id="tab_6">
-<div class="form-group">
-                                <div class="row"> 
-                                
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Status</label>
-                                    
-                                    <select class="form-control" id="charges_status" name="charges_status">
-                                    <?php if(isset($charges)){
-                                       foreach($charges as $charge){
-                                        $selected='';
-                                         if(isset($row)){
-                                           if($row->charges_status==$charge['status']){
-                                             $selected='selected';
-                                             }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['status']?>'><?php echo $charge['status']?></option>
-                                    <?php }}?>
-                                    </select>
-                                    
-                                        </div>
-                                          <div  class="col-md-6">
-                                    <label>Description</label>
-                <textarea type="text" name="charges_description" id="charges_description"  class="form-control"><?php if(isset($row)){$row->charges_description;}?></textarea>
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Prepaid</label>
-                                    
-                                    <select class="form-control" id="prepaid" name="prepaid">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                         if($row->prepaid==$charge['prepaid']){
-                                           $selected='selected';
-                                           }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['prepaid']?>'><?php echo $charge['prepaid']?></option>
-                                     <?php }?>
-                                       </select>
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Quantity</label>
-                                    <select class="form-control" id="quantity" name="quantity">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                        if(isset($row)){
-                                          if($row->quantity==$charge['quantity']){
-                                          $selected='selected';
-                                           }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['quantity']?>'><?php echo $charge['quantity']?></option>
-                                     <?php }?>
-                                       </select>
-                                                                   
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Price</label>
-                                    <select class="form-control" id="price" name="price">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                         if($row->price==$charge['price']){
-                                           $selected='selected';
-                                           }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['price']?>'><?php echo $charge['price']?></option>
-                                     <?php }?>
-                                       </select>
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Amount</label>
-                                    <select class="form-control" id="amount" name="amount">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                         if($row->amount==$charge['amount']){
-                                           $selected='selected';
-                                           }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['amount']?>'><?php echo $charge['amount']?></option>
-                                     <?php }?>
-                                       </select>
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Tax Code</label>
-                                    <select class="form-control" id="tax_code" name="tax_code">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                        if($row->tax_code==$charge['tax_code']){
-                                         $selected='selected';
-                                         }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['tax_code']?>'><?php echo $charge['tax_code']?></option>
-                                     <?php }?>
-                                       </select>
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Tax Rate</label>
-                                    <select class="form-control" id="tax_rate" name="tax_rate">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                        if($row->tax_rate==$charge['tax_rate']){
-                                          $selected='selected';
-                                          }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['tax_rate']?>'><?php echo $charge['tax_rate']?></option>
-                                     <?php }?>
-                                       </select>
-                                   
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Tax Amount</label>
-                                    <select class="form-control" id="tax_amount" name="tax_amount">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                        if($row->tax_amount==$charge['tax_amount']){
-                                         $selected='selected';
-                                         }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['tax_amount']?>'><?php echo $charge['tax_amount']?></option>
-                                     <?php }?>
-                                       </select>
-                                    
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Amount + Tax</label>
-                                    <select class="form-control" id="amount_with_tax" name="amount_with_tax">
-                                    <?php foreach($charges as $charge){
-                                      $selected='selected';
-                                       if(isset($row)){
-                                           if($row->amount_with_tax==$charge['amount_with_tax']){
-                                               $selected='selected';
-                                     }
-                                      }
-                                      ?>
-                                    <option <?php echo $selected?> value='<?php echo $charge['amount_with_tax']?>'><?php echo $charge['amount_with_tax']?></option>
-                                     <?php }?>
-                                       </select>
-                                   
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Currency</label>
-                                    
-                                    <select class="form-control" id="currency" name="currency">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                         if($row->currency==$charge['currency']){
-                                           $selected='selected';
-                                           }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['currency']?>'><?php echo $charge['currency']?></option>
-                                     <?php }?>
-                                       </select>
-                                   
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Final Amount</label>
-                                    <select class="form-control" id="final_amount" name="final_amount">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                        if($row->final_amount==$charge['final_amount']){
-                                         $selected='selected';
-                                         }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['final_amount']?>'><?php echo $charge['final_amount']?></option>
-                                     <?php }?>
-                                       </select>
-                                   
-                                  </div>
-                                 </div></div>
-                                 <div class="form-group">
-                                <div class="row"> 
-                                 <div class="col-xs-12 col-md-6">
-                                    <label>Expense</label>
-                                    
-                                    <select class="form-control" id="expense" name="expense">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                         if($row->expense==$charge['expense']){
-                                          $selected='selected';
-                                          }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['expense']?>'><?php echo $charge['expense']?></option>
-                                     <?php }?>
-                                       </select>
-                                   
-                                        </div>
-                                          <div class="col-md-6">
-                                    <label>Income</label>
-                                    <select class="form-control" id="income" name="income">
-                                    <?php foreach($charges as $charge){
-                                      $selected='';
-                                       if(isset($row)){
-                                           if($row->income==$charge['income']){
-                                                $selected='selected';                                   
-                                                }}
-                                       ?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['income']?>'><?php echo $charge['income']?></option>
-                                     <?php }?>
-                                       </select>
-                                  </div>
-                                 </div></div>
+<div class='form-group'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class='table'>
+        <tbody>
+          <div class='row'>
+            <tr>
+            <div class='col-md-10'>
+              <td>Status</td>
+            </div>
+            <div class='col-md-2'>
+              <td><button type='button' class='btn btn-info' data-target='#AddChargesModal' data-toggle='modal'>Add Charges</button></td>
+            </div>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 </div>
 <div class="tab-pane" id="tab_7">
   <div class='row'>
@@ -759,12 +418,294 @@ background-color: #fff;
 
     <!-- Scroll to Top Button-->
  <?php // commonjs() ?>
-   
-   
  
-
 </body>
+<div class='modal fade' id='AddCommodityModal'>
+  <div class='modal-dialog modal-lg modal-dialog-centered'>
+    <div class='modal-content'>
+      <div class='modal-header bg-green'>
+               <h3 class='modal-title text-white'>Add Commodity</h3>
+               <button class='close' data-dismiss='modal' style='color:white'>&times;</button>
+      </div>
+      <div class='modal-body'>
+      <div class="form-group">
+                                <div class="row"> 
+                                <div class="col-xs-12 col-md-6">
+                                    <label>Part Number</label>
+                                    
+                                    <input type="text" class="form-control" id="part_number" value='<?php if(isset($row)){$row->part_number;}?>' name="part_number[]">
+                                    
+                                        </div>
+                                        <div  class="col-md-6">
+                                    <label>Model</label>
+                                    <input type="text" name="model[]" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
+                                  </div>
+                                        
+                                 </div></div>
+                                 <div class='form-group'>
+                                   <div class='row'>
+                                 <div  class="col-md-12">
+                                    <label>Description</label>
+                                    <textarea type="text" name="description[]" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
+                                  </div>
+                                  </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Package Type</label>
+                                    <select name='package_type[]' class='form-control'>
+                                        <?php 
+                                        $extralarge='';
+                                        $medium='';
+                                        $large='';
+                                        $letter='';
+                                        if(isset($row)){
+                                                   if($row->package_type=='extra large box'){
+                                                      $extralarge='selected';
+                                                      }
+                                                      if($row->package_type=='large box'){
+                                                      $large='selected';
+                                                      }
+                                                      if($row->package_type=='mediun box'){
+                                                      $medium='selected';
+                                                      }
+                                                      if($row->package_type=='letter'){
+                                                      $letter='selected';
+                                                      }}?>
+                                      <option selected value='Not Selected'>Choose Package Type</option>
+                                    <option <?php echo $extralarge?> value='extra large box'>Extra Large Box</option>
+                                    <option <?php echo $large?> value='large box'>Large Box</option>
+                                    <option <?php echo $medium?> value='medium box'>Medium Box</option>
+                                    <option <?php echo $letter?>value='letter'>Letter</option>
+                                    </select>
+                                    
+                                        </div>
+                                        <div class="col-md-6">
+                                    <label>Location</label>
+                                    
+                                    <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location[]">
+                                    
+                                        </div>
+                                                    </div></div>
+                                        <div class='form-group'>
+                                           <div class='row'>
+                                             <div class="col-xs-12 col-md-6">
+                                                 <label>Pieces</label>
+                                                    <input type="number" name="pieces[]" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
+                                  </div>
+                                 </div></div>
+                         
+                                 <div class="form-group">
+                                <div class="row"> 
+                                
+                                     
+                                 </div></div> <div class="form-group">
+                                <h3>Dimensions(LxWxH)</h3>
+                                <div class="row"> 
+                                
+                                <div class="col-xs-12 col-md-3">
+                                    <label>Length</label>
+                                    
+                                    <input type="text" class="form-control" id="length" value='<?php if(isset($row)){$row->length;}?>' name="length[]">
+                                    
+                                        </div>
+                                        <div class="col-xs-12 col-md-3">
+                                    <label>Width</label>
+                                    
+                                    <input type="text" class="form-control" id="width" value='<?php if(isset($row)){$row->width;}?>' name="width[]">
+                                    
+                                        </div><div class="col-xs-12 col-md-3">
+                                    <label>Height</label>
+                                    
+                                    <input type="text" class="form-control" id="height" value='<?php if(isset($row)){$row->height;}?>' name="height[]">
+                                    
+                                        </div><div class="col-xs-12 col-md-3">
+                                          <label>Unit</label>
+                                    <select name='dimension_unit[]' class='form-control'>
+                                        <?php
+                                        $inches='';
+                                        $cm='';
+                                        if(isset($row)){
+                                            if($row->dimension_unit=='inches'){
+                                                $inches='selected';
+                                            }
+                                            if($row->dimension_unit=='cm'){
+                                                $cm='selected';
+                                            }
+                                        }
+                                        ?>
+                                      <option value='Not Selected'>Choose Unit</option>
+                                      <option <?php echo $inches?> value='inches'>Inches</option>
+                                      <option <?php echo $cm?> value='cm'>cm</option>
+                                    </select>
+                                    
+                                        </div>
+                                          
+                                 </div></div>
+                                 <div class='form-group'>
+                                  <div class='row'>
+                                    <div class='col-xs-12'>
+                                      <table border='1' style='width:100%'>
+                                        <thead>
+                                        <tr>
+                                          <th style='text-align:center'>By totals</th>
+                                          <th style='text-align:center'>Piece</th>
+                                          <th style='text-align:center'>Total</th>
+                                          <th style='text-align:center'>Measure</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                          <td style='text-align:center'>Weight</td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_weight[]'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_weight[]'></td>
+                                          <td><select class='form-control' name='weight_unit_measure[]'><option value='lb'>lb</option></select></td>
+                                        </tr>
+                                        <tr>
+                                          <td style='text-align:center'>Volume</td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_volume[]'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_volume[]'></td>
+                                          <td><select class='form-control' name='volume_unit_measure[]'><option value='ft3'>ft<sup>3</sup></option></select></td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+</div>
+</div>
+                             <div class='form-group'>
+                                <div class='row'>
+                                   <div class='col-sm-3'>
+                                      <label>Quantity</label>
+                                        <input type='number' value='<?php if(isset($row)){echo $row->quantity;}?>' class='form-control' name='quantity[]'>
+</div>
+                                    <div class='col-sm-3'>
+                                      <label>Unit</label>
+                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unit;}?>' name='unit[]'>
+                  </div>
+                                    <div class='col-sm-3'>
+                                      <label>Unitary Value</label>
+                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unitary_value;}?>' name='unitary_value[]'>
+</div>
+                                    <div class='col-sm-3'>
+                                      <label>Total Value</label>
+                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->total_value;}?>' name='total_value[]'>
+</div>
+          </div>          </div></div>
 
+          <div class="modal-footer">
+      <button type="button" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+     
+    </div>
+  </div>  
+</div>
+<div class='modal fade' id='AddChargesModal'>
+  <div class='modal-dialog modal-lg modal-dialog-centered'>
+    <div class='modal-content'>
+      <div class='modal-header bg-green'>
+               <h3 class='modal-title text-white'>Add Charges</h3>
+               <button class='close' data-dismiss='modal' style='color:white'>&times;</button>
+      </div>
+      <div class='modal-body'>
+      <div class="form-group">
+                                <div class="row"> 
+                                
+                                <div class="col-xs-12 col-md-6">
+                                    <label>Status</label>
+                                    
+                                    <select class="form-control" id="charges_status" name="charges_status">
+                                    <?php if(isset($charges)){
+                                       foreach($charges as $charge){
+                                        $selected='';
+                                         if(isset($row)){
+                                           if($row->charges_status==$charge['status']){
+                                             $selected='selected';
+                                             }}?>  
+                                    <option <?php echo $selected?> value='<?php echo $charge['status']?>'><?php echo $charge['status']?></option>
+                                    <?php }}?>
+                                    </select>
+                                    
+                                        </div>
+                                          <div  class="col-md-6">
+                                    <label>Description</label>
+                <textarea type="text" name="charges_description" id="charges_description"  class="form-control"><?php if(isset($row)){$row->charges_description;}?></textarea>
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Prepaid</label>
+                                          <input type='text' name='prepaid' class='form-control' value='<?php if(isset($row)){echo $row->prepaid;}?>'>
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Quantity</label>
+                                    <input type='number' class="form-control" id="quantity" name="quantity" value='<?php if(isset($row)){echo $row->quantity;}?>'>                               
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Price</label>
+                                    <input type='number' class="form-control" id="price" name="price" value='<?php if(isset($row)){echo $row->price;}?>'>                                                                   
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Amount</label>
+                                    <input type='number' class="form-control" id="amount" name="amount" value='<?php if(isset($row)){echo $row->amount;}?>'>                                                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Tax Code</label>
+                                    <input type='number' class="form-control" id="tax_code" name="tax_code" value='<?php if(isset($row)){echo $row->tax_code;}?>'>                                                                   
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Tax Rate</label>
+                                    <input type='number' class="form-control" id="tax_rate" name="tax_rate" value='<?php if(isset($row)){echo $row->tax_rate;}?>'>                                                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Tax Amount</label>
+                                    <input type='number' class="form-control" id="tax_amount" name="tax_amount" value='<?php if(isset($row)){echo $row->tax_amount;}?>'>                                                                   
+                                        </div>
+                                          <div class="col-md-6">
+                                    <label>Amount + Tax</label>
+                                    <input type='number' class="form-control" id="amount_with_tax" name="amount_with_tax" value='<?php if(isset($row)){echo $row->amount_with_tax;}?>'>                                                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Currency</label>
+                                    <input type='number' class="form-control" id="currency" name="currency" value='<?php if(isset($row)){echo $row->currency;}?>'>                                                                   
+                                  </div>
+                                          <div class="col-md-6">
+                                    <label>Final Amount</label>
+                                    <input type='number' class="form-control" id="final_amount" name="final_amount" value='<?php if(isset($row)){echo $row->final_amount;}?>'>                                                                   
+                                  </div>
+                                 </div></div>
+                                 <div class="form-group">
+                                <div class="row"> 
+                                 <div class="col-xs-12 col-md-6">
+                                    <label>Expense</label>
+                                    <input type='number' class="form-control" id="expense" name="expense" value='<?php if(isset($row)){echo $row->expense;}?>'>                                                                   
+                                  </div>
+                                          <div class="col-md-6">
+                                    <label>Income</label>
+                                         <input type='number' class="form-control" id="income" name="income" value='<?php if(isset($row)){echo $row->income;}?>'>                                                                   
+                                  </div>
+                                 </div></div>
+          <div class="modal-footer">
+      <button type="button" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+     
+    </div>
 </html>
 
 <script>

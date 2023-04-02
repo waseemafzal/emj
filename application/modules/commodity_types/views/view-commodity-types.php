@@ -39,7 +39,7 @@ $Heading=	$module_heading;
     <thead>
     <tr>
         <th>Id</th>
-        <th>Code</th>
+        <th>HTS Code</th>
         <th>Description</th>
         <th>Actions</th>
     </tr>

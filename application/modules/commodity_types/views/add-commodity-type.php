@@ -69,7 +69,7 @@ background-color: #fff;
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
-                                    <label>Code</label>
+                                    <label>HTS Code</label>
                                     
                                     <input type="number" class="form-control" id="code" name="code"  value= "<?php if(isset($row)){echo $row->code;}?>">
                                     

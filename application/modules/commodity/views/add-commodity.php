@@ -423,9 +423,9 @@ background-color: #fff;
   /******************************/
   </script>
   <script>
-    var pieces = $('#pieces').val();
-    var unit_weight = $('#unit_weight').val();
-    $('#pieces').on('change', function(){
+    $('#pieces, #unit_weight').on('change', function(){
+      var pieces = pasreFloat($('#pieces').val());
+      var unit_weight = parseFloat($('#unit_weight').val());
       var multiple = pieces*unit_weight;
       $('#total_weight').val(multiple);
     });

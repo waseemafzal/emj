@@ -66,8 +66,9 @@ background-color: #fff;
 <li><a href="#tab_4" data-toggle="tab">Carrier</a></li>
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
 <li><a href="#tab_6" data-toggle="tab">Charges</a></li>
-<li><a href="#tab_7" data-toggle="tab">Notes</a></li>
-<li><a href="#tab_8" data-toggle="tab">Attachment</a></li>
+<li><a href="#tab_7" data-toggle="tab">Events</a></li>
+<li><a href="#tab_8" data-toggle="tab">Notes</a></li>
+<li><a href="#tab_9" data-toggle="tab">Attachment</a></li>
 
 
 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
@@ -363,7 +364,28 @@ background-color: #fff;
   </div>
 </div>
 </div>
-<div class="tab-pane" id="tab_7">
+<div class='tab-pane' id='tab_7'>
+<div class='form-group'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class='table'>
+        <tbody>
+          <div class='row'>
+            <tr>
+            <div class='col-md-10'>
+              <td>Event</td>
+            </div>
+            <div class='col-md-2'>
+              <td><button type='button' class='btn btn-info' data-target='#AddEventModal' data-toggle='modal'>Add Event</button></td>
+            </div>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<div class="tab-pane" id="tab_8">
   <div class='row'>
   <div class='col-md-12' id='inputFormRow'>
             <h4>Notes</h4>
@@ -377,7 +399,7 @@ background-color: #fff;
                                   </div> <br>
         
                                   </div></div>
-                                  <div class="tab-pane" id="tab_8">
+<div class="tab-pane" id="tab_9">
   <div class='row'>
     <div class='col-md-6'>
 <label>Image</label>
@@ -433,12 +455,12 @@ background-color: #fff;
                                 <div class="col-xs-12 col-md-6">
                                     <label>Part Number</label>
                                     
-                                    <input type="text" class="form-control" id="part_number" value='<?php if(isset($row)){$row->part_number;}?>' name="part_number[]">
+                                    <input type="text" class="form-control" id="part_number" value='<?php if(isset($row)){$row->part_number;}?>' name="part_number">
                                     
                                         </div>
                                         <div  class="col-md-6">
                                     <label>Model</label>
-                                    <input type="text" name="model[]" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
+                                    <input type="text" name="model" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
                                   </div>
                                         
                                  </div></div>
@@ -446,14 +468,14 @@ background-color: #fff;
                                    <div class='row'>
                                  <div  class="col-md-12">
                                     <label>Description</label>
-                                    <textarea type="text" name="description[]" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
+                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
                                   </div>
                                   </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                     <label>Package Type</label>
-                                    <select name='package_type[]' class='form-control'>
+                                    <select name='package_type' class='form-control'>
                                         <?php 
                                         $extralarge='';
                                         $medium='';
@@ -483,7 +505,7 @@ background-color: #fff;
                                         <div class="col-md-6">
                                     <label>Location</label>
                                     
-                                    <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location[]">
+                                    <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location">
                                     
                                         </div>
                                                     </div></div>
@@ -491,7 +513,7 @@ background-color: #fff;
                                            <div class='row'>
                                              <div class="col-xs-12 col-md-6">
                                                  <label>Pieces</label>
-                                                    <input type="number" name="pieces[]" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
+                                                    <input type="number" name="pieces" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
                                   </div>
                                  </div></div>
                          
@@ -506,22 +528,22 @@ background-color: #fff;
                                 <div class="col-xs-12 col-md-3">
                                     <label>Length</label>
                                     
-                                    <input type="text" class="form-control" id="length" value='<?php if(isset($row)){$row->length;}?>' name="length[]">
+                                    <input type="text" class="form-control" id="length" value='<?php if(isset($row)){$row->length;}?>' name="length">
                                     
                                         </div>
                                         <div class="col-xs-12 col-md-3">
                                     <label>Width</label>
                                     
-                                    <input type="text" class="form-control" id="width" value='<?php if(isset($row)){$row->width;}?>' name="width[]">
+                                    <input type="text" class="form-control" id="width" value='<?php if(isset($row)){$row->width;}?>' name="width">
                                     
                                         </div><div class="col-xs-12 col-md-3">
                                     <label>Height</label>
                                     
-                                    <input type="text" class="form-control" id="height" value='<?php if(isset($row)){$row->height;}?>' name="height[]">
+                                    <input type="text" class="form-control" id="height" value='<?php if(isset($row)){$row->height;}?>' name="height">
                                     
                                         </div><div class="col-xs-12 col-md-3">
                                           <label>Unit</label>
-                                    <select name='dimension_unit[]' class='form-control'>
+                                    <select name='dimension_unit' class='form-control'>
                                         <?php
                                         $inches='';
                                         $cm='';
@@ -557,15 +579,15 @@ background-color: #fff;
                                         <tbody>
                                         <tr>
                                           <td style='text-align:center'>Weight</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_weight[]'></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_weight[]'></td>
-                                          <td><select class='form-control' name='weight_unit_measure[]'><option value='lb'>lb</option></select></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_weight'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_weight'></td>
+                                          <td><select class='form-control' name='weight_unit_measure'><option value='lb'>lb</option></select></td>
                                         </tr>
                                         <tr>
                                           <td style='text-align:center'>Volume</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_volume[]'></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_volume[]'></td>
-                                          <td><select class='form-control' name='volume_unit_measure[]'><option value='ft3'>ft<sup>3</sup></option></select></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_volume'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_volume'></td>
+                                          <td><select class='form-control' name='volume_unit_measure'><option value='ft3'>ft<sup>3</sup></option></select></td>
                                         </tr>
                                         </tbody>
                                       </table>
@@ -576,25 +598,25 @@ background-color: #fff;
                                 <div class='row'>
                                    <div class='col-sm-3'>
                                       <label>Quantity</label>
-                                        <input type='number' value='<?php if(isset($row)){echo $row->quantity;}?>' class='form-control' name='quantity[]'>
+                                        <input type='number' value='<?php if(isset($row)){echo $row->quantity;}?>' class='form-control' name='quantity'>
 </div>
                                     <div class='col-sm-3'>
                                       <label>Unit</label>
-                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unit;}?>' name='unit[]'>
+                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unit;}?>' name='unit'>
                   </div>
                                     <div class='col-sm-3'>
                                       <label>Unitary Value</label>
-                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unitary_value;}?>' name='unitary_value[]'>
+                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->unitary_value;}?>' name='unitary_value'>
 </div>
                                     <div class='col-sm-3'>
                                       <label>Total Value</label>
-                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->total_value;}?>' name='total_value[]'>
+                                        <input type='number' class='form-control' value='<?php if(isset($row)){echo $row->total_value;}?>' name='total_value'>
 </div>
           </div>          </div></div>
 
           <div class="modal-footer">
-      <button type="button" class="btn btn-primary">Save changes</button>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-success">Save changes</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
       </div>
      
@@ -700,12 +722,54 @@ background-color: #fff;
                                   </div>
                                  </div></div>
           <div class="modal-footer">
-      <button type="button" class="btn btn-primary">Save changes</button>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-success">Save changes</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+      </div>
+    </div>
+    </div>
+    <div class='modal fade' id='AddEventModal'>
+  <div class='modal-dialog modal-lg modal-dialog-centered'>
+    <div class='modal-content'>
+      <div class='modal-header bg-green'>
+               <h3 class='modal-title text-white'>Add Event</h3>
+               <button class='close' data-dismiss='modal' style='color:white'>&times;</button>
+      </div>
+      <div class='modal-body'>
+      <div class="form-group">
+                                <div class="row"> 
+                                
+                                <div class="col-xs-12 col-md-6">
+                                <label>Event Type</label>
+                                  <select name='event_type' class='form-control'>
+                                    <option disable>Choose</option>
+                                    <option value='Arrived at warehouse'>Arrived at warehouse</option>
+                                    <option value='Cargo has been picked'>Cargo has been picked</option>
+                                    <option value='Cargo scanned in'>Cargo scanned in</option>
+                                    <option value='Cargo scanned out'>Cargo scanned out</option>
+                                    <option value='Cargo Status Update'>Cargo Status Update</option>
+                                    <option value='Delivered to consignee'>Delivered to consignee</option>
+                                    <option value='Entry Status Update'>Entry Status Update</option>
+                                    <option value='External Tracking Update'>External Tracking Update</option>
+                                    <option value='Final Mile Pickup'>Final Mile Pickup</option>
+                                    <option value='In Transit'>In Transit</option>
+                                    <option value='In-bond (7512)'>In-bond (7512)</option>
+                                    <option value='Picked up'>Picked up</option>
+                                    <option value='Transaction Approved by Customer'>Transaction Approved by Customer</option>
+                                    <option value='Transaction Dispute Answer'>Transaction Dispute Answer</option>
+                                    <option value='Transaction Dispute Request'>Transaction Dispute Request</option>
+                                  </select>
+                                  </div>
+                                 </div></div>
+          <div class="modal-footer">
+      <button type="button" class="btn btn-success">Save changes</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
       </div>
      
     </div>
+    
 </html>
 
 <script>

@@ -127,7 +127,6 @@ $mess = $e['message'];
 	}	
 
 
-	
 		public function update_image(){ 
 	
 		extract($_POST);

@@ -131,7 +131,7 @@ background-color: #fff;
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
-                                    <label>Employ</label>
+                                    <label>Employee</label>
                                        <input type='text' name='employee_name' class='form-control' value='<?php if(isset($row)){echo $row->employee_name;}?>'>
                                </div>
                                     </div></div>
@@ -296,7 +296,7 @@ background-color: #fff;
     </div>
     <div class='col-md-6'>
       <label>Preferred Mode of Transport</label>
-        <input type='text' name='prefrred_mode_of_transport' class='form-control' value='<?php if(isset($row)){echo $row->prefrred_mode_of_transport;}?>'>
+        <input type='text' name='preferred_mode_of_transport' class='form-control' value='<?php if(isset($row)){echo $row->preferred_mode_of_transport;}?>'>
     </div>
   </div>
 </div>
@@ -326,7 +326,7 @@ background-color: #fff;
   <div class='row'>
     <div class='col-md-6'>
       <label>Received By</label>
-        <input type='text' name=received_by' class='form-control' value='<?php if(isset($row)){echo $row->received_by;}?>'>
+        <input type='text' name='received_by' class='form-control' value='<?php if(isset($row)){echo $row->received_by;}?>'>
     </div>
   </div>
 </div>
@@ -360,35 +360,30 @@ background-color: #fff;
 <div class='tab-pane' id='tab_8'>
   <div class='form-group'>
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-12'>
         <label>Image</label>
-          <input type='file' name='image' class='form-control'>
+          <input type='file' name='image' id='file' style='margin-bottom:10px' class='form-control'>
       </div>
-    </div>
-  </div>
   <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>
                       
                    </div>
-</div>             
+                  </div>             
                 </div>
               </div>
             </div>
             </form>
-
            </div> 
                                     </div></div></div>              
                  </div>
-               
+</div>
               
-            </div>
-          </div>
           
           <!-- /.box -->
-        </div>
+               </div>
         <!-- /.col -->
-      </div>
-      <!-- /.row -->
+                </div>
+        <!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
@@ -411,7 +406,7 @@ background-color: #fff;
      $('#form_add_update').on("submit",function(e) {
          e.preventDefault();    
          var formData = new FormData();
-          var other_data = $('#form_add_update').serializeArray();
+         var other_data = $('#form_add_update').serializeArray();
         $.each(other_data,function(key,input){
         formData.append(input.name,input.value);
         });

@@ -38,12 +38,11 @@ $Heading=	$module_heading;
                 <table id="post_table" class="table table-bordered responsive">
     <thead>
     <tr>
-        <th>Status</th>
-        <th>Description</th>
-		    <th>Package Type</th>
-        <th>Pieces</th>
-        <th>Part Number</th>
-        <th>Model</th>
+        <th>Employee</th>
+        <th>Creation Date</th>
+		    <th>Delivery Date</th>
+        <th>Received By</th>
+        <th>Tracking No</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -56,15 +55,13 @@ $Heading=	$module_heading;
 		?>
 		<tr id="row_<?php echo $row->id;?>">
         
-    <td><?php echo $row->status;?></td>
-    <td><?php echo $row->description;?></td>
+    <td><?php echo $row->employee_name;?></td>
+    <td><?php echo $row->creation_date;?></td>
     
     
-    <td><?php echo $row->package_type;?></td>
-    <td><?php echo $row->pieces;?></td>   
-    <td><?php echo $row->part_number;?></td> 
-    <td><?php echo $row->model;?></td>   
-
+    <td><?php echo $row->delivery_date;?></td>
+    <td><?php echo $row->received_by;?></td>   
+    <td><?php echo $row->tracking_number;?></td> 
     <td>
       <a href="<?=$controller?>/edit/<?php echo $row->id;?>" class='btn btn-warning'>Edit</a>
       <a onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');" class='btn btn-danger'>Delete</a>

@@ -37,6 +37,8 @@ class Warehouse_receipt extends MX_Controller {
 	   }
 	public function add(){  
 		
+
+		
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData['general'] = $this->db->get('warehouse')->result_array();
@@ -237,6 +239,56 @@ public function generateinvoice($id){
 	$this->load->view('generate-invoice', $data);
 
 }
+function saveCommudity(){ 
+		extract($_POST);
+	
+		$this->form_validation->set_rules('description', 'description', 'trim|required');
+		$this->form_validation->set_rules('pieces', 'pieces', 'trim|required');
+		/*$this->form_validation->set_rules('start_date', 'start date', 'trim|required');
+		$this->form_validation->set_rules('end_date', 'end date', 'trim|required');*/
+		if ($this->form_validation->run()==false){
+			$arr = array("status"=>"validation_error" ,"message"=> validation_errors());
+			echo json_encode($arr);
+		}else{
+			
+			$_POST['warehouse_receipts_id']=$this->db->select_max('id')->get($this->tbl)->row()->id+1;;
+			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
+		switch($result){
+			case 1:
+			$tr='<tr>
+			<th>'.$_POST['status'].'</th>
+            	<th>'.$_POST['package_type'].'</th>
+            	<th>'.$_POST['description'].'</th>
+            	<th>'.$_POST['pieces'].'</th>
+            	<th>'.$_POST['length'].'</th>
+            	<th>'.$_POST['widh'].'</th>
+            	<th>'.$_POST['height'].'</th>
+            	<th>'.$_POST['weight'].'</th>
+            	<th>Volume</th>
+			</tr>
+			';
+			$arr = array('status' => 1,'message' => "Saved Succefully !" ,"trdata"=>$tr);
+			echo json_encode($arr);
+			break;
+			case 2:
+			$arr = array('status' => 2,'message' => "Updated Succefully !");
+			echo json_encode($arr);
+			break;
+			case 0:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;
+			default:
+			$arr = array('status' => 0,'message' => "Not Saved!");
+			echo json_encode($arr);
+			break;	
+		}
+	}	
+
+	}
+
+
+
 function saveInvoice(){ 
 		extract($_POST);
 		//pre($_POST);

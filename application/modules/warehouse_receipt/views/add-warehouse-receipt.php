@@ -327,16 +327,23 @@ background-color: #fff;
    <div class='form-group'>
     <div class='row'>
       <div class='col-md-12'>
-        <table class='table'>
-          <tbody>
-          <tr>
-          <div class='col-md-10'>
-             <td>Status</td>
-          </div>
-          <div class='col-md-2'>
-             <td><button type='button' class='btn btn-info' data-toggle='modal' data-target='#AddCommodityModal'>Add Commodity</button></td>
-          </div>
-          </tr>
+      <button type='button' class='btn btn-info btn-sm pull-right' data-toggle='modal' data-target='#AddCommodityModal'>Add Commodity</button>
+        <table class='table table-striped'>
+        <thead>
+        	<tr>
+            	<th>Status</th>
+            	<th>Package</th>
+            	<th>Description</th>
+            	<th>Pieces</th>
+            	<th>Length</th>
+            	<th>Width</th>
+            	<th>Height</th>
+            	<th>Weight</th>
+            	<th>Volume</th>
+            </tr>
+        </thead>
+          <tbody id="tbody_comudity">
+         
           </tbody>
         </table>
       </div>
@@ -449,6 +456,7 @@ background-color: #fff;
                <h3 class='modal-title text-white'>Add Commodity</h3>
                <button class='close' data-dismiss='modal' style='color:white'>&times;</button>
       </div>
+      <form id="formAddCommodity">
       <div class='modal-body'>
       <div class="form-group">
                                 <div class="row"> 
@@ -615,9 +623,10 @@ background-color: #fff;
           </div>          </div></div>
 
           <div class="modal-footer">
-      <button type="button" class="btn btn-success">Save changes</button>
+      <button type="button" onclick="saveCommudity()" class="btn btn-success">Save changes</button>
       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
+      </form>
       </div>
      
     </div>
@@ -773,6 +782,75 @@ background-color: #fff;
 </html>
 
 <script>
+function saveCommudity(){
+	
+         var formData = new FormData();
+          var other_data = $('#formAddCommodity').serializeArray();
+        $.each(other_data,function(key,input){
+        formData.append(input.name,input.value);
+        });
+        
+    // ajax start
+            $.ajax({
+            type: "POST",
+            url: "<?php echo base_url().$controller.'/saveCommudity'; ?>",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'JSON',
+            beforeSend: function() {
+            $('#loader').removeClass('hidden');
+        //  $('#form_add_update .btn_au').addClass('hidden');
+            },
+            success: function(data) {
+            $('#loader').addClass('hidden');
+            //alert(data.status);
+            //var obj = jQuery.parseJSON(data);
+            if (data.status == 1)
+            {   
+			
+			$('#tbody_comudity').append(data.trdata);
+                $(".alert").addClass('alert-success');
+                $(".alert").html(data.message);
+                $(".alert").removeClass('hidden');
+                setTimeout(function(){
+                $(".alert").addClass('hidden');
+                //$('#form_add_update')[0].reset();
+                },3000);
+            }
+           else if (data.status ==0)
+            {  
+            $(".alert").addClass('alert-danger');
+                $(".alert").html(data.message);
+                $(".alert").removeClass('hidden');
+                setTimeout(function(){
+                $(".alert").addClass('hidden');
+                },3000);
+            }
+            else if (data.status == 2)
+            {   
+            $(".alert").addClass('alert-success');
+                $(".alert").html(data.message);
+                $(".alert").removeClass('hidden');
+                setTimeout(function(){
+               // window.location='<?php echo base_url().$controller; ?>';
+                },1000);
+            }
+            else if (data.status == "validation_error")
+            {   
+            $(".alert").addClass('alert-warning');
+                $(".alert").html(data.message);
+                $(".alert").removeClass('hidden');
+                
+            }
+            
+           }
+     });
+
+    //ajax end    
+    
+	}
   /**********************************save************************************/
      $('#form_add_update').on("submit",function(e) {
          e.preventDefault();    

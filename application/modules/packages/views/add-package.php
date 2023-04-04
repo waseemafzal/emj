@@ -69,6 +69,19 @@ background-color: #fff;
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
+                                    <label>Package type</label>
+                                    
+                                    <select class="form-control" id="package_type" name="package_type">
+                                    <option>Select</option>
+                                    <?php
+									foreach($package_types as $package){
+									 ?>
+                                    <option value="<?=$package['package']?>"><?=$package['package']?></option>
+                                    <?php } ?>
+                                    </select>
+                                    
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
                                     <label>Description</label>
                                     
                                     <input type="text" class="form-control" id="description" name="description"  value= "<?php if(isset($row)){echo $row->description;}?>">

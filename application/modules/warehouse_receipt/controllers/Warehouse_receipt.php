@@ -239,9 +239,65 @@ public function generateinvoice($id){
 	$this->load->view('generate-invoice', $data);
 
 }
+function setCommudity(){ 
+		extract($_POST);
+		$this->form_validation->set_rules('description', 'description', 'trim|required');
+		$this->form_validation->set_rules('pieces', 'pieces', 'trim|required');
+		if ($this->form_validation->run()==false){
+			$arr = array("status"=>0 ,"message"=> validation_errors());
+			echo json_encode($arr);
+		}
+		$rowid=time();
+		$tr='<tr id="'.$rowid.'">
+            	<th>'.$_POST['package_type'].'</th>
+            	<th>'.$_POST['description'].'</th>
+            	<th>'.$_POST['pieces'].'</th>
+            	<th>'.$_POST['length'].'</th>
+            	<th>'.$_POST['width'].'</th>
+            	<th>'.$_POST['height'].'</th>
+            	<th>'.$_POST['total_weight'].'</th>
+            	<th>'.$_POST['total_volume'].'</th>
+            	<th><a onClick="deleteRow('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+				<a onClick="editRow('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></th>
+				<input type="hidden" id="part_number_h" name="commudity[part_number][]" >
+<input type="hidden" id="model_h" name="commudity[model][]" value="'.$_POST['model'].'" >
+<input type="hidden" id="description_h" name="commudity[description][]" value="'.$_POST['description'].'">
+<input type="hidden" id="package_type_h" name="commudity[package_type][]" value="'.$_POST['package_type'].'">
+<input type="hidden" id="location_h" name="commudity[location][]"  value="'.$_POST['location'].'">
+<input type="hidden" id="pieces_h" name="commudity[pieces][]" value="'.$_POST['pieces'].'">
+<input type="hidden" id="length_h" name="commudity[length][]" value="'.$_POST['length'].'">
+<input type="hidden" id="width_h" name="commudity[width][]" value="'.$_POST['width'].'" >
+<input type="hidden" id="height_h" name="commudity[height][]" value="'.$_POST['height'].'"
+<input type="hidden" id="dimension_unit_h" name="commudity[dimension_unit][]" value="'.$_POST['dimension_unit'].'"
+<input type="hidden" id="unit_weight_h" name="commudity[unit_weight][]" value="'.$_POST['unit_weight'].'"
+<input type="hidden" id="total_weight_h" name="commudity[total_weight][]" value="'.$_POST['total_weight'].'"
+<input type="hidden" id="width_h" name="commudity[width][]" value="'.$_POST['width'].'"
+<input type="hidden" id="height_h" name="commudity[height][]" value="'.$_POST['height'].'"
+<input type="hidden" id="dimension_unit_h" name="commudity[dimension_unit][]" value="'.$_POST['dimension_unit'].'"
+<input type="hidden" id="unit_weight_h" name="commudity[unit_weight][]" value="'.$_POST['unit_weight'].'"
+<input type="hidden" id="total_weight_h" name="commudity[total_weight][]" value="'.$_POST['total_weight'].'"
+<input type="hidden" id="weight_unit_measure_h" name="commudity[weight_unit_measure][]" value="'.$_POST['weight_unit_measure'].'"
+<input type="hidden" id="unit_volume_h" name="commudity[unit_volume][]" value="'.$_POST['unit_volume'].'"
+<input type="hidden" id="volume_unit_measure_h" name="commudity[volume_unit_measure][]" value="'.$_POST['volume_unit_measure'].'"
+<input type="hidden" id="quantity_h" name="commudity[quantity][]" value="'.$_POST['quantity'].'"
+<input type="hidden" id="unit_h" name="commudity[unit][]" value="'.$_POST['unit'].'"
+<input type="hidden" id="unitary_value_h" name="commudity[unitary_value][]" value="'.$_POST['unitary_value'].'"
+<input type="hidden" id="total_value_h" name="commudity[total_value][]" value="'.$_POST['total_value'].'"
+
+			</tr>
+			';
+			$arr = array('status' => 1,"trdata"=>$tr);
+			echo json_encode($arr);		
+
+	}
 function saveCommudity(){ 
 		extract($_POST);
-	
+		//pre($_POST);
+				$PrimaryID='';
+
+	if(isset($_POST['id']) and $_POST['id']!=''){
+		$PrimaryID=$_POST['id'];
+		}
 		$this->form_validation->set_rules('description', 'description', 'trim|required');
 		$this->form_validation->set_rules('pieces', 'pieces', 'trim|required');
 		/*$this->form_validation->set_rules('start_date', 'start date', 'trim|required');
@@ -253,18 +309,67 @@ function saveCommudity(){
 			
 			$_POST['warehouse_receipts_id']=$this->db->select_max('id')->get($this->tbl)->row()->id+1;;
 			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
+			/*
+			Array
+(
+    [part_number] => 12
+    [model] => 2023
+    [description] => This is just 
+    [package_type] => Barrel
+    [location] => lahore
+    [pieces] => 2
+    [length] => 200
+    [width] => 20
+    [height] => 20
+    [dimension_unit] => inches
+    [unit_weight] => 2
+    [total_weight] => 2
+    [weight_unit_measure] => lb
+    [unit_volume] => 2
+    [total_volume] => 2
+    [volume_unit_measure] => ft3
+    [quantity] => 50
+    [unit] => 1
+    [unitary_value] => 2
+    [total_value] => 2
+)
+			*/
 		switch($result){
 			case 1:
 			$tr='<tr>
-			<th>'.$_POST['status'].'</th>
             	<th>'.$_POST['package_type'].'</th>
             	<th>'.$_POST['description'].'</th>
             	<th>'.$_POST['pieces'].'</th>
             	<th>'.$_POST['length'].'</th>
             	<th>'.$_POST['widh'].'</th>
             	<th>'.$_POST['height'].'</th>
-            	<th>'.$_POST['weight'].'</th>
-            	<th>Volume</th>
+            	<th>'.$_POST['total_volume'].'</th>
+            	<th><a class="btn btn-info btn-sm"><i class="fa fa-trash"></i></a></th>
+				<input type="hidden" name="commudity[part_number][]" >
+<input type="hidden" name="commudity[model][]" >
+<input type="hidden" name="commudity[description][]" >
+<input type="hidden" name="commudity[package_type][]" >
+<input type="hidden" name="commudity[location][]" >
+<input type="hidden" name="commudity[pieces][]" >
+<input type="hidden" name="commudity[length][]" >
+<input type="hidden" name="commudity[width][]" >
+<input type="hidden" name="commudity[height][]" >
+<input type="hidden" name="commudity[dimension_unit][]" >
+<input type="hidden" name="commudity[unit_weight][]" >
+<input type="hidden" name="commudity[total_weight][]" >
+<input type="hidden" name="commudity[width][]" >
+<input type="hidden" name="commudity[height][]" >
+<input type="hidden" name="commudity[dimension_unit][]" >
+<input type="hidden" name="commudity[unit_weight][]" >
+<input type="hidden" name="commudity[total_weight][]" >
+<input type="hidden" name="commudity[weight_unit_measure][]" >
+<input type="hidden" name="commudity[unit_volume][]" >
+<input type="hidden" name="commudity[volume_unit_measure][]" >
+<input type="hidden" name="commudity[quantity][]" >
+<input type="hidden" name="commudity[unit][]" >
+<input type="hidden" name="commudity[unitary_value][]" >
+<input type="hidden" name="commudity[total_value][]" >
+
 			</tr>
 			';
 			$arr = array('status' => 1,'message' => "Saved Succefully !" ,"trdata"=>$tr);

@@ -331,7 +331,6 @@ background-color: #fff;
         <table class='table table-striped'>
         <thead>
         	<tr>
-            	<th>Status</th>
             	<th>Package</th>
             	<th>Description</th>
             	<th>Pieces</th>
@@ -340,6 +339,7 @@ background-color: #fff;
             	<th>Height</th>
             	<th>Weight</th>
             	<th>Volume</th>
+                <th>Action</th>
             </tr>
         </thead>
           <tbody id="tbody_comudity">
@@ -483,31 +483,7 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                     <label>Package Type</label>
-                                    <select name='package_type' class='form-control'>
-                                        <?php 
-                                        $extralarge='';
-                                        $medium='';
-                                        $large='';
-                                        $letter='';
-                                        if(isset($row)){
-                                                   if($row->package_type=='extra large box'){
-                                                      $extralarge='selected';
-                                                      }
-                                                      if($row->package_type=='large box'){
-                                                      $large='selected';
-                                                      }
-                                                      if($row->package_type=='mediun box'){
-                                                      $medium='selected';
-                                                      }
-                                                      if($row->package_type=='letter'){
-                                                      $letter='selected';
-                                                      }}?>
-                                      <option selected value='Not Selected'>Choose Package Type</option>
-                                    <option <?php echo $extralarge?> value='extra large box'>Extra Large Box</option>
-                                    <option <?php echo $large?> value='large box'>Large Box</option>
-                                    <option <?php echo $medium?> value='medium box'>Medium Box</option>
-                                    <option <?php echo $letter?>value='letter'>Letter</option>
-                                    </select>
+                                    <input name="package_type" id="package_type" class="form-control" />
                                     
                                         </div>
                                         <div class="col-md-6">
@@ -623,7 +599,7 @@ background-color: #fff;
           </div>          </div></div>
 
           <div class="modal-footer">
-      <button type="button" onclick="saveCommudity()" class="btn btn-success">Save changes</button>
+      <button type="button" onclick="setCommudity()" class="btn btn-success">Save changes</button>
       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
       </form>
@@ -782,7 +758,39 @@ background-color: #fff;
 </html>
 
 <script>
-function saveCommudity(){
+function deleteRow(id){
+	var del = confirm("are you sure to remove");
+	if(del){
+		$("#"+id).remove();
+		}
+	}
+	
+function editRow(id){
+	var part_number_h = $('#'+id+ '>#part_number_h').val();
+	 $('#part_number').val(part_number_h);
+	 $('#model').val($('#'+id+ '>#model_h').val());
+	 $('#description').val($('#'+id+ '#description_h').val());
+	 $('#package_type').val($('#'+id+ '#package_type_h').val());
+	 $('#location').val($('#'+id+ '#location_h').val());
+	 $('#pieces').val($('#'+id+ '#pieces_h').val());
+	 $('#length').val($('#'+id+ '#length_h').val());
+	 $('#width').val($('#'+id+ '#width_h').val());
+	 $('#height').val($('#'+id+ '#height_h').val());
+	 $('#dimension_unit').val($('#'+id+ '#dimension_unit_h').val());
+	 $('#unit_weight').val($('#'+id+ '#unit_weight_h').val());
+	 $('#total_weight').val($('#'+id+ '#total_weight_h').val());
+	 $('#weight_unit_measure').val($('#'+id+ '#weight_unit_measure_h').val());
+	 $('#unit_volume').val($('#'+id+ '#unit_volume_h').val());
+	 $('#total_volume').val($('#'+id+ '#total_volume_h').val());
+	 $('#volume_unit_measure').val($('#'+id+ '#volume_unit_measure_h').val());
+	 $('#unit').val($('#'+id+ '#unit_h').val());
+	 $('#unitary_value').val($('#'+id+ '#unitary_value_h').val());
+	 $('#total_value').val($('#'+id+ '#total_value_h').val());
+	 // now show modal
+	 	$('#AddCommodityModal').modal('show');
+
+	}	
+function setCommudity(){
 	
          var formData = new FormData();
           var other_data = $('#formAddCommodity').serializeArray();
@@ -793,7 +801,7 @@ function saveCommudity(){
     // ajax start
             $.ajax({
             type: "POST",
-            url: "<?php echo base_url().$controller.'/saveCommudity'; ?>",
+            url: "<?php echo base_url().$controller.'/setCommudity'; ?>",
             data: formData,
             cache: false,
             contentType: false,
@@ -809,20 +817,13 @@ function saveCommudity(){
             //var obj = jQuery.parseJSON(data);
             if (data.status == 1)
             {   
-			
+			$('#AddCommodityModal').modal('hide');
 			$('#tbody_comudity').append(data.trdata);
-                $(".alert").addClass('alert-success');
-                $(".alert").html(data.message);
-                $(".alert").removeClass('hidden');
-                setTimeout(function(){
-                $(".alert").addClass('hidden');
-                //$('#form_add_update')[0].reset();
-                },3000);
+               
             }
            else if (data.status ==0)
             {  
             $(".alert").addClass('alert-danger');
-                $(".alert").html(data.message);
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){
                 $(".alert").addClass('hidden');
@@ -831,19 +832,12 @@ function saveCommudity(){
             else if (data.status == 2)
             {   
             $(".alert").addClass('alert-success');
-                $(".alert").html(data.message);
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){
                // window.location='<?php echo base_url().$controller; ?>';
                 },1000);
             }
-            else if (data.status == "validation_error")
-            {   
-            $(".alert").addClass('alert-warning');
-                $(".alert").html(data.message);
-                $(".alert").removeClass('hidden');
-                
-            }
+            
             
            }
      });

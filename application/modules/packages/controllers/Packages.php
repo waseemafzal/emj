@@ -27,7 +27,8 @@ class Packages extends MX_Controller {
 		$this->load->view($this->view, $aData);
 	}
 	public function add(){  
-		
+		$aData['package_types'] =$this->db->query("SELECT p.* FROM package_types as p")->result_array();
+		 
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData['module_heading'] =$this->module_heading;

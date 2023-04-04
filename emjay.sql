@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Feb 10, 2023 at 06:58 PM
--- Server version: 8.0.27
--- PHP Version: 7.4.26
+-- Host: 127.0.0.1
+-- Generation Time: Apr 04, 2023 at 07:44 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,15 +27,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `app_routes`
 --
 
-DROP TABLE IF EXISTS `app_routes`;
-CREATE TABLE IF NOT EXISTS `app_routes` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+CREATE TABLE `app_routes` (
+  `id` bigint(20) NOT NULL,
   `slug` varchar(192) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `controller` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'blogpost',
-  `resource_id` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `resource_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_routes`
@@ -125,14 +123,12 @@ INSERT INTO `app_routes` (`id`, `slug`, `controller`, `type`, `resource_id`) VAL
 -- Table structure for table `app_user_session`
 --
 
-DROP TABLE IF EXISTS `app_user_session`;
-CREATE TABLE IF NOT EXISTS `app_user_session` (
-  `access_token` varchar(255) NOT NULL,
-  `user_id` int NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `id` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=186 DEFAULT CHARSET=latin1;
+CREATE TABLE `app_user_session` (
+  `access_token` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `app_user_session`
@@ -310,9 +306,103 @@ INSERT INTO `app_user_session` (`access_token`, `user_id`, `created_date`, `id`)
 ('696461664998216', 165, '2022-10-05 19:30:16', 180),
 ('294231664999052', 167, '2022-10-05 19:44:12', 181),
 ('423111664999126', 165, '2022-10-05 19:45:26', 182),
-('156791667033072', 2, '2022-10-29 08:44:32', 183),
-('655201667033109', 2, '2022-10-29 08:45:09', 184),
-('111681667906613', 2, '2022-11-08 11:23:33', 185);
+('494341675792416', 10, '2023-02-07 17:53:36', 270),
+('328281674486221', 7, '2023-01-23 15:03:41', 266),
+('369171667589151', 4, '2022-11-04 19:12:31', 185),
+('434271667983818', 4, '2022-11-09 08:50:18', 186),
+('500431673548217', 19, '2023-01-12 18:30:17', 249),
+('761671667994514', 4, '2022-11-09 11:48:34', 188),
+('451891673508183', 30, '2023-01-12 07:23:03', 248),
+('043241673507085', 30, '2023-01-12 07:04:45', 247),
+('489011673502709', 28, '2023-01-12 05:51:49', 245),
+('888941673440301', 27, '2023-01-11 12:31:41', 244),
+('280641673432179', 26, '2023-01-11 10:16:19', 242),
+('512721668007813', 4, '2022-11-09 15:30:13', 194),
+('067951673431222', 25, '2023-01-11 10:00:22', 241),
+('998021675745405', 10, '2023-02-07 04:50:05', 269),
+('158001673430874', 24, '2023-01-11 09:54:34', 240),
+('429541668021941', 8, '2022-11-09 19:25:41', 198),
+('449421673418824', 23, '2023-01-11 06:33:44', 231),
+('864471673406422', 17, '2023-01-11 03:07:02', 229),
+('087091673587272', 31, '2023-01-13 05:21:12', 250),
+('829371668073961', 9, '2022-11-10 09:52:41', 202),
+('984141668080802', 10, '2022-11-10 11:46:42', 203),
+('657001673378687', 21, '2023-01-10 19:24:47', 227),
+('346741673364806', 10, '2023-01-10 15:33:26', 225),
+('551111671027599', 18, '2022-12-14 14:19:59', 222),
+('708141671027991', 19, '2022-12-14 14:26:31', 223),
+('287081669463750', 10, '2022-11-26 11:55:50', 218),
+('846181675403298', 2, '2023-02-03 05:48:18', 268),
+('650501668407058', 9, '2022-11-14 06:24:18', 210),
+('317331668487867', 9, '2022-11-15 04:51:07', 211),
+('134681668487871', 9, '2022-11-15 04:51:11', 212),
+('136591668491777', 10, '2022-11-15 05:56:17', 213),
+('606121668500278', 10, '2022-11-15 08:17:58', 214),
+('266631668510028', 10, '2022-11-15 11:00:28', 215),
+('271151669110424', 16, '2022-11-22 09:47:04', 216),
+('870481673588044', 19, '2023-01-13 05:34:04', 251),
+('126271673591850', 31, '2023-01-13 06:37:30', 252),
+('194961673592501', 31, '2023-01-13 06:48:21', 253),
+('657551674988451', 9, '2023-01-29 10:34:11', 267),
+('477781673871325', 31, '2023-01-16 12:15:25', 255),
+('641351673871356', 31, '2023-01-16 12:15:56', 256),
+('749941674420897', 33, '2023-01-22 20:54:57', 265),
+('544371674196440', 32, '2023-01-20 06:34:00', 258),
+('617781674196622', 10, '2023-01-20 06:37:02', 259),
+('213871676954288', 34, '2023-02-21 04:38:08', 271),
+('855551676954885', 35, '2023-02-21 04:48:05', 272),
+('137091676959747', 39, '2023-02-21 06:09:07', 273),
+('421541676961685', 41, '2023-02-21 06:41:25', 274),
+('238401676962394', 39, '2023-02-21 06:53:14', 275),
+('332731676962437', 41, '2023-02-21 06:53:57', 276),
+('771151676962487', 41, '2023-02-21 06:54:47', 277),
+('068151676962613', 39, '2023-02-21 06:56:53', 278),
+('473061676964146', 45, '2023-02-21 07:22:26', 279);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carriers`
+--
+
+CREATE TABLE `carriers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `carrier_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `entity_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `mobile` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `fax` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `account_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `f_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `l_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `identification_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `zip_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `port_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `billing_country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `billing_state` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `billing_city` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `billing_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `billing_zipcode` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `billing_port_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `country_of_citizenship` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `date_of_birth` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `carriers`
+--
+
+INSERT INTO `carriers` (`id`, `name`, `carrier_type`, `entity_id`, `phone`, `mobile`, `fax`, `email`, `website`, `account_no`, `f_name`, `l_name`, `identification_no`, `country`, `state`, `city`, `address`, `zip_code`, `port_id`, `billing_country`, `billing_state`, `billing_city`, `billing_address`, `billing_zipcode`, `billing_port_id`, `country_of_citizenship`, `date_of_birth`, `notes`) VALUES
+(1, 'Jawad', 'air', '89', '03411663111', '03411663111', 'bghjg', 'jawad78692@gmail.com', 'https://www.youtube.com/', '97', 'Jawad', 'Ahmad', '789', 'Pakistan', 'Punjab', 'Multan', 'Chowk Shah Abbass', '7987', '798', 'India', 'Delhi', 'Delhi', 'Raj Ghat', '6786', '67868', 'Pakistan', '2023-03-29', 'hkj'),
+(3, 'Ajmal', 'air', '89', '03411663111', '03411663111', 'bghjg', 'jawad78692@gmail.com', 'https://www.youtube.com/', '97', 'Jawad', 'Ahmad', '789', 'Pakistan', 'Punjab', 'Multan', 'Chowk Shah Abbass', '7987', '798', 'India', 'Delhi', 'Delhi', 'Raj Ghat', '6786', '67868', 'Pakistan', '2023-03-29', 'hkj');
 
 -- --------------------------------------------------------
 
@@ -320,25 +410,23 @@ INSERT INTO `app_user_session` (`access_token`, `user_id`, `created_date`, `id`)
 -- Table structure for table `charges`
 --
 
-DROP TABLE IF EXISTS `charges`;
-CREATE TABLE IF NOT EXISTS `charges` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `prepaid` varchar(255) NOT NULL,
-  `quantity` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `amount` varchar(255) NOT NULL,
-  `tax_code` varchar(255) NOT NULL,
-  `tax_rate` varchar(255) NOT NULL,
-  `tax_amount` varchar(255) NOT NULL,
-  `amount_with_tax` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `currency` varchar(255) NOT NULL,
-  `final_amount` varchar(255) NOT NULL,
-  `expense` varchar(255) NOT NULL,
-  `income` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `charges` (
+  `id` int(11) NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `prepaid` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `tax_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `tax_rate` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `tax_amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `amount_with_tax` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `currency` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `final_amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `expense` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `income` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `charges`
@@ -353,14 +441,12 @@ INSERT INTO `charges` (`id`, `status`, `description`, `prepaid`, `quantity`, `pr
 -- Table structure for table `ci_sessions`
 --
 
-DROP TABLE IF EXISTS `ci_sessions`;
-CREATE TABLE IF NOT EXISTS `ci_sessions` (
+CREATE TABLE `ci_sessions` (
   `id` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `ip_address` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` int UNSIGNED NOT NULL DEFAULT '0',
-  `data` blob NOT NULL,
-  KEY `ci_sessions_timestamp` (`timestamp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `data` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -368,44 +454,43 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 -- Table structure for table `clients_invoice`
 --
 
-DROP TABLE IF EXISTS `clients_invoice`;
-CREATE TABLE IF NOT EXISTS `clients_invoice` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `client_id` int NOT NULL,
-  `item_description` varchar(255) NOT NULL,
+CREATE TABLE `clients_invoice` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `item_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `amount` double NOT NULL,
-  `detail` text NOT NULL,
-  `payment_terms` text,
+  `detail` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `payment_terms` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `tax` double DEFAULT NULL,
   `discount` double DEFAULT NULL,
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_by` int DEFAULT NULL,
-  `paid` enum('Yes','No') NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `paid` enum('Yes','No') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created_date` date NOT NULL,
   `due_date` date NOT NULL,
-  `order_no` varchar(255) NOT NULL,
-  `notes` text NOT NULL,
-  `order_id` int NOT NULL,
-  `payment_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `order_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `notes` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `payment_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `clients_invoice`
 --
 
 INSERT INTO `clients_invoice` (`id`, `client_id`, `item_description`, `amount`, `detail`, `payment_terms`, `tax`, `discount`, `created_on`, `created_by`, `paid`, `created_date`, `due_date`, `order_no`, `notes`, `order_id`, `payment_id`) VALUES
-(1, 0, '', 1420, '{\"items\":[\"\",\"\"],\"quantities\":[\"20\",\"10\"],\"rates\":[\"10\",\"100\"],\"subtotal\":[\"200\",\"1000\"]}', '', 20, 20, '2022-11-10 06:45:52', NULL, 'No', '2022-11-10', '2022-12-05', '1668433327', '', 1, NULL),
-(2, 0, '', 681586, '{\"items\":[\"\",\"\"],\"quantities\":[\"879\",\"78\"],\"rates\":[\"798\",\"76\"],\"subtotal\":[\"701442\",\"5928\"]}', '', 10, 90000, '2022-11-10 09:58:35', NULL, 'No', '2022-11-10', '2022-12-05', '1668074315', '', 1, NULL),
-(3, 0, '', 1332650, '{\"items\":[\"\"],\"quantities\":[\"879\"],\"rates\":[\"798\"],\"subtotal\":[\"701442\"]}', '', 90, 89, '2022-11-10 09:59:31', NULL, 'Yes', '2022-11-10', '2022-12-05', '1668074371', '', 1, NULL),
-(4, 0, '', 1332650, '{\"items\":[\"\"],\"quantities\":[\"879\"],\"rates\":[\"798\"],\"subtotal\":[\"701442\"]}', '', 90, 89, '2022-11-10 10:16:11', NULL, 'Yes', '2022-11-10', '2022-12-05', '1668075371', '', 1, NULL),
-(5, 0, '', 1192362, '{\"items\":[\"\",\"\"],\"quantities\":[\"879\",\"789\"],\"rates\":[\"798\",\"798\"],\"subtotal\":[\"701442\",\"629622\"]}', '', 70, 89, '2022-11-10 10:47:32', NULL, 'No', '2022-11-10', '2022-12-05', '1668077252', '', 1, NULL),
-(6, 0, '', 1332650, '{\"items\":[\"\",\"\"],\"quantities\":[\"879\",\"798798\"],\"rates\":[\"798\",\"890\"],\"subtotal\":[\"701442\",\"710930220\"]}', '', 90, 89, '2022-11-10 10:55:37', NULL, 'No', '2022-11-10', '2022-12-05', '1668077737', '', 1, NULL),
-(7, 0, '', 234, '{\"items\":[\"card\",\"cniv\"],\"quantities\":[\"4\",\"2\"],\"rates\":[\"25\",\"60\"],\"subtotal\":[\"100\",\"120\"]}', 'kjsdksj', 20, 30, '2022-11-10 11:00:29', NULL, 'No', '2022-11-10', '2022-12-07', '1668433286', 'xusyd', 3, NULL),
-(9, 0, '', 500, '{\"items\":[\"\"],\"quantities\":[\"2\"],\"rates\":[\"200\"],\"subtotal\":[\"400\"]}', '', 25, 0, '2022-11-14 12:29:24', NULL, 'No', '2022-11-14', '2022-11-28', '1668431046', '', 6, NULL),
-(10, 0, '', 57.5, '{\"items\":[\"\"],\"quantities\":[\"23\"],\"rates\":[\"2\"],\"subtotal\":[\"46\"]}', '', 25, 0, '2022-11-14 13:11:21', NULL, 'No', '2022-11-14', '2022-12-06', '1668431481', '', 5, NULL),
-(11, 0, '', 230, '{\"items\":[\"\"],\"quantities\":[\"20\"],\"rates\":[\"10\"],\"subtotal\":[\"200\"]}', '', 15, 0, '2022-11-14 13:12:53', NULL, 'No', '2022-11-14', '2022-11-28', '1668431573', '', 4, NULL),
-(12, 0, '', 244, '{\"items\":[\"\"],\"quantities\":[\"25\"],\"rates\":[\"10\"],\"subtotal\":[\"250\"]}', '', 10, 31, '2022-11-14 13:27:15', NULL, 'No', '2022-11-08', '2022-12-01', '1668432554', '', 7, NULL);
+(1, 0, '', 100, '{\"items\":[\"Pateesa\"],\"quantities\":[\"2\"],\"rates\":[\"50\"],\"subtotal\":[\"100\"]}', '', 0, 0, '2022-11-10 05:43:34', NULL, 'Yes', '2022-11-11', '2022-11-12', '1668059014', 'sukkia rotian tey patisa, loye lelon tey patisa', 4, 3),
+(2, 0, '', 40, '{\"items\":[\"kulfi khoye aal\"],\"quantities\":[\"2\"],\"rates\":[\"20\"],\"subtotal\":[\"40\"]}', 'stripe sey pay kro bhai debit card sey', 0, 0, '2022-11-10 05:44:46', NULL, 'Yes', '2022-11-10', '2022-11-15', '1668059086', 'Kulfi banai j dodh tey lachian paa k', 5, 69),
+(3, 0, '', 14.28, '{\"items\":[\"hello from me\"],\"quantities\":[\"3\"],\"rates\":[\"5\"],\"subtotal\":[\"15\"]}', 'no term', 2, 1, '2022-11-10 11:56:38', NULL, 'Yes', '2022-11-03', '2022-11-12', '1668081398', 'no notes', 6, 2),
+(5, 0, '', 1180, '{\"items\":[\"hello from me\"],\"quantities\":[\"12\"],\"rates\":[\"100\"],\"subtotal\":[\"1200\"]}', 'card', 0, 20, '2022-11-10 16:27:35', NULL, 'No', '2022-11-10', '2022-11-12', '1668097655', 'please pay today', 8, NULL),
+(6, 0, '', 22.44, '{\"items\":[\"The onchange JavaScript event is triggered when an element is changed and then loses focus. In the context of a textarea , this happens when the  content of \"],\"quantities\":[\"2\"],\"rates\":[\"21\"],\"subtotal\":[\"42\"]}', 'By debit card', 2, 20, '2022-11-12 13:01:02', NULL, 'Yes', '2022-11-12', '2022-11-19', '1668258062', 'No notes for now just testing', 9, 70),
+(7, 0, '', 8.16, '{\"items\":[\"this item is hot\"],\"quantities\":[\"2\"],\"rates\":[\"5\"],\"subtotal\":[\"10\"]}', 'card', 2, 2, '2022-11-12 13:01:42', NULL, 'Yes', '2022-11-12', '2022-11-21', '1668258102', 'cash', 10, 71),
+(8, 0, '', 200, '{\"items\":[\"cnic\"],\"quantities\":[\"1\"],\"rates\":[\"200\"],\"subtotal\":[\"200\"]}', '', 0, 0, '2022-11-16 10:51:17', NULL, 'Yes', '2022-11-16', '2022-11-20', '1668595877', '', 12, 73),
+(9, 0, '', 300, '{\"items\":[\"it was one item\"],\"quantities\":[\"1\"],\"rates\":[\"300\"],\"subtotal\":[\"300\"]}', 'bank', 0, 0, '2022-11-26 12:39:09', NULL, 'Yes', '2022-11-26', '2022-11-27', '1669466349', 'no notes for now', 25, 74),
+(12, 0, '', 2890, '{\"items\":[\"New\",\"New\"],\"quantities\":[\"1\",\"2\"],\"rates\":[\"2500\",\"200\"],\"subtotal\":[\"2500\",\"400\"]}', '', 10, 300, '2023-01-11 08:21:28', NULL, 'Yes', '2023-01-11', '2023-01-28', '1673425288', '', 35, 75),
+(13, 0, '', 510, '{\"items\":[\"New\"],\"quantities\":[\"2\"],\"rates\":[\"250\"],\"subtotal\":[\"500\"]}', '', 10, 40, '2023-01-11 09:01:50', NULL, 'Yes', '2023-01-11', '2023-01-29', '1673427811', '', 34, 76),
+(14, 0, '', 6090, '{\"items\":[\"cloth\"],\"quantities\":[\"7\"],\"rates\":[\"800\"],\"subtotal\":[\"5600\"]}', '', 10, 70, '2023-02-21 06:20:15', NULL, 'No', '2023-02-21', '2023-03-10', '1676960415', '', 73, NULL),
+(15, 0, '', 82636, '{\"items\":[\"toys\"],\"quantities\":[\"78\"],\"rates\":[\"900\"],\"subtotal\":[\"70200\"]}', '', 18, 200, '2023-02-21 06:49:49', NULL, 'No', '2023-02-28', '2023-02-21', '1676962189', '', 74, NULL);
 
 -- --------------------------------------------------------
 
@@ -413,28 +498,27 @@ INSERT INTO `clients_invoice` (`id`, `client_id`, `item_description`, `amount`, 
 -- Table structure for table `cms`
 --
 
-DROP TABLE IF EXISTS `cms`;
-CREATE TABLE IF NOT EXISTS `cms` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cms` (
+  `id` int(11) NOT NULL,
   `post_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `short_heading` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `post_banner` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'defaultbanner.png',
   `post_description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `displaysidebar` int NOT NULL,
-  `sidebar` int NOT NULL,
+  `displaysidebar` int(11) NOT NULL,
+  `sidebar` int(11) NOT NULL,
   `meta_keyword` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `meta_title` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `meta_description` varchar(1000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cms`
 --
 
 INSERT INTO `cms` (`id`, `post_title`, `short_heading`, `post_banner`, `post_description`, `displaysidebar`, `sidebar`, `meta_keyword`, `meta_title`, `meta_description`, `created_on`) VALUES
-(53, 'Le frelon asiatique', 'Le frelon asiatique', '1736860717446.jpg', '<p>Le frelon asiatique est arriv&eacute; accidentellement en France en 2004 et avait colonis&eacute;, en janvier 2020, sur tout l&#39;Hexagone, &agrave; l&rsquo;exception du Bas-Rhin, du Territoire-de-Belfort et de la Corse. On le retrouve aussi d&eacute;sormais en Espagne, au Portugal, en Italie, en Belgique, aux Pays-Bas, en Allemagne et jusqu&rsquo;en Angleterre. Cette esp&egrave;ce invasive a &eacute;t&eacute; class&eacute;e comme &laquo;&nbsp;danger sanitaire de 2e cat&eacute;gorie&nbsp;&raquo; en France en 2012. L&rsquo;union europ&eacute;enne l&rsquo;a quant &agrave; elle class&eacute; &laquo;&nbsp;nuisible&nbsp;&raquo; en juin 2016. Mais le frelon asiatique continue sa progression, contribuant au d&eacute;clin des abeilles mellif&egrave;res et des pollinisateurs sauvages.</p>\n', 0, 0, 'Le frelon asiatique', 'Le frelon asiatique', 'Le frelon asiatique', '2020-09-05 15:21:01');
+(1, 'Terms', 'Terms', 'defaultbanner.png', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 0, '', '', '', '2022-11-21 14:56:40'),
+(2, 'Privacy', 'Privacy', 'defaultbanner.png', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.', 0, 0, '', '', '', '2022-11-21 14:56:40');
 
 -- --------------------------------------------------------
 
@@ -442,30 +526,69 @@ INSERT INTO `cms` (`id`, `post_title`, `short_heading`, `post_banner`, `post_des
 -- Table structure for table `commodities`
 --
 
-DROP TABLE IF EXISTS `commodities`;
-CREATE TABLE IF NOT EXISTS `commodities` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `package_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `pieces` varchar(255) NOT NULL,
-  `part_number` varchar(255) NOT NULL,
-  `model` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `length` varchar(255) NOT NULL,
-  `width` varchar(255) NOT NULL,
-  `height` varchar(255) NOT NULL,
-  `dimension_unit` varchar(255) NOT NULL,
-  `weight_unit` varchar(255) NOT NULL,
-  `volume_unit` varchar(255) NOT NULL,
-  `weight` varchar(255) NOT NULL,
-  `volume` varchar(255) NOT NULL,
-  `quantity` varchar(255) NOT NULL,
-  `unit` varchar(255) NOT NULL,
-  `unitary_value` varchar(255) NOT NULL,
-  `total_value` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `commodities` (
+  `id` int(11) NOT NULL,
+  `commodity` varchar(255) NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `package_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `serial_no` varchar(255) NOT NULL,
+  `invoice_no` varchar(255) NOT NULL,
+  `po_no` varchar(255) NOT NULL,
+  `lot_no` varchar(255) NOT NULL,
+  `job` varchar(255) NOT NULL,
+  `expires_on` varchar(255) NOT NULL,
+  `ncm_code` int(11) NOT NULL,
+  `notes` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `pieces` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `part_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `length` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `width` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `height` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `dimension_unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `weight_measure_unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `volume_measure_unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `unit_weight` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `unit_volume` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `total_weight` varchar(255) NOT NULL,
+  `total_volume` varchar(255) NOT NULL,
+  `quantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `unitary_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `total_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `commodities`
+--
+
+INSERT INTO `commodities` (`id`, `commodity`, `status`, `description`, `package_type`, `serial_no`, `invoice_no`, `po_no`, `lot_no`, `job`, `expires_on`, `ncm_code`, `notes`, `image`, `pieces`, `part_number`, `model`, `location`, `length`, `width`, `height`, `dimension_unit`, `weight_measure_unit`, `volume_measure_unit`, `unit_weight`, `unit_volume`, `total_weight`, `total_volume`, `quantity`, `unit`, `unitary_value`, `total_value`) VALUES
+(1, '', 'Active', 'This is a good product with more than 300 brands', 'letter', '', '', '', '', '', '', 0, '', '', '3', '800', '2020', 'Multan', '', '', '', 'Choose Unit', 'lb', 'ft3', '', '', '', '', '', '', '', ''),
+(2, '', '', '', 'medium box', '', '', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', 'Choose Unit', 'lb', 'ft3', '', '', '', '', '', '', '', ''),
+(3, '', '', 'kjhk', 'large box', '', '', '', '', '', '', 0, '', '8558d5085fd7186c22f5b74c1f9e75b6.jpg', '2', 'hkj', 'hkjh', 'bmnb', '89', '798', '798798', 'inches', 'lb', 'ft3', '', '', '', '', '', '', '', ''),
+(4, '', '', '', 'Choose Package Type', '', '', '', '', '', '', 0, '', '', '', '', '', '', '', '', '', 'inches', 'lb', 'ft3', '', '', '', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commodity_types`
+--
+
+CREATE TABLE `commodity_types` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `commodity_types`
+--
+
+INSERT INTO `commodity_types` (`id`, `code`, `description`) VALUES
+(1, '79', 'hgjghj hkj');
 
 -- --------------------------------------------------------
 
@@ -473,17 +596,15 @@ CREATE TABLE IF NOT EXISTS `commodities` (
 -- Table structure for table `contacts`
 --
 
-DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE IF NOT EXISTS `contacts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `contact` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `type` enum('legal','medical','road','other') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `contact` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` enum('legal','medical','road','other') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `contacts`
@@ -505,22 +626,20 @@ INSERT INTO `contacts` (`id`, `user_id`, `name`, `contact`, `email`, `address`, 
 -- Table structure for table `containers`
 --
 
-DROP TABLE IF EXISTS `containers`;
-CREATE TABLE IF NOT EXISTS `containers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `container_type` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `number` varchar(255) NOT NULL,
-  `serial_number_1` varchar(255) NOT NULL,
-  `serial_number_2` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `length` varchar(255) NOT NULL,
-  `weight` varchar(255) NOT NULL,
-  `width` varchar(255) NOT NULL,
-  `height` varchar(255) NOT NULL,
-  `volume` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `containers` (
+  `id` int(11) NOT NULL,
+  `container_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `serial_number_1` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `serial_number_2` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `location` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `length` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `weight` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `width` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `height` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `volume` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `containers`
@@ -533,25 +652,54 @@ INSERT INTO `containers` (`id`, `container_type`, `description`, `number`, `seri
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `conversations`
+--
+
+CREATE TABLE `conversations` (
+  `conversation_id` int(10) UNSIGNED NOT NULL,
+  `owner_id` int(10) UNSIGNED NOT NULL,
+  `modified` datetime NOT NULL,
+  `receiver_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `conversations`
+--
+
+INSERT INTO `conversations` (`conversation_id`, `owner_id`, `modified`, `receiver_id`) VALUES
+(1, 10, '2022-11-29 15:24:49', 1),
+(2, 8, '2022-11-26 20:53:27', 1),
+(3, 7, '2022-11-30 00:53:09', 1),
+(4, 17, '2022-12-14 14:20:03', 1),
+(5, 18, '2022-12-14 14:39:30', 1),
+(6, 23, '2023-01-11 05:03:12', 1),
+(7, 24, '2023-01-11 08:56:50', 1),
+(8, 2, '2023-01-20 18:25:20', 1),
+(9, 33, '2023-01-20 19:59:26', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `drivers`
 --
 
-DROP TABLE IF EXISTS `drivers`;
-CREATE TABLE IF NOT EXISTS `drivers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `driver_name` varchar(255) NOT NULL,
-  `driver_license_number` varchar(255) NOT NULL,
-  `pro_number` int NOT NULL,
-  `tracking_number` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `drivers` (
+  `id` int(11) NOT NULL,
+  `driver_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `driver_license_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `pro_number` int(11) NOT NULL,
+  `tracking_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `drivers`
 --
 
 INSERT INTO `drivers` (`id`, `driver_name`, `driver_license_number`, `pro_number`, `tracking_number`) VALUES
-(1, 'Jawad', '798', 789798, '78900');
+(1, 'Jawad', '798', 789798, ''),
+(3, 'Waseem', '9090', 56567, '789'),
+(4, 'Waseem', '9090', 56567, '789'),
+(5, 'Bilal', '786', 6786785, '56576');
 
 -- --------------------------------------------------------
 
@@ -559,13 +707,11 @@ INSERT INTO `drivers` (`id`, `driver_name`, `driver_license_number`, `pro_number
 -- Table structure for table `groups`
 --
 
-DROP TABLE IF EXISTS `groups`;
-CREATE TABLE IF NOT EXISTS `groups` (
-  `id` mediumint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `groups` (
+  `id` mediumint(8) UNSIGNED NOT NULL,
   `name` varchar(20) NOT NULL,
-  `description` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `description` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups`
@@ -581,14 +727,12 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 -- Table structure for table `helpcenter`
 --
 
-DROP TABLE IF EXISTS `helpcenter`;
-CREATE TABLE IF NOT EXISTS `helpcenter` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `message` text NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+CREATE TABLE `helpcenter` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` text CHARACTER SET latin1 NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `helpcenter`
@@ -617,7 +761,48 @@ INSERT INTO `helpcenter` (`id`, `user_id`, `message`, `created_date`) VALUES
 (21, 143, 'i need help', '2020-09-30 14:36:21'),
 (22, 156, 'Hello I need help', '2020-10-01 18:38:41'),
 (23, 156, 'Hello', '2020-10-02 18:48:36'),
-(24, 160, 'Hello from me other side', '2020-10-08 18:27:53');
+(24, 160, 'Hello from me other side', '2020-10-08 18:27:53'),
+(25, 7, 'gg', '2023-01-22 09:53:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory_items_definition`
+--
+
+CREATE TABLE `inventory_items_definition` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `method` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `inventory_items_definition`
+--
+
+INSERT INTO `inventory_items_definition` (`id`, `description`, `method`) VALUES
+(1, 'Shaheer', 'pipe');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `json_logs`
+--
+
+CREATE TABLE `json_logs` (
+  `id` int(11) NOT NULL,
+  `body` longtext CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `json_logs`
+--
+
+INSERT INTO `json_logs` (`id`, `body`) VALUES
+(1, '{\"consignee_country\":\"1\",\"package_weight\":\"3\",\"item_description\":\"sdsd\",\"width\":\"7,3\",\"shipment_from\":\"as\",\"shipper_phone\":\"2231321\",\"consignee_address\":\"svdvds\",\"pickup_location\":\"ssvd\",\"shipper_country\":\"1\",\"length\":\"4,2\",\"carriage_value\":\"3\",\"quantity\":\"2\",\"request_insurance\":\"yes\",\"delivery_type\":\"Home\",\"request_pickup\":\"yes\",\"shipment_to\":\"vsd\",\"shipment_date\":\"2023-02-04\",\"consignee_name\":\"sdvsdv\",\"shipper_address\":\"sdvsvd\",\"consignee_city\":\"5909\",\"consignee_state\":\"42\",\"package_type\":\"Extra Large Box\",\"shipper_state\":\"42\",\"consignee_phone\":\"2323\",\"shipment_type\":\"1\",\"height\":\"8,6\",\"shipper_name\":\"sasa\",\"shipper_city\":\"5912\",\"track_number\":\"66884421\",\"shipment_status\":0,\"user_id\":10}'),
+(2, '\"INSERT INTO `shipment_orders` (`consignee_country`, `package_weight`, `item_description`, `width`, `shipment_from`, `shipper_phone`, `consignee_address`, `pickup_location`, `shipper_country`, `length`, `carriage_value`, `quantity`, `request_insurance`, `delivery_type`, `request_pickup`, `shipment_to`, `shipment_date`, `consignee_name`, `shipper_address`, `consignee_city`, `consignee_state`, `package_type`, `shipper_state`, `consignee_phone`, `shipment_type`, `height`, `shipper_name`, `shipper_city`, `track_number`, `shipment_status`, `user_id`) VALUES (\' 1\', \' 3\', \' sdsd\', \' 73\', \' as\', \' 2231321\', \' svdvds\', \' ssvd\', \' 1\', \' 42\', \' 3\', \' 2\', \' yes\', \' Home\', \' yes\', \' vsd\', \' 2023-02-04\', \' sdvsdv\', \' sdvsvd\', \' 5909\', \' 42\', \' Extra Large Box\', \' 42\', \' 2323\', \' 1\', \' 86\', \' sasa\', \' 5912\', \'69583499\', 0, 10)\"'),
+(3, '{\"first_name\":\"Jawad\",\"sur_name\":\"Ahmad\",\"email\":\"jawadahmad78692@gmail.com\",\"password\":\"12345678\",\"mobile\":\"03411663111\",\"devicetype\":\"android\",\"device_id\":\"eQGXJPwIQAOuD_VoY9pW6m:APA91bH4A7g2BnZf4f21IJ7OBWud8TRG69Oa4vYN4bR0MIlKwCuFxZ77SgnutCNtztPpj2O-RVYToO-NADH-MT1dti9XbJOp056Uaj-LBioSuKnQPxXLNUHmgocENb2gOJd37xP8oN9S\",\"address\":\"Chowk Shah Abbass\",\"country_id\":\"166\",\"state_id\":\"2728\",\"city_id\":\"31464\",\"answer\":\"2022\"}'),
+(4, '{\"address\":\"Chowk\",\"address1\":\"Shah Abbass\",\"answer\":\"Sir Ali\",\"city_id\":\"31464\",\"country_id\":\"166\",\"device_id\":\"0DF3FABE-4BD3-4964-8CC1-99574D95F9ED\",\"devicetype\":\"ios\",\"email\":\"jawad.cyphersol@gmail.com\",\"first_name\":\"Jawad\",\"mobile\":\"03124555886\",\"password\":\"12345678\",\"secret_qestion_id\":\"3\",\"state_id\":\"2728\",\"sur_name\":\"Ahmad\"}');
 
 -- --------------------------------------------------------
 
@@ -625,9 +810,8 @@ INSERT INTO `helpcenter` (`id`, `user_id`, `message`, `created_date`) VALUES
 -- Table structure for table `landing_bills`
 --
 
-DROP TABLE IF EXISTS `landing_bills`;
-CREATE TABLE IF NOT EXISTS `landing_bills` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `landing_bills` (
+  `id` int(11) NOT NULL,
   `exporter_name` varchar(255) NOT NULL,
   `exporter_address` varchar(255) NOT NULL,
   `consigned_to` varchar(255) NOT NULL,
@@ -635,14 +819,14 @@ CREATE TABLE IF NOT EXISTS `landing_bills` (
   `notify_party` varchar(255) NOT NULL,
   `notify_party_address` varchar(255) NOT NULL,
   `document_number` varchar(255) NOT NULL,
-  `bl_number` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `bl_number` varchar(255) NOT NULL,
   `forwording_agent` varchar(255) NOT NULL,
   `agent_address` varchar(255) NOT NULL,
   `point_of_origin` varchar(255) NOT NULL,
   `loading_pier` varchar(255) NOT NULL,
   `domestic_routing` varchar(255) NOT NULL,
   `type_of_move` varchar(255) NOT NULL,
-  `containarized` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `containarized` varchar(255) DEFAULT NULL,
   `pre_carriage_by` varchar(255) NOT NULL,
   `exporting_carrier` varchar(255) NOT NULL,
   `place_of_receipt` varchar(255) NOT NULL,
@@ -659,9 +843,8 @@ CREATE TABLE IF NOT EXISTS `landing_bills` (
   `collect` varchar(255) NOT NULL,
   `date_by` varchar(255) NOT NULL,
   `dated_at` varchar(255) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `date` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `landing_bills`
@@ -679,14 +862,95 @@ INSERT INTO `landing_bills` (`id`, `exporter_name`, `exporter_address`, `consign
 -- Table structure for table `login_attempts`
 --
 
-DROP TABLE IF EXISTS `login_attempts`;
-CREATE TABLE IF NOT EXISTS `login_attempts` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `login_attempts` (
+  `id` int(10) UNSIGNED NOT NULL,
   `ip_address` varchar(15) NOT NULL,
   `login` varchar(100) NOT NULL,
-  `time` int UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `time` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `message_id` int(10) UNSIGNED NOT NULL,
+  `conversation_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `body` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `read` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1=deleted for one,2 deleted for everyone',
+  `deleted_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `conversation_id`, `user_id`, `body`, `date`, `read`, `type`, `status`, `deleted_by`) VALUES
+(1, 1, 10, 'hello how are you', '2022-11-26 07:02:26', 1, 'text', 0, 0),
+(2, 1, 10, 'hello how are you', '2022-11-26 07:04:43', 1, 'text', 0, 0),
+(3, 2, 8, '1adasd', '2022-11-26 15:53:27', 0, 'text', 0, 0),
+(4, 1, 10, 'hi', '2022-11-29 10:24:21', 0, 'text', 0, 0),
+(5, 1, 10, 'hi', '2022-11-29 10:24:26', 0, 'text', 0, 0),
+(6, 1, 10, 'hi', '2022-11-29 10:24:29', 0, 'text', 0, 0),
+(7, 1, 10, 'hi', '2022-11-29 10:24:31', 0, 'text', 0, 0),
+(8, 1, 10, 'hi', '2022-11-29 10:24:32', 0, 'text', 0, 0),
+(9, 1, 10, 'hi', '2022-11-29 10:24:33', 0, 'text', 0, 0),
+(10, 1, 10, 'hi', '2022-11-29 10:24:34', 0, 'text', 0, 0),
+(11, 1, 10, 'how r', '2022-11-29 10:24:35', 0, 'text', 0, 0),
+(12, 1, 10, 'how', '2022-11-29 10:24:37', 0, 'text', 0, 0),
+(13, 1, 10, 's', '2022-11-29 10:24:45', 0, 'text', 0, 0),
+(14, 1, 10, 's', '2022-11-29 10:24:45', 0, 'text', 0, 0),
+(15, 1, 10, 's', '2022-11-29 10:24:45', 0, 'text', 0, 0),
+(16, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(17, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(18, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(19, 1, 10, 's', '2022-11-29 10:24:46', 0, 'text', 0, 0),
+(20, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(21, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(22, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(23, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(24, 1, 10, 's', '2022-11-29 10:24:47', 0, 'text', 0, 0),
+(25, 1, 10, 's', '2022-11-29 10:24:48', 0, 'text', 0, 0),
+(26, 1, 10, 's', '2022-11-29 10:24:48', 0, 'text', 0, 0),
+(27, 1, 10, 's', '2022-11-29 10:24:48', 0, 'text', 0, 0),
+(28, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(29, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(30, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(31, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(32, 1, 10, 's', '2022-11-29 10:24:49', 0, 'text', 0, 0),
+(33, 3, 7, 'hu', '2022-11-29 10:51:39', 0, 'text', 0, 0),
+(34, 3, 7, 'hi', '2022-11-29 19:53:09', 0, 'text', 0, 0),
+(35, 7, 24, 'Hello', '2023-01-11 03:56:50', 0, 'text', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mode_of_transport`
+--
+
+CREATE TABLE `mode_of_transport` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `method` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mode_of_transport`
+--
+
+INSERT INTO `mode_of_transport` (`id`, `description`, `method`) VALUES
+(1, 'Chowk Shah Abbass, Multan', 'rail'),
+(2, 'jllkhjk', 'ground'),
+(3, '/;m.,m', 'rail'),
+(4, 'm.,', 'ocean'),
+(5, 'bvcbv', 'unknown'),
+(6, 'nlhjlk', 'pipe');
 
 -- --------------------------------------------------------
 
@@ -694,18 +958,16 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- Table structure for table `notifications`
 --
 
-DROP TABLE IF EXISTS `notifications`;
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `body` varchar(255) NOT NULL,
-  `sender_id` int NOT NULL,
-  `receiver_id` int NOT NULL,
-  `resource_id` int NOT NULL,
-  `resource_type` varchar(50) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `readed` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `body` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `resource_id` int(11) NOT NULL,
+  `resource_type` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `readed` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `notifications`
@@ -720,12 +982,23 @@ INSERT INTO `notifications` (`id`, `body`, `sender_id`, `receiver_id`, `resource
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification_types`
+--
+
+CREATE TABLE `notification_types` (
+  `notification_id` int(11) NOT NULL,
+  `type` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `message` text CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order_card_detail`
 --
 
-DROP TABLE IF EXISTS `order_card_detail`;
-CREATE TABLE IF NOT EXISTS `order_card_detail` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_card_detail` (
+  `id` int(11) NOT NULL,
   `txn_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `address_zip` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `address_zip_check` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -740,8 +1013,8 @@ CREATE TABLE IF NOT EXISTS `order_card_detail` (
   `currency` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `object` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `paid` int NOT NULL,
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `paid` int(11) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp(),
   `card_num` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `card_cvc` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `card_exp_month` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -749,9 +1022,215 @@ CREATE TABLE IF NOT EXISTS `order_card_detail` (
   `paid_amount` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `paid_amount_currency` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `payment_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `order_id` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `order_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_card_detail`
+--
+
+INSERT INTO `order_card_detail` (`id`, `txn_id`, `address_zip`, `address_zip_check`, `brand`, `country`, `exp_month`, `exp_year`, `fingerprint`, `funding`, `last4`, `description`, `currency`, `amount`, `object`, `paid`, `created_on`, `card_num`, `card_cvc`, `card_exp_month`, `card_exp_year`, `paid_amount`, `paid_amount_currency`, `payment_status`, `order_id`) VALUES
+(1, 'ch_3M2UMEAj5MXORqkL07D3kF2l', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636c9bade63ca', 'usd', '100', 'charge', 1, '2022-11-10 06:35:27', '', '', '', '', '', '', '', 4),
+(3, 'ch_3M3IMXAj5MXORqkL04JjjVuX', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f8a8915a74', 'usd', '1111', 'charge', 1, '2022-11-12 11:59:06', '', '', '', '', '', '', '', 4),
+(4, 'ch_3M3J9zAj5MXORqkL1Vivv3th', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968342e85', 'usd', '40', 'charge', 1, '2022-11-12 12:50:12', '', '', '', '', '', '', '', 5),
+(5, 'ch_3M3JA2Aj5MXORqkL0JxjI7jK', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9685c4403', 'usd', '40', 'charge', 1, '2022-11-12 12:50:15', '', '', '', '', '', '', '', 5),
+(6, 'ch_3M3JA3Aj5MXORqkL1oWa4TZc', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96878f5fe', 'usd', '40', 'charge', 1, '2022-11-12 12:50:16', '', '', '', '', '', '', '', 5),
+(7, 'ch_3M3JA4Aj5MXORqkL0qDPcEhY', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96883db86', 'usd', '40', 'charge', 1, '2022-11-12 12:50:17', '', '', '', '', '', '', '', 5),
+(8, 'ch_3M3JA9Aj5MXORqkL1S1QXaeg', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968db952f', 'usd', '40', 'charge', 1, '2022-11-12 12:50:22', '', '', '', '', '', '', '', 5),
+(9, 'ch_3M3JAAAj5MXORqkL0WaFTlnX', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968e1b3cb', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(10, 'ch_3M3JAAAj5MXORqkL104pKEM7', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968e55f88', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(11, 'ch_3M3JAAAj5MXORqkL0pcy5mHJ', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968e874c8', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(12, 'ch_3M3JAAAj5MXORqkL0UabnwMY', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968eb679d', 'usd', '40', 'charge', 1, '2022-11-12 12:50:23', '', '', '', '', '', '', '', 5),
+(13, 'ch_3M3JABAj5MXORqkL1q85hI1q', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968f9ac01', 'usd', '40', 'charge', 1, '2022-11-12 12:50:24', '', '', '', '', '', '', '', 5),
+(14, 'ch_3M3JACAj5MXORqkL1dmm86dq', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f968ff3056', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(15, 'ch_3M3JACAj5MXORqkL06GddVau', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96904a02b', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(16, 'ch_3M3JACAj5MXORqkL0spvcVSZ', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969074c59', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(17, 'ch_3M3JACAj5MXORqkL1aXRguHc', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9690afe2a', 'usd', '40', 'charge', 1, '2022-11-12 12:50:25', '', '', '', '', '', '', '', 5),
+(18, 'ch_3M3JADAj5MXORqkL0siKCeab', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969175d64', 'usd', '40', 'charge', 1, '2022-11-12 12:50:26', '', '', '', '', '', '', '', 5),
+(19, 'ch_3M3JAEAj5MXORqkL1Xr4MGN3', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9691c8ef9', 'usd', '40', 'charge', 1, '2022-11-12 12:50:26', '', '', '', '', '', '', '', 5),
+(20, 'ch_3M3JAEAj5MXORqkL0YC2V8HE', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96923e150', 'usd', '40', 'charge', 1, '2022-11-12 12:50:27', '', '', '', '', '', '', '', 5),
+(21, 'ch_3M3JAEAj5MXORqkL0qVJAkQR', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969259a5e', 'usd', '40', 'charge', 1, '2022-11-12 12:50:27', '', '', '', '', '', '', '', 5),
+(22, 'ch_3M3JAEAj5MXORqkL16BFtCTO', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9692b02e0', 'usd', '40', 'charge', 1, '2022-11-12 12:50:27', '', '', '', '', '', '', '', 5),
+(23, 'ch_3M3JAFAj5MXORqkL0zYi1LHK', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f96936507c', 'usd', '40', 'charge', 1, '2022-11-12 12:50:28', '', '', '', '', '', '', '', 5),
+(24, 'ch_3M3JAFAj5MXORqkL0vs3fb6U', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f9693b7bb2', 'usd', '40', 'charge', 1, '2022-11-12 12:50:28', '', '', '', '', '', '', '', 5),
+(25, 'ch_3M3JANAj5MXORqkL1DLqKYPY', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969b2ef26', 'usd', '40', 'charge', 1, '2022-11-12 12:50:36', '', '', '', '', '', '', '', 5),
+(26, 'ch_3M3JANAj5MXORqkL18PbgI3J', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969baa76b', 'usd', '40', 'charge', 1, '2022-11-12 12:50:36', '', '', '', '', '', '', '', 5),
+(27, 'ch_3M3JAOAj5MXORqkL1ZKs3VxT', '0', '0', 'Visa', 'US', '1', '2024', '', 'credit', '4242', 'orderNo:636f969bde59c', 'usd', '40', 'charge', 1, '2022-11-12 12:50:37', '', '', '', '', '', '', '', 5),
+(28, 'ch_3M3JAnAj5MXORqkL03QEEuQg', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b5274eb', 'usd', '40', 'charge', 1, '2022-11-12 12:51:02', '', '', '', '', '', '', '', 5),
+(29, 'ch_3M3JAoAj5MXORqkL0LAQijvO', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b693171', 'usd', '40', 'charge', 1, '2022-11-12 12:51:03', '', '', '', '', '', '', '', 5),
+(30, 'ch_3M3JApAj5MXORqkL13jqE1Wm', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b71a721', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(31, 'ch_3M3JApAj5MXORqkL1kkghdyJ', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b74ed28', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(32, 'ch_3M3JApAj5MXORqkL0NO2TK39', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b777d31', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(33, 'ch_3M3JApAj5MXORqkL0mk3ATK3', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f96b7b29a4', 'usd', '40', 'charge', 1, '2022-11-12 12:51:04', '', '', '', '', '', '', '', 5),
+(34, 'ch_3M3JC5Aj5MXORqkL1fbQykM6', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f970551111', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(35, 'ch_3M3JC5Aj5MXORqkL0bW6EBGT', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97053f736', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(36, 'ch_3M3JC5Aj5MXORqkL147ZSaRf', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97056b416', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(37, 'ch_3M3JC5Aj5MXORqkL12DbLKww', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97057a2fc', 'usd', '40', 'charge', 1, '2022-11-12 12:52:22', '', '', '', '', '', '', '', 5),
+(38, 'ch_3M3JC7Aj5MXORqkL1M6ZtMbW', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97071a31a', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(39, 'ch_3M3JC7Aj5MXORqkL1aKCyVsV', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f9707670d9', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(40, 'ch_3M3JC7Aj5MXORqkL1mnVCNFs', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f97078db19', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(41, 'ch_3M3JC7Aj5MXORqkL01twepn5', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f9707b55cc', 'usd', '40', 'charge', 1, '2022-11-12 12:52:24', '', '', '', '', '', '', '', 5),
+(42, 'ch_3M3JC8Aj5MXORqkL1d5el7BL', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f970837aed', 'usd', '40', 'charge', 1, '2022-11-12 12:52:25', '', '', '', '', '', '', '', 5),
+(43, 'ch_3M3JC9Aj5MXORqkL1sAjYpG6', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f9709032bf', 'usd', '40', 'charge', 1, '2022-11-12 12:52:26', '', '', '', '', '', '', '', 5),
+(44, 'ch_3M3JCzAj5MXORqkL1z2Venqi', '0', '0', 'Visa', 'US', '10', '2027', '', 'credit', '4242', 'orderNo:636f973d09802', 'usd', '40', 'charge', 1, '2022-11-12 12:53:18', '', '', '', '', '', '', '', 5),
+(45, 'ch_3M3JD4Aj5MXORqkL19YTNi71', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9741d9fe3', 'usd', '40', 'charge', 1, '2022-11-12 12:53:23', '', '', '', '', '', '', '', 5),
+(46, 'ch_3M3JD4Aj5MXORqkL1Yeb0pRo', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9742c7636', 'usd', '40', 'charge', 1, '2022-11-12 12:53:23', '', '', '', '', '', '', '', 5),
+(47, 'ch_3M3JD5Aj5MXORqkL1qRcvQ3O', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97432ab86', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(48, 'ch_3M3JD5Aj5MXORqkL0ld19AY1', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974379fdf', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(49, 'ch_3M3JD5Aj5MXORqkL0yUeYMUe', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97434c0e6', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(50, 'ch_3M3JD6Aj5MXORqkL1IrfNmrQ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9743ca366', 'usd', '40', 'charge', 1, '2022-11-12 12:53:24', '', '', '', '', '', '', '', 5),
+(51, 'ch_3M3JD6Aj5MXORqkL0HEtRjE5', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974487600', 'usd', '40', 'charge', 1, '2022-11-12 12:53:25', '', '', '', '', '', '', '', 5),
+(52, 'ch_3M3JD7Aj5MXORqkL0n7HMKgG', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974541526', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(53, 'ch_3M3JD7Aj5MXORqkL0Xg9oeMg', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974562718', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(54, 'ch_3M3JD7Aj5MXORqkL10mJ0PSk', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97456289d', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(55, 'ch_3M3JD7Aj5MXORqkL1mBe8VWl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9745a763a', 'usd', '40', 'charge', 1, '2022-11-12 12:53:26', '', '', '', '', '', '', '', 5),
+(56, 'ch_3M3JD8Aj5MXORqkL1tJJGBTZ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974661e50', 'usd', '40', 'charge', 1, '2022-11-12 12:53:27', '', '', '', '', '', '', '', 5),
+(57, 'ch_3M3JD9Aj5MXORqkL14Ev80HZ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97472bc67', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(58, 'ch_3M3JD9Aj5MXORqkL1ugSFPYX', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974755761', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(59, 'ch_3M3JD9Aj5MXORqkL1aYEvsSx', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97475118e', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(60, 'ch_3M3JD9Aj5MXORqkL1rvo3WcJ', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f97477eea8', 'usd', '40', 'charge', 1, '2022-11-12 12:53:28', '', '', '', '', '', '', '', 5),
+(61, 'ch_3M3JDAAj5MXORqkL1uwOUZgh', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f9748872a7', 'usd', '40', 'charge', 1, '2022-11-12 12:53:29', '', '', '', '', '', '', '', 5),
+(62, 'ch_3M3JDBAj5MXORqkL1yMenxfG', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974911a1c', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(63, 'ch_3M3JDBAj5MXORqkL1y2IRN9h', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974930a85', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(64, 'ch_3M3JDBAj5MXORqkL0BRGc4zA', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974928e74', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(65, 'ch_3M3JDBAj5MXORqkL0LMVl9bM', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974961897', 'usd', '40', 'charge', 1, '2022-11-12 12:53:30', '', '', '', '', '', '', '', 5),
+(66, 'ch_3M3JDCAj5MXORqkL03g5VSms', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974a56cfa', 'usd', '40', 'charge', 1, '2022-11-12 12:53:31', '', '', '', '', '', '', '', 5),
+(67, 'ch_3M3JDDAj5MXORqkL1hHY2htf', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974ad937c', 'usd', '40', 'charge', 1, '2022-11-12 12:53:31', '', '', '', '', '', '', '', 5),
+(68, 'ch_3M3JDDAj5MXORqkL09eHuBWT', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974b1912b', 'usd', '40', 'charge', 1, '2022-11-12 12:53:32', '', '', '', '', '', '', '', 5),
+(69, 'ch_3M3JDDAj5MXORqkL1BHBlmwT', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:636f974b47ae9', 'usd', '40', 'charge', 1, '2022-11-12 12:53:32', '', '', '', '', '', '', '', 5),
+(70, 'ch_3M3LUgAj5MXORqkL1ivJpJIk', '0', '0', 'Visa', 'US', '2', '2023', '', 'credit', '4242', 'orderNo:636fb98e44bdb', 'usd', '22.44', 'charge', 1, '2022-11-12 15:19:43', '', '', '', '', '', '', '', 9),
+(71, 'ch_3M3LYHAj5MXORqkL0RgVMErw', '0', '0', 'Visa', 'US', '2', '2042', '', 'credit', '4242', 'orderNo:636fba6ce4a9d', 'usd', '8.16', 'charge', 1, '2022-11-12 15:23:26', '', '', '', '', '', '', '', 10),
+(72, 'ch_3M4jDeAj5MXORqkL0qnhfm12', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:6374c0c699398', 'usd', '14.5', 'charge', 1, '2022-11-16 10:51:51', '', '', '', '', '', '', '', 12),
+(73, 'ch_3M4jDoAj5MXORqkL02FRNmjl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:6374c0d0a62b0', 'usd', '200', 'charge', 1, '2022-11-16 10:52:01', '', '', '', '', '', '', '', 12),
+(74, 'ch_3M8NfpAj5MXORqkL1Jn6Dtyl', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63820921c16d9', 'usd', '300', 'charge', 1, '2022-11-26 12:40:03', '', '', '', '', '', '', '', 25),
+(75, 'ch_3MP07oAj5MXORqkL0vbx4rbq', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63be7a008a26e', 'usd', '2890', 'charge', 1, '2023-01-11 08:57:37', '', '', '', '', '', '', '', 35),
+(76, 'ch_3MP0E3Aj5MXORqkL1rqOGZt4', '0', '0', 'Visa', 'US', '12', '2024', '', 'credit', '4242', 'orderNo:63be7b839500b', 'usd', '510', 'charge', 1, '2023-01-11 09:04:04', '', '', '', '', '', '', '', 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packages`
+--
+
+CREATE TABLE `packages` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `package_type` varchar(255) NOT NULL,
+  `container_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `container_equip_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `method` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `length` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `width` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `height` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `volume` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `weight` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `maximum_weight` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `courier` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`id`, `description`, `package_type`, `container_code`, `container_equip_type`, `method`, `length`, `width`, `height`, `volume`, `weight`, `maximum_weight`, `courier`, `status`) VALUES
+(1, 'Enjoyment', '', '9789', '7867', 'ground', '7', '7', '7', '7', '7', '7', '7', '798hjkh'),
+(3, 'Nissan Days', 'Vehicle', '1122', 'Nope', '', '2', '5', '4', '40', '50', '50', 'Fedex', 'Active'),
+(4, 'Nissan Days Highway', 'Vehicle', '1123', 'Nope', '', '2', '5', '5', '40', '50', '50', 'UPS', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_types`
+--
+
+CREATE TABLE `package_types` (
+  `id` int(11) NOT NULL,
+  `package` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `package_types`
+--
+
+INSERT INTO `package_types` (`id`, `package`) VALUES
+(1, 'Bag'),
+(2, 'Bale'),
+(3, 'Barrel'),
+(4, 'Basket'),
+(5, 'Bin'),
+(6, 'Bing Chest'),
+(7, 'Bottle'),
+(8, 'Box'),
+(9, 'Bucket'),
+(10, 'Bundle'),
+(11, 'Bundle'),
+(12, 'Cabinet'),
+(13, 'Can'),
+(14, 'Can case'),
+(15, 'Car boy'),
+(16, 'Container'),
+(17, 'Cylinder'),
+(18, 'Drum'),
+(19, 'Vehicle'),
+(20, 'Wrapped');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pickup_orders`
+--
+
+CREATE TABLE `pickup_orders` (
+  `id` int(11) NOT NULL,
+  `creation_date` varchar(255) NOT NULL,
+  `creation_time` varchar(255) NOT NULL,
+  `delivery_date` varchar(255) NOT NULL,
+  `delivery_time` varchar(255) NOT NULL,
+  `pickup_date` varchar(255) NOT NULL,
+  `pickup_time` varchar(255) NOT NULL,
+  `number` varchar(255) NOT NULL,
+  `employee_name` varchar(255) NOT NULL,
+  `issued_by` varchar(255) NOT NULL,
+  `destination_agent` varchar(255) NOT NULL,
+  `shipper_name` varchar(255) NOT NULL,
+  `shipper_address` varchar(255) NOT NULL,
+  `pickup_location_name` varchar(255) NOT NULL,
+  `pickup_location_address` varchar(255) NOT NULL,
+  `consignee_name` varchar(255) NOT NULL,
+  `consignee_address` varchar(255) NOT NULL,
+  `delivery_location_name` varchar(255) NOT NULL,
+  `delivery_location_address` varchar(255) NOT NULL,
+  `client_to_bill` varchar(255) NOT NULL,
+  `supplier_name` varchar(255) NOT NULL,
+  `supplier_invoice_number` varchar(255) NOT NULL,
+  `supplier_address` varchar(255) NOT NULL,
+  `supplier_purchase_order_number` varchar(255) NOT NULL,
+  `inland_carrier` varchar(255) NOT NULL,
+  `main_carrier` varchar(255) NOT NULL,
+  `mode_of_transport` varchar(255) NOT NULL,
+  `return_address` varchar(255) NOT NULL,
+  `pro_number` varchar(255) NOT NULL,
+  `driver_name` varchar(255) NOT NULL,
+  `booking_number` varchar(255) NOT NULL,
+  `driver_license_number` varchar(255) NOT NULL,
+  `preferred_mode_of_transport` varchar(255) NOT NULL,
+  `tracking_number` varchar(255) NOT NULL,
+  `pod_delivery_date` varchar(255) NOT NULL,
+  `pod_delivery_time` varchar(255) NOT NULL,
+  `received_by` varchar(255) NOT NULL,
+  `comments` varchar(255) NOT NULL,
+  `internal_comments` varchar(255) NOT NULL,
+  `notes` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pickup_orders`
+--
+
+INSERT INTO `pickup_orders` (`id`, `creation_date`, `creation_time`, `delivery_date`, `delivery_time`, `pickup_date`, `pickup_time`, `number`, `employee_name`, `issued_by`, `destination_agent`, `shipper_name`, `shipper_address`, `pickup_location_name`, `pickup_location_address`, `consignee_name`, `consignee_address`, `delivery_location_name`, `delivery_location_address`, `client_to_bill`, `supplier_name`, `supplier_invoice_number`, `supplier_address`, `supplier_purchase_order_number`, `inland_carrier`, `main_carrier`, `mode_of_transport`, `return_address`, `pro_number`, `driver_name`, `booking_number`, `driver_license_number`, `preferred_mode_of_transport`, `tracking_number`, `pod_delivery_date`, `pod_delivery_time`, `received_by`, `comments`, `internal_comments`, `notes`, `image`) VALUES
+(1, '2023-03-14', '11:01', '2023-02-22', '11:02', '2023-03-03', '15:04', '78', 'hjg', 'gjhg', 'ghj', 'igu', ' gjhg ', 'ghj', 'jhgj', 'hjk', ' h ', 'jkh', 'kjhk', '', 'hg', '798', 'ghk', '78', 'h', 'hkj', 'hkjh', 'hkjh', '79', 'hjk', '78', '78', 'gjhg', '789', '2023-04-20', '11:03', 'jgh', 'utit', 'tuytuy', 'ljk', '796a0b59167665b22186f052cff66f8c.jpg');
 
 -- --------------------------------------------------------
 
@@ -759,16 +1238,14 @@ CREATE TABLE IF NOT EXISTS `order_card_detail` (
 -- Table structure for table `plans`
 --
 
-DROP TABLE IF EXISTS `plans`;
-CREATE TABLE IF NOT EXISTS `plans` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `plans` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `price` float(10,2) NOT NULL DEFAULT '0.00' COMMENT 'Minimum amount is $0.50 US',
+  `price` float(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Minimum amount is $0.50 US',
   `interval` enum('week','month','year') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'month',
   `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `paystack_plan_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `paystack_plan_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `plans`
@@ -783,16 +1260,39 @@ INSERT INTO `plans` (`id`, `name`, `price`, `interval`, `description`, `paystack
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ports`
+--
+
+CREATE TABLE `ports` (
+  `id` int(11) NOT NULL,
+  `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `port_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `port_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `subdivision` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `transportation_method` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `us_custom_codes` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ports`
+--
+
+INSERT INTO `ports` (`id`, `country`, `port_id`, `port_name`, `subdivision`, `remarks`, `transportation_method`, `us_custom_codes`, `notes`) VALUES
+(1, 'Pakistan', '67', 'B', 'Karachi', 'hurry up', '', 'yiuyi', 'yiu');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `post_images`
 --
 
-DROP TABLE IF EXISTS `post_images`;
-CREATE TABLE IF NOT EXISTS `post_images` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `post_images` (
+  `id` int(11) NOT NULL,
   `file` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `post_id` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `post_images`
@@ -809,9 +1309,8 @@ INSERT INTO `post_images` (`id`, `file`, `post_id`) VALUES
 -- Table structure for table `purchase_orders`
 --
 
-DROP TABLE IF EXISTS `purchase_orders`;
-CREATE TABLE IF NOT EXISTS `purchase_orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `purchase_orders` (
+  `id` int(11) NOT NULL,
   `seller_name` varchar(255) NOT NULL,
   `contact_address` varchar(255) NOT NULL,
   `phone_no` varchar(255) NOT NULL,
@@ -825,9 +1324,8 @@ CREATE TABLE IF NOT EXISTS `purchase_orders` (
   `part_number` varchar(255) NOT NULL,
   `quantity` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `additional_information` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `additional_information` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `purchase_orders`
@@ -842,17 +1340,15 @@ INSERT INTO `purchase_orders` (`id`, `seller_name`, `contact_address`, `phone_no
 -- Table structure for table `requests`
 --
 
-DROP TABLE IF EXISTS `requests`;
-CREATE TABLE IF NOT EXISTS `requests` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `request_type` enum('Report','Medical','Physical','Fire','Kidnapping','Accident','Road Robbery') NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `latlon` varchar(255) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `requests` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `request_type` enum('Report','Medical','Physical','Fire','Kidnapping','Accident','Road Robbery') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `latlon` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `requests`
@@ -882,15 +1378,32 @@ INSERT INTO `requests` (`id`, `user_id`, `request_type`, `description`, `latlon`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `search_history`
+--
+
+CREATE TABLE `search_history` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `search_history`
+--
+
+INSERT INTO `search_history` (`id`, `user_id`, `order_id`) VALUES
+(1, 7, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `secret_questions`
 --
 
-DROP TABLE IF EXISTS `secret_questions`;
-CREATE TABLE IF NOT EXISTS `secret_questions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `question` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `secret_questions` (
+  `id` int(11) NOT NULL,
+  `question` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `secret_questions`
@@ -908,9 +1421,8 @@ INSERT INTO `secret_questions` (`id`, `question`) VALUES
 -- Table structure for table `setting`
 --
 
-DROP TABLE IF EXISTS `setting`;
-CREATE TABLE IF NOT EXISTS `setting` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `setting` (
+  `id` int(11) NOT NULL,
   `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `banner` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -919,16 +1431,15 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `terms` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `asocial_links` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `asocial_links` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setting`
 --
 
 INSERT INTO `setting` (`id`, `description`, `image`, `banner`, `phone`, `status`, `address`, `terms`, `email`, `asocial_links`) VALUES
-(1, '<p>Sed Ut Perspiciatis Unde Omnis Iste Natus Error Sit Voluptatem.</p>\n\n<p>7860 North Park Place<br />\nSan Francisco, CA 94120</p>\n\n<p><strong>Email:</strong>&nbsp;Support@skillsquared</p>\n\n<p><strong>Call:</strong>&nbsp;<a href=\"tel:+15555555555\">555-555-1234</a></p>', '4010064043540.jpg', '5068095178430.jpg', '01 123 456 7895', '1', '#1002 Sector 49 new york', '<p>Hello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHell</p>\n\n<p>o this is test message</p>\n', 'info@emjayglobal.com', '{\"fb\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"tw\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"go\":\"https:\\/\\/www.google.com\\/emjayglobal\",\"li\":\"https:\\/\\/www.linkedIn.com\\/emjayglobal\",\"yo\":\"https:\\/\\/www.youtube.com\\/emjayglobal\"}');
+(1, '<p>Sed Ut Perspiciatis Unde Omnis Iste Natus Error Sit Voluptatem.</p>\n\n<p>7860 North Park Place<br />\nSan Francisco, CA 94120</p>\n\n<p><strong>Email:</strong>&nbsp;Support@skillsquared</p>\n\n<p><strong>Call:</strong>&nbsp;<a href=\"tel:+15555555555\">555-555-1234</a></p>', '3467389993150.jpg', '5068095178430.jpg', '01 123 456 7895', '1', '#1002 Sector 49 new york', '<p>Hello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is tes</p>\n\n<p>t messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHello this is test messageHell</p>\n\n<p>o this is test message</p>\n', 'info@emjayglobal.com', '{\"fb\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"tw\":\"https:\\/\\/www.facebook.com\\/emjayglobal\",\"go\":\"https:\\/\\/www.google.com\\/emjayglobal\",\"li\":\"https:\\/\\/www.linkedIn.com\\/emjayglobal\",\"yo\":\"https:\\/\\/www.youtube.com\\/emjayglobal\"}');
 
 -- --------------------------------------------------------
 
@@ -936,57 +1447,110 @@ INSERT INTO `setting` (`id`, `description`, `image`, `banner`, `phone`, `status`
 -- Table structure for table `shipment_orders`
 --
 
-DROP TABLE IF EXISTS `shipment_orders`;
-CREATE TABLE IF NOT EXISTS `shipment_orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `shipment_type` int NOT NULL COMMENT '1=personal effect,2=ocean frieght,3=Air Frieght,4=Vehicle Shipment',
-  `shipment_status` varchar(255) NOT NULL,
-  `shipper_name` varchar(255) NOT NULL,
-  `shipper_phone` varchar(255) NOT NULL,
-  `shipper_address` varchar(255) NOT NULL,
-  `shipper_state` varchar(255) NOT NULL,
-  `shipper_city` varchar(255) NOT NULL,
-  `request_pickup` varchar(255) NOT NULL DEFAULT 'No',
-  `pickup_location` varchar(255) NOT NULL,
-  `request_insurance` varchar(255) NOT NULL DEFAULT 'No',
-  `delivery_type` enum('Home','Lagos Warehouse') NOT NULL,
-  `consignee_name` varchar(255) NOT NULL,
-  `consignee_address` varchar(255) NOT NULL,
-  `consignee_phone` varchar(255) NOT NULL,
-  `item_description` varchar(255) NOT NULL,
-  `consignee_country` varchar(255) NOT NULL,
-  `consignee_state` varchar(255) NOT NULL,
-  `consignee_city` varchar(255) NOT NULL,
-  `quantity` varchar(255) NOT NULL,
-  `length` varchar(255) NOT NULL,
-  `width` varchar(255) NOT NULL,
-  `height` varchar(255) NOT NULL,
-  `package_type` enum('Extra Large Box','Large Box','Medium Box','Letter') DEFAULT NULL,
-  `package_weight` varchar(255) NOT NULL,
-  `carriage_value` varchar(255) NOT NULL,
+CREATE TABLE `shipment_orders` (
+  `id` int(11) NOT NULL,
+  `shipment_type` int(11) NOT NULL COMMENT '1=personal effect,2=ocean frieght,3=Air Frieght,4=Vehicle Shipment',
+  `shipper_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shipper_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shipper_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shipper_country` int(11) NOT NULL DEFAULT 160,
+  `shipper_state` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shipper_city` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `request_pickup` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No',
+  `pickup_location` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `request_insurance` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'No',
+  `delivery_type` enum('Home','Lagos Warehouse') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `item_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_country` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_state` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_city` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `length` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `width` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `height` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `package_type` enum('Extra Large Box','Large Box','Medium Box','Letter') CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `package_weight` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `carriage_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `amount` double DEFAULT NULL,
-  `shipment_from` varchar(255) NOT NULL,
-  `shipment_to` varchar(255) NOT NULL,
-  `shipment_date` varchar(255) NOT NULL,
+  `shipment_from` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shipment_to` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `shipment_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `expected_delivery_date` date DEFAULT NULL,
   `track_number` double NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_id` int(11) DEFAULT NULL,
+  `shipment_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shipment_orders`
 --
 
-INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipment_status`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `track_number`) VALUES
-(3, 1, '2', 'naeem', '03411663111', 'Chowk Shah Abbass Multan', '2652', 'Select City', 'yes', 'Cantt', 'yes', 'Home', 'Jawad', 'New Delhi', '+91 567 451 799', '<p>New product</p>\r\n', '101', '10', '707', '1', '20', '10', '10', 'Extra Large Box', '1', '2000', NULL, 'Nigeria', 'India', '', 65205088),
-(4, 1, '2', 'naeem', '03411663111', 'Chowk Shah Abbass Multan', '2652', '30731', 'yes', 'Cantt', 'yes', 'Home', 'Jawad', 'New Delhi', '+91 567 451 799', 'New product', '101', '10', '707', '1', '20', '10', '10', 'Medium Box', '1', '2000', NULL, 'Nigeria', 'India', '2022-11-21 ', 42979922),
-(5, 1, '3', 'naeem', '03411663111', 'Chowk Shah Abbass Multan', '2652', '30731', 'yes', 'Cantt', 'yes', 'Home', 'Jawad', 'New Delhi', '+91 567 451 799', 'New product', '101', '10', '707', '1', '20', '10', '10', 'Medium Box', '1', '2000', NULL, 'Nigeria', 'India', '2022-11-21 ', 90985350),
-(8, 4, '5', 'hjk', 'hjk', 'jlk', '2653', '30743', 'yes', 'm.,', 'No', 'Lagos Warehouse', 'k;l', 'kl;', 'k;l', '<p>uio</p>\r\n', '2', '74', '6020', '7', '67', '65', '56', 'Large Box', '78', '678', NULL, 'yuk', 'yui', '2022-11-08', 36034574),
-(9, 4, '3', 'hjk', 'hjk', 'jlk', '2653', '30743', 'yes', 'm.,', 'No', 'Lagos Warehouse', 'k;l', 'kl;', 'k;l', '<p>uio</p>\r\n', '2', '74', '6020', '7', '67', '65', '56', 'Large Box', '78', '678', NULL, 'yuk', 'yui', '2022-11-08', 66300049),
-(10, 4, '', 'hjk', 'hjk', 'jlk', '2653', '30743', 'yes', 'm.,', 'No', 'Lagos Warehouse', 'k;l', 'kl;', 'k;l', '<p>uio</p>\r\n', '2', '74', '6020', '7', '67', '65', '56', 'Large Box', '78', '678', NULL, 'yuk', 'yui', '2022-11-08', 93885755),
-(11, 4, '', 'hi', 'yu', 'ui', '2682', '31136', 'yes', 'hk', 'No', 'Lagos Warehouse', 'uio', 'uoi', 'uoi', '<p>uoi</p>\r\n', '1', '42', '5909', '12', '67', '67', '78', 'Medium Box', '78', '675', NULL, 'yu', 'yiu', '2022-11-08', 21056878),
-(12, 4, '', 'hi', 'yu', 'ui', '2682', '31136', 'yes', 'hk', 'No', 'Lagos Warehouse', 'uio', 'uoi', 'uoi', '<p>uoi</p>\r\n', '1', '42', '5909', '12', '67', '67', '78', 'Medium Box', '78', '675', NULL, 'yu', 'yiu', '2022-11-08', 465275),
-(13, 4, '', 'hi', 'yu', 'ui', '2682', '31136', 'yes', 'hk', 'No', 'Lagos Warehouse', 'uio', 'uoi', 'uoi', '<p>uoi</p>\r\n', '1', '42', '5909', '12', '67', '67', '78', 'Medium Box', '78', '675', NULL, 'yu', 'yiu', '2022-11-08', 63190368),
-(14, 4, '3', 'ghj', '7897', 'jklj', '2647', '30692', 'yes', 'jl', 'No', 'Lagos Warehouse', 'kl;j', 'mlkj', '798', '<p>oiu</p>\r\n', '2', '75', '6022', '67', '7', '9', '89', 'Large Box', '78', '789', NULL, 'jlk', 'jlk', '2023-02-04', 42015671);
+INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipper_name`, `shipper_phone`, `shipper_address`, `shipper_country`, `shipper_state`, `shipper_city`, `request_pickup`, `pickup_location`, `request_insurance`, `delivery_type`, `consignee_name`, `consignee_address`, `consignee_phone`, `item_description`, `consignee_country`, `consignee_state`, `consignee_city`, `quantity`, `length`, `width`, `height`, `package_type`, `package_weight`, `carriage_value`, `amount`, `shipment_from`, `shipment_to`, `shipment_date`, `expected_delivery_date`, `track_number`, `user_id`, `shipment_status`) VALUES
+(2, 4, 'waseem', '3417090031', 'Hussain town Multan\r\ntown', 160, '2647', 'Select City', 'yes', 'nishter college', 'yes', 'Home', 'mr ben', 'jsksjds', '03417090031', '<p>skjsdkj</p>\r\n', '1', '42', '5909', '2', '3', '3', '3', 'Extra Large Box', '1', '1', NULL, 'Lahore', 'Lahore', '2022-10-29', NULL, 0, NULL, 2),
+(3, 1, 'waseem', '341709003', 'xyz', 160, '2648', '48510', 'yes', 'xys', 'yes', 'Home', 'mr ben', 'Hussain town Multan\r\ntown', '3417090031', '<p>hellof</p>\r\n', '17', '327', '7255', '2', '2', '2', '2', 'Extra Large Box', '1', '1', NULL, 'liaqatpur', 'liaqatpur', '2022-10-29', NULL, 40960587, NULL, 0),
+(4, 1, 'Wajid', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 61210695, 7, 1),
+(5, 4, 'Seyaam', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 40080218, 7, 0),
+(6, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 97399963, 10, 0),
+(7, 4, 'Jawad khan', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 75713930, 10, 0),
+(8, 4, 'Jawad days', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 73769471, 10, 0),
+(9, 1, 'Jawad', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 95889687, 7, 0),
+(10, 4, 'wajid ali', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', NULL, '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14943, 7, 0),
+(13, 2, 'Ismail khan niazi', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 14225224, 7, 1),
+(14, 1, 'Naveed ', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 43205899, 7, 0),
+(15, 1, 'haha', '+234676466', 'gagag', 160, 'Bashshar', 'Bani Wanif', 'yes', 'gahaha', 'yes', 'Home', 'bahah', 'bahsj', '+2346767', 'hahah', 'Andorra', 'Canillo', 'Canillo', '2', '6494', '4', '4', '', '1', '1', NULL, 'gaha', 'haha', '2022-11-17', NULL, 46335237, 7, 0),
+(16, 1, 'seeeeema', '15', 'XXX', 160, 'Pind Pondri', 'Chak 42', 'yes', 'chowk jalebi wala', 'yes', 'Home', 'jajajajaj', 'm', '1', 'good', 'p', '42', '2', '1', '1', '1', '1', 'Extra Large Box', '56', '7', NULL, 'multan', 'lahore', '2022-11-08', NULL, 89099449, 7, 0),
+(17, 1, 'wajid', '+23431313', '1jaj', 160, 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 21141464, 7, 0),
+(18, 1, 'wajid', '+23431313', '1jaj', 160, 'Manu\'a', 'Ofu', 'yes', 'nsjsj', 'yes', 'Home', 'naja', 'a', '+23499', 'haja', 'Afghanistan', 'Gawr', 'Shahrak', '2', '4', '4', '4', '', '1', '1', NULL, 'a', 'a', '2022-11-17', NULL, 55004198, 7, 0),
+(19, 1, 'hwwh', '+23466464', 'bbsh', 160, 'Baglan', 'Baghlan', 'yes', 'bb', 'yes', 'Home', 'bhw', 'bshh', '+2349464', 'babs', 'Algeria', 'Adrar', 'Adrar', '2', '9494', '4', '4', '', '123', '1', NULL, 'hhshs', 'hshs', '2022-11-17', NULL, 93712401, 7, 0),
+(20, 1, 'Abdul Wajid', '+2343331245671', 'Lahore Sector Z1', 160, 'New York', 'Brookhaven', 'yes', 'Same as above', 'yes', 'Home', 'Bilal Razaq Kashmiri', 'Township', '+2343481072184', 'This packet has large as', 'Afghanistan', 'Baglan', 'Baghlan', '3', '6', '1', '6', '', '65', '12', NULL, 'Lahore', 'Jaranwala', '2022-11-18', NULL, 91466675, 7, 0),
+(21, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 19385476, 7, 0),
+(22, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 69094402, 7, 0),
+(23, 1, 'seema', '+234123', 'xxxx', 160, 'Farah', 'Farah', 'yes', 'gagay', 'yes', 'Home', 'gg', 'hh', '+23499', 'haha', 'Afghanistan', 'Badgis', 'Bala Morghab', '2', '47', '4', '4', '', '64', '4', NULL, 'haha', 'nanaj', '2022-11-19', NULL, 1132491, 7, 0),
+(24, 4, 'gg', '+23499', 'vv', 160, 'Manu\'a', 'Ofu', 'yes', 'hb', 'yes', 'Home', 'bb', 'b', '+23456', 'h', 'Algeria', 'Batnah', '\'Ayn Tutah', '1', '4', '4', '4', 'Letter', '11', '22', NULL, 'ao', 'a', '2022-11-22', NULL, 9801762, 7, 0),
+(25, 1, 'seyam', '+923417090031', 'new shah shams colony', 160, 'Punjab', 'Multan', 'yes', 'new shah shams', 'yes', 'Home', 'Mr ben', 'Nigeria', '+234319739494', 'one pair of shoes', 'Nigeria', 'Abia', 'Amaigbo', '1', '2', '1', '2', '', '1', '45', NULL, 'Pakistan', 'nigeria', '2022-11-22', NULL, 64342, 16, 0),
+(26, 1, 'wasen', '+2349595', 'lahore', 160, 'Punjab', 'Abdul Hakim', 'yes', 'lahor', 'no', 'Home', 'Ebenzir', 'lagos', '+23434364', 'xjej', 'Nigeria', 'Abia', 'Aba', '2', '1299', '9', '8', '', '25', '2080', NULL, 'multan', 'anna', '2022-12-15', NULL, 79187420, 19, 0),
+(27, 1, 'ben', '+2344438548762', 'Huntington beach', 160, 'Maryland', 'Baltimore', 'yes', 'randallstown', 'no', 'Home', 'waseem', 'Pakistan', '+2344439858822', 'dhghjkk', 'Pakistan', 'Punjab', 'Alipur', '2', '2', '2', '2', '', '25', '500', NULL, 'Baltimore', 'Lagos', '2022-12-17', NULL, 53456434, 18, 0),
+(28, 1, 'ben', '+2344438548762', 'Huntington beach', 160, 'Maryland', 'Baltimore', 'yes', 'randallstown', 'no', 'Home', 'waseem', 'Pakistan', '+2344439858822', 'dhghjkk', 'Pakistan', 'Punjab', 'Alipur', '2', '2', '2', '2', '', '25', '500', NULL, 'Baltimore', 'Lagos', '2022-12-17', NULL, 65315053, 18, 0),
+(29, 3, 'waseem', '+923417090031', 'Lahore multan', 160, 'Punjab', 'Abdul Hakim', 'yes', 'Nishter road', 'yes', 'Home', 'adnan', '566 b Street2', '+92341079649', 'this is really important durex item', 'Pakistan', 'Punjab', 'Attock', '1', '19', '54', '21', '', '2', '25', NULL, 'multan', 'Lahore', '2023-1-10', NULL, 54457542, 19, 0),
+(38, 3, 'Junaid', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 71921314, 10, 0),
+(39, 2, 'Junaid', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 31639814, 10, 0),
+(41, 2, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 7129045, 10, 0),
+(42, 2, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 60272988, 30, 3),
+(43, 3, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 53099917, 30, 3),
+(44, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 32565635, 30, 1),
+(45, 4, 'Yousaf Aheer', '+923215548866', 'Chah Jammu wala', 160, 'Punjab', 'Multan', 'yes', 'Multan', 'no', 'Home', 'Hashim', 'Wilayatabad', '+923215666986', 'New', 'Pakistan', 'Punjab', 'Multan', '1', '', '', '', 'Letter', '858', '88588', NULL, 'Chah Jammu wala', 'wilayatabad', '2023-1-12', NULL, 23148991, 30, 0),
+(46, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 99377740, 30, 0),
+(47, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 99377740, 30, 0),
+(48, 4, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 39359183, 30, 0),
+(49, 4, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 39359183, 30, 0),
+(50, 4, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 73696506, 30, 0),
+(51, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 75596538, 19, 0),
+(52, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 70789127, 19, 0),
+(53, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 95651491, 19, 0),
+(54, 1, 'waseem afzal', '+9295956', 'Pakistan', 160, 'Badakhshan', 'Eshkashemn', 'yes', 'nsj', 'yes', 'Home', 'kaj', 'nsn', '+67294946', 'hahah', 'Afghanistan', 'Bamiyan', 'Qil Qal\'eh', '0', '', '', '', '', '55', '6666', NULL, 'hsh', 'hsjjs', '2023-1-12', NULL, 16822376, 19, 0),
+(55, 4, 'Yousaf Aheer', '+9269888', 'jhb', 160, 'Punjab', 'Multan', 'no', 'gh', 'no', 'Home', 'nbv', 'nbhj', '+9369655', 'bjju', 'Afghanistan', 'Kabul', 'Kabul', '1', '', '', '', 'Letter', '66', '9369', NULL, 'bb', 'hhh', '2023-1-13', NULL, 44757295, 30, 0),
+(56, 4, 'Yousaf Aheer', '+9269888', 'jhb', 160, 'Punjab', 'Multan', 'no', 'gh', 'no', 'Home', 'nbv', 'nbhj', '+9369655', 'bjju', 'Afghanistan', 'Kabul', 'Kabul', '1', '', '', '', 'Letter', '66', '9369', NULL, 'bb', 'hhh', '2023-1-13', NULL, 44757295, 30, 0),
+(57, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 80013249, 31, 0),
+(58, 1, 'M seyaam ', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 62248151, 10, 0),
+(59, 0, 'wa', 'shipper_phone', 'shipper_address', 160, 'shipper_state', 'shipper_city', 'No', 'pickup_location', 'No', '', 'consignee_name', 'consignee_address', 'consignee_phone', 'item_description', 'consignee_country', 'consignee_state', 'consignee_city', 'quantity', '', '', '', '', '', '', NULL, 'shipment_from', 'shipment_to', '', NULL, 72112681, 7, 0),
+(60, 0, 'wa', 'shipper_phone', 'shipper_address', 160, 'shipper_state', 'shipper_city', 'No', 'pickup_location', 'No', '', 'consignee_name', 'consignee_address', 'consignee_phone', 'item_description', 'consignee_country', 'consignee_state', 'consignee_city', 'quantity', '', '', '', '', '', '', NULL, 'shipment_from', 'shipment_to', '', NULL, 57285666, 7, 0),
+(61, 1, 'Yousaf', '03075493296', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Multan', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '35', '45', 'Extra Large Box', '56', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 63102944, 31, 0),
+(62, 1, 'waseem afzal afzal', '+23494694', 'new shja', 160, 'Baluchistan', 'Dera Allah Yar', 'yes', '123 house new shah shams colony', 'yes', 'Home', 'Mr Ben', 'Lagos', '+23464673', 'no description', 'Nigeria', 'Abia', 'Aba', '2', '\"82\",\"82\"', '\"88\",\"82\"', '\"9\",\"920\"', '', '89', '99', NULL, 'multan', 'lagos', '2023-1-17', NULL, 45682030, 2, 0),
+(63, 1, 'waseem afzal afzal', '+234555', 'multan', 160, 'Badakhshan', 'Khandud', 'yes', 'new shah shams colony', 'yes', 'Home', 'naveed', 'na kana sahb', '+2346465', 'tables', 'Afghanistan', 'Gawr', 'Shahrak', '2', '\"6\",\"77\"', '\"6\",\"65\"', '\"7\",\"1\"', 'Extra Large Box', '77', '899', NULL, 'Lahore', 'kndar', '2023-1-19', NULL, 90245206, 2, 0),
+(64, 1, 'Naveed file', '03278178979', 'Chowk Shah Abbass', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '56', '35', '45', 'Extra Large Box', '56', '67', NULL, 'multan', 'lahore', '2022-11-08', NULL, 43335552, 10, 0),
+(65, 1, ' sasa', ' 2231321', ' sdvsvd', 1, ' 42', ' 5912', ' yes', ' ssvd', ' yes', '', ' sdvsdv', ' svdvds', ' 2323', ' sdsd', ' 1', ' 42', ' 5909', ' 2', ' 42', ' 73', ' 86', '', ' 3', ' 3', NULL, ' as', ' vsd', ' 2023-02-04', NULL, 69583499, 10, 0),
+(66, 4, 'wajid ali', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '', '', NULL, '', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 60108495, 10, 0),
+(67, 4, 'wajid ali', '03278178979', 'nishter road multan', 160, '2682', '31136', 'yes', 'Chowk', 'yes', 'Home', 'jawad', 'multan', '03411663111', 'good', '1', '42', '5909', '2', '', '', '', NULL, '', '', NULL, 'multan', 'lahore', '2022-11-08', NULL, 41862214, 10, 0),
+(68, 4, 'dADA2', '211234', 'DSVSD', 1, '45', '5922', 'yes', 'ASVVSD', 'yes', 'Home', 'SVDVSD', 'VSDA', '32RR32', 'VSDSVD', '3', '118', '6131', '1', '', '', '', NULL, '', '', NULL, 'CAS', 'CSA', '', NULL, 28622916, 10, 0),
+(69, 4, 'dADA2', '211234', 'DSVSD', 1, '45', '5922', 'yes', 'ASVVSD', 'yes', 'Home', 'SVDVSD', 'VSDA', '32RR32', 'VSDSVD', '3', '118', '6131', '1', '', '', '', NULL, '', '', NULL, 'CAS', 'CSA', '', NULL, 70449913, 10, 0),
+(70, 4, 'qfewf', '423', 'sdvvsd', 1, '49', '5938', 'yes', 'sdvvds', 'yes', 'Home', 'svdsdv', 'svdvd', '3r32', 'svdvds', '2', '76', '6023', '1', '', '', '', NULL, '', '', NULL, 'sdvvsd', 'svdvd', '', NULL, 48764156, 10, 0),
+(71, 1, 'Adnam', '03421996688', 'Gulgasht', 166, '2728', '31464', 'no', 'Vihari Chowk', 'no', 'Home', 'Shaheer', 'Sui Gas chiwk', '03255584155', 'New ', '166', '2728', '31464', '2', '2,5', '2,5', '2,5', 'Extra Large Box', '25', '5', NULL, 'Multan', 'Multan', '2023-03-22', NULL, 68959004, 10, 0),
+(72, 4, 'Waseem', '03412886636', 'Chowk', 166, '2728', '31464', 'no', 'Lahore Road', 'no', 'Home', 'wajahat', 'Mianwali', '03155663355', 'ghju', '166', '2728', '31464', '2', '', '', '', NULL, '', '', NULL, 'Multan', 'Mianwali', '', NULL, 39073883, 10, 0),
+(73, 3, 'jafir', '03422556325', 'Bosan Road ', 166, '2728', '31464', 'no', 'Sher Shah', 'no', 'Home', 'Gul', 'Gulgasht', '03215558835', 'hhh', '166', '2728', '31464', '2', '2,7', '8,2', '5,7', 'Extra Large Box', '258', '25', NULL, 'Lahore ', 'Multan', '2023-03-25', NULL, 96284268, 10, 0),
+(74, 3, 'Ghulam Ali', '03125566688', 'gulgasht', 166, '2728', '31464', 'no', 'bosan road', 'no', 'Home', 'Jaffir', 'Layyah', '03125866336', 'yugh', '166', '2728', '31444', '1', '2', '5', '8', 'Large Box', '588', '55', NULL, 'Multan', 'Layyah', '2023-03-23', NULL, 47254554, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -994,21 +1558,51 @@ INSERT INTO `shipment_orders` (`id`, `shipment_type`, `shipment_status`, `shippe
 -- Table structure for table `shipment_orders_files`
 --
 
-DROP TABLE IF EXISTS `shipment_orders_files`;
-CREATE TABLE IF NOT EXISTS `shipment_orders_files` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `file` varchar(255) NOT NULL DEFAULT 'noimg.png',
-  `order_id` int NOT NULL COMMENT 'primary key of shipment_orders table',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `shipment_orders_files` (
+  `id` int(11) NOT NULL,
+  `file` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'noimg.png',
+  `order_id` int(11) NOT NULL COMMENT 'primary key of shipment_orders table'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shipment_orders_files`
 --
 
 INSERT INTO `shipment_orders_files` (`id`, `file`, `order_id`) VALUES
-(3, 'f53d96e53948d2b565b25bfa346c7b3a.jpg', 3),
-(4, 'f4bdc5481b9b888bcc8a7e5680a4e8f5.jpg', 3);
+(1, '47eb1b0f2818ceb42c18fab4d7d232bf.png', 1),
+(2, '5c60e9c1c3ad9ed9963082f042046ecb.png', 1),
+(3, '43491d0a59f225f0aa58a71c9cd8e557.png', 2),
+(4, '6dc0fcf525333f1d7b1a64642e2b1f36.png', 2),
+(5, 'd65f54bf90f026e783da90ea5c91874d.jpg', 4),
+(6, '820e18fc627327b7696a90ec314c0f4a.jpg', 4),
+(7, '4a6a2e14dc712682d49428c688c2d8a3.jpg', 6),
+(8, 'dfce9662d21266fa9115492fb4e06f73.jpg', 6),
+(9, 'd4631456606d7384ab0da28690e30cbe.png', 7),
+(10, 'ecec4c9760edbdadf4e12122e9beafda.png', 7),
+(11, 'bca465781467038c42867d461e6af874.jpg', 8),
+(12, 'b28317af2f947946dee6108255ab84c3.jpg', 9),
+(13, '2f63c3c079c61f60301a65d535e00510.jpg', 9),
+(14, '15c89581709ce31dda728f6c4c964662.jpg', 10),
+(15, '5b144e4cf2161a46ab4bcb9871bb8836.png', 12),
+(16, 'ae2e0f29ee0ada086ee9b0078790f603.png', 12),
+(17, 'b5298898ba86f3d929d40c7903776de6.png', 13),
+(18, '237379a09aa3fcc8c541004c454c8829.png', 13),
+(19, '8cc001471aa45b6b805413bd50cf43e8.png', 14),
+(20, 'ccf8b54a85a6c5aeb93e1d26c3c37305.png', 14),
+(21, '323738923378.png', 21),
+(22, '323738923378.png', 22),
+(23, '936173294100.jpg', 22),
+(24, '323738923378.png', 3),
+(25, '936173294100.jpg', 3),
+(26, '323738923378.png', 2),
+(27, '936173294100.jpg', 2),
+(28, '1159614608568.jpg', 68),
+(29, '1159614608568.jpg', 69),
+(30, '479262729946.jpg', 70),
+(31, '913940423770.jpg', 71),
+(32, '5532275211398.jpg', 72),
+(33, '4053202613328.jpg', 73),
+(34, '1214120270076.jpg', 74);
 
 -- --------------------------------------------------------
 
@@ -1016,16 +1610,43 @@ INSERT INTO `shipment_orders_files` (`id`, `file`, `order_id`) VALUES
 -- Table structure for table `shipment_orders_oceanfreight`
 --
 
-DROP TABLE IF EXISTS `shipment_orders_oceanfreight`;
-CREATE TABLE IF NOT EXISTS `shipment_orders_oceanfreight` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `company_preference` varchar(255) NOT NULL,
-  `order_id` int NOT NULL COMMENT 'primary key of shipment_orders table',
-  `vin_number` varchar(255) NOT NULL,
+CREATE TABLE `shipment_orders_oceanfreight` (
+  `id` int(11) NOT NULL,
+  `company_preference` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `order_id` int(11) NOT NULL COMMENT 'primary key of shipment_orders table',
+  `vin_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `purchase_cost` double NOT NULL,
-  `vehicle_description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `vehicle_description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shipment_orders_oceanfreight`
+--
+
+INSERT INTO `shipment_orders_oceanfreight` (`id`, `company_preference`, `order_id`, `vin_number`, `purchase_cost`, `vehicle_description`) VALUES
+(5, 'Cyphersol', 2, '11', 22, 'nissan'),
+(6, 'uyui', 5, '67', 789798, 'hjkhgj'),
+(7, 'uyui', 7, '67', 789798, 'hjkhgj'),
+(8, 'uyui', 8, '67', 789798, 'hjkhgj'),
+(9, 'uyui', 10, '67', 789798, 'hjkhgj'),
+(10, '\"22\"', 24, '\"11\"', 0, '\"'),
+(11, '\"\"', 30, '\"\"', 0, '\"'),
+(12, '\"No\"', 31, '\"MLK -7896\"', 0, '\"New Vehicle \"'),
+(14, '\"No\"', 32, '\"MLK -7896\"', 0, '\"New Vehicle \"'),
+(17, '\"No\"', 33, '\"MLK -7896\"', 0, '\"New Vehicle \"'),
+(19, '\"\"', 34, '\"\"', 0, '\"\"'),
+(25, '\"No\"', 35, '\"MLF-6677\"', 0, '\"New\"'),
+(27, '\"\"', 36, '\"\"', 0, '\"\"'),
+(28, '\"No\"', 37, '\"MLF-7874\"', 0, '\"New\"'),
+(29, '\"No\"', 40, '\"MLK-6780\"', 0, '\"New\"'),
+(30, '\"No\"', 45, '\"MLK-4578\"', 0, '\"New\"'),
+(31, '\"bh\"', 26, '\"nnjh\"', 0, '\"bbj\"'),
+(32, 'uyui', 66, '67', 789798, 'hjkhgj'),
+(33, 'uyui', 67, '67', 789798, 'hjkhgj'),
+(34, 'Z', 68, '2', 2, 'S'),
+(35, 'Z', 69, '2', 2, 'S'),
+(36, 'd', 70, '3', 3, 's'),
+(37, 'h', 72, '7', 5, 'b');
 
 -- --------------------------------------------------------
 
@@ -1033,13 +1654,11 @@ CREATE TABLE IF NOT EXISTS `shipment_orders_oceanfreight` (
 -- Table structure for table `shipment_status`
 --
 
-DROP TABLE IF EXISTS `shipment_status`;
-CREATE TABLE IF NOT EXISTS `shipment_status` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `status_title` varchar(255) NOT NULL,
-  `status_id` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `shipment_status` (
+  `id` int(11) NOT NULL,
+  `status_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `status_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shipment_status`
@@ -1049,9 +1668,7 @@ INSERT INTO `shipment_status` (`id`, `status_title`, `status_id`) VALUES
 (1, 'Received', 0),
 (2, 'Processing', 1),
 (3, 'Shipped', 2),
-(4, 'Cancelled', 3),
-(5, 'Ready for pickup', 4),
-(6, 'Delayed', 5);
+(4, 'Cancelled', 3);
 
 -- --------------------------------------------------------
 
@@ -1059,12 +1676,10 @@ INSERT INTO `shipment_status` (`id`, `status_title`, `status_id`) VALUES
 -- Table structure for table `shipment_types`
 --
 
-DROP TABLE IF EXISTS `shipment_types`;
-CREATE TABLE IF NOT EXISTS `shipment_types` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `shipment_types` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shipment_types`
@@ -1082,22 +1697,22 @@ INSERT INTO `shipment_types` (`id`, `type`) VALUES
 -- Table structure for table `suppliers`
 --
 
-DROP TABLE IF EXISTS `suppliers`;
-CREATE TABLE IF NOT EXISTS `suppliers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `supplier_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `address` varchar(255) NOT NULL,
+CREATE TABLE `suppliers` (
+  `id` int(11) NOT NULL,
+  `supplier_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `invoice_number` varchar(255) NOT NULL,
   `purchase_order_number` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `suppliers`
 --
 
-INSERT INTO `suppliers` (`id`, `supplier_name`, `address`, `invoice_number`, `purchase_order_number`) VALUES
-(1, 'Jawad', 'Chowk Shah Abbass', '8098', '7990');
+INSERT INTO `suppliers` (`id`, `supplier_name`, `invoice_number`, `purchase_order_number`, `address`) VALUES
+(3, 'Waseem', '7900', '798', 'Sui Gas Chowk'),
+(4, 'Waseem', '79', '798', 'Sui Gas Chowk'),
+(5, 'Waseem', '78', '7979', 'Sui Gas Chowk');
 
 -- --------------------------------------------------------
 
@@ -1105,13 +1720,11 @@ INSERT INTO `suppliers` (`id`, `supplier_name`, `address`, `invoice_number`, `pu
 -- Table structure for table `tbl_cities`
 --
 
-DROP TABLE IF EXISTS `tbl_cities`;
-CREATE TABLE IF NOT EXISTS `tbl_cities` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `state_id` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48773 DEFAULT CHARSET=latin1;
+CREATE TABLE `tbl_cities` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `state_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_cities`
@@ -49754,13 +50367,12 @@ INSERT INTO `tbl_cities` (`id`, `name`, `state_id`) VALUES
 -- Table structure for table `tbl_countries`
 --
 
-DROP TABLE IF EXISTS `tbl_countries`;
-CREATE TABLE IF NOT EXISTS `tbl_countries` (
-  `id` int NOT NULL,
+CREATE TABLE `tbl_countries` (
+  `id` int(11) NOT NULL,
   `sortname` varchar(3) NOT NULL,
   `name` varchar(150) NOT NULL,
-  `phonecode` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `phonecode` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_countries`
@@ -50020,14 +50632,12 @@ INSERT INTO `tbl_countries` (`id`, `sortname`, `name`, `phonecode`) VALUES
 -- Table structure for table `tbl_payment_notifications`
 --
 
-DROP TABLE IF EXISTS `tbl_payment_notifications`;
-CREATE TABLE IF NOT EXISTS `tbl_payment_notifications` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `body` text NOT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `ondate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `tbl_payment_notifications` (
+  `id` int(11) NOT NULL,
+  `body` text CHARACTER SET latin1 NOT NULL,
+  `type` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `ondate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50035,12 +50645,11 @@ CREATE TABLE IF NOT EXISTS `tbl_payment_notifications` (
 -- Table structure for table `tbl_states`
 --
 
-DROP TABLE IF EXISTS `tbl_states`;
-CREATE TABLE IF NOT EXISTS `tbl_states` (
-  `id` int NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `country_id` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `tbl_states` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) CHARACTER SET latin1 NOT NULL,
+  `country_id` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_states`
@@ -54177,56 +54786,78 @@ INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_type` int NOT NULL COMMENT '1=super admin,2=admin,3=Pro user,4=Normal user',
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_type` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL COMMENT 'mobile or cell number',
   `address` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
+  `city_id` varchar(255) NOT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `country_id` varchar(255) NOT NULL,
   `uniq_id` varchar(255) NOT NULL,
   `image` varchar(500) NOT NULL DEFAULT 'noimg.png',
   `device_id` text NOT NULL,
   `devicetype` varchar(255) NOT NULL,
   `social_id` varchar(255) NOT NULL,
   `social_type` varchar(255) NOT NULL,
-  `added_by` int NOT NULL,
-  `active` tinyint UNSIGNED DEFAULT '1',
+  `added_by` int(11) NOT NULL,
+  `active` tinyint(3) UNSIGNED DEFAULT 1,
   `ip_address` varchar(45) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `salt` varchar(255) DEFAULT NULL,
   `remember_code` varchar(40) DEFAULT NULL,
-  `created_on` int UNSIGNED NOT NULL,
-  `last_login` int UNSIGNED DEFAULT NULL,
+  `created_on` int(10) UNSIGNED NOT NULL,
+  `last_login` int(10) UNSIGNED DEFAULT NULL,
   `timezone` varchar(500) NOT NULL,
-  `age` int NOT NULL,
+  `age` int(11) NOT NULL,
   `about` longtext NOT NULL,
   `player_id` varchar(255) NOT NULL,
   `latitude` varchar(255) NOT NULL,
   `longitude` varchar(255) NOT NULL,
-  `online` int NOT NULL DEFAULT '0',
+  `online` int(11) NOT NULL DEFAULT 0,
   `activation_code` varchar(255) NOT NULL,
   `referal_code` varchar(255) NOT NULL,
-  `plan_id` int NOT NULL,
+  `plan_id` int(11) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `sur_name` varchar(255) DEFAULT NULL,
   `address1` varchar(255) DEFAULT NULL,
-  `secret_qestion_id` int NOT NULL,
-  `answer` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `secret_qestion_id` int(11) NOT NULL,
+  `answer` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `country`, `city`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`) VALUES
-(1, 1, 'admin', '', 'admin@admin.com', '03411663111', 'Chowk Shah Abbass', 'Pakistan', 'Multan', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1675757426, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, ''),
-(2, 3, 'waseem', 'waf@gmail.com', 'waf@gmail.com', '0232434343', '', '', '', '', 'noimg.png', 'fy95AIiEQQS6ZuDje-lKsj:APA91bF6BrtZQuNjudX7xUygjMV0RYfMBRTh01qtC_nF2Zzd8JWBSEGqFOmcFZ-G5XhVTWfqDDho8N-k9MOdzrrvHJf_rpRFwJ_cpntYdGWAeMO8MsPrwalzVgIixwdCW6XfdZGgf9W0', 'android', '', '', 0, 1, '::1', '$2y$08$KTbZN7.rZU8BxkQNnbJkuu/hlhpZP9vQZ.ltPWHKzZXmuPUHJvTeu', NULL, NULL, 1667033021, 1667906613, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '', 'afzal', NULL, 0, '');
+INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `address`, `city_id`, `state_id`, `country_id`, `uniq_id`, `image`, `device_id`, `devicetype`, `social_id`, `social_type`, `added_by`, `active`, `ip_address`, `password`, `salt`, `remember_code`, `created_on`, `last_login`, `timezone`, `age`, `about`, `player_id`, `latitude`, `longitude`, `online`, `activation_code`, `referal_code`, `plan_id`, `phone`, `sur_name`, `address1`, `secret_qestion_id`, `answer`) VALUES
+(1, 1, 'admin', '', 'admin@admin.com', NULL, 'Chowk Shah Abbass', '30644', 2639, '159', '', '809f86890b131680e6d7a25e1a878564.jpg', '', '', '', '', 1, 1, '', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 0, 1680581686, '', 0, '', '', '', '', 0, '', '', 0, '', NULL, NULL, 0, ''),
+(2, 3, 'waseem afzal', 'waseemafzal31@gmail.com', 'waseemafzal31@gmail.com', '0232434343', 'multan', '30644', 2639, '159', '', 'noimg.png', 'd-fcAWldQGG7zjY6cCPMj1:APA91bFlR6r3kTyhT90itlolCNvT4cmFowjMnU-xJ57QsSZwu32GIRrb8sAtcCK3QxGxrnvw1CT4lcQ48skDx4jH5FW4xsWWyxNk77FNgsifhHOFNuN8tQbTS4rxdSuZm09IrZrNYZDG', 'android', '', '', 0, 1, '::1', '$2y$08$rCfZg0qn8pYKOgWpEsaRFeixfxRsrElLZHZasP/piIeqegaU57.Ca', NULL, NULL, 1667033021, 1675403298, '', 0, '', '', '', '', 0, '635ce7bdec8c1', '635ce7bdecca9', 0, '2121254', 'afzal', NULL, 0, ''),
+(3, 3, 'ads', 'adas@gmail.com', 'adas@gmail.com', 'ad', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$NH0ZJBr.NTAYX8sKujc99.Uyf093WwwcipmC2Sk.4jZ.Igmyxryd2', NULL, NULL, 1667589094, NULL, '', 0, '', '', '', '', 0, '636563e6ac9bd', '636563e6ac9be', 0, '', 'asd', NULL, 0, ''),
+(5, 3, 'ads', 'adadsadaas@gmail.com', 'adadsadaas@gmail.com', 'ad', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$2ZM2WV1xHTnMF7bx5ea5zO83b9tLjnDT3soI5dWs7JTHr3yeiMI4O', NULL, NULL, 1667689122, NULL, '', 0, '', '', '', '', 0, '6366eaa2269aa', '6366eaa2269ac', 0, '', 'asd', NULL, 0, ''),
+(6, 3, 'w', 'aaa@gamil.com', 'aaa@gamil.com', '94', '', '30644', 2639, '159', '', 'noimg.png', '', '', '', '', 0, 1, '103.181.132.9', '$2y$08$645aYNTzzz4p/hkJSmr3M.ZUSkNuoyqRrMDtz8fdXRTRRyWq1u79m', NULL, NULL, 1667692015, NULL, '', 0, '', '', '', '', 0, '6366f5efbfa29', '6366f5efbfa2a', 0, '', 'a', NULL, 0, ''),
+(7, 3, 'Abdul', 'devwajid@gmail.com', 'devwajid@gmail.com', '155', 'Lahore townshipppppp', '30644', 2639, '159', '', 'b12da25f6a0aeb4711d4a29c9448da2e.jpg', 'efnfJj84S7WhL1pniQkPBb:APA91bECDGHv0WFGvjiu1IlHPp8YwtZcFK-mNzI0DYW1AQbJORiC7n5fWOfilHeuUTA2cup2JV4empt1Y4SGHaf4rhVNMiJs5RGs0uIyvYXMmRS_k2mxwcQAryFvvI7ti63JUEug5L-d', 'android', '', '', 1, 0, '103.181.132.9', '$2y$08$3PvAmSPuKTW2gkaUfp9SWOaqqzcYVTRoknjOLqaFKPZSXmF0hrFHa', NULL, NULL, 1667984295, 1674486221, '', 0, '', '', '', '', 0, '636b6ba78817a', '636b6ba78817c', 0, '15', 'wajid', NULL, 0, ''),
+(8, 3, 'Abdul', 'miankhalifa@gmail.com', 'miankhalifa@gmail.com', '15', 'Haha', '', NULL, '', '', 'noimg.png', '12312321', 'android', '', '', 0, 1, '103.181.132.9', '$2y$08$XZutxq0St0rlX2ORWoY4v.ulBW6cHAEsSJfMo2N.ncL6WpZH464XW', NULL, NULL, 1668021917, 1668021941, '', 0, '', '', '', '', 0, '636bfe9dd8721', '636bfe9dd8722', 0, 'XXX', 'Wajid', NULL, 0, ''),
+(9, 3, 'waseem', 'a@a.com', 'a@a.com', '0232434343', '', '', NULL, '', '', 'noimg.png', 'fPoe5Y1aTWWHjiTryb4iK8:APA91bFFqxas2Lfyu8K39T2JWNkgarNb2bmwykx3Uwn-Uen5EpI0rbd76HogLKkKCBVyFJe5pN-mWriRmfI1NVpwDOoJPzBldU7IecZt73t0UNAnRuCk6yDye-gzk4Z802X0i9lHSuBw', 'android', '', '', 0, 1, '39.42.99.136', '$2y$08$loLH5QNx9aoW5i5mJmYaleuHI/bJKhvkj.FtfvrqJFWn5c0SNaVlm', NULL, NULL, 1668073791, 1674988451, '', 0, '', '', '', '', 0, '636cc93f7503b', '636cc93f7503d', 0, '', 'afzal', NULL, 0, ''),
+(10, 3, 'ahmad', 'ahmadjawad78992@gmail.com', 'ahmadjawad78992@gmail.com', '0232434343', '', '', NULL, '', '', 'noimg.png', '5173F3A6-1ACF-426D-BD5A-07156D181DD9', 'ios', '', '', 0, 1, '124.29.216.9', '$2y$08$.x0T5PSmnbcD9tj1E51sFujGIsWQc1EYz4.K.R5OGGQnYX19oRWB2', NULL, NULL, 1668080784, 1675792416, '', 0, '', '', '', '', 0, '636ce490759fa', '636ce490759fb', 0, '', 'jawad', NULL, 0, ''),
+(11, 3, 'test', 'a1@a.com', 'a1@a.com', '1234556785553', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$Leg42J3hOi/T2fvysayP3eCSIHQ3qmhJ2RvfUZKf6ps05mq0bqZgO', NULL, NULL, 1668405930, NULL, '', 0, '', '', '', '', 0, '6371daaab1f7b', '6371daaab1f7d', 0, '', 'ad', NULL, 0, ''),
+(12, 3, 'asd', 'a2@a.com', 'a2@a.com', '121242134234123', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$OQlxjXzotMvHFZgBkHTP8ua90lGsCxDrWU8EtugKPBvY3yLodeqUy', NULL, NULL, 1668406067, NULL, '', 0, '', '', '', '', 0, '6371db33752be', '6371db33752bf', 0, '', 'asdf', NULL, 0, ''),
+(13, 3, 'ddas', 'a3@a.com', 'a3@a.com', '121332132312312', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$BYcJhKi/7ercwH8/br4pRO4pAdIDgrkAuE4Ls0eYmlvvz1JWC4rKa', NULL, NULL, 1668406242, NULL, '', 0, '', '', '', '', 0, '6371dbe26ecd8', '6371dbe26ecd9', 0, '', 'adsaa', NULL, 0, ''),
+(14, 3, 'wdsa', 'a4@a.com', 'a4@a.com', '122434322434213', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$o.ZuTpyfb43QFEd7OW.XpeGNDDRwBq2eov9Vioy9vlBsjRQbraE26', NULL, NULL, 1668406474, NULL, '', 0, '', '', '', '', 0, '6371dcca45c85', '6371dcca45c87', 0, '', 'asfasfa', NULL, 0, ''),
+(15, 3, 'daseq', 'a5@a.com', 'a5@a.com', '121324324232134', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '39.42.99.136', '$2y$08$OaF3DGGdfBnEtY484vnHQejmLteGC/5Bnic3qH/6VgPx2/lPC.6Rm', NULL, NULL, 1668406815, NULL, '', 0, '', '', '', '', 0, '6371de1ef2cc2', '6371de1ef2cc3', 0, '', 'sad', NULL, 0, ''),
+(18, 3, 'ben', 'olebint001@gmail.com', 'olebint001@gmail.com', '08108252661', 'Huntington beach', '', NULL, '', '', 'JFIFCC8\"	\n\r!!1	\"AQa2q#3BRb\n$4CSr%TVc5DUs89Edtwx&7:Xeu6Wv\'F(GYfiy襦g	U!1AQaq\"2BR#br$34ST%C5	D&EUc?JR(JR(JR(JR(JR(JxC\'b}*Q:Cx]v q\",P2Ic*ѱٯd	WЌeĔMs|R8Qz)DJRD)DJRD)DJRD)DJRD)DJRD)DJRD)DJRD)DJRD)DJR68tliӻcov0UvK]={,ɲ[![O`(٥iCbO͵4r)EK[\'+', 'd0t15zlWRh65oxCHHi48tW:APA91bHV5Fs18Qa6O6pQGw0TN1sHe8KOTijSrwgvjEQZcKP6sOIN2rpt1tMEKOz4tJpc7ZcGVliWFip20c7-7FCPDxrs_7_OpKOZAZjx6Co-b_8zKcxXkJWJ1XXdZphUElpobiDKule-', 'android', '', '', 0, 1, '62.210.211.183', '$2y$08$xexYhT1qmNZowRhLxKGr9uL1BFqiH.hWQlxZpzowoK/gUb5lTGNES', NULL, NULL, 1671027508, 1671027599, '', 0, '', '', '', '', 0, '6399db34e72d6', '6399db34e72d7', 0, '', 'ola', NULL, 0, ''),
+(19, 3, 'waseem', 'hr.cyphersol@gmail.com', 'hr.cyphersol@gmail.com', '03417090031', '', '', NULL, '', '', 'noimg.png', 'dtgSARAqQrCGMFBmYrX6Ab:APA91bF_o9DjnbgpFqGjROmEM7VB44GMACcIn3HrxIw2ncd3651MWGlVWrOerqGTZv47F6WYLJV6Jp24AFM48vvRNAR2uoX-5XbQIIDlXZRmFIg6OEDi6Jh143OSs2HFMdMvUYKs_UQ3', 'android', '', '', 0, 1, '124.29.216.9', '$2y$08$YcaTfAfhONEAF1rdB6Zx1eT0jMQEqz4L4Gais6NmYkezPENxbHXwm', NULL, NULL, 1671027928, 1673588044, '', 0, '', '', '', '', 0, '6399dcd85ff33', '6399dcd85ff34', 0, '', 'afzal', NULL, 0, ''),
+(20, 3, 'Abdul', 'nrwajid.leads@gmail.com', 'nrwajid.leads@gmail.com', '1,', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '103.148.154.62', '$2y$08$yNeSw2xOW4XpPR16mDEKPeyIKp7q2Ol6ALGeKvT6KOIW6qS7q/ika', NULL, NULL, 1673378510, NULL, '', 0, '', '', '', '', 0, '63bdbace3e847', '63bdbace3e848', 0, '', 'Wajid', NULL, 0, ''),
+(21, 3, 'babab', 'mrwajid.leads@gmail.com', 'mrwajid.leads@gmail.com', '6797', '', '', NULL, '', '', 'noimg.png', 'fEXI5hh2Ssy_bClObQLvbC:APA91bE96312IfkuYbNwR6Fy5X8Vxb8ffE_RsNEOM8U_aPxpC90PlgD9xGrWW8ea1d9TbkLt5IPIlOQFDUONPSbteIjaYtp1MtolkForspV8JC1eNVawdtmI3Xn61B1ZZS13mRadQ5pF', 'android', '', '', 0, 0, '103.148.154.62', '$2y$08$R9SlFcy2TwPf/guIu09lM.9FtcLOzsnnDIr/X46bfgh4VqEPw4cMC', NULL, NULL, 1673378664, 1673378687, '', 0, '', '', '', '', 0, '63bdbb6816d7d', '63bdbb6816d7f', 0, '', 'nsnsnsn', NULL, 0, ''),
+(22, 3, 'w', 'a@gmail.com', 'a@gmail.com', '646', '', '', NULL, '', '', 'noimg.png', 'fEXI5hh2Ssy_bClObQLvbC:APA91bE96312IfkuYbNwR6Fy5X8Vxb8ffE_RsNEOM8U_aPxpC90PlgD9xGrWW8ea1d9TbkLt5IPIlOQFDUONPSbteIjaYtp1MtolkForspV8JC1eNVawdtmI3Xn61B1ZZS13mRadQ5pF', 'android', '', '', 0, 1, '103.148.154.62', '$2y$08$CIzkJqGv1GYXhUh8KhDSTe4Idv5lnf3Fpvb1muKvdmMf7zPyY2Yja', NULL, NULL, 1673379649, 1673379659, '', 0, '', '', '', '', 0, '63bdbf41e1a4a', '63bdbf41e1a4b', 0, '', 'h', NULL, 0, ''),
+(32, 3, 'Test', 'miyiba4308@quamox.com', 'miyiba4308@quamox.com', '03045678907', '', '', NULL, '', '', 'noimg.png', '43492201-BD86-4BEA-8490-426FB0192534', 'ios', '', '', 0, 1, '119.160.99.220', '$2y$08$FOha1CsRqkoxNa3mj97GWut1oYQeLnYZm9weflgfS3GC36.ARHgLq', NULL, NULL, 1674196393, 1674196440, '', 0, '', '', '', '', 0, '63ca35a910bff', '63ca35a910c00', 0, '', 'User', NULL, 0, ''),
+(33, 3, 'Emmanuel', 'oziiperfect36@gmail.com', 'oziiperfect36@gmail.com', '08072314393', '', '', NULL, '', '', 'noimg.png', 'd5ZUkLMLSVa3wqtoKm5A0v:APA91bFzRKqQsTZv6iZEDAwlVmq7EANA9zkf0ygnTAHOQCbkplqrEYX7rhVqDLFhs7VndfV2o-qrcYGAEe83OZpsEbw-Nkzk4E_GVs35t9N8JLy-OJQj77qxl0tJ03gDYv9FMbQLA4AT', 'android', '', '', 0, 1, '102.88.34.14', '$2y$08$5WuDf9rbTbF2RHIpr76NreqEYBqf6UJGp/JKZzWwEjBs2FAHRx5ku', NULL, NULL, 1674237996, 1674420897, '', 0, '', '', '', '', 0, '63cad82cea30e', '63cad82cea310', 0, '', 'nnam', NULL, 0, ''),
+(34, 3, 'Jawad', 'ceo@cyphersol.com', 'ceo@cyphersol.com', '03155564886', '', '', NULL, '', '', 'noimg.png', '0DF3FABE-4BD3-4964-8CC1-99574D95F9ED', 'ios', '', '', 0, 1, '124.29.216.9', '$2y$08$tT4tbj.TUP5jJMZQGc0n.ONSW75ufFGMlZSBfljwO.PlDkb3UHVUe', NULL, NULL, 1676954021, 1676954288, '', 0, '', '', '', '', 0, '63f449a5b81f3', '63f449a5b81f4', 0, '', 'Ahmad', NULL, 0, ''),
+(39, 3, 'Shaheer', 'shaheerkhalid450@gmail.com', 'shaheerkhalid450@gmail.com', '03428546632', '', '', NULL, '', '', 'noimg.png', '0DF3FABE-4BD3-4964-8CC1-99574D95F9ED', 'ios', '', '', 0, 1, '124.29.216.9', '$2y$08$/wQRe/IgCHB0y7PfOhQ60e1Qjz3crfFNgTIYIn/kkdbNRAp/B4n5e', NULL, NULL, 1676958585, 1676962613, '', 0, '', '', '', '', 0, '63f45b79ca27e', '63f45b79ca280', 0, '', 'Khalid', NULL, 0, ''),
+(46, 3, 'Jawad', 'jawadahmad78692@gmail.com', 'jawadahmad78692@gmail.com', '03411663111', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '124.29.216.9', '$2y$08$Dqy3HM..J1tmDsApZ0Yy/eX3SC995SJojkK8tT9Ed/wb6qfK0ft/a', NULL, NULL, 1676976333, NULL, '', 0, '', '', '', '', 0, '63f4a0cd070ee', '63f4a0cd070f0', 0, '', 'Ahmad', NULL, 0, ''),
+(47, 3, 'Jawad', 'jawad.cyphersol@gmail.com', 'jawad.cyphersol@gmail.com', '03124555886', '', '', NULL, '', '', 'noimg.png', '', '', '', '', 0, 1, '124.29.216.9', '$2y$08$fvI.m5TjN/6aIeYe7nz.auyDvyy44eodSeXv7AtrkK2OemK97dtz6', NULL, NULL, 1676976784, NULL, '', 0, '', '', '', '', 0, '63f4a29010f44', '63f4a29010f45', 0, '', 'Ahmad', NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -54234,16 +54865,11 @@ INSERT INTO `users` (`id`, `user_type`, `name`, `username`, `email`, `mobile`, `
 -- Table structure for table `users_groups`
 --
 
-DROP TABLE IF EXISTS `users_groups`;
-CREATE TABLE IF NOT EXISTS `users_groups` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int UNSIGNED NOT NULL,
-  `group_id` mediumint UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
-  KEY `fk_users_groups_users1_idx` (`user_id`),
-  KEY `fk_users_groups_groups1_idx` (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `users_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `group_id` mediumint(8) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -54251,15 +54877,13 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 -- Table structure for table `users_rights`
 --
 
-DROP TABLE IF EXISTS `users_rights`;
-CREATE TABLE IF NOT EXISTS `users_rights` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users_rights` (
+  `id` int(11) NOT NULL,
   `group_title` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `add_users` int NOT NULL,
-  `edit_users` int NOT NULL,
-  `delete_users` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+  `add_users` int(11) NOT NULL,
+  `edit_users` int(11) NOT NULL,
+  `delete_users` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users_rights`
@@ -54276,16 +54900,13 @@ INSERT INTO `users_rights` (`id`, `group_title`, `add_users`, `edit_users`, `del
 -- Table structure for table `user_devices`
 --
 
-DROP TABLE IF EXISTS `user_devices`;
-CREATE TABLE IF NOT EXISTS `user_devices` (
-  `device_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `push_id` varchar(512) NOT NULL,
-  `type` varchar(16) NOT NULL DEFAULT 'android',
-  `active` tinyint UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`device_id`),
-  UNIQUE KEY `device_id` (`device_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `user_devices` (
+  `device_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `push_id` varchar(512) CHARACTER SET latin1 NOT NULL,
+  `type` varchar(16) CHARACTER SET latin1 NOT NULL DEFAULT 'android',
+  `active` tinyint(3) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -54293,25 +54914,24 @@ CREATE TABLE IF NOT EXISTS `user_devices` (
 -- Table structure for table `warehouse`
 --
 
-DROP TABLE IF EXISTS `warehouse`;
-CREATE TABLE IF NOT EXISTS `warehouse` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `warehouse_name` varchar(255) NOT NULL,
-  `transaction_number` varchar(255) NOT NULL,
-  `employ_name` varchar(255) NOT NULL,
-  `issued_by` varchar(255) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  `time` varchar(255) NOT NULL,
-  `entry_no` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `warehouse` (
+  `id` int(11) NOT NULL,
+  `warehouse_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `transaction_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `employ_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `issued_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `time` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `entry_no` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `warehouse`
 --
 
 INSERT INTO `warehouse` (`id`, `warehouse_name`, `transaction_number`, `employ_name`, `issued_by`, `date`, `time`, `entry_no`) VALUES
-(1, 'Emj', '678', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796');
+(1, 'Emj', '678', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796000'),
+(5, 'Local Warehouse', '687', 'hkj', 'kjhk', '2023-02-06', '16:13', '789');
 
 -- --------------------------------------------------------
 
@@ -54319,89 +54939,760 @@ INSERT INTO `warehouse` (`id`, `warehouse_name`, `transaction_number`, `employ_n
 -- Table structure for table `warehouse_receipts`
 --
 
-DROP TABLE IF EXISTS `warehouse_receipts`;
-CREATE TABLE IF NOT EXISTS `warehouse_receipts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `warehouse_name` varchar(255) NOT NULL,
-  `employ_name` varchar(255) NOT NULL,
-  `issued_by` varchar(255) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  `time` varchar(255) NOT NULL,
-  `entry_no` varchar(255) NOT NULL,
-  `transaction_number` varchar(255) NOT NULL,
-  `division` varchar(255) NOT NULL,
-  `bonded_warehouse` varchar(255) NOT NULL,
-  `destination_agent` varchar(255) NOT NULL,
-  `shipper_name` varchar(255) NOT NULL,
-  `consignee_name` varchar(255) NOT NULL,
-  `shipper_address` varchar(255) NOT NULL,
-  `consignee_address` varchar(255) NOT NULL,
-  `client_to_bill` varchar(255) NOT NULL,
-  `model_of_transp` varchar(255) NOT NULL,
-  `origin` varchar(255) NOT NULL,
-  `destination` varchar(255) NOT NULL,
-  `supplier_name` varchar(255) NOT NULL,
-  `invoice_number` varchar(255) NOT NULL,
-  `supplier_address` varchar(255) NOT NULL,
-  `purchase_order_number` varchar(255) NOT NULL,
-  `carrier` varchar(255) NOT NULL,
-  `driver_name` varchar(255) NOT NULL,
-  `driver_license_number` varchar(255) NOT NULL,
-  `pro_number` varchar(255) NOT NULL,
-  `tracking_number` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
+CREATE TABLE `warehouse_receipts` (
+  `id` int(11) NOT NULL,
+  `warehouse_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `employ_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `issued_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `time` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `entry_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `transaction_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `division` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bonded_warehouse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `destination_agent` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `shipper_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `shipper_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `consignee_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `client_to_bill` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `model_of_transp` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `origin` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `destination` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `supplier_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `invoice_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `supplier_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `purchase_order_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `carrier` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `driver_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `driver_license_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pro_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tracking_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `package_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `pieces` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `part_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `length` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `width` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `height` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `dimension_unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `weight_unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `volume_unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `unitary_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `total_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `serial_number_1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `serial_number_2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_location` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_length` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_weight` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_width` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_height` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `container_volume` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `charges_status` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `charges_description` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `prepaid` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `total_quantity` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `price` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `amount` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `tax_code` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `tax_rate` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `tax_amount` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `amount_with_tax` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `currency` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `final_amount` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `expense` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `income` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_receipts_charges`
+--
+
+CREATE TABLE `warehouse_receipts_charges` (
+  `id` int(11) NOT NULL,
+  `charges_status` varchar(255) NOT NULL,
+  `charges_description` varchar(255) NOT NULL,
+  `prepaid` varchar(255) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `tax_code` varchar(255) NOT NULL,
+  `tax_rate` varchar(255) NOT NULL,
+  `tax_amount` varchar(255) NOT NULL,
+  `amount_with_tax` varchar(255) NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `final_amount` varchar(255) NOT NULL,
+  `expense` varchar(255) NOT NULL,
+  `income` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warehouse_receipts_commodities`
+--
+
+CREATE TABLE `warehouse_receipts_commodities` (
+  `id` int(11) NOT NULL,
+  `warehouse_receipts_id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `package_type` varchar(255) NOT NULL,
-  `pieces` varchar(255) NOT NULL,
   `part_number` varchar(255) NOT NULL,
   `model` varchar(255) NOT NULL,
+  `package_type` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
+  `pieces` varchar(255) NOT NULL,
   `length` varchar(255) NOT NULL,
   `width` varchar(255) NOT NULL,
   `height` varchar(255) NOT NULL,
-  `dimension_unit` varchar(255) NOT NULL,
-  `weight_unit` varchar(255) NOT NULL,
-  `volume_unit` varchar(255) NOT NULL,
   `quantity` varchar(255) NOT NULL,
+  `dimension_unit` varchar(255) NOT NULL,
+  `unit_weight` varchar(255) NOT NULL,
+  `unit_volume` varchar(255) NOT NULL,
+  `total_weight` varchar(255) NOT NULL,
+  `total_volume` varchar(255) NOT NULL,
+  `weight_unit_measure` varchar(255) NOT NULL,
+  `volume_unit_measure` varchar(255) NOT NULL,
   `unit` varchar(255) NOT NULL,
   `unitary_value` varchar(255) NOT NULL,
-  `total_value` varchar(255) NOT NULL,
-  `container_type` varchar(255) NOT NULL,
-  `container_description` varchar(255) NOT NULL,
-  `container_number` varchar(255) NOT NULL,
-  `serial_number_1` varchar(255) NOT NULL,
-  `serial_number_2` varchar(255) NOT NULL,
-  `container_location` varchar(255) NOT NULL,
-  `container_length` varchar(255) NOT NULL,
-  `container_weight` varchar(255) NOT NULL,
-  `container_width` varchar(255) NOT NULL,
-  `container_height` varchar(255) NOT NULL,
-  `container_volume` varchar(255) NOT NULL,
-  `charges_status` varchar(15) NOT NULL,
-  `charges_description` varchar(50) NOT NULL,
-  `prepaid` varchar(15) NOT NULL,
-  `total_quantity` varchar(15) NOT NULL,
-  `price` varchar(15) NOT NULL,
-  `amount` varchar(15) NOT NULL,
-  `tax_code` varchar(15) NOT NULL,
-  `tax_rate` varchar(15) NOT NULL,
-  `tax_amount` varchar(15) NOT NULL,
-  `amount_with_tax` varchar(15) NOT NULL,
-  `currency` varchar(15) NOT NULL,
-  `final_amount` varchar(15) NOT NULL,
-  `expense` varchar(15) NOT NULL,
-  `income` varchar(15) NOT NULL,
-  `file` varchar(255) NOT NULL,
-  `qr_image` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `total_value` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `warehouse_receipts`
+-- Dumping data for table `warehouse_receipts_commodities`
 --
 
-INSERT INTO `warehouse_receipts` (`id`, `warehouse_name`, `employ_name`, `issued_by`, `date`, `time`, `entry_no`, `transaction_number`, `division`, `bonded_warehouse`, `destination_agent`, `shipper_name`, `consignee_name`, `shipper_address`, `consignee_address`, `client_to_bill`, `model_of_transp`, `origin`, `destination`, `supplier_name`, `invoice_number`, `supplier_address`, `purchase_order_number`, `carrier`, `driver_name`, `driver_license_number`, `pro_number`, `tracking_number`, `status`, `description`, `package_type`, `pieces`, `part_number`, `model`, `location`, `length`, `width`, `height`, `dimension_unit`, `weight_unit`, `volume_unit`, `quantity`, `unit`, `unitary_value`, `total_value`, `container_type`, `container_description`, `container_number`, `serial_number_1`, `serial_number_2`, `container_location`, `container_length`, `container_weight`, `container_width`, `container_height`, `container_volume`, `charges_status`, `charges_description`, `prepaid`, `total_quantity`, `price`, `amount`, `tax_code`, `tax_rate`, `tax_amount`, `amount_with_tax`, `currency`, `final_amount`, `expense`, `income`, `file`, `qr_image`) VALUES
-(1, 'Emj', 'Jawad Ahmad', 'Emj', '2023-01-24', '16:19', '796', '678', 'Multan', '', 'Ahmad', 'naeem', 'Jawad', 'Shah Jamal ', 'Multan', 'ultimate_consignee', 'hjk', 'Shah Jamal ', 'Multan', 'Jawad', '8098', 'chowk shah abbas', '7987', 'Speedocargo', 'Jawad', '798', '789798', '78979', 'r2 req', 'ljk', 'large box', '4', '78', 'hkj', 'Multan', '10', '20', '30', 'Not Selected', 'lb', 'ft3', '6', '', '', '', 'Cargo', 'hjk', '23', '89', '787', 'Multan', '230', '440', '34', '239', '449', 'Active', 'bk', '897', '', '56', '789', '897', '768', '565', '1200', 'Pkr', '1050', '200', '900', '2ae716fabd1a60743a4a435fc413f5de.jpg', '');
+INSERT INTO `warehouse_receipts_commodities` (`id`, `warehouse_receipts_id`, `description`, `part_number`, `model`, `package_type`, `location`, `pieces`, `length`, `width`, `height`, `quantity`, `dimension_unit`, `unit_weight`, `unit_volume`, `total_weight`, `total_volume`, `weight_unit_measure`, `volume_unit_measure`, `unit`, `unitary_value`, `total_value`) VALUES
+(1, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `app_routes`
+--
+ALTER TABLE `app_routes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `app_user_session`
+--
+ALTER TABLE `app_user_session`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `carriers`
+--
+ALTER TABLE `carriers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `charges`
+--
+ALTER TABLE `charges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ci_sessions`
+--
+ALTER TABLE `ci_sessions`
+  ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `clients_invoice`
+--
+ALTER TABLE `clients_invoice`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms`
+--
+ALTER TABLE `cms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `commodities`
+--
+ALTER TABLE `commodities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `commodity_types`
+--
+ALTER TABLE `commodity_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `containers`
+--
+ALTER TABLE `containers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `conversations`
+--
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`conversation_id`);
+
+--
+-- Indexes for table `drivers`
+--
+ALTER TABLE `drivers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `helpcenter`
+--
+ALTER TABLE `helpcenter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inventory_items_definition`
+--
+ALTER TABLE `inventory_items_definition`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `json_logs`
+--
+ALTER TABLE `json_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `landing_bills`
+--
+ALTER TABLE `landing_bills`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`message_id`),
+  ADD UNIQUE KEY `CONVERSATIONS` (`conversation_id`,`message_id`);
+
+--
+-- Indexes for table `mode_of_transport`
+--
+ALTER TABLE `mode_of_transport`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification_types`
+--
+ALTER TABLE `notification_types`
+  ADD PRIMARY KEY (`notification_id`);
+
+--
+-- Indexes for table `order_card_detail`
+--
+ALTER TABLE `order_card_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `package_types`
+--
+ALTER TABLE `package_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pickup_orders`
+--
+ALTER TABLE `pickup_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `plans`
+--
+ALTER TABLE `plans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ports`
+--
+ALTER TABLE `ports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `post_images`
+--
+ALTER TABLE `post_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_orders`
+--
+ALTER TABLE `purchase_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `search_history`
+--
+ALTER TABLE `search_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `secret_questions`
+--
+ALTER TABLE `secret_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `setting`
+--
+ALTER TABLE `setting`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipment_orders`
+--
+ALTER TABLE `shipment_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipment_orders_files`
+--
+ALTER TABLE `shipment_orders_files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipment_orders_oceanfreight`
+--
+ALTER TABLE `shipment_orders_oceanfreight`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipment_status`
+--
+ALTER TABLE `shipment_status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipment_types`
+--
+ALTER TABLE `shipment_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_cities`
+--
+ALTER TABLE `tbl_cities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_payment_notifications`
+--
+ALTER TABLE `tbl_payment_notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users_groups`
+--
+ALTER TABLE `users_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uc_users_groups` (`user_id`,`group_id`),
+  ADD KEY `fk_users_groups_users1_idx` (`user_id`),
+  ADD KEY `fk_users_groups_groups1_idx` (`group_id`);
+
+--
+-- Indexes for table `users_rights`
+--
+ALTER TABLE `users_rights`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_devices`
+--
+ALTER TABLE `user_devices`
+  ADD PRIMARY KEY (`device_id`),
+  ADD UNIQUE KEY `device_id` (`device_id`);
+
+--
+-- Indexes for table `warehouse`
+--
+ALTER TABLE `warehouse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `warehouse_receipts`
+--
+ALTER TABLE `warehouse_receipts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `warehouse_receipts_charges`
+--
+ALTER TABLE `warehouse_receipts_charges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `warehouse_receipts_commodities`
+--
+ALTER TABLE `warehouse_receipts_commodities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `app_routes`
+--
+ALTER TABLE `app_routes`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
+--
+-- AUTO_INCREMENT for table `app_user_session`
+--
+ALTER TABLE `app_user_session`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
+
+--
+-- AUTO_INCREMENT for table `carriers`
+--
+ALTER TABLE `carriers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `charges`
+--
+ALTER TABLE `charges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `clients_invoice`
+--
+ALTER TABLE `clients_invoice`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `cms`
+--
+ALTER TABLE `cms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `commodities`
+--
+ALTER TABLE `commodities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `commodity_types`
+--
+ALTER TABLE `commodity_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `containers`
+--
+ALTER TABLE `containers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `conversations`
+--
+ALTER TABLE `conversations`
+  MODIFY `conversation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `drivers`
+--
+ALTER TABLE `drivers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `helpcenter`
+--
+ALTER TABLE `helpcenter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `inventory_items_definition`
+--
+ALTER TABLE `inventory_items_definition`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `json_logs`
+--
+ALTER TABLE `json_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `landing_bills`
+--
+ALTER TABLE `landing_bills`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `message_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `mode_of_transport`
+--
+ALTER TABLE `mode_of_transport`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `notification_types`
+--
+ALTER TABLE `notification_types`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_card_detail`
+--
+ALTER TABLE `order_card_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `package_types`
+--
+ALTER TABLE `package_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `pickup_orders`
+--
+ALTER TABLE `pickup_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `plans`
+--
+ALTER TABLE `plans`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ports`
+--
+ALTER TABLE `ports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `post_images`
+--
+ALTER TABLE `post_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `purchase_orders`
+--
+ALTER TABLE `purchase_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `search_history`
+--
+ALTER TABLE `search_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `secret_questions`
+--
+ALTER TABLE `secret_questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `setting`
+--
+ALTER TABLE `setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `shipment_orders`
+--
+ALTER TABLE `shipment_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT for table `shipment_orders_files`
+--
+ALTER TABLE `shipment_orders_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `shipment_orders_oceanfreight`
+--
+ALTER TABLE `shipment_orders_oceanfreight`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `shipment_status`
+--
+ALTER TABLE `shipment_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `shipment_types`
+--
+ALTER TABLE `shipment_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_cities`
+--
+ALTER TABLE `tbl_cities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48773;
+
+--
+-- AUTO_INCREMENT for table `tbl_payment_notifications`
+--
+ALTER TABLE `tbl_payment_notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `users_groups`
+--
+ALTER TABLE `users_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users_rights`
+--
+ALTER TABLE `users_rights`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user_devices`
+--
+ALTER TABLE `user_devices`
+  MODIFY `device_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `warehouse`
+--
+ALTER TABLE `warehouse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `warehouse_receipts`
+--
+ALTER TABLE `warehouse_receipts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `warehouse_receipts_charges`
+--
+ALTER TABLE `warehouse_receipts_charges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `warehouse_receipts_commodities`
+--
+ALTER TABLE `warehouse_receipts_commodities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

@@ -68,6 +68,8 @@ class Warehouse_receipt extends MX_Controller {
 		$aData['mode_of_transport'] = $this->db->get('mode_of_transport')->result_array();
 		$aData['containers'] = $this->db->get('containers')->result_array();
 		$aData['charges'] = $this->db->get('charges')->result_array();
+		$commudities = $this->db->where('warehouse_receipts_id',$id)->get('warehouse_receipts_commodities')->result_array();
+		$aData['trdata']=$this->setEditcommudity($commudities);
 		$aData['row']=$query;
 			//pre($aData);
 		$aData['tbl'] =$this->tbl;
@@ -95,7 +97,57 @@ class Warehouse_receipt extends MX_Controller {
 			break;	
 		}
 	}
+	
+	function setEditcommudity($commudityArr){
+					$c = count($commudityArr);
+$tr='<tr><td colspan="9">No commudity</td></tr>';
+		if($c>0){
+			//echo '=>'.$c;exit;
+			//pre($commudityArr);
+				$tr='';
+				for($i=0;$i<$c;$i++){
+					
+	$rowid=time();
+		$tr.='<tr id="'.$rowid.'">
+            	<th>'.$commudityArr[$i]['package_type'].'</th>
+            	<th>'.$commudityArr[$i]['description'].'</th>
+            	<th>'.$commudityArr[$i]['pieces'].'</th>
+            	<th>'.$commudityArr[$i]['length'].'</th>
+            	<th>'.$commudityArr[$i]['width'].'</th>
+            	<th>'.$commudityArr[$i]['height'].'</th>
+            	<th>'.$commudityArr[$i]['total_weight'].'</th>
+            	<th>'.$commudityArr[$i]['total_volume'].'</th>
+            	<th><a onClick="deleteRow('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+				<a onClick="editRow('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></th>
+				<input type="hidden" id="part_number_h" name="commudity[part_number][]" value="'.$commudityArr[$i]['part_number'].'" >
+<input type="hidden" id="model_h" name="commudity[model][]" value="'.$commudityArr[$i]['model'].'" >
+<input type="hidden" id="description_h" name="commudity[description][]" value="'.$commudityArr[$i]['description'].'">
+<input type="hidden" id="package_type_h" name="commudity[package_type][]" value="'.$commudityArr[$i]['package_type'].'">
+<input type="hidden" id="location_h" name="commudity[location][]"  value="'.$commudityArr[$i]['location'].'">
+<input type="hidden" id="pieces_h" name="commudity[pieces][]" value="'.$commudityArr[$i]['pieces'].'">
+<input type="hidden" id="length_h" name="commudity[length][]" value="'.$commudityArr[$i]['length'].'">
+<input type="hidden" id="width_h" name="commudity[width][]" value="'.$commudityArr[$i]['width'][$i].'" >
+<input type="hidden" id="height_h" name="commudity[height][]" value="'.$commudityArr[$i]['height'].'">
+<input type="hidden" id="dimension_unit_h" name="commudity[dimension_unit][]" value="'.$commudityArr[$i]['dimension_unit'].'">
+<input type="hidden" id="unit_weight_h" name="commudity[unit_weight][]" value="'.$commudityArr[$i]['unit_weight'].'">
+<input type="hidden" id="total_weight_h" name="commudity[total_weight][]" value="'.$commudityArr[$i]['total_weight'].'">
+<input type="hidden" id="weight_unit_measure_h" name="commudity[weight_unit_measure][]" value="'.$commudityArr[$i]['weight_unit_measure'].'">
+<input type="hidden" id="unit_volume_h" name="commudity[unit_volume][]" value="'.$commudityArr[$i]['unit_volume'].'">
+<input type="hidden" id="unit_volume_h" name="commudity[total_volume][]" value="'.$commudityArr[$i]['total_volume'].'">
+<input type="hidden" id="volume_unit_measure_h" name="commudity[volume_unit_measure][]" value="'.$commudityArr[$i]['volume_unit_measure'].'">
+<input type="hidden" id="quantity_h" name="commudity[quantity][]" value="'.$commudityArr[$i]['quantity'].'">
+<input type="hidden" id="unit_h" name="commudity[unit][]" value="'.$commudityArr[$i]['unit'].'">
+<input type="hidden" id="unitary_value_h" name="commudity[unitary_value][]" value="'.$commudityArr[$i]['unitary_value'].'">
+<input type="hidden" id="total_value_h" name="commudity[total_value][]" value="'.$commudityArr[$i]['total_value'].'">
+
+			</tr>
+			';
+					}
+				}
+				return $tr;
+		}
 	function save(){ 
+		//pre($_POST['commudity']);
 		extract($_POST);
 		// echo "<pre>";
 		// print_r($_POST);
@@ -120,7 +172,7 @@ class Warehouse_receipt extends MX_Controller {
 		// $this->qrlib->generate($params);
 		
 		$PrimaryID = $_POST['id'];
-		$_POST['notes'] = implode(',',$_POST['notes']);
+		$_POST['notes'] = json_encode($_POST['notes']);
 		$_POST['transaction_number'] = rand(10000,9990000);
 		unset($_POST['id']);
 	//pre($_POST);
@@ -150,6 +202,13 @@ class Warehouse_receipt extends MX_Controller {
 			$_POST['file']= $upload_data['file_name'];
 			}
 		}
+		/********handling commudities **************/
+		$commudityArr=array();
+		if(isset($_POST['commudity']) and count($_POST['commudity'])>0){
+			$commudityArr = $_POST['commudity'];
+			unset($_POST['commudity']);
+			}
+		/********************/	
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
 		
 	
@@ -157,9 +216,41 @@ class Warehouse_receipt extends MX_Controller {
 	    		$e = $this->db->error(); // Gets the last error that has occured
 $num = $e['code'];
 $mess = $e['message'];
+
 		switch($result){
 			case 1:
-			
+			$warehouse_receipts_id=$this->db->insert_id();
+			$c = count($commudityArr['description']);
+			if($c>0){
+			//echo '=>'.$c;exit;
+				//pre($commudityArr);
+				for($i=0;$i<$c;$i++){
+					
+					$cArr=array('warehouse_receipts_id'=>$warehouse_receipts_id,
+					'description'=>$commudityArr['description'][$i],
+					'part_number'=>$commudityArr['part_number'][$i],
+					'model'=>$commudityArr['model'][$i],
+					'package_type'=>$commudityArr['package_type'][$i],
+					'location'=>$commudityArr['location'][$i],
+					'pieces'=>$commudityArr['pieces'][$i],
+					'length'=>$commudityArr['length'][$i],
+					'width'=>$commudityArr['width'][$i],
+					'height'=>$commudityArr['height'][$i],
+					'quantity'=>$commudityArr['quantity'][$i],
+					'dimension_unit'=>$commudityArr['dimension_unit'][$i],
+					'unit_weight'=>$commudityArr['unit_weight'][$i],
+					'unit_volume'=>$commudityArr['unit_volume'][$i],
+					'total_weight'=>$commudityArr['total_weight'][$i],
+					'total_volume'=>$commudityArr['total_volume'][$i],
+					'weight_unit_measure'=>$commudityArr['weight_unit_measure'][$i],
+					'volume_unit_measure'=>$commudityArr['volume_unit_measure'][$i],
+					'unit'=>$commudityArr['unit'][$i],
+					'unitary_value'=>$commudityArr['unitary_value'][$i],
+					'total_value'=>$commudityArr['total_value'][$i]
+					);
+					$this->db->insert('warehouse_receipts_commodities',$cArr);
+					}
+				}
 			$arr = array('status' => 1,'message' => "Inserted Succefully !");
 			echo json_encode($arr);
 			break;
@@ -178,6 +269,11 @@ $mess = $e['message'];
 			break;	
 		}
 	}	
+	
+	function insertCommudities($comudityArr,$receipt_id){
+		
+		
+		}
 		
 	  public function update_image(){ 
 	
@@ -259,7 +355,7 @@ function setCommudity(){
             	<th>'.$_POST['total_volume'].'</th>
             	<th><a onClick="deleteRow('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 				<a onClick="editRow('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></th>
-				<input type="hidden" id="part_number_h" name="commudity[part_number][]" >
+				<input type="hidden" id="part_number_h" name="commudity[part_number][]" value="'.$_POST['part_number'].'" >
 <input type="hidden" id="model_h" name="commudity[model][]" value="'.$_POST['model'].'" >
 <input type="hidden" id="description_h" name="commudity[description][]" value="'.$_POST['description'].'">
 <input type="hidden" id="package_type_h" name="commudity[package_type][]" value="'.$_POST['package_type'].'">
@@ -267,128 +363,23 @@ function setCommudity(){
 <input type="hidden" id="pieces_h" name="commudity[pieces][]" value="'.$_POST['pieces'].'">
 <input type="hidden" id="length_h" name="commudity[length][]" value="'.$_POST['length'].'">
 <input type="hidden" id="width_h" name="commudity[width][]" value="'.$_POST['width'].'" >
-<input type="hidden" id="height_h" name="commudity[height][]" value="'.$_POST['height'].'"
-<input type="hidden" id="dimension_unit_h" name="commudity[dimension_unit][]" value="'.$_POST['dimension_unit'].'"
-<input type="hidden" id="unit_weight_h" name="commudity[unit_weight][]" value="'.$_POST['unit_weight'].'"
-<input type="hidden" id="total_weight_h" name="commudity[total_weight][]" value="'.$_POST['total_weight'].'"
-<input type="hidden" id="width_h" name="commudity[width][]" value="'.$_POST['width'].'"
-<input type="hidden" id="height_h" name="commudity[height][]" value="'.$_POST['height'].'"
-<input type="hidden" id="dimension_unit_h" name="commudity[dimension_unit][]" value="'.$_POST['dimension_unit'].'"
-<input type="hidden" id="unit_weight_h" name="commudity[unit_weight][]" value="'.$_POST['unit_weight'].'"
-<input type="hidden" id="total_weight_h" name="commudity[total_weight][]" value="'.$_POST['total_weight'].'"
-<input type="hidden" id="weight_unit_measure_h" name="commudity[weight_unit_measure][]" value="'.$_POST['weight_unit_measure'].'"
-<input type="hidden" id="unit_volume_h" name="commudity[unit_volume][]" value="'.$_POST['unit_volume'].'"
-<input type="hidden" id="volume_unit_measure_h" name="commudity[volume_unit_measure][]" value="'.$_POST['volume_unit_measure'].'"
-<input type="hidden" id="quantity_h" name="commudity[quantity][]" value="'.$_POST['quantity'].'"
-<input type="hidden" id="unit_h" name="commudity[unit][]" value="'.$_POST['unit'].'"
-<input type="hidden" id="unitary_value_h" name="commudity[unitary_value][]" value="'.$_POST['unitary_value'].'"
-<input type="hidden" id="total_value_h" name="commudity[total_value][]" value="'.$_POST['total_value'].'"
+<input type="hidden" id="height_h" name="commudity[height][]" value="'.$_POST['height'].'">
+<input type="hidden" id="dimension_unit_h" name="commudity[dimension_unit][]" value="'.$_POST['dimension_unit'].'">
+<input type="hidden" id="unit_weight_h" name="commudity[unit_weight][]" value="'.$_POST['unit_weight'].'">
+<input type="hidden" id="total_weight_h" name="commudity[total_weight][]" value="'.$_POST['total_weight'].'">
+<input type="hidden" id="weight_unit_measure_h" name="commudity[weight_unit_measure][]" value="'.$_POST['weight_unit_measure'].'">
+<input type="hidden" id="unit_volume_h" name="commudity[unit_volume][]" value="'.$_POST['unit_volume'].'">
+<input type="hidden" id="unit_volume_h" name="commudity[total_volume][]" value="'.$_POST['total_volume'].'">
+<input type="hidden" id="volume_unit_measure_h" name="commudity[volume_unit_measure][]" value="'.$_POST['volume_unit_measure'].'">
+<input type="hidden" id="quantity_h" name="commudity[quantity][]" value="'.$_POST['quantity'].'">
+<input type="hidden" id="unit_h" name="commudity[unit][]" value="'.$_POST['unit'].'">
+<input type="hidden" id="unitary_value_h" name="commudity[unitary_value][]" value="'.$_POST['unitary_value'].'">
+<input type="hidden" id="total_value_h" name="commudity[total_value][]" value="'.$_POST['total_value'].'">
 
 			</tr>
 			';
 			$arr = array('status' => 1,"trdata"=>$tr);
 			echo json_encode($arr);		
-
-	}
-function saveCommudity(){ 
-		extract($_POST);
-		//pre($_POST);
-				$PrimaryID='';
-
-	if(isset($_POST['id']) and $_POST['id']!=''){
-		$PrimaryID=$_POST['id'];
-		}
-		$this->form_validation->set_rules('description', 'description', 'trim|required');
-		$this->form_validation->set_rules('pieces', 'pieces', 'trim|required');
-		/*$this->form_validation->set_rules('start_date', 'start date', 'trim|required');
-		$this->form_validation->set_rules('end_date', 'end date', 'trim|required');*/
-		if ($this->form_validation->run()==false){
-			$arr = array("status"=>"validation_error" ,"message"=> validation_errors());
-			echo json_encode($arr);
-		}else{
-			
-			$_POST['warehouse_receipts_id']=$this->db->select_max('id')->get($this->tbl)->row()->id+1;;
-			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
-			/*
-			Array
-(
-    [part_number] => 12
-    [model] => 2023
-    [description] => This is just 
-    [package_type] => Barrel
-    [location] => lahore
-    [pieces] => 2
-    [length] => 200
-    [width] => 20
-    [height] => 20
-    [dimension_unit] => inches
-    [unit_weight] => 2
-    [total_weight] => 2
-    [weight_unit_measure] => lb
-    [unit_volume] => 2
-    [total_volume] => 2
-    [volume_unit_measure] => ft3
-    [quantity] => 50
-    [unit] => 1
-    [unitary_value] => 2
-    [total_value] => 2
-)
-			*/
-		switch($result){
-			case 1:
-			$tr='<tr>
-            	<th>'.$_POST['package_type'].'</th>
-            	<th>'.$_POST['description'].'</th>
-            	<th>'.$_POST['pieces'].'</th>
-            	<th>'.$_POST['length'].'</th>
-            	<th>'.$_POST['widh'].'</th>
-            	<th>'.$_POST['height'].'</th>
-            	<th>'.$_POST['total_volume'].'</th>
-            	<th><a class="btn btn-info btn-sm"><i class="fa fa-trash"></i></a></th>
-				<input type="hidden" name="commudity[part_number][]" >
-<input type="hidden" name="commudity[model][]" >
-<input type="hidden" name="commudity[description][]" >
-<input type="hidden" name="commudity[package_type][]" >
-<input type="hidden" name="commudity[location][]" >
-<input type="hidden" name="commudity[pieces][]" >
-<input type="hidden" name="commudity[length][]" >
-<input type="hidden" name="commudity[width][]" >
-<input type="hidden" name="commudity[height][]" >
-<input type="hidden" name="commudity[dimension_unit][]" >
-<input type="hidden" name="commudity[unit_weight][]" >
-<input type="hidden" name="commudity[total_weight][]" >
-<input type="hidden" name="commudity[width][]" >
-<input type="hidden" name="commudity[height][]" >
-<input type="hidden" name="commudity[dimension_unit][]" >
-<input type="hidden" name="commudity[unit_weight][]" >
-<input type="hidden" name="commudity[total_weight][]" >
-<input type="hidden" name="commudity[weight_unit_measure][]" >
-<input type="hidden" name="commudity[unit_volume][]" >
-<input type="hidden" name="commudity[volume_unit_measure][]" >
-<input type="hidden" name="commudity[quantity][]" >
-<input type="hidden" name="commudity[unit][]" >
-<input type="hidden" name="commudity[unitary_value][]" >
-<input type="hidden" name="commudity[total_value][]" >
-
-			</tr>
-			';
-			$arr = array('status' => 1,'message' => "Saved Succefully !" ,"trdata"=>$tr);
-			echo json_encode($arr);
-			break;
-			case 2:
-			$arr = array('status' => 2,'message' => "Updated Succefully !");
-			echo json_encode($arr);
-			break;
-			case 0:
-			$arr = array('status' => 0,'message' => "Not Saved!");
-			echo json_encode($arr);
-			break;
-			default:
-			$arr = array('status' => 0,'message' => "Not Saved!");
-			echo json_encode($arr);
-			break;	
-		}
-	}	
 
 	}
 

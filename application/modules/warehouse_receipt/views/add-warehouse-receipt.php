@@ -65,9 +65,9 @@ background-color: #fff;
 <li><a href="#tab_3" data-toggle="tab">Supplier</a></li>
 <li><a href="#tab_4" data-toggle="tab">Carrier</a></li>
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
-<li><a href="#tab_6" data-toggle="tab">Charges</a></li>
+<!--<li><a href="#tab_6" data-toggle="tab">Charges</a></li>
 <li><a href="#tab_7" data-toggle="tab">Events</a></li>
-<li><a href="#tab_8" data-toggle="tab">Notes</a></li>
+--><li><a href="#tab_8" data-toggle="tab">Notes</a></li>
 <li><a href="#tab_9" data-toggle="tab">Attachment</a></li>
 
 
@@ -343,7 +343,7 @@ background-color: #fff;
             </tr>
         </thead>
           <tbody id="tbody_comudity">
-         
+         <?=$trdata?>
           </tbody>
         </table>
       </div>
@@ -397,8 +397,19 @@ background-color: #fff;
   <div class='col-md-12' id='inputFormRow'>
             <h4>Notes</h4>
                 <div class="notes">
+                <?php if(isset($row)){
+					$notes = json_decode($row->notes);
+					foreach($notes as $key=>$val){
+					?>
+                        <input style="width:50%"type="text" name="notes[]" value="<?=$val?>" autocomplete="off">
+                        <button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>
+
+                    <?php } }
+					else{
+					?>
                     <input style="width:50%"type="text" name="notes[]" autocomplete="off">
                         <button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>
+                        <?php } ?>
                 </div>
 
             <div id="newRow"></div>
@@ -409,10 +420,11 @@ background-color: #fff;
 <div class="tab-pane" id="tab_9">
   <div class='row'>
     <div class='col-md-6'>
-<label>Image</label>
+<label>Attachment</label>
  <?php if(isset($row)){
    if($row->file){
-    echo '<img src="uploads/".$row->file height="70">';
+	   $attachment='uploads/'.$row->file;
+    echo '<a href="'.$attachment.'" class="fancybox"><img src="'.$attachment.'" height="70"></a>';
     }}?>
 <input type='file' class='form-control' name='file' id='file'>
                                     </div>
@@ -755,8 +767,11 @@ function deleteRow(id){
 	}
 	
 function editRow(id){
-	var part_number_h = $('#'+id+ '>#part_number_h').val();
-	 $('#part_number').val(part_number_h);
+	
+	
+	$('#formAddCommodity').append("<input type='hidden' id='rowid' value='"+id+"' >");
+	$('#formAddCommodity .btn-success').addClass("edit_true");
+	 $('#part_number').val($('#'+id+ '>#part_number_h').val());
 	 $('#model').val($('#'+id+ '>#model_h').val());
 	 $('#description').val($('#'+id+ '>#description_h').val());
 	 $('#package_type').val($('#'+id+ '>#package_type_h').val());
@@ -772,6 +787,7 @@ function editRow(id){
 	 $('#unit_volume').val($('#'+id+ '>#unit_volume_h').val());
 	 $('#total_volume').val($('#'+id+ '>#total_volume_h').val());
 	 $('#volume_unit_measure').val($('#'+id+ '>#volume_unit_measure_h').val());
+
 	 $('#unit').val($('#'+id+ '>#unit_h').val());
 	 $('#unitary_value').val($('#'+id+ '>#unitary_value_h').val());
 	 $('#total_value').val($('#'+id+ '>#total_value_h').val());
@@ -801,6 +817,10 @@ function setCommudity(){
         //  $('#form_add_update .btn_au').addClass('hidden');
             },
             success: function(data) {
+				if($('#formAddCommodity .btn-success').hasClass("edit_true")){
+		var rowid = $('#formAddCommodity #rowid').val();
+		$('#'+rowid).remove();
+		}
             $('#loader').addClass('hidden');
             //alert(data.status);
             //var obj = jQuery.parseJSON(data);

@@ -31,6 +31,7 @@ class Warehouse_receipt extends MX_Controller {
 		$this->load->library('pdf');
 		$aData['data'] =$this->db->where('id', $id)->get('warehouse_receipts')->result_array();
 		$aData['settings'] = $this->db->get('setting')->result_array();
+		$aData['charges'] =$this->db->where('warehouse_receipts_id', $id)->get('warehouse_receipts_charges')->result_array();
         // $html = $this->load->view('receipt-pdf', [], true, $aData);
         // $this->pdf->createPDF($html, 'mypdf', false);
 		$this->load->view('receipt-pdf', $aData);
@@ -172,7 +173,7 @@ $tr='<tr><td colspan="9">No commudity</td></tr>';
 		// $this->qrlib->generate($params);
 		
 		$PrimaryID = $_POST['id'];
-		$_POST['notes'] = json_encode($_POST['notes']);
+		//$_POST['notes'] = json_encode($_POST['notes']);
 		$_POST['transaction_number'] = rand(10000,9990000);
 		unset($_POST['id']);
 	//pre($_POST);
@@ -207,6 +208,13 @@ $tr='<tr><td colspan="9">No commudity</td></tr>';
 		if(isset($_POST['commudity']) and count($_POST['commudity'])>0){
 			$commudityArr = $_POST['commudity'];
 			unset($_POST['commudity']);
+			}
+		/********************/	
+		/********handling charges **************/
+		$chargesArr=array();
+		if(isset($_POST['charges']) and count($_POST['charges'])>0){
+			$chargesArr = $_POST['charges'];
+			unset($_POST['charges']);
 			}
 		/********************/	
 	    $result = $this->crud->saveRecord($PrimaryID,$_POST,$this->tbl);
@@ -249,7 +257,36 @@ $mess = $e['message'];
 					'total_value'=>$commudityArr['total_value'][$i]
 					);
 					$this->db->insert('warehouse_receipts_commodities',$cArr);
+					
 					}
+					
+				}
+			$charges = count($chargesArr['prepaid']);
+			if($charges>0){
+			//echo '=>'.$c;exit;
+				//pre($chargesArr);
+				for($i=0;$i<$charges;$i++){
+					
+					$chargesArray=array('warehouse_receipts_id'=>$warehouse_receipts_id,
+					'charges_description'=>$chargesArr['charges_description'][$i],
+					'price'=>$chargesArr['price'][$i],
+					'expense'=>$chargesArr['expense'][$i],
+					'income'=>$chargesArr['income'][$i],
+					'amount'=>$chargesArr['amount'][$i],
+					'tax_amount'=>$chargesArr['tax_amount'][$i],
+					'tax_rate'=>$chargesArr['tax_rate'][$i],
+					'tax_code'=>$chargesArr['tax_code'][$i],
+					'amount_with_tax'=>$chargesArr['amount_with_tax'][$i],
+					'final_amount'=>$chargesArr['final_amount'][$i],
+					'quantity'=>$chargesArr['quantity'][$i],
+					'currency'=>$chargesArr['currency'][$i],
+					'prepaid'=>$chargesArr['prepaid'][$i],
+					'charges_status'=>$chargesArr['charges_status'][$i],
+					);
+					$this->db->insert('warehouse_receipts_charges',$chargesArray);
+					
+					}
+					
 				}
 			$arr = array('status' => 1,'message' => "Inserted Succefully !");
 			echo json_encode($arr);
@@ -354,7 +391,7 @@ function setCommudity(){
             	<td>'.$_POST['total_weight'].'</td>
             	<td>'.$_POST['total_volume'].'</td>
             	<td><a onClick="deleteRow('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-				<a onClick="editRow('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></th>
+				<a onClick="editRow('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></td>
 
 				<input type="hidden" id="part_number_h" name="commudity[part_number][]" value="'.$_POST['part_number'].'" >
 <input type="hidden" id="model_h" name="commudity[model][]" value="'.$_POST['model'].'" >
@@ -384,6 +421,41 @@ function setCommudity(){
 
 	}
 
+	function addCharges(){ 
+		extract($_POST);
+		//print_r($_POST);exit;
+		$rowid=time();
+		$tr='<tr id="'.$rowid.'">
+            	<td>'.$_POST['charges_status'].'</td>
+            	<td>'.$_POST['charges_description'].'</td>
+            	<td>'.$_POST['quantity'].'</td>
+            	<td>'.$_POST['tax_amount'].'</td>
+            	<td>'.$_POST['income'].'</td>
+            	<td>'.$_POST['expense'].'</td>
+            	<td>'.$_POST['amount'].'</td>
+            	<td>'.$_POST['final_amount'].'</td>
+            	<td><a onClick="deleteCharges('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+				<a onClick="editCharges('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></td>
+
+<input type="hidden" id="charges_status_h" name="charges[charges_status][]" value="'.$_POST['charges_status'].'" >
+<input type="hidden" id="charges_description_h" name="charges[charges_description][]" value="'.$_POST['charges_description'].'" >
+<input type="hidden" id="quantity_h" name="charges[quantity][]" value="'.$_POST['quantity'].'">
+<input type="hidden" id="tax_amount_h" name="charges[tax_amount][]" value="'.$_POST['tax_amount'].'">
+<input type="hidden" id="income_h" name="charges[income][]"  value="'.$_POST['income'].'">
+<input type="hidden" id="expense_h" name="charges[expense][]" value="'.$_POST['expense'].'">
+<input type="hidden" id="amount_h" name="charges[amount][]" value="'.$_POST['amount'].'">
+<input type="hidden" id="final_amount_h" name="charges[final_amount][]" value="'.$_POST['final_amount'].'" >
+<input type="hidden" id="prepaid_h" name="charges[prepaid][]" value="'.$_POST['prepaid'].'">
+<input type="hidden" id="tax_code_h" name="charges[tax_code][]" value="'.$_POST['tax_code'].'">
+<input type="hidden" id="tax_rate_h" name="charges[tax_rate][]" value="'.$_POST['tax_rate'].'">
+<input type="hidden" id="amount_with_tax_h" name="charges[amount_with_tax][]" value="'.$_POST['amount_with_tax'].'">
+<input type="hidden" id="currency_h" name="charges[currency][]" value="'.$_POST['currency'].'">
+<input type="hidden" id="price_h" name="charges[price][]" value="'.$_POST['price'].'">
+</tr>';
+			$arr = array('status' => 1,"trdata"=>$tr);
+			echo json_encode($arr);		
+
+	}
 
 
 function saveInvoice(){ 

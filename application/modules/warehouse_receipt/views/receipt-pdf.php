@@ -83,7 +83,7 @@
                     <th width='10%'>Final Amount:</th>
                     <td width='25%'><?php echo $data[0]['final_amount']?></td>
                   </tr>
-                  <tr style='background-color:silver'>
+                  <tr>
                     <th width='25%'>Package:&nbsp;<?php echo $data[0]['package_type']?></th>
                     <th width='25%'>Dimensions(LxWxH):&nbsp;<?php echo $data[0]['length'].','.$data[0]['width'].','.$data[0]['height']?></th>
                     <th width='25%'>Description:&nbsp;<?php echo $data[0]['description']?></th>
@@ -95,19 +95,68 @@
                     <th colspan='2' width='50%'>Volume Unit:&nbsp;<?php echo $data[0]['volume_unit']?></th>
                     
 </tr>
-                  <tr style='background-color:silver'>
+                  <tr>
                     <th width='25%'>Location:&nbsp;<?php echo $data[0]['location']?></th>
                     <th width='25%'>Quantity:&nbsp;<?php echo $data[0]['quantity']?></th>
                     <th width='25%'>Part Number:&nbsp;<?php echo $data[0]['part_number']?></th>
                     <th width='25%'>Model:&nbsp;<?php echo $data[0]['model']?></th>
 </tr>
-                  <tr style='background-color:silver'>
+                  <tr>
                     <th width='25%'>Serial no. 1:&nbsp;<?php echo $data[0]['serial_number_1']?></th>
                     <th width='25%'>Serial no. 2:&nbsp;<?php echo $data[0]['serial_number_2']?></th>
                     
 </tr>
-                </tbody>
-            </table>
+  <?php if(isset($charges) && $charges!=''){?>                       
+<tr>
+
+                          <th style='background-color:silver;text-align:center' colspan='4'>Charges</th>
+</tr> 
+<tr>
+  <td colspan='4'>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Description</th>
+          <th>Income</th>
+          <th>Tax Amount</th>
+          <th>Tax Code</th>
+          <th>Tax Rate</th>
+          <th>Expense</th>
+          <th>Amt With Tax</th>
+          <th>Currency</th>
+          <th>Price</th>
+          <th>Prepaid</th>
+          <th>Quantity</th>
+          <th>Amount</th>
+          <th>Final Amount</th>
+          </thead>
+        </tr>
+      <tbody>
+      <?php foreach($charges as $charged){?>
+        <tr>
+        <td><?php echo $charged['charges_status'];?></td>
+        <td><?php echo $charged['charges_description'];?></td>
+        <td><?php echo $charged['income'];?></td>
+        <td><?php echo $charged['tax_amount'];?></td>
+        <td><?php echo $charged['tax_code'];?></td>
+        <td><?php echo $charged['tax_rate'];?></td>
+        <td><?php echo $charged['expense'];?></td>
+        <td><?php echo $charged['amount_with_tax'];?></td>
+        <td><?php echo $charged['currency'];?></td>
+        <td><?php echo $charged['price'];?></td>
+        <td><?php echo $charged['prepaid'];?></td>
+        <td><?php echo $charged['quantity'];?></td>
+        <td><?php echo $charged['amount'];?></td>
+        <td><?php echo $charged['final_amount'];?></td>
+        </tr>
+        <?php }}?>
+  </tbody>
+    </table>
+  </td>
+</tr>
+     </tbody>
+       </table>
 </div>
 </div>
 <button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>

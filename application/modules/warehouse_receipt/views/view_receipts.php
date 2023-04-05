@@ -38,7 +38,6 @@ $Heading=	$module_heading;
                 <table id="post_table" class="table table-bordered responsive">
     <thead>
     <tr>
-        <th>Warehouse Name</th>
         <th>Employ Name</th>
 		    <th>Shipper Name</th>
         <th>Consignee Name</th>
@@ -54,7 +53,6 @@ $Heading=	$module_heading;
 		?>
 		<tr id="row_<?php echo $row->id;?>">
         
-    <td><?php echo $row->warehouse_name;?></td>
     <td><?php echo $row->employ_name;?></td>
     
     

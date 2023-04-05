@@ -65,9 +65,9 @@ background-color: #fff;
 <li><a href="#tab_3" data-toggle="tab">Supplier</a></li>
 <li><a href="#tab_4" data-toggle="tab">Carrier</a></li>
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
-<!--<li><a href="#tab_6" data-toggle="tab">Charges</a></li>
+<li><a href="#tab_6" data-toggle="tab">Charges</a></li>
 <li><a href="#tab_7" data-toggle="tab">Events</a></li>
---><li><a href="#tab_8" data-toggle="tab">Notes</a></li>
+<li><a href="#tab_8" data-toggle="tab">Notes</a></li>
 <li><a href="#tab_9" data-toggle="tab">Attachment</a></li>
 
 
@@ -270,7 +270,7 @@ background-color: #fff;
     </div><br><br><br>
     <div class='col-md-6'>
     <label>Address</label>
-     <textarea name='supplier_address' class='form-control'></textarea>
+     <textarea name='supplier_address' class='form-control'><?php if(isset($row)){echo $row->supplier_address;}?></textarea>
    </div>
   </div>
 </div>
@@ -284,7 +284,7 @@ background-color: #fff;
             foreach($carriers as $carrier){
             $selected='';
             if(isset($row)){
-              if($row->carrier==$carrier["name"]){
+              if($row->carrier==$carrier["id"]){
               $selected='selected';
               }}?>
               <option <?php echo $selected?> value='<?php echo $carrier["id"];?>'><?php echo $carrier["name"];?></option>
@@ -343,7 +343,7 @@ background-color: #fff;
             </tr>
         </thead>
           <tbody id="tbody_comudity">
-         <?=$trdata?>
+        
           </tbody>
         </table>
       </div>
@@ -353,21 +353,27 @@ background-color: #fff;
 <div class="tab-pane" id="tab_6">
 <div class='form-group'>
   <div class='row'>
-    <div class='col-md-12'>
-      <table class='table'>
-        <tbody>
-          <div class='row'>
-            <tr>
-            <div class='col-md-10'>
-              <td>Status</td>
-            </div>
-            <div class='col-md-2'>
-              <td><button type='button' class='btn btn-info' data-target='#AddChargesModal' data-toggle='modal'>Add Charges</button></td>
-            </div>
-          </div>
-        </tbody>
-      </table>
-    </div>
+  <div class='col-md-12'>
+      <button type='button' class='btn btn-info btn-sm pull-right' data-toggle='modal' data-target='#AddChargesModal'>Add Charges</button>
+        <table class='table table-striped'>
+        <thead>
+        	<tr>
+            	<th>Status</th>
+            	<th>Description</th>
+            	<th>Quantity</th>
+            	<th>Tax Amount</th>
+            	<th>Income</th>
+            	<th>Expense</th>
+            	<th>Amount</th>
+              <th>Final Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+          <tbody id="tbody_charges">
+        
+          </tbody>
+        </table>
+      </div>
   </div>
 </div>
 </div>
@@ -397,26 +403,9 @@ background-color: #fff;
   <div class='col-md-12' id='inputFormRow'>
             <h4>Notes</h4>
                 <div class="notes">
-                <?php if(isset($row)){
-					$notes = json_decode($row->notes);
-					foreach($notes as $key=>$val){
-					?>
-                        <input style="width:50%"type="text" name="notes[]" value="<?=$val?>" autocomplete="off">
-                        <button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>
-
-                    <?php } }
-					else{
-					?>
-                    <input style="width:50%"type="text" name="notes[]" autocomplete="off">
-                        <button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>
-                        <?php } ?>
+                        <textarea name="notes" class='form-control'> <?php if(isset($row)){echo $row->notes;}?></textarea>
                 </div>
-
-            <div id="newRow"></div>
-            <button id="addRow" type="button" class="btn btn-info btn-sm">Add Row</button>
-                                  </div> <br>
-        
-                                  </div></div>
+               </div></div></div>
 <div class="tab-pane" id="tab_9">
   <div class='row'>
     <div class='col-md-6'>
@@ -616,26 +605,15 @@ background-color: #fff;
                <h3 class='modal-title text-white'>Add Charges</h3>
                <button class='close' data-dismiss='modal' style='color:white'>&times;</button>
       </div>
+      <form id='chargesForm'>
       <div class='modal-body'>
       <div class="form-group">
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-6">
                                     <label>Status</label>
-                                    
-                                    <select class="form-control" id="charges_status" name="charges_status">
-                                    <?php if(isset($charges)){
-                                       foreach($charges as $charge){
-                                        $selected='';
-                                         if(isset($row)){
-                                           if($row->charges_status==$charge['status']){
-                                             $selected='selected';
-                                             }}?>  
-                                    <option <?php echo $selected?> value='<?php echo $charge['status']?>'><?php echo $charge['status']?></option>
-                                    <?php }}?>
-                                    </select>
-                                    
-                                        </div>
+                <input type='text' class='form-control' name='charges_status' id='charges_status' value='<?php if(isset($row)){echo $row->charges_status;}?>'>
+                                  </div>
                                           <div  class="col-md-6">
                                     <label>Description</label>
                 <textarea type="text" name="charges_description" id="charges_description"  class="form-control"><?php if(isset($row)){$row->charges_description;}?></textarea>
@@ -645,7 +623,7 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                     <label>Prepaid</label>
-                                          <input type='text' name='prepaid' class='form-control' value='<?php if(isset($row)){echo $row->prepaid;}?>'>
+                                          <input type='text' name='prepaid' id='prepaid' class='form-control' value='<?php if(isset($row)){echo $row->prepaid;}?>'>
                                         </div>
                                           <div class="col-md-6">
                                     <label>Quantity</label>
@@ -689,7 +667,7 @@ background-color: #fff;
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                     <label>Currency</label>
-                                    <input type='number' class="form-control" id="currency" name="currency" value='<?php if(isset($row)){echo $row->currency;}?>'>                                                                   
+                                    <input type='text' class="form-control" id="currency" name="currency" value='<?php if(isset($row)){echo $row->currency;}?>'>                                                                   
                                   </div>
                                           <div class="col-md-6">
                                     <label>Final Amount</label>
@@ -708,12 +686,12 @@ background-color: #fff;
                                   </div>
                                  </div></div>
           <div class="modal-footer">
-      <button type="button" class="btn btn-success">Save changes</button>
+      <button type="button" onclick="addCharges()" class="btn btn-success">Save changes</button>
       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
+      </form>
       </div>
       </div>
-    </div>
     </div>
     <div class='modal fade' id='AddEventModal'>
   <div class='modal-dialog modal-lg modal-dialog-centered'>
@@ -765,12 +743,15 @@ function deleteRow(id){
 		$("#"+id).remove();
 		}
 	}
-	
+	function deleteCharges(id){
+	var del = confirm("are you sure to remove");
+	if(del){
+		$("#"+id).remove();
+		}
+	}
 function editRow(id){
-	
-	
-	$('#formAddCommodity').append("<input type='hidden' id='rowid' value='"+id+"' >");
-	$('#formAddCommodity .btn-success').addClass("edit_true");
+   $('#formAddCommodity').append("<input type='hidden' id='rowid' value='"+id+"' >");
+   $('#formAddCommodity .btn-success').addClass("edit_true");
 	 $('#part_number').val($('#'+id+ '>#part_number_h').val());
 	 $('#model').val($('#'+id+ '>#model_h').val());
 	 $('#description').val($('#'+id+ '>#description_h').val());
@@ -793,6 +774,29 @@ function editRow(id){
 	 $('#total_value').val($('#'+id+ '>#total_value_h').val());
 	 // now show modal
 	 	$('#AddCommodityModal').modal('show');
+
+	}	
+  function editCharges(id){
+	
+	
+	$('#chargesForm').append("<input type='hidden' id='rowid' value='"+id+"' >");
+	$('#chargesForm .btn-success').addClass("edit_true");
+	 $('#charges_status').val($('#'+id+ '>#charges_status_h').val());
+	 $('#charges_description').val($('#'+id+ '>#charges_description_h').val());
+	 $('#amount').val($('#'+id+ '>#amount_h').val());
+	 $('#income').val($('#'+id+ '>#income_h').val());
+	 $('#expense').val($('#'+id+ '>#expense_h').val());
+	 $('#final_amount').val($('#'+id+ '>#final_amount_h').val());
+	 $('#tax_amount').val($('#'+id+ '>#tax_amount_h').val());
+	 $('#tax_rate').val($('#'+id+ '>#tax_rate_h').val());
+	 $('#tax_code').val($('#'+id+ '>#tax_code_h').val());
+	 $('#amount_with_tax').val($('#'+id+ '>#amount_with_tax_h').val());
+	 $('#currency').val($('#'+id+ '>#currency_h').val());
+	 $('#quantity').val($('#'+id+ '>#quantity_h').val());
+	 $('#price').val($('#'+id+ '>#price_h').val());
+	 $('#prepaid').val($('#'+id+ '>#prepaid_h').val());
+	 // now show modal
+	 	$('#AddChargesModal').modal('show');
 
 	}	
 function setCommudity(){
@@ -928,20 +932,62 @@ function setCommudity(){
   /******************************/
   </script>
 <script>
-  $("#addRow").click(function () {
-            var html = '';
-            html += '<div id="inputFormRow">';
-            html += '<div class="notes">';
-            html += '<input type="text" name="notes[]" style="width:50%" autocomplete="off">&nbsp';
-            html += '<button id="removeRow" type="button" class="btn btn-danger btn-sm">Remove</button>';
-            html += '</div>';
-            html += '</div>';
-
-            $('#newRow').append(html);
+  function addCharges(){
+        var formdata = new FormData();
+        var other_data = $('#chargesForm').serializeArray();
+        $.each(other_data,function(key,input){
+        formdata.append(input.name,input.value);
         });
+        
+    // ajax start
+            $.ajax({
+            type: "POST",
+            url: "<?php echo base_url().$controller.'/addCharges'; ?>",
+            data: formdata,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'JSON',
+            beforeSend: function() {
+            $('#loader').removeClass('hidden');
+        //  $('#form_add_update .btn_au').addClass('hidden');
+            },
+            success: function(data) {
+				if($('#chargesForm .btn-success').hasClass("edit_true")){
+		var rowid = $('#chargesForm #rowid').val();
+		$('#'+rowid).remove();
+		}
+            $('#loader').addClass('hidden');
+            //alert(data.status);
+            //var obj = jQuery.parseJSON(data);
+            if (data.status == 1)
+            {   
+			$('#AddChargesModal').modal('hide');
+			$('#tbody_charges').append(data.trdata);
+               
+            }
+           else if (data.status ==0)
+            {  
+            $(".alert").addClass('alert-danger');
+                $(".alert").removeClass('hidden');
+                setTimeout(function(){
+                $(".alert").addClass('hidden');
+                },3000);
+            }
+            else if (data.status == 2)
+            {   
+            $(".alert").addClass('alert-success');
+                $(".alert").removeClass('hidden');
+                setTimeout(function(){
+               // window.location='<?php echo base_url().$controller; ?>';
+                },1000);
+            }
+            
+            
+           }
+     });
 
-        // remove row
-        $(document).on('click', '#removeRow', function () {
-            $(this).closest('#inputFormRow').remove();
-        });
+    //ajax end    
+   
+ }
 </script>

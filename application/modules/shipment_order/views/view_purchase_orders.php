@@ -1,9 +1,6 @@
 <?php getHead();
 $controller=$this->router->class;
-$Heading=$controller;
-if(isset($module_heading) and $module_heading!=''){
-$Heading= $module_heading;
-  }
+ $Heading = 'Purchase Orders';
  ?>
    <style>
    .txt-white{ color:#fff !important}

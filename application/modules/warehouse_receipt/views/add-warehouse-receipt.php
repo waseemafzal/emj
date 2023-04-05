@@ -470,7 +470,6 @@ background-color: #fff;
                                     <label>Model</label>
                                     <input type="text" name="model" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
                                   </div>
-                                        
                                  </div></div>
                                  <div class='form-group'>
                                    <div class='row'>
@@ -500,34 +499,24 @@ background-color: #fff;
                                                     <input type="number" name="pieces" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
                                   </div>
                                  </div></div>
-                         
-                                 <div class="form-group">
-                                <div class="row"> 
-                                
-                                     
-                                 </div></div> <div class="form-group">
+                          <div class="form-group">
                                 <h3>Dimensions(LxWxH)</h3>
                                 <div class="row"> 
-                                
                                 <div class="col-xs-12 col-md-3">
                                     <label>Length</label>
-                                    
-                                    <input type="text" class="form-control" id="length" value='<?php if(isset($row)){$row->length;}?>' name="length">
-                                    
-                                        </div>
-                                        <div class="col-xs-12 col-md-3">
+                                    <input type="number" class="form-control" id="length" value='<?php if(isset($row)){$row->length;}?>' name="length">
+                                 </div>
+                                <div class="col-xs-12 col-md-3">
                                     <label>Width</label>
-                                    
-                                    <input type="text" class="form-control" id="width" value='<?php if(isset($row)){$row->width;}?>' name="width">
-                                    
-                                        </div><div class="col-xs-12 col-md-3">
+                                      <input type="number" class="form-control" id="width" value='<?php if(isset($row)){$row->width;}?>' name="width">
+                                  </div>
+                                    <div class="col-xs-12 col-md-3">
                                     <label>Height</label>
-                                    
-                                    <input type="text" class="form-control" id="height" value='<?php if(isset($row)){$row->height;}?>' name="height">
-                                    
-                                        </div><div class="col-xs-12 col-md-3">
+                                       <input type="number" class="form-control" id="height" value='<?php if(isset($row)){$row->height;}?>' name="height">
+                                    </div>
+                                    <div class="col-xs-12 col-md-3">
                                           <label>Unit</label>
-                                    <select name='dimension_unit' class='form-control'>
+                                              <select name='dimension_unit' class='form-control'>
                                         <?php
                                         $inches='';
                                         $cm='';
@@ -769,23 +758,23 @@ function editRow(id){
 	var part_number_h = $('#'+id+ '>#part_number_h').val();
 	 $('#part_number').val(part_number_h);
 	 $('#model').val($('#'+id+ '>#model_h').val());
-	 $('#description').val($('#'+id+ '#description_h').val());
-	 $('#package_type').val($('#'+id+ '#package_type_h').val());
-	 $('#location').val($('#'+id+ '#location_h').val());
-	 $('#pieces').val($('#'+id+ '#pieces_h').val());
-	 $('#length').val($('#'+id+ '#length_h').val());
-	 $('#width').val($('#'+id+ '#width_h').val());
-	 $('#height').val($('#'+id+ '#height_h').val());
-	 $('#dimension_unit').val($('#'+id+ '#dimension_unit_h').val());
-	 $('#unit_weight').val($('#'+id+ '#unit_weight_h').val());
-	 $('#total_weight').val($('#'+id+ '#total_weight_h').val());
-	 $('#weight_unit_measure').val($('#'+id+ '#weight_unit_measure_h').val());
-	 $('#unit_volume').val($('#'+id+ '#unit_volume_h').val());
-	 $('#total_volume').val($('#'+id+ '#total_volume_h').val());
-	 $('#volume_unit_measure').val($('#'+id+ '#volume_unit_measure_h').val());
-	 $('#unit').val($('#'+id+ '#unit_h').val());
-	 $('#unitary_value').val($('#'+id+ '#unitary_value_h').val());
-	 $('#total_value').val($('#'+id+ '#total_value_h').val());
+	 $('#description').val($('#'+id+ '>#description_h').val());
+	 $('#package_type').val($('#'+id+ '>#package_type_h').val());
+	 $('#location').val($('#'+id+ '>#location_h').val());
+	 $('#pieces').val($('#'+id+ '>#pieces_h').val());
+	 $('#length').val($('#'+id+ '>#length_h').val());
+	 $('#width').val($('#'+id+ '>#width_h').val());
+	 $('#height').val($('#'+id+ '>#height_h').val());
+	 $('#dimension_unit').val($('#'+id+ '>#dimension_unit_h').val());
+	 $('#unit_weight').val($('#'+id+ '>#unit_weight_h').val());
+	 $('#total_weight').val($('#'+id+ '>#total_weight_h').val());
+	 $('#weight_unit_measure').val($('#'+id+ '>#weight_unit_measure_h').val());
+	 $('#unit_volume').val($('#'+id+ '>#unit_volume_h').val());
+	 $('#total_volume').val($('#'+id+ '>#total_volume_h').val());
+	 $('#volume_unit_measure').val($('#'+id+ '>#volume_unit_measure_h').val());
+	 $('#unit').val($('#'+id+ '>#unit_h').val());
+	 $('#unitary_value').val($('#'+id+ '>#unitary_value_h').val());
+	 $('#total_value').val($('#'+id+ '>#total_value_h').val());
 	 // now show modal
 	 	$('#AddCommodityModal').modal('show');
 

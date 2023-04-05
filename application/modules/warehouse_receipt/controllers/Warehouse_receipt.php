@@ -249,17 +249,17 @@ function setCommudity(){
 		}
 		$rowid=time();
 		$tr='<tr id="'.$rowid.'">
-            	<th>'.$_POST['package_type'].'</th>
-            	<th>'.$_POST['description'].'</th>
-            	<th>'.$_POST['pieces'].'</th>
-            	<th>'.$_POST['length'].'</th>
-            	<th>'.$_POST['width'].'</th>
-            	<th>'.$_POST['height'].'</th>
-            	<th>'.$_POST['total_weight'].'</th>
-            	<th>'.$_POST['total_volume'].'</th>
-            	<th><a onClick="deleteRow('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+            	<td>'.$_POST['package_type'].'</td>
+            	<td>'.$_POST['description'].'</td>
+            	<td>'.$_POST['pieces'].'</td>
+            	<td>'.$_POST['length'].'</td>
+            	<td>'.$_POST['width'].'</td>
+            	<td>'.$_POST['height'].'</td>
+            	<td>'.$_POST['total_weight'].'</td>
+            	<td>'.$_POST['total_volume'].'</td>
+            	<td><a onClick="deleteRow('.$rowid.')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
 				<a onClick="editRow('.$rowid.')" class="btn btn-success btn-sm"><i class="fa fa-pencil"></i></a></th>
-				<input type="hidden" id="part_number_h" name="commudity[part_number][]" >
+				<input type="hidden" id="part_number_h" name="commudity[part_number][]" value="'.$_POST['part_number'].'">
 <input type="hidden" id="model_h" name="commudity[model][]" value="'.$_POST['model'].'" >
 <input type="hidden" id="description_h" name="commudity[description][]" value="'.$_POST['description'].'">
 <input type="hidden" id="package_type_h" name="commudity[package_type][]" value="'.$_POST['package_type'].'">

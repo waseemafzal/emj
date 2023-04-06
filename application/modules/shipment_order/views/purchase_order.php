@@ -1,10 +1,6 @@
 <?php getHead();
 $controller=$this->router->class;
-$Heading=$controller;
-if(isset($module_heading) and $module_heading!=''){
-$Heading=   $module_heading;
-    }
-
+$Heading= 'Add Purchase Order';
  ?>
    <style>
     .remove_button{position: absolute;top: 25px;left: 0;}

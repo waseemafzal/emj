@@ -98,7 +98,58 @@ class Warehouse_receipt extends MX_Controller {
 			break;	
 		}
 	}
-	
+	function ____autocomplete_data(){
+		$search = $this->input->post('package_type');
+		$data = $this->db->select('description')
+						 ->from('packages')
+						 ->like('description', $search)
+						 ->get()
+						 ->result_array();
+		echo json_encode($data);
+	}
+
+
+	function autocomplete_data(){
+
+		$searchTerm = $_GET['term']; 
+
+		$query =$this->db->query("select * from packages WHERE description LIKE '%".$searchTerm."%' OR package_type LIKE '%".$searchTerm."%' OR length LIKE '%".$searchTerm."%' OR width LIKE '%".$searchTerm."%' OR height LIKE '%".$searchTerm."%' OR volume LIKE '%".$searchTerm."%' ")->result_array();
+
+		// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+    foreach($query as $row){ 
+
+        $data['id'] = $row['id']; 
+
+        $data['package_type'] = $row['package_type']; 
+
+        $data['description'] = $row['description']; 
+
+        $data['length'] = $row['length'];
+		
+        $data['width'] = $row['width']; 
+       
+		$data['height'] = $row['height']; 
+		
+		$data['volume'] = $row['volume']; 
+
+        array_push($skillData, $data); 
+
+    } 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+
+		/*************/
+
+
 	function setEditcommudity($commudityArr){
 					$c = count($commudityArr);
 $tr='<tr><td colspan="9">No commudity</td></tr>';

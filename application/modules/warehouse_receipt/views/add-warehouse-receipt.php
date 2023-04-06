@@ -7,6 +7,24 @@ $Heading=   $module_heading;
 
  ?>
    <style>
+    table.table-autocomplete thead tr th {
+    padding: 3px;
+}
+table.table-autocomplete .ui-menu-item td {
+    border-left: solid 1px #B6B6B6;
+    padding: 3px;
+}
+.ui-autocomplete { 
+  
+}	
+.flightstatTable .arrival{ background-color:#96F;color:#fff}
+.flightstatTable .departure{background-color:#96C;color:#fff}
+.flightstatTable>thead>tr>th{
+	font-size:10px; 
+	}
+.flightstatTable td{
+	font-size:9px; font-weight:normal;	
+	}
     .remove_button{position: absolute;top: 25px;left: 0;}
     .add_button{position: absolute;top: 25px;left: 0;}
     .box-primary {
@@ -36,6 +54,8 @@ background-color: #fff;
 }
 
    </style>
+   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -445,6 +465,9 @@ background-color: #fff;
    
 
   <?php  getFooter(); ?>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
     <!-- Scroll to Top Button-->
  <?php // commonjs() ?>
@@ -458,7 +481,7 @@ background-color: #fff;
                <button class='close' data-dismiss='modal' style='color:white'>&times;</button>
       </div>
       <form id="formAddCommodity">
-      <div class='modal-body'>
+      <div class='modal-body ui-front'>
       <div class="form-group">
                                 <div class="row"> 
                                 <div class="col-xs-12 col-md-6">
@@ -472,27 +495,17 @@ background-color: #fff;
                                     <input type="text" name="model" id="model" value='<?php if(isset($row)){$row->model;}?>' class="form-control">
                                   </div>
                                  </div></div>
-                                 <div class='form-group'>
-                                   <div class='row'>
-                                 <div  class="col-md-12">
-                                    <label>Description</label>
-                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
-                                  </div>
-                                  </div></div>
                                  <div class="form-group">
                                 <div class="row"> 
                                  <div class="col-xs-12 col-md-6">
                                     <label>Package Type</label>
                                     <input name="package_type" id="package_type" class="form-control" />
-                                    
-                                        </div>
-                                        <div class="col-md-6">
-                                    <label>Location</label>
-                                    
-                                    <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location">
-                                    
-                                        </div>
-                                                    </div></div>
+                                    </div>
+                                 <div class="col-md-6">
+                                     <label>Location</label>
+                                       <input type="text" class="form-control" id="location" value='<?php if(isset($row)){$row->location;}?>' name="location">
+                                     </div>
+                                     </div></div>
                                         <div class='form-group'>
                                            <div class='row'>
                                              <div class="col-xs-12 col-md-6">
@@ -500,6 +513,13 @@ background-color: #fff;
                                                     <input type="number" name="pieces" id="pieces" value='<?php if(isset($row)){$row->pieces;}?>' class="form-control">
                                   </div>
                                  </div></div>
+                                 <div class='form-group'>
+                                   <div class='row'>
+                                 <div  class="col-md-12">
+                                    <label>Description</label>
+                                    <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){$row->description;}?></textarea>
+                                  </div>
+                                  </div></div>
                           <div class="form-group">
                                 <h3>Dimensions(LxWxH)</h3>
                                 <div class="row"> 
@@ -572,7 +592,7 @@ background-color: #fff;
                                 <div class='row'>
                                    <div class='col-sm-3'>
                                       <label>Quantity</label>
-                                        <input type='number' value='<?php if(isset($row)){echo $row->quantity;}?>' class='form-control' name='quantity'>
+                                        <input type='number' value='<?php if(isset($row)){echo $row->quantity;}?>' class='form-control' name='quantity' id='quantity'>
 </div>
                                     <div class='col-sm-3'>
                                       <label>Unit</label>
@@ -990,4 +1010,62 @@ function setCommudity(){
     //ajax end    
    
  }
+</script>
+
+<script>
+// $(document).ready(function() {
+//     $("#package_type").autocomplete({
+//         source: function(request, response) {
+//             $.ajax({
+//                 url: "<?php echo base_url('warehouse_receipt/autocomplete_data'); ?>",
+//                 type: "POST",
+//                 dataType: "json",
+//                 data: { search: request.term },
+//                 success: function(data) {
+//                     var table = '<table>';
+//                     $.each(data, function(index, item) {
+//                         table += '<tr><td>' + item.field1 + '</td></tr>';
+//                     });
+//                     table += '</table>';
+//                     response(table);
+//                 }
+//             });
+//         },
+//         select: function(event, ui) {
+//             // Extract the selected data from the table
+//             var field1 = ui.item.find('td:eq(0)').text();
+
+//             // Fill the desired fields in the form with the selected data
+//             $("#description").val(field1);
+
+//             return false;
+//         }
+//     })
+//     .autocomplete("instance")._renderItem = function(ul, item) {
+//         // Render the table HTML in the autocomplete dropdown
+//         return $("<li>")
+//             .append(item)
+//             .appendTo(ul);
+//     };
+// });
+</script>
+<script>
+  $(function() {
+    $("#package_type").autocomplete({
+        source: "<?=base_url()?>warehouse_receipt/autocomplete_data",
+        select: function( event, ui ) {
+            event.preventDefault();
+			$("#description").val(ui.item.description);
+           $("#length").val(ui.item.length);
+           $("#width").val(ui.item.width);
+           $("#height").val(ui.item.height);
+        }
+    })
+	.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	};
+	
+});
 </script>

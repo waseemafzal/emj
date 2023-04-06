@@ -61,17 +61,20 @@ if(lasturi()=='create_user'){
                            <?php $c=0; 
 						   foreach ($data->result() as $user):
 						   $c++;
+						   $selected='';
 						      $string = $user->group_title;
 						      
 					if(get_session('user_type')!=SUPER_ADMIN){
 						if($c==1 or $c==2){
 							continue;
 							}
-						
+						if($row->user_type == $user->id) {
+							$selected= "selected='selected'";
+						}
 						}
 						   ?>
                            
-                           <option <?php if($row->user_type == $user->id) echo "selected='selected'" ?> value="<?php echo  $user->id?>">
+                           <option <?php $selected ?> value="<?php echo  $user->id?>">
                            <?php 
 						   
 						   echo  $string?>

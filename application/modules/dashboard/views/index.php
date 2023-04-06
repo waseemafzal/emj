@@ -43,7 +43,7 @@
         
         
         
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6 hidden">
 
         <div class="small-box bg-green">
 
@@ -71,19 +71,19 @@
 
                         <div class="inner">
 
-                            <h3><?php echo  count_tbl_where('users','plan_id',2); ?></h3>
+                            <h3><?php echo  count_tbl_where('users','user_type',3); ?></h3>
 
-                            <p>Basic subscriptions </p>
+                            <p>Customers </p>
 
                         </div>
 
                         <div class="icon">
 
-                            <i class="fa fa-credit-card"></i>
+                            <i class="fa fa-user"></i>
 
                         </div>
 
-                        <a href="javascript:void(0)" class="small-box-footer">&nbsp; <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="users" class="small-box-footer">&nbsp; <i class="fa fa-arrow-circle-right"></i></a>
 
                     </div>
           </div>
@@ -93,9 +93,9 @@
 
                         <div class="inner">
 
-                            <h3><?php echo  count_tbl_where('users','plan_id',3); ?></h3>
+                            <h3><?php echo  getcount('suppliers'); ?></h3>
 
-                            <p>Premium subscriptions </p>
+                            <p>Suppliers </p>
 
                         </div>
 
@@ -105,7 +105,7 @@
 
                         </div>
 
-                        <a href="javascript:void(0)" class="small-box-footer">&nbsp; <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="suppliers" class="small-box-footer">&nbsp; <i class="fa fa-arrow-circle-right"></i></a>
 
                     </div>
           </div>
@@ -115,9 +115,9 @@
 
                         <div class="inner">
 
-                            <h3><?php echo  count_tbl_where('users','plan_id',4); ?></h3>
+                            <h3><?php echo  getcount('shipment_orders'); ?></h3>
 
-                            <p>Family plan subscriptions </p>
+                            <p>Shipment orders </p>
 
                         </div>
 
@@ -127,7 +127,7 @@
 
                         </div>
 
-                        <a href="javascript:void(0)" class="small-box-footer">&nbsp; <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="shipment_orders" class="small-box-footer">&nbsp; <i class="fa fa-arrow-circle-right"></i></a>
 
                     </div>
           </div>
@@ -139,19 +139,19 @@
 
                         <div class="inner">
 
-                            <h3><?php echo  count_tbl_where('users','user_type',USER); ?></h3>
+                            <h3><?php echo  getcount('pickup_orders'); ?></h3>
 
-                            <p>Users </p>
+                            <p>Pickup_orders </p>
 
                         </div>
 
                         <div class="icon">
 
-                            <i class="ion ion-person-add"></i>
+                            <i class="fa fa-list"></i>
 
                         </div>
 
-                        <a href="<?php echo base_url();?>users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="pickup_orders" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 
                     </div>
                     

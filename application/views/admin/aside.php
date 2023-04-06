@@ -15,7 +15,7 @@
         
                   <li class="treeview">
           <a href="#">
-             <i class="fa fa-cog"></i>
+             <i class="fa fa-home"></i>
                  <span>Warehouse</span>
                      <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
@@ -68,22 +68,25 @@
         
       </li>
 
-         <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa-shopping-cart'></i> <span>Shipment Orders</span></a></li> 
+         <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa fa-shopping-cart'></i> <span>Shipment Orders</span></a></li> 
      
-         <li class="<?= getActive('pickup_orders') ?>"><a href="pickup_orders"><i class='fa-shopping-cart'></i> <span>Pickup Orders</span></a></li> 
-    
-         <li><a href="<?php echo base_url();?>users"><i class="fa fa-user"></i> <span> Users</span></a></li>
+         <li class="<?= getActive('pickup_orders') ?>"><a href="pickup_orders"><i class='fa fa-shopping-cart'></i> <span>Pickup Orders</span></a></li> 
+     <li class="<?= getActive('purchase_order') ?>"><a href="shipment_order/view_purchase_orders"><i class='fa fa-shopping-cart'></i><span>Purchase Orders</span></a></li>
+      <li class="<?= getActive('landing_bill') ?>"><a href="shipment_order/view_landing_bill"><i class='fa  fa-arrow-down'></i><span>Bill of Landing</span></a></li>
+          
+         <li><a href="<?php echo base_url();?>users"><i class="fa fa-user"></i> <span> User</span></a></li>
+         <li><a href="<?php echo base_url();?>auth/create_user"><i class="fa fa-user"></i> <span> Create User</span></a></li>
+         <li><a href="<?php echo base_url();?>supplier"><i class="fa fa-user"></i> <span> Supplier</span></a></li>
 
             	
          <li class="<?=getActive('setting')?>"><a href="setting/edit" ><i class="fa fa-gear"></i>Account settings</a></li>
             <!--<li class="class="<?=getActive('contacts')?>><a href="contacts"><i class="fa fa-phone"></i>Contacts</a></li>-->
 
-          <li class="<?= getActive('countries_management') ?>"><a href="countries_management"><i class="fa fa-th"></i> <span>Countries /State /city </span></a></li>
+          <li class="<?= getActive('countries_management') ?>"><a href="countries_management"><i class="fa fa-globe"></i> <span>Countries /State /city </span></a></li>
 
-          <li class="<?= getActive('purchase_order') ?>"><a href="shipment_order/view_purchase_orders"><span>Purchase Orders</span></a></li>
+         
           
-          <li class="<?= getActive('landing_bill') ?>"><a href="shipment_order/view_landing_bill"><span>Bill of Landing</span></a></li>
-          
+         
  
 
 

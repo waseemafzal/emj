@@ -41,6 +41,8 @@ class Packages extends MX_Controller {
  	public function edit($id){
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData['row']=$query;
+		$aData['package_types'] =$this->db->query("SELECT p.* FROM package_types as p")->result_array();
+		
 			//pre($aData);
 		$aData['tbl'] =$this->tbl;
 		

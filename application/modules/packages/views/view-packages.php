@@ -35,6 +35,7 @@ $Heading=	$module_heading;
             </div>
             <!-- /.box-header -->
              <div class="box-body">
+             <div class="table-responsive">
                 <table id="post_table" class="table table-bordered responsive">
     <thead>
     <tr>
@@ -76,8 +77,8 @@ $Heading=	$module_heading;
     <td><?php echo $row->status;?></td>
 
     <td>
-      <a href="<?=$controller?>/edit/<?php echo $row->id;?>" class='btn btn-warning'>Edit</a>
-      <a onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');" class='btn btn-danger'>Delete</a>
+      <a href="<?=$controller?>/edit/<?php echo $row->id;?>" class='btn btn-sm btn-warning'><i class="fa fa-pencil"></i></a>
+      <a onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');" class='btn btn-sm btn-danger'><i class="fa fa-trash"></i></a>
     </td>
     </tr>
     
@@ -88,6 +89,7 @@ $Heading=	$module_heading;
     
     </tbody>
     </table>
+    </div>
                   </div>  
                     
                 

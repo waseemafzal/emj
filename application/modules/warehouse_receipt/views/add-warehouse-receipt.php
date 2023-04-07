@@ -52,7 +52,9 @@ background-color: #fff;
 .button{
   display: inline-block;
 }
-
+.ui-menu .ui-menu-item:hover{
+	background-color:#CCC;
+	}
    </style>
    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
 
@@ -174,6 +176,7 @@ background-color: #fff;
                                  <div class="col-xs-12 col-md-6">
                                           <label>Destination Agent</label>
                                           <select name='destination_agent' class='form-control'>
+                                          <option>Select</option>
                                     <?php if(isset($destination_agents)){
                           foreach($destination_agents as $agent){
                              $selected = '';
@@ -193,7 +196,9 @@ background-color: #fff;
   <div class='col-md-6'>
 <h3>Shipper</h3>
 <label>Shipper Name</label>
+
 <select name='shipper_name' class='form-control'>
+ <option>Select</option>
   <?php if(isset($shipment)){
     foreach($shipment as $detail){
     $selected='';
@@ -465,7 +470,6 @@ background-color: #fff;
    
 
   <?php  getFooter(); ?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
@@ -841,15 +845,17 @@ function setCommudity(){
         //  $('#form_add_update .btn_au').addClass('hidden');
             },
             success: function(data) {
+				console.log('response');
 				if($('#formAddCommodity .btn-success').hasClass("edit_true")){
 		var rowid = $('#formAddCommodity #rowid').val();
 		$('#'+rowid).remove();
 		}
             $('#loader').addClass('hidden');
-            //alert(data.status);
+           
             //var obj = jQuery.parseJSON(data);
             if (data.status == 1)
             {   
+			console.log('i am in if');
 			$('#AddCommodityModal').modal('hide');
 			$('#tbody_comudity').append(data.trdata);
                
@@ -858,9 +864,10 @@ function setCommudity(){
             {  
             $(".alert").addClass('alert-danger');
                 $(".alert").removeClass('hidden');
+                $(".alert").html(data.message);
                 setTimeout(function(){
                 $(".alert").addClass('hidden');
-                },3000);
+                },5000);
             }
             else if (data.status == 2)
             {   
@@ -1061,11 +1068,11 @@ function setCommudity(){
            $("#height").val(ui.item.height);
         }
     })
-	.data("ui-autocomplete")._renderItem = function (table, item) {
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
 	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
 	.data("item.autocomplete", item)
 	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
-	};
+	}*/;
 	
 });
 </script>

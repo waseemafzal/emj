@@ -127,8 +127,9 @@ if(count($query) > 0){
 
         $data['package_type'] = $row['package_type']; 
 
-        $data['description'] = $row['description']; 
+        $data['value'] =$row['package_type'].' | '.$row['description']; 
 
+        $data['description'] = $row['description'];
         $data['length'] = $row['length'];
 		
         $data['width'] = $row['width']; 
@@ -429,7 +430,7 @@ function setCommudity(){
 		$this->form_validation->set_rules('pieces', 'pieces', 'trim|required');
 		if ($this->form_validation->run()==false){
 			$arr = array("status"=>0 ,"message"=> validation_errors());
-			echo json_encode($arr);
+			echo json_encode($arr);exit;
 		}
 		$rowid=time();
 		$tr='<tr id="'.$rowid.'">

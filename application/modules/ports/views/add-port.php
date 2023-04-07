@@ -154,8 +154,7 @@ background-color: #fff;
                                     if(in_array('Road', $method)){
                                       $Road = 'checked';
                                     }
-                                     
-                                    }?>
+                                  }?>
                                   <input type="checkbox" <?php echo $Road?> class="" id="transportation_method" name="transportation_method[]" value='Road'>Road
                                   </div>
                                   <div class="col-md-2">

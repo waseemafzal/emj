@@ -32,7 +32,8 @@ class Warehouse_receipt extends MX_Controller {
 		$aData['data'] =$this->db->where('id', $id)->get('warehouse_receipts')->result_array();
 		$aData['settings'] = $this->db->get('setting')->result_array();
 		$aData['charges'] =$this->db->where('warehouse_receipts_id', $id)->get('warehouse_receipts_charges')->result_array();
-        // $html = $this->load->view('receipt-pdf', [], true, $aData);
+		$aData['commodities'] =$this->db->where('warehouse_receipts_id', $id)->get('warehouse_receipts_commodities')->result_array();
+		// $html = $this->load->view('receipt-pdf', [], true, $aData);
         // $this->pdf->createPDF($html, 'mypdf', false);
 		$this->load->view('receipt-pdf', $aData);
 	   }
@@ -130,7 +131,8 @@ if(count($query) > 0){
         $data['value'] =$row['package_type'].' | '.$row['description']; 
 
         $data['description'] = $row['description'];
-        $data['length'] = $row['length'];
+
+		$data['length'] = $row['length'];
 		
         $data['width'] = $row['width']; 
        

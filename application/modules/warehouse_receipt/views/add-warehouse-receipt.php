@@ -1060,9 +1060,12 @@ function setCommudity(){
   $(function() {
     $("#package_type").autocomplete({
         source: "<?=base_url()?>warehouse_receipt/autocomplete_data",
+        // minLength:2,
+        // autoFocus:true,
         select: function( event, ui ) {
             event.preventDefault();
-			$("#description").val(ui.item.description);
+           $(this).val(ui.item.package_type);
+			     $("#description").val(ui.item.description);
            $("#length").val(ui.item.length);
            $("#width").val(ui.item.width);
            $("#height").val(ui.item.height);

@@ -88,7 +88,7 @@ background-color: #fff;
 <li><a href="#tab_4" data-toggle="tab">Carrier</a></li>
 <li><a href="#tab_5" data-toggle="tab">Commodity</a></li>
 <li><a href="#tab_6" data-toggle="tab">Charges</a></li>
-<li><a href="#tab_7" data-toggle="tab">Events</a></li>
+<!--<li><a href="#tab_7" data-toggle="tab">Events</a></li>-->
 <li><a href="#tab_8" data-toggle="tab">Notes</a></li>
 <li><a href="#tab_9" data-toggle="tab">Attachment</a></li>
 

@@ -56,7 +56,8 @@ background-color: #fff;
 	background-color:#CCC;
 	}
    </style>
-   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -184,7 +185,7 @@ background-color: #fff;
                                if($row->destination_agent==$agent['name']){
                                   $selected = 'selected';
                                }}?>
-                                            <option <?php echo $selected?> value='<?php echo $agent['name']?>'><?php echo $agent['name']?></option>          
+                                            <option <?php echo $selected?> value='<?php echo $agent['name']?>'><?php echo '<i class="fa fa-user">' .$agent["name"]. '</i>';?></option>          
                                     <?php }}?>
                       </select>
                                    
@@ -197,7 +198,7 @@ background-color: #fff;
 <h3>Shipper</h3>
 <label>Shipper Name</label>
 
-<select name='shipper_name' class='form-control'>
+<select name='shipper_name' id='shipper_name' class='form-control'>
  <option>Select</option>
   <?php if(isset($shipment)){
     foreach($shipment as $detail){
@@ -229,7 +230,7 @@ background-color: #fff;
                     </div>
     <div class='col-md-6'>
       <label>Address</label>
-       <textarea type='text' class='form-control' name='shipper_address'><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
+       <textarea type='text' class='form-control' id='shipper_address' name='shipper_address'><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
     </div>
     <div class='col-md-6'>
       <label>Address</label>
@@ -269,11 +270,11 @@ background-color: #fff;
     <div class='row'>
     <div class='col-md-6'>
       <label>Origin</label>
-         <input type='text' name='origin' value='<?php if(isset($row)){echo $row->origin;}?>' class='form-control'>
+         <input type='text' name='origin' id='origin' value='<?php if(isset($row)){echo $row->origin;}?>' class='form-control'>
     </div>
     <div class='col-md-6'>
       <label>Destination</label>
-         <input type='text' name='destination' value='<?php if(isset($row)){echo $row->destination;}?>' class='form-control'>
+         <input type='text' id='destination' name='destination' value='<?php if(isset($row)){echo $row->destination;}?>' class='form-control'>
     </div>
     </div></div>
 <div class="tab-pane" id="tab_3">
@@ -333,17 +334,17 @@ background-color: #fff;
   </div>
   <div class='col-md-6'>
     <label>Driver's License Number:</label>
-    <input type='number' name='driver_license_number' class='form-control' value='<?php if(isset($row)){echo $row->driver_license_number;}?>'>
+    <input type='text' name='driver_license_number' class='form-control' value='<?php if(isset($row)){echo $row->driver_license_number;}?>'>
   </div></div>
   <br>
   <div class='row'>
   <div class='col-md-6'>
     <label>PRO Number:</label>
-    <input type='number' name='pro_number' class='form-control' value='<?php if(isset($row)){echo $row->pro_number;}?>'>
+    <input type='text' name='pro_number' class='form-control' value='<?php if(isset($row)){echo $row->pro_number;}?>'>
   </div>
   <div class='col-md-6'>
     <label>Driver's Tracking Number:</label>
-    <input type='number' name='driver_tracking_number' class='form-control' value='<?php if(isset($row)){echo $row->driver_tracking_number;}?>'>
+    <input type='text' name='driver_tracking_number' class='form-control' value='<?php if(isset($row)){echo $row->driver_tracking_number;}?>'>
   </div>
           </div>
             </div>
@@ -473,6 +474,8 @@ background-color: #fff;
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
     <!-- Scroll to Top Button-->
  <?php // commonjs() ?>
  
@@ -577,14 +580,14 @@ background-color: #fff;
                                         <tbody>
                                         <tr>
                                           <td style='text-align:center'>Weight</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_weight'></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_weight'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_weight' id='unit_weight'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_weight' id='total_weight'></td>
                                           <td><select class='form-control' name='weight_unit_measure'><option value='lb'>lb</option></select></td>
                                         </tr>
                                         <tr>
                                           <td style='text-align:center'>Volume</td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='unit_volume'></td>
-                                          <td><input class='form-control' placeholder='0.00' type='number' name='total_volume'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' id='unit_volume' name='unit_volume'></td>
+                                          <td><input class='form-control' placeholder='0.00' type='number' id='total_volume' name='total_volume'></td>
                                           <td><select class='form-control' name='volume_unit_measure'><option value='ft3'>ft<sup>3</sup></option></select></td>
                                         </tr>
                                         </tbody>
@@ -1078,4 +1081,90 @@ function setCommudity(){
 	}*/;
 	
 });
+</script>
+<script>
+  $(function() {
+    $("#origin").autocomplete({
+        source: "<?=base_url()?>warehouse_receipt/autocomplete_origin",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.value);
+        }
+    })
+	});
+</script>
+<script>
+  $(function() {
+    $("#destination").autocomplete({
+        source: "<?=base_url()?>warehouse_receipt/autocomplete_destination",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.value);
+        }
+    })	
+});
+</script>
+<script>
+  $(function() {
+    $("#location").autocomplete({
+        source: "<?=base_url()?>warehouse_receipt/autocomplete_location",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.value);
+        }
+    })	
+});
+</script>
+<script>
+  $('#shipper_name').change(function(){
+    var shipper_name = $(this).val();
+  })
+  // function shipperAddress(id){
+  //   $.ajax({
+  //     type: "POST",
+  //     url: "<?php echo base_url()?>/warehouse_receipt/shipperAddress",
+  //     data: {'id':id},
+  //     success:function(response){
+  //       if(response.status==200){
+  //           $("#shipper_address").val(response.message);
+  //       }
+  //     }
+  //   });
+  // }
+</script>
+<script>
+  $("#width ,#length ,#height").on('change keyup keydown', function () {
+
+var width = $("#width").val();
+var length = $("#length").val();
+var height = $("#height").val();
+var result = width * length * height;
+result = result/100;
+$("#unit_volume").val(result);
+
+});
+</script>
+<script>
+  $('#pieces').on('change', function(){
+    var pieces = $(this).val();
+    var weight = $('#unit_weight').val();
+    var total_weight = pieces * weight;
+    $('#total_weight').val(total_weight);
+
+  });
+</script>
+<script>
+  $('#pieces').on('change', function(){
+    var pieces = $(this).val();
+    var volume = $('#unit_volume').val();
+    var total_volume = pieces * volume;
+    $('#total_volume').val(total_volume);
+
+  });
 </script>

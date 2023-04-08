@@ -39,8 +39,6 @@ class Warehouse_receipt extends MX_Controller {
 	   }
 	public function add(){  
 		
-
-		
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData['general'] = $this->db->get('warehouse')->result_array();
@@ -56,10 +54,8 @@ class Warehouse_receipt extends MX_Controller {
 	//	pre($aData);
 		$this->load->view('add-warehouse-receipt',$aData);
 	}
-	 
 
- 
- 	public function edit($id){
+	public function edit($id){
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData['general'] = $this->db->get('warehouse')->result_array();
 		$aData['destination_agents'] = $this->db->where(array('user_type'=>3))->get('users')->result_array();
@@ -151,7 +147,101 @@ echo json_encode($skillData);
 }
 
 		/*************/
+		function autocomplete_origin(){
 
+			$searchTerm = $_GET['term']; 
+	
+			$query =$this->db->query("select * from ports WHERE port_name LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR subdivision LIKE '%".$searchTerm."%' ")->result_array();
+	
+			// Generate array with account data 
+	
+	$skillData = array(); 
+	
+	if(count($query) > 0){ 
+	
+		foreach($query as $row){ 
+	
+			$data['id'] = $row['id']; 
+
+			//$data['origin'] = $row['port_name'];
+		
+			$data['value'] =$row['port_name'].','.$row['country'].','.$row['subdivision']; 
+	
+			array_push($skillData, $data); 
+	
+		} 
+	
+	} 
+	
+	echo json_encode($skillData); 
+	
+	}
+	
+			/*************/
+			function autocomplete_destination(){
+
+				$searchTerm = $_GET['term']; 
+		
+				$query =$this->db->query("select * from ports WHERE port_name LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR subdivision LIKE '%".$searchTerm."%' ")->result_array();
+		
+				// Generate array with account data 
+		
+		$skillData = array(); 
+		
+		if(count($query) > 0){ 
+		
+			foreach($query as $row){ 
+		
+				$data['id'] = $row['id']; 
+	
+				//$data['origin'] = $row['port_name'];
+			
+				$data['value'] =$row['port_name'].','.$row['country'].','.$row['subdivision']; 
+		
+				array_push($skillData, $data); 
+		
+			} 
+		
+		} 
+		
+		echo json_encode($skillData); 
+		
+		}
+		
+				/*************/
+				function autocomplete_location(){
+
+					$searchTerm = $_GET['term']; 
+			
+					$query =$this->db->query("select * from ports WHERE port_name LIKE '%".$searchTerm."%' OR country LIKE '%".$searchTerm."%' OR subdivision LIKE '%".$searchTerm."%' ")->result_array();
+			
+					// Generate array with account data 
+			
+			$skillData = array(); 
+			
+			if(count($query) > 0){ 
+			
+				foreach($query as $row){ 
+			
+					$data['id'] = $row['id']; 
+		
+					//$data['location'] = $row['port_name'];
+				
+					$data['value'] =$row['port_name'].','.$row['country'].','.$row['subdivision']; 
+			
+					array_push($skillData, $data); 
+			
+				} 
+			
+			} 
+			
+			echo json_encode($skillData); 
+			
+			}
+			
+					/*************/
+			
+	
 
 	function setEditcommudity($commudityArr){
 					$c = count($commudityArr);
@@ -411,20 +501,15 @@ public function updateStatus(){
       }
       echo json_encode($response);
 }
-public function generateinvoice($id){
-	$data['result'] = $this->db->where('id', $id)->get('suppliers')->row();
-	$invoice = $this->db->where('order_id', $id)->get('clients_invoice')->result_array();
- //print_r($data);exit();
-	//lq();exit();
-	//echo "<pre>";
-	//print_r($invoice);exit();
-	//$data['result'] = $data[0];
-  if(count($invoice)>0){
-  	$data['row'] = $invoice;
-  //echo "<pre>";print_r($data['row']);exit();
-  	 }  
-	$this->load->view('generate-invoice', $data);
-
+function shipperAddress(){
+	$arr=array('status'=>201, 'message'=>'Not Found');
+	extract($_POST);
+	$address=$this->db->select('shipper_address')->where('id', $_POST['id'])->get('shipment_orders')->resul_array(); 
+	//echo $address;exit;
+    if(count($address)>0){
+		$arr=array('status'=>200, 'message'=>$address);
+	}
+		echo json_encode($arr);
 }
 function setCommudity(){ 
 		extract($_POST);

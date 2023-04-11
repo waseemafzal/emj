@@ -73,7 +73,7 @@ background-color: #fff;
              <div class="alert hidden"></div>
              <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
-                                <h2 id="heading" >Personal Effect</h2>
+                                <h2 id="heading"></h2>
                                 <hr>
                                 <!--Body-->
                                   <h3>Contact Details</h3>
@@ -668,7 +668,7 @@ $(document).ready(function(){
     $('#form_add_update').show('slow');
      $("#shipment_type").val(1);
     var h = "Personal Effect";
-    $('#heading').html(h);
+    $('#heading').text(h);
     $('#shipper_phone').show();
     $('#package_details').show();
     $('#shipment').hide();
@@ -687,7 +687,7 @@ $(document).ready(function(){
       $('#form_add_update').show('slow');
       $("#shipment_type").val(3);
       var h = "Air Freight";
-      $('#heading').html(h);
+      $('#heading').text(h);
       $('#shipper_phone').show();
       $('#package_details').show();
       $('#shipment').hide();
@@ -706,7 +706,7 @@ $(document).ready(function(){
     $('#form_add_update').show('slow');
     $("#shipment_type").val(4);
     var h = "Vehicle Shipment";
-    $('#heading').html(h);
+    $('#heading').text(h);
     $('#shipper_phone').show();
      $('#package_details').show();
     $('#shipment').show();
@@ -725,7 +725,7 @@ $(document).ready(function(){
     $('#form_add_update').show('slow');
     $("#shipment_type").val(2);
     var h = "Ocean Freight";
-    $('#heading').html(h);
+    $('#heading').text(h);
     $('#shipper_phone').show();
     $('#package_details').show();
     $('#shipment').hide();

@@ -369,6 +369,8 @@ background-color: #fff;
             </tr>
         </thead>
           <tbody id="tbody_comudity">
+            <?if(isset($trdata)){
+              echo $trdata;}?>
         
           </tbody>
         </table>

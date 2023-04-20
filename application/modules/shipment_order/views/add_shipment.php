@@ -419,6 +419,263 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                      </div>
                                    </div>
                                  </div>
+                                 <div id='shipment_extra_details'>
+                                 <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Shipment Name</label>
+                               <input type='text' name='shipment_name' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Bill of Landing Number</label>
+                               <input type='text' name='landing_bill_no' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Booking Number</label>
+                               <input type='text' name='booking_no' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Executed Place</label>
+                               <input type='text' name='executed_place' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Executed By</label>
+                               <input type='text' name='executed_by' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Executed Date</label>
+                               <input type='date' name='executed_date' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-6'>
+                            <label>Departure Date/Time</label>
+                               <input type='date' name='departure_date' class='form-control'></div>
+                               <div class='col-md-6'>
+                                <label></label>
+                               <input type='time' name='departure_time' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-6'>
+                            <label>Arrival Date/Time</label>
+                               <input type='date' name='arrival_date' class='form-control'></div>
+                               <div class='col-md-6'>
+                                <label></label>
+                               <input type='time' name='arrival_time' class='form-control'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'>
+                          <div class='row'>
+                            <div class='col-md-6'>
+                              <label>Declared Value</label>
+                                <input type='text' name='declared_value' class='form-control'>
+                            </div>
+                          </div>
+                        </div>
+                        <div class='form-group'>
+                          <div class='row'>
+                            <div class='col-md-12'>
+                              <label>Description of Goods</label>
+                                <textarea name='description_of_goods' class='form-control'></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <div id='entities'>                    
+                      <h2>Select the entitles</h2>
+                        <hr>
+                          <div class='row'>
+                            
+                            <div class='col-md-6'>
+                              <label>Ultimate Consignee</label>
+                                <input type='text' name='ultimate_consignee' class='form-control'>
+                            </div>
+                           
+                            <div class='col-md-6'>
+                              <label>Address</label>
+                                <textarea name='ultimate_consignee_address' class='form-control'></textarea>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Notify Party</label>
+                                <input type='text' name='notify_party' class='form-control'>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Address</label>
+                                <textarea name='notify_party_address' class='form-control'></textarea>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Intermediate</label>
+                                <input type='text' name='intermediate' class='form-control'>
+                            </div>
+                            
+                            <div class='col-md-6'>
+                              <label>Address</label>
+                                <textarea name='intermediate_address' class='form-control'></textarea>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Forwording Agent</label>
+                                <input type='text' name='forwording_agent' class='form-control'>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Address</label>
+                                <textarea name='forwording_agent_address' class='form-control'></textarea>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Destination Agent</label>
+                                <input type='text' name='destination_agent' class='form-control'>
+                            </div>
+                            <div class='col-md-6'>
+                              <label>Address</label>
+                                <textarea name='destination_agent_address' class='form-control'></textarea>
+                            </div>
+                          </div>
+                          </div>
+                          <div id='routing_information'>
+                          <h2>Routing Information</h2>
+                        <hr>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Service Type</label>
+                                   <input type='text' name='service_type' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Route</label>
+                                   <input type='text' name='route' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Mode of Transport</label>
+                                   <input type='text' name='mode_of_transport' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <b>Origin</b><hr style='margin-top:-10px;width:90%'>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>port of Origin or FTZ No</label>
+                                   <input type='text' name='port_of_origin' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Pre Carriage By</label>
+                                   <input type='text' name='pre_carriage_by' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Place of Receipt by Pre-Carrier</label>
+                                   <input type='text' name='place_of_receipt' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <b>Export</b><hr style='margin-top:-10px;width:90%'>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Loading Pier or Terminal</label>
+                                   <input type='text' name='loading_pier' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Port of Loading</label>
+                                   <input type='text' name='port_of_loading' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Exporting Carrier</label>
+                                   <input type='text' name='exporting_receipt' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Vessel Name and Flag</label>
+                                   <input type='text' name='vessel_name' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Voyage Identification</label>
+                                   <input type='text' name='voyage_identification' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <b>Destination</b><hr style='margin-top:-10px;width:90%'>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Port of Unloading</label>
+                                   <input type='text' name='port_of_unloading' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>On Carriage By</label>
+                                   <input type='text' name='on_carriage_by' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                          <div class='form-group'>
+                            <div class='row'>
+                              <div class='col-md-4'>
+                                 <label>Place of Delivery by on-Carrier</label>
+                                   <input type='text' name='place_of_delievry' class='form-control'>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                                  <?php
                                  if(isset($row)){
 									  if($vehicles->num_rows()>0){
@@ -670,6 +927,9 @@ $(document).ready(function(){
     var h = "Personal Effect";
     $('#heading').text(h);
     $('#shipper_phone').show();
+    $('#shipment_extra_details').hide();
+    $('#entities').hide();
+    $('#routing_information').hide();
     $('#package_details').show();
     $('#shipment').hide();
     $('#select_packaging').show();
@@ -691,6 +951,9 @@ $(document).ready(function(){
       $('#shipper_phone').show();
       $('#package_details').show();
       $('#shipment').hide();
+      $('#shipment_extra_details').hide();
+    $('#entities').hide();
+    $('#routing_information').hide();
       $('#select_packaging').show();
       $('#shipper_address').show();
       $('#request_pickup').show();
@@ -708,6 +971,9 @@ $(document).ready(function(){
     var h = "Vehicle Shipment";
     $('#heading').text(h);
     $('#shipper_phone').show();
+    $('#shipment_extra_details').hide();
+    $('#entities').hide();
+    $('#routing_information').hide();
      $('#package_details').show();
     $('#shipment').show();
     $('#select_packaging').show();
@@ -727,6 +993,9 @@ $(document).ready(function(){
     var h = "Ocean Freight";
     $('#heading').text(h);
     $('#shipper_phone').show();
+    $('#shipment_extra_details').show();
+    $('#entities').show();
+    $('#routing_information').show();
     $('#package_details').show();
     $('#shipment').hide();
     $('#select_packaging').show();

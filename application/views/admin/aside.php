@@ -43,7 +43,8 @@
           </a>
       
           <ul class="treeview-menu">
-          <li class="<?= getActive('carriers') ?>"><a href="carriers"><span>Carriers</span></a></li>
+          <li class="<?= getActive('cat') ?>"><a href="cat"><span>Directories</span></a></li>
+<li class="<?= getActive('carriers') ?>"><a href="carriers"><span>Carriers</span></a></li>
 
           <li class="<?= getActive('commodity_types') ?>"><a href="commodity_types"><span>Commodity Types</span></a></li>
           <li class="<?= getActive('commdity') ?>" ><a href="commodity"><span>Commodity</span></a></li>

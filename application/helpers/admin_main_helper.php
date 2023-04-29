@@ -15,7 +15,17 @@ get_title_by_fieldName($id,$field,$tableName)
 get_title($id,$tableName)
 |-------------------------------------------------------
 */
+function get_data($tbl, $con)
+{
+	$CI = &get_instance();
+	return $CI->db->get_where($tbl, $con)->result_array();
+}
 
+function get_tbl($tbl)
+{
+	$CI = &get_instance();
+	return $CI->db->get($tbl)->result_array();
+}
 function setChecked($a,$b){
 if($a==$b){
 	echo 'checked';

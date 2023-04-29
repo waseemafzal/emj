@@ -61,28 +61,35 @@ background-color: #fff;
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-             <div class="button">
-              <button id="personal_effects" type="button" class="btn btn-primary">Personal Effects</button></div>
-              <div class="button">
-             <button id="ocean_freight" class="btn btn-primary">Ocean Freight</button></div>
-             <div class="button">
-             <button id="air_freight" class="btn btn-primary button">Air Freight</button></div>
-             <div class="button">
-             <button id="vehicle_shipment" class="btn btn-primary button">Vehicle Shipment</button></div>
-             <form id="form_add_update" name="form_add_update" role="form" style="display: none">
+             <form id="form_add_update" name="form_add_update" role="form">
              <div class="alert hidden"></div>
              <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
-                                <h2 id="heading"></h2>
+                                <h2>Ocean Freight</h2>
                                 <hr>
                                 <!--Body-->
-                                  <h3>Contact Details</h3>
-                                <div class="form-group">
+                                  <div class="row">
+        <div class="col-md-12">
+          <!-- Custom Tabs -->
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#shipper_details" data-toggle="tab">Shipper Details</a></li>
+              <li><a href="#consignee_details" data-toggle="tab">Consignee Details</a></li>
+              <li><a href="#shipment_details" data-toggle="tab">Shipment Details</a></li>
+              <li><a href='#package_details' data-toggle='tab'>Package Details</a></li>
+              <li><a href="#entitles" data-toggle="tab">Entitles</a></li>
+              <li><a href="#routing_information" data-toggle="tab">Routing Information</a></li>
+              <li><a href="#exporting_information" data-toggle="tab">Exporting Information</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="shipper_details">
+                <h2>Shipper Details</h2><hr>
+              <div class="form-group">
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-4">
                                     <label>Shipper's Name</label>
-                                    
+                                    <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>">
                                     
                                         </div>
@@ -90,31 +97,25 @@ background-color: #fff;
                                     <label>Shipper's Phone</label>
                                     <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>">
                                   </div>
-                                 </div></div>
-                                 
-                                 <div id="contact_details" class="form-group">
-                                 <div class="row">
-                              
-  
-  <div class="col-xs-12 col-md-4">
-    <label>Select State</label>
-   <select name="shipper_state" id="shipper_state" class="form-control">
-    <option value="">Select State</option>
-     <?php
-    foreach($nigerianStates as $state)
-    {
-      $stateSelected='';
-			  if(isset($row)){
-		if($state['state_id']==$row->shipper_state){
-		  $stateSelected='selected="selected"';
-		}
-      }
-     echo '<option '.$stateSelected.' value="'.$state['state_id'].'">'.$state['state'].'</option>';
-    }
-    ?>
-   </select>
-  </div>
-  
+                                 <div class="col-xs-12 col-md-4">
+                                        <label>Select State</label>
+                                        <select name="shipper_state" id="shipper_state" class="form-control">
+                                          <option value="">Select State</option>
+                                          <?php
+                                          foreach($nigerianStates as $state)
+                                          {
+                                            $stateSelected='';
+                                              if(isset($row)){
+                                          if($state['state_id']==$row->shipper_state){
+                                            $stateSelected='selected="selected"';
+                                          }
+                                            }
+                                          echo '<option '.$stateSelected.' value="'.$state['state_id'].'">'.$state['state'].'</option>';
+                                          }
+                                          ?>
+                                        </select>
+                                        </div></div></div>
+  <div class='form-group'><div class='row'>
   <div class="col-xs-12 col-md-4">
     <label>Select city</label>
    <select name="shipper_city" id="shipper_city" class="form-control">
@@ -136,15 +137,21 @@ if($city['city_id']==$row->shipper_city){
    
    </select>
   </div>
+  <div class="col-md-4">
+                                    <label>Pickup Location</label>
+                                    
+                                    <input type="text" class="form-control" id="pickup_location" name="pickup_location" value="<?php if(isset($row)){echo $row->pickup_location;}?>">
+                                    
+                                        </div>
   </div>
   </div>
   <div class="form-group"  id="shipper_address">
                                    <label>Address</label>
                                    <textarea type="text" name="shipper_address" class="form-control"><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
                                     </div>
- 
- 
-                                     <div class="form-group" id="request_pickup">
+                <div class="form-group" id="request_pickup">
+                  <div class='row'>
+                    <div class='col-md-4'>
                         <?php
                         $checked='';
                        if(isset($row)){            
@@ -160,18 +167,8 @@ if($city['city_id']==$row->shipper_city){
                       }
                       ?>
                                     Request PickUp  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_pickup" name="request_pickup"<?php echo $checked?> value="yes">    
-                                    
-                                        </div>
-
-                                     <div class="form-group" id="pickup_location">
-                                      <div class="row">
-                                        <div class="col-md-4">
-                                    <label>Pickup Location</label>
-                                    
-                                    <input type="text" class="form-control" id="pickup_location" name="pickup_location" value="<?php if(isset($row)){echo $row->pickup_location;}?>">
-                                    
-                                        </div></div></div>
-                                     <div class="form-group" id="request_insurance">
+                    </div>                                    
+                          <div class='col-md-4'>              
                               <?php
                         $checked='';
                        if(isset($row)){            
@@ -188,7 +185,7 @@ if($city['city_id']==$row->shipper_city){
                       ?>
                                     Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="yes" <?php echo  $checked;?>>    
                                   
-                                        </div>
+                                        </div></div></div>
 
                                      <div class="form-group" id="delivery_option">
                                        <?php
@@ -211,197 +208,150 @@ if($city['city_id']==$row->shipper_city){
                                     <br>
                                     <input type="radio" <?php echo  $home?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
                                      <input type="radio" <?php echo  $warehouse?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
-                                        </div><hr>
-                               <h3>Consignee's Details</h3>
+                                        </div>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="consignee_details">
+              <h2>Consignee's Details</h2><hr>
                                 
-                                         <div class="form-group">
-                                          <div class="row">
-                                            <div class="col-md-4">
-                                    <label>Consignee's Name</label>
-                                    
-                                    <input type="text" class="form-control" id="consignee_name" name="consignee_name" value="<?php if(isset($row)){ echo $row->consignee_name;} ?>">
-                                    
-                                        </div>
-                                         
-                                       
-                                        <div class="col-md-4">
-                                    <label>Consignee's Phone</label>
-                                    
-                                    <input type="number" class="form-control" id="consignee_phone" name="consignee_phone" value="<?php if(isset($row)){ echo $row->consignee_phone;} ?>">
-                                    
-                                        </div>   
-                                      </div></div>
-                                      <div class="form-group">
-                                        <div class="row">
-                                          <div class="col-xs-12 col-md-12">
-                                            <label>Consignee's Address</label>
-                                            <textarea class="form-control" name="consignee_address"><?php if(isset($row)){ echo $row->consignee_address;} ?></textarea>
-                                          </div>
-                                        </div>
-                                      </div>
-                                             <div class="form-group">
-                                     <div class="row">
-                               <div class="col-xs-12 col-md-4">
-   <select name="consignee_country" id="consignee_country" class="form-control">
-    <option value="">Select Country</option>
-    <?php
-    
-    foreach ($countries as $country) {
-      $selectedCountry='';
-      if(isset($row)){
-          if($country->id == $row->consignee_country){
-           $selectedCountry='selected="selected"'; 
-          }
-          }
-echo '<option '.$selectedCountry.' value="'.$country->id.'">'.$country->name.'</option>';
- }
-    ?>
-   </select>
-  </div>
-  
-  <div class="col-xs-12 col-md-4">
-   <select name="consignee_state" id="consignee_state" class="form-control">
-    <option value="">Select State</option>
-    <?php
-    
-     foreach ($selectedstates as $selectstate) {  
-        $selectedState='';
-    if(isset($row)){   
+                                <div class="form-group">
+                                 <div class="row">
+                                   <div class="col-md-4">
+                           <label>Consignee's Name</label>
+                           
+                           <input type="text" class="form-control" id="consignee_name" name="consignee_name" value="<?php if(isset($row)){ echo $row->consignee_name;} ?>">
+                           
+                               </div>
+                          <div class="col-md-4">
+                           <label>Consignee's Phone</label>
+                           
+                           <input type="number" class="form-control" id="consignee_phone" name="consignee_phone" value="<?php if(isset($row)){ echo $row->consignee_phone;} ?>">
+                           
+                               </div>   
+                             </div></div>
+                             <div class="form-group">
+                               <div class="row">
+                                 <div class="col-xs-12 col-md-12">
+                                   <label>Consignee's Address</label>
+                                   <textarea class="form-control" name="consignee_address"><?php if(isset($row)){ echo $row->consignee_address;} ?></textarea>
+                                 </div>
+                               </div>
+                             </div>
+                                    <div class="form-group">
+                            <div class="row">
+                      <div class="col-xs-12 col-md-4">
+<select name="consignee_country" id="consignee_country" class="form-control">
+<option value="">Select Country</option>
+<?php
 
-          if($selectstate['state_id'] == $row->consignee_state){
-           $selectedState='selected="selected"'; 
-          }
-          }
-        
-      
+foreach ($countries as $country) {
+$selectedCountry='';
+if(isset($row)){
+ if($country->id == $row->consignee_country){
+  $selectedCountry='selected="selected"'; 
+ }
+ }
+echo '<option '.$selectedCountry.' value="'.$country->id.'">'.$country->name.'</option>';
+}
+?>
+</select>
+</div>
+
+<div class="col-xs-12 col-md-4">
+<select name="consignee_state" id="consignee_state" class="form-control">
+<option value="">Select State</option>
+<?php
+
+foreach ($selectedstates as $selectstate) {  
+$selectedState='';
+if(isset($row)){   
+
+ if($selectstate['state_id'] == $row->consignee_state){
+  $selectedState='selected="selected"'; 
+ }
+ }
+
+
 echo '<option '.$selectedState.' value="'.$selectstate['state_id'].'">'.$selectstate['state'].'</option>';    }
 
- 
-    ?>
-   </select>
-  </div>
-  
-  <div class="col-xs-12 col-md-4">
-   <select name="consignee_city" id="consignee_city" class="form-control">
-    <option value="">Select City</option>
-     <?php
 
-      foreach ($selectedcities as $selectcity) {  
-        $selectedCity='';
+?>
+</select>
+</div>
+
+<div class="col-xs-12 col-md-4">
+<select name="consignee_city" id="consignee_city" class="form-control">
+<option value="">Select City</option>
+<?php
+
+foreach ($selectedcities as $selectcity) {  
+$selectedCity='';
 if(isset($row)){       
 
-          if($selectcity['city_id'] == $row->consignee_city){
-           $selectedCity='selected="selected"'; 
-          }
-          }
-        
-      
+ if($selectcity['city_id'] == $row->consignee_city){
+  $selectedCity='selected="selected"'; 
+ }
+ }
+
+
 echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity['city'].'</option>';    }
 
- 
-    ?>
-   </select>
-  </div>
-  </div>
-                                    
-                                        </div>
-                                 
-                                         <div class="form-group">
-                                   <label>Item Description</label>
-                                     <textarea type="text" class="form-control" id="editor1" name="item_description" required><?php if(isset($row)){ echo $row->item_description;} ?></textarea>
-                                
-                                </div>
-                              
-                                         <div class="form-group">
-                                        <div class="row">
-                                          <div class="col-md-2">
-                                    <label>Quantity</label>
-                                    
-                                    <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
-                                    
-                                    </div>                                      
-                                        <div class="col-md-2">       
-                                    <label>Length (cm)</label>
-                                    
-                                    <input type="number" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
-                                    
-                                         </div>
-                                           <div class="col-md-2"> 
-                                    <label>Width (cm)</label>
-                                    
-                                    <input type="number" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
-                                    </div>
-                                          <div class="col-md-2">
-                                            
-                                    <label>Height (cm)</label>
-                                    
-                                    <input type="number" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
-                                    
-                                       </div> 
-                                       <div id="select_packaging" class="col-md-3">
-                                    <label>Please Select Your Packaging</label>
-                                    
-                                   <select class="form-control" name="package_type">
-                                       <option value="extra large box" <?php if(isset($row)){ echo setSelect($row->package_type,'extra large box');}?>>Extra Large Box</option>
-                                       <option value="large box"  <?php if(isset($row)){ echo setSelect($row->package_type,'large box');}?>>Large Box</option>
-                                       <option value="medium box" <?php if(isset($row)){ echo setSelect($row->package_type,'medium box');}?>>Medium Box</option>
-                                       <option value="letter" <?php if(isset($row)){ echo setSelect($row->package_type,'letter');}?>>Letter</option> 
-                                   </select>
-                                        </div>
-                                       </div></div> 
-                                               <hr>
-                                        <section id="package_details">
-                                        <h3>Package Details</h3>
-                                             <div class="form-group">
-                                              <div class="row">
-                                                <div class="col-md-4">
-                                    <label>Package Weight</label>
-                                    
-                                    <input type="number" class="form-control" id="package_weight" name="package_weight"  value="<?php if(isset($row)){ echo $row->package_weight;} ?>">
-                                    
-                                        </div>
-                                                <div class="col-md-4">
-                                    <label>Carriage Value</label>
-                                    
-                                    <input type="number" class="form-control" id="carriage_value" name="carriage_value" value="<?php if(isset($row)){ echo $row->carriage_value;} ?>">
-                                    
-                                        </div> 
-                                                 
-                                    </div>       
-                              </div></section>
-                              
-                              
-                               <div class="form-group">
-                                 <div class="row">
-                                 
-                                   <div class="col-md-4">
-                              <label style="color: blue">Front and back of title and Invoice</label>
-                                    <input type="file" name="file[]" onchange="preview_image()" class=" file"  id="file" accept=".png,.PNG,.JPG,.jpg,.jpeg,.JPEG,.gif"  multiple>
-                                      <div class="col-md-12">
-                                   <div id="preview_image"></div>
-                                   </div> 
-                                    
-                                    <?php if(isset($row)){
-										 if($files->num_rows()>0){
-                                      foreach($files->result() as $image){
-                                        $src = base_url() . 'uploads/' . $image->file; { ?>
-                        <div style="margin-left:2px " class="col-xs-4 col-md-4 pad0    img_wrap_<?php echo $image->id ?>">
-                         <div class="thumbnail" style="margin-bottom: 2px;"><a class="fancybox" href="<?=$src?>">  <img id="img_<?php echo $image->id ?>" src="<?php echo $src ?>" class="img-responsive"></a></div>
-                          <center>
-                            <!--<a onclick="getImage('<?php echo $image->id ?>','shipment_orders_files')" class="btn btn-xs btn-success" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Edit">
-                              <i class="fa fa-pencil"></i></a>-->
-                            <a class="btn btn-xs btn-danger" onclick="deleteImg('<?php echo $image->id ?>','shipment_orders_files')" href="javascript:void(0)" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Delete"><i class="fa fa-times"></i>
-                            </a>
-                          </center>
 
-                        </div>
-                                     <?php } }}}?>
-                     </div>
-                               
-                                  </div><hr>
-                                 
-                                 <div class="form-group">
-                                  <h3>Shipment Details</h3>
+?>
+</select>
+</div>
+</div>
+                           
+                               </div>
+                        
+                                <div class="form-group">
+                          <label>Item Description</label>
+                            <textarea type="text" class="form-control" id="editor1" name="item_description" required><?php if(isset($row)){ echo $row->item_description;} ?></textarea>
+                       
+                       </div>
+                     
+                                <div class="form-group">
+                               <div class="row">
+                                 <div class="col-md-2">
+                           <label>Quantity</label>
+                           
+                           <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
+                           
+                           </div>                                      
+                               <div class="col-md-2">       
+                           <label>Length (cm)</label>
+                           
+                           <input type="number" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
+                           
+                                </div>
+                                  <div class="col-md-2"> 
+                           <label>Width (cm)</label>
+                           
+                           <input type="number" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
+                           </div>
+                                 <div class="col-md-2">
+                                   
+                           <label>Height (cm)</label>
+                           
+                           <input type="number" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
+                           
+                              </div> 
+                              <div id="select_packaging" class="col-md-3">
+                           <label>Please Select Your Packaging</label>
+                           
+                          <select class="form-control" name="package_type">
+                              <option value="extra large box" <?php if(isset($row)){ echo setSelect($row->package_type,'extra large box');}?>>Extra Large Box</option>
+                              <option value="large box"  <?php if(isset($row)){ echo setSelect($row->package_type,'large box');}?>>Large Box</option>
+                              <option value="medium box" <?php if(isset($row)){ echo setSelect($row->package_type,'medium box');}?>>Medium Box</option>
+                              <option value="letter" <?php if(isset($row)){ echo setSelect($row->package_type,'letter');}?>>Letter</option> 
+                          </select>
+                               </div>
+                              </div></div>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="shipment_details">
+              <div class="form-group">
+                                  <h2>Shipment Details</h2><hr>
                                    <div class="row">
                                      <div class="col-md-4">
                                        <label>From City</label>
@@ -426,18 +376,10 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <label>Shipment Name</label>
                                <input type='text' name='shipment_name' class='form-control'>
                           </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
                           <div class='col-md-4'>
                             <label>Bill of Landing Number</label>
                                <input type='text' name='landing_bill_no' class='form-control'>
                           </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
                           <div class='col-md-4'>
                             <label>Booking Number</label>
                                <input type='text' name='booking_no' class='form-control'>
@@ -450,18 +392,10 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <label>Executed Place</label>
                                <input type='text' name='executed_place' class='form-control'>
                           </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
                           <div class='col-md-4'>
                             <label>Executed By</label>
                                <input type='text' name='executed_by' class='form-control'>
                           </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
                           <div class='col-md-4'>
                             <label>Executed Date</label>
                                <input type='date' name='executed_date' class='form-control'>
@@ -508,7 +442,53 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                         </div>
                       </div>
                     </div>
-                  <div id='entities'>                    
+                    <div class='tab-pane' id='package_details'>
+                                        <h3>Package Details</h3>
+                                             <div class="form-group">
+                                              <div class="row">
+                                                <div class="col-md-4">
+                                    <label>Package Weight</label>
+                                    
+                                    <input type="number" class="form-control" id="package_weight" name="package_weight"  value="<?php if(isset($row)){ echo $row->package_weight;} ?>">
+                                    
+                                        </div>
+                                                <div class="col-md-4">
+                                    <label>Carriage Value</label>
+                                    
+                                    <input type="number" class="form-control" id="carriage_value" name="carriage_value" value="<?php if(isset($row)){ echo $row->carriage_value;} ?>">
+                                    
+                                        </div> 
+                                                 
+                                    </div>       
+                              </div>
+                              <div class="form-group">
+                                 <div class="row">
+                                   <div class="col-md-4">
+                              <label style="color: blue">Front and back of title and Invoice</label>
+                                    <input type="file" name="file[]" onchange="preview_image()" class=" file"  id="file" accept=".png,.PNG,.JPG,.jpg,.jpeg,.JPEG,.gif"  multiple>
+                                      <div class="col-md-12">
+                                   <div id="preview_image"></div>
+                                   </div> 
+                                    
+                                    <?php if(isset($row)){
+										 if($files->num_rows()>0){
+                                      foreach($files->result() as $image){
+                                        $src = base_url() . 'uploads/' . $image->file; { ?>
+                        <div style="margin-left:2px " class="col-xs-4 col-md-4 pad0    img_wrap_<?php echo $image->id ?>">
+                         <div class="thumbnail" style="margin-bottom: 2px;"><a class="fancybox" href="<?=$src?>">  <img id="img_<?php echo $image->id ?>" src="<?php echo $src ?>" class="img-responsive"></a></div>
+                          <center>
+                            <!--<a onclick="getImage('<?php echo $image->id ?>','shipment_orders_files')" class="btn btn-xs btn-success" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Edit">
+                              <i class="fa fa-pencil"></i></a>-->
+                            <a class="btn btn-xs btn-danger" onclick="deleteImg('<?php echo $image->id ?>','shipment_orders_files')" href="javascript:void(0)" data-toggle="tooltip" title="" style="overflow: hidden; position: relative;" data-original-title="Delete"><i class="fa fa-times"></i>
+                            </a>
+                          </center>
+
+                        </div>
+                                     <?php } }}}?>
+                     </div>
+                               
+                                  </div></div></div>
+              <div class='tab-pane' id='entitles'>                    
                       <h2>Select the entitles</h2>
                         <hr>
                           <div class='row'>
@@ -557,7 +537,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             </div>
                           </div>
                           </div>
-                          <div id='routing_information'>
+                          <div class='tab-pane' id="routing_information">
                           <h2>Routing Information</h2>
                         <hr>
                           <div class='form-group'>
@@ -566,71 +546,49 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                  <label>Service Type</label>
                                    <input type='text' name='service_type' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Route</label>
                                    <input type='text' name='route' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Mode of Transport</label>
                                    <input type='text' name='mode_of_transport' class='form-control'>
                               </div>
                             </div>
                           </div>
-                          <b>Origin</b><hr style='margin-top:-10px;width:90%'>
+                          <h2>Origin</h2><hr>
                           <div class='form-group'>
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>port of Origin or FTZ No</label>
                                    <input type='text' name='port_of_origin' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Pre Carriage By</label>
                                    <input type='text' name='pre_carriage_by' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Place of Receipt by Pre-Carrier</label>
                                    <input type='text' name='place_of_receipt' class='form-control'>
                               </div>
                             </div>
                           </div>
-                          <b>Export</b><hr style='margin-top:-10px;width:90%'>
+                          </div>
+                          <div class='tab-pane' id='exporting_information'>
+                          <h2>Export Info</h2><hr>
                           <div class='form-group'>
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>Loading Pier or Terminal</label>
                                    <input type='text' name='loading_pier' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Port of Loading</label>
                                    <input type='text' name='port_of_loading' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Exporting Carrier</label>
-                                   <input type='text' name='exporting_receipt' class='form-control'>
+                                   <input type='text' name='exporting_carrier' class='form-control'>
                               </div>
                             </div>
                           </div>
@@ -639,137 +597,53 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                               <div class='col-md-4'>
                                  <label>Vessel Name and Flag</label>
                                    <input type='text' name='vessel_name' class='form-control'>
-                              </div>
-                            </div>
                           </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Voyage Identification</label>
                                    <input type='text' name='voyage_identification' class='form-control'>
                               </div>
                             </div>
                           </div>
-                          <b>Destination</b><hr style='margin-top:-10px;width:90%'>
+                          <h2>Destination</h2><hr>
                           <div class='form-group'>
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>Port of Unloading</label>
                                    <input type='text' name='port_of_unloading' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>On Carriage By</label>
                                    <input type='text' name='on_carriage_by' class='form-control'>
                               </div>
-                            </div>
-                          </div>
-                          <div class='form-group'>
-                            <div class='row'>
                               <div class='col-md-4'>
                                  <label>Place of Delivery by on-Carrier</label>
-                                   <input type='text' name='place_of_delievry' class='form-control'>
+                                   <input type='text' name='place_of_delivery' class='form-control'>
                               </div>
                             </div>
                           </div>
-                        </div>
-                                 <?php
-                                 if(isset($row)){
-									  if($vehicles->num_rows()>0){
-										  $v=0;
-                                 foreach ($vehicles->result() as $vehicle) {
-                                   
-                                    ?>
-                             <div class="form-group field_wrapper">
-                                   <div class="row">
-                                    <div class="col-md-3">
-                                       <label>Vehicle Description</label>
-                                       <input type="text" name="vehicle_description[]" value="<?php echo $vehicle->vehicle_description?>" class="form-control">
-                                     </div>
-                                     <div class="col-md-3">
-                                       <label>Vin Number</label>
-                                       <input type="text" name="vin_number[]" value="<?php echo $vehicle->vin_number?>" class="form-control">
-                                     </div>
-                                     <div class="col-md-2">
-                                       <label>Vehicle Purchase Cost</label>
-                                       <input type="number" name="purchase_cost[]" value="<?php echo $vehicle->purchase_cost?>" class="form-control">
-                                   
-                                     </div>
-                                     <div class="col-md-3">
-                                       <label>Company Preference</label>
-                                       <input type="text" name="company_preference[]" value="<?php echo $vehicle->company_preference?>" class="form-control">
-                                   
-                                     </div>
-                                     <div class="col-md-1">
-                                     <?php if($v==0){ ?>
- <a href="javascript:void(0);" class="add_button" title="Add field">
-  <img width="30" height="30" src="<?php echo base_url()?>image/add-more.png">
-                                                </a>
-                                                <?php } else { ?>
-                                                <a  href="javascript:void(0);" class="remove_button"><img height="30" width="30" src="<?php echo base_url()?>image/remove.png"/></a>
-                                                <?php } ?>
-                                     </div>
-
-                                       
-                                   </div>
-                                 <?php 
-								 $v++;
-								 }}}
-                                 
-                                  else{?>
-                                 <div class="form-group field_wrapper" id="vehicles">
-                                   <div class="row">
-                                    <div class="col-md-3">
-                                       <label>Vehicle Description</label>
-                                       <input type="text" name="vehicle_description[]" class="form-control">
-                                     </div>
-                                     <div class="col-md-3">
-                                       <label>Vin Number</label>
-                                       <input type="text" name="vin_number[]" class="form-control">
-                                     </div>
-                                     <div class="col-md-2">
-                                       <label>Vehicle Purchase Cost</label>
-                                       <input type="text" name="purchase_cost[]" class="form-control">
-                                   
-                                     </div>
-                                     <div class="col-md-3">
-                                       <label>Company Preference</label>
-                                       <input type="text" name="company_preference[]" class="form-control">
-                                   
-                                     </div>
-                                     <div class="col-md-1">
- <a href="javascript:void(0);" class="add_button" title="Add field">
-  <img width="30" height="30" src="<?php echo base_url()?>image/add-more.png">
-                                                </a>
-                                     </div>
-
-                                       
-                                   </div>
-                                  
-
-                                 </div><?php }?>
-                                  
-                                        <div class="clearfix">&nbsp;</div>
-             <div class="col-xs-12 col-md-12">
+                          <div class="clearfix">&nbsp;</div>
+                <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>
                       
                    </div>
            </div> 
-
-                    
-                       <div class="clearfix">&nbsp;</div>
+                 <div class="clearfix">&nbsp;</div>
                     
                 </form>
-              
-                 </div>
-               
-              
+                        </div>        
+                       
+              <!-- /.tab-pane -->
             </div>
+            <!-- /.tab-content -->
           </div>
-          
+          <!-- nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <!-- END CUSTOM TABS -->
+                                
+                                               
           <!-- /.box -->
         </div>
         <!-- /.col -->
@@ -778,7 +652,6 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
     </section>
     <!-- /.content -->
   </div>
-   
 
   <?php  getFooter(); ?>
 
@@ -918,94 +791,6 @@ $(document).ready(function(){
         $(this).parent().parent('div').remove(); //Remove field html
         x--; //Decrement field counter
     });
-});
-</script>
-<script type="text/javascript">
- $("#personal_effects").click(function(){
-    $('#form_add_update').show('slow');
-     $("#shipment_type").val(1);
-    var h = "Personal Effect";
-    $('#heading').text(h);
-    $('#shipper_phone').show();
-    $('#shipment_extra_details').hide();
-    $('#entities').hide();
-    $('#routing_information').hide();
-    $('#package_details').show();
-    $('#shipment').hide();
-    $('#select_packaging').show();
-    $('#shipper_address').show();
-    $('#request_pickup').show();
-    $('#pickup_location').show();
-    $('#request_insurance').show();
-    $('#delivery_option').show();
-    $('#contact_details').show();
-    $("#vehicles").hide();
-});
-</script>
-<script type="text/javascript">
- $("#air_freight").click(function(){
-      $('#form_add_update').show('slow');
-      $("#shipment_type").val(3);
-      var h = "Air Freight";
-      $('#heading').text(h);
-      $('#shipper_phone').show();
-      $('#package_details').show();
-      $('#shipment').hide();
-      $('#shipment_extra_details').hide();
-    $('#entities').hide();
-    $('#routing_information').hide();
-      $('#select_packaging').show();
-      $('#shipper_address').show();
-      $('#request_pickup').show();
-      $('#pickup_location').show();
-      $('#request_insurance').show();
-      $('#delivery_option').show();
-      $('#contact_details').show();
-      $("#vehicles").hide();
-});
-</script>
-<script type="text/javascript">
- $("#vehicle_shipment").click(function(){
-    $('#form_add_update').show('slow');
-    $("#shipment_type").val(4);
-    var h = "Vehicle Shipment";
-    $('#heading').text(h);
-    $('#shipper_phone').show();
-    $('#shipment_extra_details').hide();
-    $('#entities').hide();
-    $('#routing_information').hide();
-     $('#package_details').show();
-    $('#shipment').show();
-    $('#select_packaging').show();
-    $('#shipper_address').show();
-    $('#request_pickup').show();
-    $('#pickup_location').show();
-    $('#request_insurance').show();
-     $('#delivery_option').show();
-     $('#contact_details').show();
-     $("#vehicles").show();
-});
-</script>
-<script type="text/javascript">
- $("#ocean_freight").click(function(){
-    $('#form_add_update').show('slow');
-    $("#shipment_type").val(2);
-    var h = "Ocean Freight";
-    $('#heading').text(h);
-    $('#shipper_phone').show();
-    $('#shipment_extra_details').show();
-    $('#entities').show();
-    $('#routing_information').show();
-    $('#package_details').show();
-    $('#shipment').hide();
-    $('#select_packaging').show();
-    $('#shipper_address').show();
-    $('#request_pickup').show();
-    $('#pickup_location').show();
-    $('#request_insurance').show();
-    $('#delivery_option').show();
-    $('#contact_details').show();
-    $("#vehicles").hide();
 });
 </script>
 <script type="text/javascript">

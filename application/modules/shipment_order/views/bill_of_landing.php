@@ -60,7 +60,8 @@ background-color: #fff;
               
             </div>
             <!-- /.box-header -->
-            <div class="box-body">          
+            <div class="box-body">  
+    <div id='pdf'>
               <h1 style='color:blue;float:right'>Bill of Landing</h1>
                  <table class='table table-bordered'>
                  <tr>
@@ -72,49 +73,77 @@ background-color: #fff;
                   BALTIMORE, MD 21206. UNITED STATES
                   </td>
                   <td>Document Number<br>SAL-575448</td>
-                  <td colspan='2'>B/L Number<br>EMJ13678</td>
+                  <td colspan='2'>B/L Number<br><?php echo $result[0]['landing_bill_no'];?></td>
                  </tr>
                  <tr>
                   <td colspan='3'>Export References</td>
                  </tr>
                  <tr>
-                  <td rowspan='2'>CONSIGNED TO<br><b>IBRAHIM B ABARSHI</b><br>
-                                  2 KAGARA CLOSE<br>
-                                  U/RIME<br>
-                                  KADUNA. NIGERIA</td>
-                  <td colspan='3'> FORWARDING AGENT<br><b>Emjay Global LLC, FMC#024627N</b><br>
-                                   6254 FRANKFORD AVENUE<br>
-                                   443-304-2803, BALTIMORE, MD 21206. UNITED STATES</td>
+                  <td rowspan='2'>CONSIGNED TO<br><b><?php echo $result[0]['consignee_name'];?></b><br>
+                  <?php echo $result[0]['consignee_address'];?></td>
+                  <td colspan='3'> FORWARDING AGENT<br><b><?php echo $result[0]['forwording_agent'];?></b><br>
+                  <?php echo $result[0]['forwording_agent_address'];?></td>
                  </tr>
                  <tr>
-                  <td colspan='3'> POINT (STATE) OF ORIGIN OR FTZ NUMBER<br><b>BALTIMORE</b></td>
+                  <td colspan='3'> POINT (STATE) OF ORIGIN OR FTZ NUMBER<br><b><?php echo $result[0]['port_of_origin'];?></b></td>
                  </tr>
                  <tr>
-                  <td colspan='2'> NOTIFY PARTY /INTERMEDIATE CONSIGNEE<br><b>BALA ABARSHI</b><br>4703 WITCHHAZEL WAY<br>
-                       ABERDEEN, MD 21001. UNITED STATES</td>
+                  <td colspan='2'> NOTIFY PARTY /INTERMEDIATE CONSIGNEE<br><b><?php echo $result[0]['notify_party'];?></b><br>
+                  <?php echo $result[0]['notify_party_address'];?></td>
                   <td rowspan='2' colspan='2'> DOMESTIC ROUTING / EXPORT INSTRUCTIONS</td>
                  </tr>
                  <tr>
-                  <td> PRE-CARRIAGE BY<br><b>SALLAUM LINES</b></td>
-                  <td>PLACE OF RECEIPT BY PRE-CARRIER<br><b>BALTIMORE</b></td>
+                  <td> PRE-CARRIAGE BY<br><b><?php echo $result[0]['pre_carriage_by'];?></b></td>
+                  <td>PLACE OF RECEIPT BY PRE-CARRIER<br><b><?php echo $result[0]['place_of_receipt'];?></b></td>
                   <td></td>
                  </tr>
                  <tr>
-                  <td> EXPORTING CARRIER<br><b>SILVER QUEEN / 22SQ06</b></td>
-                  <td>PORT OF LOADING/ EXPORT<br><b>BALTIMORE</b></td>
-                  <td>LOADING PIER / TERMINAL<br><b>SOUTH LOCUST POINT</b></td>
+                  <td> EXPORTING CARRIER<br><b><?php echo $result[0]['exporting_carrier'];?></b></td>
+                  <td>PORT OF LOADING/ EXPORT<br><b><?php echo $result[0]['port_of_loading'];?></b></td>
+                  <td>LOADING PIER / TERMINAL<br><b><?php echo $result[0]['loading_pier'];?></b></td>
                   <td></td>
                  </tr>
                  <tr>
-                  <td> FOREIGN PORT OF UNLOADING<br><b>TINCAN SEAPORT</b></td>
-                  <td>PLACE OF DELIVERY BY ON-CARRIER<br><b>TINCAN SEAPORT</b></td>
+                  <td> FOREIGN PORT OF UNLOADING<br><b><?php echo $result[0]['port_of_unloading'];?></b></td>
+                  <td>PLACE OF DELIVERY BY ON-CARRIER<br><b><?php echo $result[0]['place_of_delivery'];?></b></td>
                   <td>TYPE OF MOVE<br><b>Vessel</b></td>
                   <td>CONTAINERIZED (Vessel only)<br>Yes&nbsp;&nbsp;<input type='checkbox'>&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;<input type='checkbox'></td>
                  </tr>
+                 <tr>
+                  <td colspan='4'>
+                    <table class='table table-striped'>
+                      <thead>
+                        <tr>
+                          <th>Marks and Numbers (18)</th>
+                          <th>No of Packages (19)</th>
+                          <th>Description of Comodities (20)</th>
+                          <th>Gross Weight (kg)(21)</th>
+                          <th>Measurement (22)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>WR EGW14172</td>
+                          <td>1 VEH</td>
+                          <td>2016 HONDA CIVIC EX<br>
+                              VIN:2HGFC2F77GH574944<br>
+                              AES ITN:X20220706171267
+                        </td>
+                          <td>1,267.79 Kg<br>"2,795.00 Lb"</td>
+                          <td>418.77 ft³<br>"4,359.24 Vlb"</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                 </tr>
                  </table>
           </div>
+          <button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>
+        </div>
+
         <!-- /.col -->
       </div>
+
       <!-- /.row -->
     </section>
     <!-- /.content -->
@@ -122,6 +151,18 @@ background-color: #fff;
    
 
   <?php  getFooter(); ?>
+  <script>
+        function printDiv() {
+            var divContents = document.getElementById("pdf").innerHTML;
+            var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body >');
+            a.document.write(divContents);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        }
+    </script>
 <script>
  function updateStatus(id,status){
 

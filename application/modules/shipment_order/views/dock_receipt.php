@@ -61,7 +61,8 @@ background-color: #fff;
             <!-- /.box-header -->
             <div id="GFG">
             <div class="box-body">          
-              <h1 style='color:blue;float:right'>Dock Receipt</h1>
+<div id='pdf'>
+            <h1 style='color:blue;float:right'>Dock Receipt</h1>
                  <table class='table table-bordered'>
                  <tr>
                   <td rowspan='2'>
@@ -108,10 +109,38 @@ background-color: #fff;
                   <td>TYPE OF MOVE<br><b>Vessel</b></td>
                   <td>CONTAINERIZED (Vessel only)<br>Yes&nbsp;&nbsp;<input type='checkbox'>&nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;<input type='checkbox'></td>
                  </tr>
+                 <tr>
+                  <td colspan='4'>
+                    <table class='table table-striped'>
+                      <thead>
+                        <tr>
+                          <th>Marks and Numbers (18)</th>
+                          <th>No of Packages (19)</th>
+                          <th>Description of Comodities (20)</th>
+                          <th>Gross Weight (kg)(21)</th>
+                          <th>Measurement (22)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>WR EGW14172</td>
+                          <td>1 VEH</td>
+                          <td>2016 HONDA CIVIC EX<br>
+                              VIN:2HGFC2F77GH574944<br>
+                              AES ITN:X20220706171267
+                        </td>
+                          <td>1,267.79 Kg<br>"2,795.00 Lb"</td>
+                          <td>418.77 ft³<br>"4,359.24 Vlb"</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                 </tr>
                  </table>
           </div>
+          <button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>
+
 </div>
-<button style='text-align:center' class='btn btn-primary'>Print</button>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -121,6 +150,18 @@ background-color: #fff;
    
 
   <?php  getFooter(); ?>
+  <script>
+        function printDiv() {
+            var divContents = document.getElementById("pdf").innerHTML;
+            var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body >');
+            a.document.write(divContents);
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+        }
+    </script>
   <script>
         function printDiv() {
             var divContents = document.getElementById("GFG").innerHTML;

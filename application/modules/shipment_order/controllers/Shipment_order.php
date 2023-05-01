@@ -261,14 +261,20 @@ $mess = $e['message'];
 		}
 	}	
 
-public function dockreceipt($id){
+public function dock_receipt($id){
 	//$id=$_GET['id'];
 	$data['result'] = $this->db->where('id', $id)->get('shipment_orders')->result_array();
 	// $query=$this->db->last_query($data);
 	// echo $query;
 	$this->load->view('dock_receipt', $data);
 }
-	
+public function landing_bill($id){
+	//$id=$_GET['id'];
+	$data['result'] = $this->db->where('id', $id)->get('shipment_orders')->result_array();
+	// $query=$this->db->last_query($data);
+	// echo $query;
+	$this->load->view('bill_of_landing', $data);
+}	
 		public function update_image(){ 
 	
 		extract($_POST);

@@ -298,7 +298,7 @@ $('#post_table').dataTable( {
   function dockreceipt(id){
     $.ajax({
       type: "get",
-      url: '<?php echo base_url()?>shipment_order/dockreceipt'
+      url: '<?php echo base_url()?>shipment_order/dock_receipt'
     });
   }
 </script>

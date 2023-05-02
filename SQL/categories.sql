@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `title` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `parent` longtext COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  `parent` longtext COLLATE utf8_unicode_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'catdefault.png',
   `icon_class` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL

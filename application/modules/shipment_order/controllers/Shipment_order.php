@@ -27,7 +27,7 @@ class Shipment_order extends MX_Controller {
 	    
 		$this->load->view($this->view,$aData);
 	}
-	public function add(){  
+	public function add_personal_effects(){  
 		
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
@@ -35,7 +35,37 @@ class Shipment_order extends MX_Controller {
 	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
-		$this->load->view('add_shipment',$aData);
+		$this->load->view('add_personal_effects_shipment',$aData);
+	}
+	public function add_ocean_shipment(){  
+		
+		$aData['tbl'] =$this->tbl;
+		$aData['add'] =1;
+		$aData["countries"] = $this->country_model->get_country();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+		$aData['module_heading'] =$this->module_heading;
+	//	pre($aData);
+		$this->load->view('add_ocean_shipment',$aData);
+	}
+	public function add_air_shipment(){  
+		
+		$aData['tbl'] =$this->tbl;
+		$aData['add'] =1;
+		$aData["countries"] = $this->country_model->get_country();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+		$aData['module_heading'] =$this->module_heading;
+	//	pre($aData);
+		$this->load->view('add_air_shipment',$aData);
+	}
+	public function add_vehicle_shipment(){  
+		
+		$aData['tbl'] =$this->tbl;
+		$aData['add'] =1;
+		$aData["countries"] = $this->country_model->get_country();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+		$aData['module_heading'] =$this->module_heading;
+	//	pre($aData);
+		$this->load->view('add_vehicle_shipment',$aData);
 	}
 	 function get_state()
  {
@@ -66,6 +96,9 @@ class Shipment_order extends MX_Controller {
  	$data['result'] = $this->db->get('purchase_orders')->result_array();
  	$this->load->view('view_purchase_orders', $data);
 
+ }
+ public function tabs(){
+	$this->load->view('tabs-form');
  }
  //public function 
 	public function edit($id){
@@ -228,8 +261,20 @@ $mess = $e['message'];
 		}
 	}	
 
-
-	
+public function dock_receipt($id){
+	//$id=$_GET['id'];
+	$data['result'] = $this->db->where('id', $id)->get('shipment_orders')->result_array();
+	// $query=$this->db->last_query($data);
+	// echo $query;
+	$this->load->view('dock_receipt', $data);
+}
+public function landing_bill($id){
+	//$id=$_GET['id'];
+	$data['result'] = $this->db->where('id', $id)->get('shipment_orders')->result_array();
+	// $query=$this->db->last_query($data);
+	// echo $query;
+	$this->load->view('bill_of_landing', $data);
+}	
 		public function update_image(){ 
 	
 		extract($_POST);

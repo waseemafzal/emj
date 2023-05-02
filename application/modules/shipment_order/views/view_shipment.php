@@ -21,8 +21,10 @@ $Heading=	$module_heading;
         
       </h1>
       <ol class="breadcrumb">
-
-        <li > <a href="<?=$controller?>/add" class="btn btn-sm btn-success txt-white"><i class="fa fa-plus icon-white"></i> Add New Record</a></li>
+      <li > <a href="<?=$controller?>/add_personal_effects?shipment_type=1" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-user"></i> Personal Effects</a></li>
+      <li > <a href="<?=$controller?>/add_ocean_shipment?shipment_type=2" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-ship icon-white"></i> Ocean Freight</a></li>
+      <li > <a href="<?=$controller?>/add_air_shipment?shipment_type=3" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-plane icon-white"></i> Air Freight</a></li>
+        <li > <a href="<?=$controller?>/add_vehicle_shipment?shipment_type=4" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-truck icon-white"></i> Vehicle Shipment</a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -45,6 +47,7 @@ $Heading=	$module_heading;
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
         <th>Status</th>
+        <th>Dock Receipt</th>
         <th>Invoice</th>
         <th>Actions</th>
     </tr>
@@ -83,7 +86,11 @@ $Heading=	$module_heading;
             
           
          </select></td> 
-         
+         <td>
+          <select onchange="dockreceipt('<?php echo $row->id?>')">
+            <option>Dock Receipt</option>
+          </select>
+         </td>
           <td>
             <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Invoice</a>
          </td>
@@ -287,7 +294,14 @@ $('#post_table').dataTable( {
   "ordering": false
 } );
 </script>
-
+<script>
+  function dockreceipt(id){
+    $.ajax({
+      type: "get",
+      url: '<?php echo base_url()?>shipment_order/dock_receipt'
+    });
+  }
+</script>
   
 
   

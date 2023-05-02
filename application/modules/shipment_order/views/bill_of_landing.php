@@ -136,7 +136,46 @@ background-color: #fff;
                     </table>
                   </td>
                  </tr>
-                 </table>
+                 <tr>
+                  <td colspan='4'>
+                 Carrier has a policy against payment, solicitation, or receipt of any rebate, directly or indirectly, which would be unlawful under the United States Shipping Act, 1984 as amended.</td></tr>
+                <tr>
+                 <td colspan='4'>DECLARED VALUE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;READ CLAUSE 29 HEREOF CONCERNING EXTRA FREIGHT AND CARRIER'S LIMITATION OF LIABILITY.</td></tr>
+                 <tr>
+                  <td colspan='2'>
+                    <table class='table table-bordered'>
+                      <thead>
+                        <tr>
+                          <th style='font-size:13px'>FREIGHT RATES, CHARGES, WEIGHTS AND / OR MEASUREMENTS<br>SUBJECT TO CORRECTION</th>
+                          <th>PREPAID</th>
+                          <th>COLLECT</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                        <td height='200px'></td>
+                        <td height='200px'></td>
+                        <td height='200px'></td>
+                        </tr>
+                        <tr>
+                        <td>GRAND TOTAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USD</td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td colspan='2'>
+                  <p>Received by the Carrier for shipment by ocean vessel between port of loading and port of
+discharge.</p><br><br>
+DATED AT: <hr style='margin-top:-10px;border:1px solid black;width:70%;margin-right:20px'>
+<br>
+BY: <hr style='margin-top:-10px;border:1px solid black;width:86%;margin-right:20px'>
+<p style='text-align:center'>AGENT FOR CARRIER</p>
+  Month: July &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Day 06 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Year 2023
+                  </td>
+                 </tr>
+                </table>
           </div>
           <button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>
         </div>

@@ -136,13 +136,31 @@ background-color: #fff;
                     </table>
                   </td>
                  </tr>
+                 <tr>
+                  <td colspan='2'>
+                    <p style='text-align:center'><b>DELIVERED BY</b></p>
+                    LIGHTER TRUCK<br> <br>
+                  ARRIVED DATE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TIME
+                  <br><br>UNLOADED DATE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TIME<br>
+                  <br>CHECKED BY<br> <br>
+                  PLACED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN SHIP/ ON DOCX&nbsp;&nbsp;&nbsp;LOCATION
+                
+                </td>
+                  <td colspan='2'>
+                  <p>RECEIVED THE ABOVE DESCRIBED GOODS OR PACKAGES SUBJECT TO ALL THE TERMS</p>
+                  <p style='text-align:center'><b>FOR THE MASTER</b></p>
+                  BY <hr style='border:1px solid black; margin-top:-10px;width:75%'>
+                  <p style='text-align:center'><b>RECEIVING CLERK</b></p><br>
+                  Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jul/06/2022
+                  </td>
+                 </tr>
                  </table>
           </div>
-          <button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>
-
 </div>
         <!-- /.col -->
       </div>
+<button type="button" class='btn btn-lg btn-primary' style='margin:5% 50%;' value="click" onclick="printDiv()">Print</button>
+
       <!-- /.row -->
     </section>
     <!-- /.content -->

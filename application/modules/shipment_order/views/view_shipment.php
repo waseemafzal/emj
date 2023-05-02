@@ -87,8 +87,10 @@ $Heading=	$module_heading;
           
          </select></td> 
          <td>
-          <select onchange="dockreceipt('<?php echo $row->id?>')">
-            <option>Dock Receipt</option>
+         <select onchange="redirectMe(this.value)">
+            <option>Select</option>
+            <option value='<?php echo $row->id?>_dock'>Dock Receipt</option>
+            <option value='<?php echo $row->id?>_bill'>Landing Bill</option>
           </select>
          </td>
           <td>
@@ -263,7 +265,7 @@ $Heading=	$module_heading;
 <script>
  function updateStatus(id,status){
 
-var formData = new FormData();
+ var formData = new FormData();
  formData.append("id", id);
  formData.append("status", status);
   // ajax start
@@ -290,20 +292,39 @@ var formData = new FormData();
   }
 </script>  
 <script>
+  function redirectMe(id){
+    window.location.href="shipment_order/generate/"+id;
+  }
 $('#post_table').dataTable( {
   "ordering": false
 } );
 </script>
 <script>
-  function dockreceipt(id){
+  function dockreceipt(id, value){
+    // formData = new FormData();
+    // formData.append('id', id);
+    // formData.append('value', value);
     $.ajax({
-      type: "get",
-      url: '<?php echo base_url()?>shipment_order/dock_receipt'
+      type: 'POST',
+      url: '<?php echo base_url()?>shipment_order/dock_receipt',
+      data:{id:'id',value:'value'},
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'JSON',
+      success:function(response){
+        if(response.value=='dock_receipt'){
+          alert(response.value);
+          // window.location.href = '<?php echo base_url()?>shipment_status/dock_receipt';
+        }
+        //  if(response.value=='bill_of_receipt'){
+        //   window.location.href = '<?php echo base_url()?>shipment_status/bill_of_receipt';
+        //        }
+              }
     });
   }
 </script>
   
-
   
   
   

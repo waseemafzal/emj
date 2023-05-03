@@ -100,7 +100,7 @@ $Heading=	$module_heading;
     <td class="center">
             
            <button data-target="#shipment_modal_<?php echo $row->id;?>" class="btn btn-primary btn-xs" data-toggle="modal" ><i class="fa fa-eye"></i></button> 
-           <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Edit'));?>" class="btn btn-info btn-xs" href="<?=$controller?>/edit/<?php echo $row->id;?>">
+           <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Edit'));?>" class="btn btn-info btn-xs" href="<?=$controller?>/edit/<?php echo $row->id;?>/<?php echo $row->shipment_type?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
             </a>
             <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $row->id;?>','<?=$tbl?>');">

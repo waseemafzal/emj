@@ -63,7 +63,6 @@ background-color: #fff;
             <div class="box-body">
              <form id="form_add_update" name="form_add_update" role="form">
              <div class="alert hidden"></div>
-             <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
                                 <h2>Air Shipment</h2>
                                 <hr>
@@ -74,7 +73,11 @@ background-color: #fff;
                                 
                                 <div class="col-xs-12 col-md-4">
                                     <label>Shipper's Name</label>
+                                    <?php if(isset($row)){?>
+                                      <input type="hidden" name="shipment_type" value="<?php echo $row->shipment_type;?>">
+                                    <?php }else{?>
                                     <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>            
+                                    <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>">
                                     
                                         </div>
@@ -142,19 +145,18 @@ if($city['city_id']==$row->shipper_city){
                                           <div class='col-md-4'>
                       <?php
                         $checked='';
-                       if(isset($row)){            
-                      
-                      
-                      switch ($row->request_pickup) {
+                       if(isset($row)){             
+                        switch ($row->request_pickup) {
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
-                         $checked='';                      
+                        case 'null':
+                         $checked='';    
+                         break;                  
                       }
                       }
                       ?>
-                                    Request PickUp  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_pickup" name="request_pickup"<?php echo $checked?> value="yes">    
+                      Request PickUp  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_pickup" name="request_pickup" <?php echo $checked?> value="yes">    
                                     
                                         </div>
                                      <div class="col-md-4">
@@ -167,12 +169,13 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
+                        case 'null':
                          $checked='';                      
+                         break;
                       }
                       }
                       ?>
-                                    Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="yes" <?php echo  $checked;?>>    
+                                    Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="yes" <?php echo $checked;?>>    
                                   
                                         </div></div></div>
 
@@ -181,22 +184,20 @@ if($city['city_id']==$row->shipper_city){
                         $home='';
                         $warehouse='';
                        if(isset($row)){            
-                      
-                      
-                      switch ($row->delivery_type) {
+                       switch ($row->delivery_type) {
                         case 'home':
                          $home='checked';
                           break;
                        case 'lagos warehouse':
-                         $warehouse='checked';  
-                         break;                    
+                         $warehouse='checked';                      
+                         break;
                       }
                       }
                       ?>
                                     <label>Delivery Type</label>
                                     <br>
-                                    <input type="radio" <?php echo  $home?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
-                                     <input type="radio" <?php echo  $warehouse?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
+                                    <input type="radio" <?php echo $home;?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
+                                     <input type="radio" <?php echo  $warehouse;?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
                                         </div><hr>
                                <h3>Consignee Details</h3>
                                 

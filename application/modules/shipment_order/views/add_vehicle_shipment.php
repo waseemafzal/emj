@@ -63,7 +63,6 @@ background-color: #fff;
             <div class="box-body">
              <form id="form_add_update" name="form_add_update" role="form">
              <div class="alert hidden"></div>
-             <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
                                 <h2>Vehicle Shipment</h2>
                                 <hr>
@@ -74,7 +73,12 @@ background-color: #fff;
                                 
                                 <div class="col-xs-12 col-md-4">
                                     <label>Shipper's Name</label>
-                                    <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>
+                                    <?php if(isset($row)){
+                                      if($row->shipment_type!=''){?>
+                                      <input type="hidden" name="shipment_type" value="<?php echo $row->shipment_type;?>">
+                                    <?php }}else{?>
+                                    <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>            
+                                    <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>">
                                     
                                         </div>
@@ -148,12 +152,14 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
-                         $checked='';                      
+                        case 'null':
+                         $checked='';  
+                        break;                    
                       }
                       }
                       ?>
                                     Request PickUp  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_pickup" name="request_pickup"<?php echo $checked?> value="yes">    
+                                    
                                     
                                         </div>
 
@@ -167,8 +173,9 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
-                         $checked='';                      
+                        case 'null':
+                         $checked='';
+                         break;                      
                       }
                       }
                       ?>
@@ -187,7 +194,7 @@ if($city['city_id']==$row->shipper_city){
                         case 'home':
                          $home='checked';
                           break;
-                       case 'lagos warehouse':
+                        case 'lagos warehouse':
                          $warehouse='checked';  
                          break;                    
                       }
@@ -401,7 +408,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                      <div class="col-md-4">
                                        <label>Shipment Date</label>
                                        <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
-                                     <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
+                                       <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
                                      </div>
                                    </div>
                                  </div>
@@ -410,8 +417,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
 									  if($vehicles->num_rows()>0){
 										  $v=0;
                                  foreach ($vehicles->result() as $vehicle) {
-                                   
-                                    ?>
+                                   ?>
                              <div class="form-group field_wrapper">
                                    <div class="row">
                                     <div class="col-md-3">
@@ -482,12 +488,12 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                  </div><?php }?>
                                   
                                         <div class="clearfix">&nbsp;</div>
-                <div class="col-xs-12 col-md-12">
+               
+           </div> 
+           <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>
                       
                    </div>
-           </div> 
-
                     
                        <div class="clearfix">&nbsp;</div>
                     
@@ -653,7 +659,7 @@ $(document).ready(function(){
      $('#form_add_update').on("submit",function(e) {
          e.preventDefault();    
          var inputFile = $('input#file');
-    var filesToUpload = inputFile[0].files;
+         var filesToUpload = inputFile[0].files;
          var formData = new FormData();
           var other_data = $('#form_add_update').serializeArray();
         $.each(other_data,function(key,input){

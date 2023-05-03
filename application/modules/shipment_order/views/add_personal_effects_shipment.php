@@ -63,7 +63,6 @@ background-color: #fff;
             <div class="box-body">
              <form id="form_add_update" name="form_add_update" role="form">
              <div class="alert hidden"></div>
-             <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
                                 <h2>Perosnal Effects</h2>
                                 <hr>
@@ -74,7 +73,11 @@ background-color: #fff;
                                 
                                 <div class="col-xs-12 col-md-4">
                                     <label>Shipper's Name</label>
+                                    <?php if(isset($row)){?>
+                                    <input type='hidden' name='shipment_type' value='<?php echo $row->shipment_type;?>'>
+                                  <?php  }else{?>
                                     <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>
+                                    <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>">
                                     
                                         </div>
@@ -150,7 +153,7 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
+                       case 'null':
                          $checked='';                      
                       }
                       }
@@ -168,7 +171,7 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
+                       case 'null':
                          $checked='';                      
                       }
                       }

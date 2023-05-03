@@ -101,7 +101,51 @@ class Shipment_order extends MX_Controller {
 	$this->load->view('tabs-form');
  }
  //public function 
-	public function edit($id){
+	public function edit($id, $shipment_type){
+		//pre($aData);
+	 if($shipment_type=='1'){
+		$this->edit_personal_effects($id, $shipment_type);
+	 }
+	 if($shipment_type=='2'){
+		$this->edit_ocean_shipment($id, $shipment_type);
+	 }
+	 if($shipment_type=='3'){
+		$this->edit_air_shipment($id, $shipment_type);
+	 }
+	 if($shipment_type=='4'){
+		$this->edit_vehicle_shipment($id, $shipment_type);
+	 }
+	}
+	public function edit_personal_effects($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	//print_r($aData['row']);exit;
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+		//pre($aData);
+		$this->load->view('add_personal_effects_shipment', $aData);
+	}
+	public function edit_ocean_shipment($id, $shipment_type){
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
@@ -128,7 +172,66 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		
 		$aData['module_heading'] =$this->module_heading;
 		//pre($aData);
-		$this->load->view('add_shipment',$aData);
+		$this->load->view('add_ocean_shipment', $aData);
+	}
+	public function edit_air_shipment($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	//print_r($aData['row']);exit;
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+		//pre($aData);
+		$this->load->view('add_air_shipment', $aData);
+	}
+	public function edit_vehicle_shipment($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	//print_r($aData['row']);exit;
+	
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+		//pre($aData);
+		$this->load->view('add_vehicle_shipment', $aData);
 	}
 	public function delete(){ 
 		extract($_POST);
@@ -150,23 +253,25 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	}
 	function save(){ 
 		extract($_POST);
-		// echo "<pre>";
-		// print_r($_POST);
+		//    echo "<pre>";
+		//    print_r($_POST);
+		//    exit;
 		// pre($_FILES);
 		//pre($_POST);
-
+ 
+ 
 		$PrimaryID = $_POST['id'];
 		$vehicleDescriptionArr=array();
 		$vin_numberArr=array();
 		$purchase_costArr=array();
 		$company_preferenceArr=array();
 if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])>0){
-	//pre($_POST);
-            	$vehicleDescriptionArr=$_POST['vehicle_description'];
+	//pre($_POST['vehicle_description']);
+    $vehicleDescriptionArr=$_POST['vehicle_description'];
 	$vin_numberArr=$_POST['vin_number'];
 	$purchase_costArr=$_POST['purchase_cost'];
 	$company_preferenceArr=$_POST['company_preference'];
-		unset($_POST['vehicle_description'],$_POST['vin_number'],$_POST['purchase_cost'], $_POST['company_preference']);
+	unset($_POST['vehicle_description'],$_POST['vin_number'],$_POST['purchase_cost'], $_POST['company_preference']);
 	
 }
 //echo 'out o if';exit;
@@ -191,7 +296,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 	    if($PrimaryID!=''){
 			
 				$insrtID = $PrimaryID;
-
+		}
 			
 	    if (!empty($_FILES)){ 
 	    	//pre($_FILES);
@@ -208,11 +313,12 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
 
 			if( count($vehicleDescriptionArr)>0){
              //alert($id);exit();
-			// pre($_POST['vehicle_description']);
+			// echo '<pre>'; print_r($vehicleDescriptionArr);
+			  //exit;
               $totalvehicle =   count($vehicleDescriptionArr);
                // $_POST['company_preference'] = implode(',', $_POST['company_preference']);
                 //$company_preference =  $_POST['company_preference'];
-				
+				//pre($totalvehicle);
               for ($i=0; $i < $totalvehicle; $i++) { 
               	$dataArr = array(
                       'vin_number'=>$vin_numberArr[$i],
@@ -223,7 +329,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
                       
 
                 );  
-				
+				//pre($dataArr);
 				if($PrimaryID!=''){
 					$this->db->where('order_id',$PrimaryID)->delete('shipment_orders_oceanfreight');
 					}
@@ -233,7 +339,7 @@ if(isset($_POST['vehicle_description']) and count($_POST['vehicle_description'])
               }
                 
              //   lq();
-			}
+			
 
 	    }
 	    		$e = $this->db->error(); // Gets the last error that has occured

@@ -63,7 +63,6 @@ background-color: #fff;
             <div class="box-body">
              <form id="form_add_update" name="form_add_update" role="form">
              <div class="alert hidden"></div>
-             <input type="hidden" name="shipment_type" id="shipment_type">
                     <div class="form-group wrap_form">
                                 <h2>Ocean Freight</h2>
                                 <hr>
@@ -89,7 +88,11 @@ background-color: #fff;
                                 
                                 <div class="col-xs-12 col-md-4">
                                     <label>Shipper's Name</label>
+                                    <?php if(isset($row)){?>
+                                      <input type="hidden" name="shipment_type" value="<?php echo $row->shipment_type;?>">
+                                   <?php }else{?>
                                     <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>
+                                    <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>">
                                     
                                         </div>
@@ -161,7 +164,7 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
+                       case 'null':
                          $checked='';                      
                       }
                       }
@@ -178,7 +181,7 @@ if($city['city_id']==$row->shipper_city){
                         case 'yes':
                          $checked='checked';
                           break;
-                       case 'no':
+                       case 'null':
                          $checked='';                      
                       }
                       }
@@ -374,15 +377,15 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                       <div class='row'>
                           <div class='col-md-4'>
                             <label>Shipment Name</label>
-                               <input type='text' name='shipment_name' class='form-control'>
+                               <input type='text' name='shipment_name' class='form-control' value='<?php if(isset($row)){echo $row->shipment_name;}?>'>
                           </div>
                           <div class='col-md-4'>
                             <label>Bill of Landing Number</label>
-                               <input type='text' name='landing_bill_no' class='form-control'>
+                               <input type='text' name='landing_bill_no' class='form-control' value='<?php if(isset($row)){echo $row->landing_bill_no;}?>'>
                           </div>
                           <div class='col-md-4'>
                             <label>Booking Number</label>
-                               <input type='text' name='booking_no' class='form-control'>
+                               <input type='text' name='booking_no' class='form-control' value='<?php if(isset($row)){echo $row->booking_no;}?>'>
                           </div>
                         </div>
                         </div>
@@ -390,15 +393,15 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                       <div class='row'>
                           <div class='col-md-4'>
                             <label>Executed Place</label>
-                               <input type='text' name='executed_place' class='form-control'>
+                               <input type='text' name='executed_place' class='form-control' value='<?php if(isset($row)){echo $row->executed_place;}?>'>
                           </div>
                           <div class='col-md-4'>
                             <label>Executed By</label>
-                               <input type='text' name='executed_by' class='form-control'>
+                               <input type='text' name='executed_by' class='form-control' value='<?php if(isset($row)){echo $row->executed_by;}?>'>
                           </div>
                           <div class='col-md-4'>
                             <label>Executed Date</label>
-                               <input type='date' name='executed_date' class='form-control'>
+                               <input type='date' name='executed_date' class='form-control' value='<?php if(isset($row)){echo $row->executed_date;}?>'>
                           </div>
                         </div>
                         </div>
@@ -406,10 +409,10 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                       <div class='row'>
                           <div class='col-md-6'>
                             <label>Departure Date/Time</label>
-                               <input type='date' name='departure_date' class='form-control'></div>
+                               <input type='date' name='departure_date' class='form-control' value='<?php if(isset($row)){echo $row->departure_date;}?>'></div>
                                <div class='col-md-6'>
                                 <label></label>
-                               <input type='time' name='departure_time' class='form-control'>
+                               <input type='time' name='departure_time' class='form-control' value='<?php if(isset($row)){echo $row->departure_time;}?>'>
                           </div>
                         </div>
                         </div>
@@ -417,10 +420,10 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                       <div class='row'>
                           <div class='col-md-6'>
                             <label>Arrival Date/Time</label>
-                               <input type='date' name='arrival_date' class='form-control'></div>
+                               <input type='date' name='arrival_date' class='form-control' value='<?php if(isset($row)){echo $row->arrival_date;}?>'></div>
                                <div class='col-md-6'>
                                 <label></label>
-                               <input type='time' name='arrival_time' class='form-control'>
+                               <input type='time' name='arrival_time' class='form-control' value='<?php if(isset($row)){echo $row->arrival_time;}?>'>
                           </div>
                         </div>
                         </div>
@@ -428,7 +431,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                           <div class='row'>
                             <div class='col-md-6'>
                               <label>Declared Value</label>
-                                <input type='text' name='declared_value' class='form-control'>
+                                <input type='text' name='declared_value' class='form-control' value='<?php if(isset($row)){echo $row->declared_value;}?>'>
                             </div>
                           </div>
                         </div>
@@ -436,7 +439,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                           <div class='row'>
                             <div class='col-md-12'>
                               <label>Description of Goods</label>
-                                <textarea name='description_of_goods' class='form-control'></textarea>
+                                <textarea name='description_of_goods' class='form-control'><?php if(isset($row)){echo $row->description_of_goods;}?></textarea>
                             </div>
                           </div>
                         </div>
@@ -495,45 +498,45 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             
                             <div class='col-md-6'>
                               <label>Ultimate Consignee</label>
-                                <input type='text' name='ultimate_consignee' class='form-control'>
+                                <input type='text' name='ultimate_consignee' class='form-control' value='<?php if(isset($row)){echo $row->ultimate_consignee;}?>'>
                             </div>
                            
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='ultimate_consignee_address' class='form-control'></textarea>
+                                <textarea name='ultimate_consignee_address' class='form-control'><?php if(isset($row)){echo $row->ultimate_consignee_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Notify Party</label>
-                                <input type='text' name='notify_party' class='form-control'>
+                                <input type='text' name='notify_party' class='form-control' value='<?php if(isset($row)){echo $row->notify_party;}?>'>
                             </div>
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='notify_party_address' class='form-control'></textarea>
+                                <textarea name='notify_party_address' class='form-control'><?php if(isset($row)){echo $row->notify_party_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Intermediate</label>
-                                <input type='text' name='intermediate' class='form-control'>
+                                <input type='text' name='intermediate' class='form-control' value='<?php if(isset($row)){echo $row->intermediate;}?>'>
                             </div>
                             
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='intermediate_address' class='form-control'></textarea>
+                                <textarea name='intermediate_address' class='form-control'><?php if(isset($row)){echo $row->intermediate_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Forwording Agent</label>
-                                <input type='text' name='forwording_agent' class='form-control'>
+                                <input type='text' name='forwording_agent' class='form-control' value='<?php if(isset($row)){echo $row->forwording_agent;}?>'>
                             </div>
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='forwording_agent_address' class='form-control'></textarea>
+                                <textarea name='forwording_agent_address' class='form-control'><?php if(isset($row)){echo $row->forwording_agent_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Destination Agent</label>
-                                <input type='text' name='destination_agent' class='form-control'>
+                                <input type='text' name='destination_agent' class='form-control' value='<?php if(isset($row)){echo $row->destination_agent;}?>'>
                             </div>
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='destination_agent_address' class='form-control'></textarea>
+                                <textarea name='destination_agent_address' class='form-control'><?php if(isset($row)){echo $row->destination_agent_address;}?></textarea>
                             </div>
                           </div>
                           </div>
@@ -544,15 +547,15 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>Service Type</label>
-                                   <input type='text' name='service_type' class='form-control'>
+                                   <input type='text' name='service_type' class='form-control' value='<?php if(isset($row)){echo $row->service_type;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Route</label>
-                                   <input type='text' name='route' class='form-control'>
+                                   <input type='text' name='route' class='form-control' value='<?php if(isset($row)){echo $row->route;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Mode of Transport</label>
-                                   <input type='text' name='mode_of_transport' class='form-control'>
+                                   <input type='text' name='mode_of_transport' class='form-control' value='<?php if(isset($row)){echo $row->mode_of_transport;}?>'>
                               </div>
                             </div>
                           </div>
@@ -561,15 +564,15 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>port of Origin or FTZ No</label>
-                                   <input type='text' name='port_of_origin' class='form-control'>
+                                   <input type='text' name='port_of_origin' class='form-control' value='<?php if(isset($row)){echo $row->port_of_origin;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Pre Carriage By</label>
-                                   <input type='text' name='pre_carriage_by' class='form-control'>
+                                   <input type='text' name='pre_carriage_by' class='form-control' value='<?php if(isset($row)){echo $row->pre_carriage_by;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Place of Receipt by Pre-Carrier</label>
-                                   <input type='text' name='place_of_receipt' class='form-control'>
+                                   <input type='text' name='place_of_receipt' class='form-control' value='<?php if(isset($row)){echo $row->place_of_receipt;}?>'>
                               </div>
                             </div>
                           </div>
@@ -580,15 +583,15 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>Loading Pier or Terminal</label>
-                                   <input type='text' name='loading_pier' class='form-control'>
+                                   <input type='text' name='loading_pier' class='form-control' value='<?php if(isset($row)){echo $row->loading_pier;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Port of Loading</label>
-                                   <input type='text' name='port_of_loading' class='form-control'>
+                                   <input type='text' name='port_of_loading' class='form-control' value='<?php if(isset($row)){echo $row->port_of_loading;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Exporting Carrier</label>
-                                   <input type='text' name='exporting_carrier' class='form-control'>
+                                   <input type='text' name='exporting_carrier' class='form-control' value='<?php if(isset($row)){echo $row->exporting_carrier;}?>'>
                               </div>
                             </div>
                           </div>
@@ -596,11 +599,11 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>Vessel Name and Flag</label>
-                                   <input type='text' name='vessel_name' class='form-control'>
+                                   <input type='text' name='vessel_name' class='form-control' value='<?php if(isset($row)){echo $row->vessel_name;}?>'>
                           </div>
                               <div class='col-md-4'>
                                  <label>Voyage Identification</label>
-                                   <input type='text' name='voyage_identification' class='form-control'>
+                                   <input type='text' name='voyage_identification' class='form-control' value='<?php if(isset($row)){echo $row->voyage_identification;}?>'>
                               </div>
                             </div>
                           </div>
@@ -609,15 +612,15 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             <div class='row'>
                               <div class='col-md-4'>
                                  <label>Port of Unloading</label>
-                                   <input type='text' name='port_of_unloading' class='form-control'>
+                                   <input type='text' name='port_of_unloading' class='form-control' value='<?php if(isset($row)){echo $row->port_of_unloading;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>On Carriage By</label>
-                                   <input type='text' name='on_carriage_by' class='form-control'>
+                                   <input type='text' name='on_carriage_by' class='form-control' value='<?php if(isset($row)){echo $row->on_carriage_by;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Place of Delivery by on-Carrier</label>
-                                   <input type='text' name='place_of_delivery' class='form-control'>
+                                   <input type='text' name='place_of_delivery' class='form-control' value='<?php if(isset($row)){echo $row->place_of_delivery;}?>'>
                               </div>
                             </div>
                           </div>

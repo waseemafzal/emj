@@ -63,7 +63,18 @@ function commonjs(){
 	$CI = &get_instance();
 	return $CI->load->view("admin/myscript");
 }
-
+ function getCategory(){
+	$CI = &get_instance();
+	return $CI->db->where('parent', 0)->get('categories')->result_array();
+ }
+ function getSubcategory($id){
+	$CI = &get_instance();
+    return $CI->db->where('parent', $id)->get('categories')->result_array();  
+ }
+ function getSubchild($id){
+	$CI = &get_instance();
+    return $CI->db->where('parent', $id)->get('categories')->result_array();  
+ }
   function getSetting($processing_fee='',$servicecharges ='',$settingcol='')
 	{
    // servicecharges work here

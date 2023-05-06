@@ -253,6 +253,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	}
 	function save(){ 
 		extract($_POST);
+		//var_dump($_POST);
 		//    echo "<pre>";
 		//    print_r($_POST);
 		//    exit;
@@ -348,7 +349,7 @@ $mess = $e['message'];
 		switch($result){
 			case 1:
 			
-			$arr = array('status' => 1,'message' => "Inserted Succefully !");
+			$arr = array('status' => 1,'message' => "Inserted Succefully !", 'primary_id'=>$insrtID);
 			echo json_encode($arr);
 			break;
 			case 2:

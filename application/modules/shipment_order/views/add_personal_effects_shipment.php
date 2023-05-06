@@ -429,7 +429,36 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
     </section>
     <!-- /.content -->
   </div>
-  
+  <div class='modal fade' id="saveModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+       <div class="modal-header text-white bg-green">
+         <h3 class="modal-title">Directories Modal</h3>
+       <button class="close" style='color:white' data-dismiss="modal"><span>&times;</span></button>
+       </div>
+       <div class="modal-body">
+      <?php 
+       $categories = getCategory();
+foreach($categories as $category){
+   $subcategory=getSubcategory($category['id']);
+?>
+   <h1><?php echo $category['title'];?></h1>
+   <?php foreach($subcategory as $subcat){
+      $subchilds = getSubchild($subcat['id']);
+    ?>
+   <div><h1><?php echo '<i class="fa fa-folder" style="font-size:30px"></i>&nbsp;' .$subcat['title'];?></h1></div>
+   <?php foreach($subchilds as $subchild){?>
+   <h1><?php echo $subchild['title'];?></h1>
+   <?php }}}?>
+      </div>
+     <div class="modal-footer">
+       <button class="btn btn-success" type="button">Save</button>
+       <button class='btn btn-danger' data-dismiss='modal'>Close</button>
+     </div>
+     
+     </div>
+</div>
+</div>  
   <?php  getFooter(); ?>
 
     <!-- Scroll to Top Button-->
@@ -615,6 +644,7 @@ $(document).ready(function(){
             if (data.status == 1)
             {   
                 $(".alert").addClass('alert-success');
+                $('#saveModal').modal('show');
                 $(".alert").html(data.message);
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){

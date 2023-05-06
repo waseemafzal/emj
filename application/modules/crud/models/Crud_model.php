@@ -210,6 +210,7 @@ function send_mail($to,$from,$from_heading,$subject,$htmlContent){
 			// if id exist then update
 			$this->db->where('id', $id);
 				$result=$this->db->update($table,$data_array); 
+				//echo $this->db->last_query();
 				//echo $this->db->last_query(); die;
 				if ($result){
 					return 2;

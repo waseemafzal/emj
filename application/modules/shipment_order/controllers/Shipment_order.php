@@ -233,6 +233,15 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		//pre($aData);
 		$this->load->view('add_vehicle_shipment', $aData);
 	}
+	public function storeDirectory(){
+		extract($_POST);
+		//print_r($_POST);exit;
+		$data = $this->db->insert('history', $_POST);
+	if($data){
+		$arr = array('status'=>200, 'message'=>'Data has been saved successfully');
+	}
+	echo json_encode($arr);
+	}
 	public function delete(){ 
 		extract($_POST);
 		$result =$this->crud->delete($id,$this->tbl);

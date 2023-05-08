@@ -441,49 +441,20 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
        </div>
        <div class="modal-body">
        <input type="hidden" id="last_insert_id_input" name='shipment_order_id'>
-      <ul class="sidebar-menu" data-widget="tree">
-       <li class="treeview">
-          <a href="javascript:void(0)">
-            <i class="fa fa-share"></i> <span>Directories</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="treeview">
-            <?php 
-              $categories = getCategory();
-              foreach($categories as $category){
-              $subcategory=getSubcategory($category['id']);
-              ?>
-              <a href="javascript:void(0)"><i class="fa fa-circle-o"></i><?php echo $category['title']?>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                      <?php foreach($subcategory as $subcat){
-                          $subchilds = getSubchild($subcat['id']);
-                    ?>
-                <li><a href="javascript:void(0)"><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?></a></li>
-                <li class="treeview">
-                    <?php foreach($subchilds as $subchild){?>
-                        <a href="#"><i class="fa fa-circle-o"></i> <?php echo $subchild['title']?>
-                          <span class="pull-right-container">
-                             <i class="fa fa-angle-left pull-right"></i>
-                      </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <?php }}}?>
-          </ul>
-        </li> 
-</ul>
+      <?php 
+       $categories = getCategory();
+foreach($categories as $category){
+   $subcategory=getSubcategory($category['id']);
+?>
+
+   <h1><a href="javascript:void(0)" data-id='<?php echo $category['id'];?>' onclick='saveModalData(event)'><?php echo $category['title'];?></a></h1>
+   <?php foreach($subcategory as $subcat){
+      $subchilds = getSubchild($subcat['id']);
+    ?>
+   <h1 style='margin-left:40px'><i class="fa fa-folder" style="font-size:30px"></i>&nbsp;<a href="javascript:void(0)" onclick='saveModalData(event)' data-id="<?php echo $subcat['id'];?>"><?php echo $subcat['title'];?></a></h1>
+   <?php foreach($subchilds as $subchild){?>
+   <h1 style='margin-left: 180px'><a href='javascript:void(0)' onclick='saveModalData(event)' style='margin-top:-5px' data-id='<?php echo $subchild['id'];?>'>&nbsp;<?php echo $subchild['title'];?></a></h1>
+   <?php }}}?>
       </div>
      <div class="modal-footer">
        <button class="btn btn-success" type="button">Save</button>

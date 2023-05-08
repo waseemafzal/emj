@@ -12,6 +12,10 @@ $Heading=   $module_heading;
     .box-primary {
     margin:5px 2px; 
         }
+        a[data-id]:hover {
+  background-color: black;
+  color: #fff;
+}
     .box-primary img{
         min-width:200px;
         min-height: 200px;
@@ -668,18 +672,19 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
        <button class="close" style='color:white' data-dismiss="modal"><span>&times;</span></button>
        </div>
        <div class="modal-body">
+       <input type="hidden" id="last_insert_id_input" name='shipment_order_id'>
       <?php 
        $categories = getCategory();
 foreach($categories as $category){
    $subcategory=getSubcategory($category['id']);
 ?>
-   <h1><?php echo $category['title'];?></h1>
+   <h1><a href="javascript:void(0)" data-id='<?php echo $category['id'];?>' onclick='saveModalData(event)'><?php echo $category['title'];?></a></h1>
    <?php foreach($subcategory as $subcat){
       $subchilds = getSubchild($subcat['id']);
     ?>
-   <div><h1><?php echo '<i class="fa fa-folder" style="font-size:30px"></i>&nbsp;' .$subcat['title'];?></h1></div>
+   <h1 style='margin-left:40px'><i class="fa fa-folder" style="font-size:30px"></i>&nbsp;<a href="javascript:void(0)" onclick='saveModalData(event)' data-id="<?php echo $subcat['id'];?>"><?php echo $subcat['title'];?></a></h1>
    <?php foreach($subchilds as $subchild){?>
-   <h1><?php echo $subchild['title'];?></h1>
+   <h1 style='margin-left: 180px'><a href='javascript:void(0)' onclick='saveModalData(event)' style='margin-top:-5px' data-id='<?php echo $subchild['id'];?>'>&nbsp;<?php echo $subchild['title'];?></a></h1>
    <?php }}}?>
       </div>
      <div class="modal-footer">
@@ -882,7 +887,9 @@ $(document).ready(function(){
             if (data.status == 1)
             {   
                 $(".alert").addClass('alert-success');
+                var id = data.primary_id;
                 $('#saveModal').modal('show');
+                $('#saveModal').find('#last_insert_id_input').val(id); // Set the value of the hidden input field to the id
                 $(".alert").html(data.message);
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){
@@ -1045,4 +1052,33 @@ $("#<?=$btn?>").addClass('active');
 	<?php }
 ?>
 </script>
+<script>
+   function saveModalData(event){
+    var id = $('#last_insert_id_input').val();
+    var selectedSubcategoryId = event.target.getAttribute('data-id');   
+    var formdata = new FormData();
+    formdata.append('cat_id', selectedSubcategoryId);
+    formdata.append('shipment_order_id', id);
+  $.ajax({
+      type: "POST",
+      url: "<?php echo base_url()?>shipment_order/storeDirectory",
+      data: formdata,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'JSON',
+      beforeSend: function() {
+      $('#loader').removeClass('hidden');
+    //  $('#form_add_update .btn_au').addClass('hidden');
+      },
+      success: function(data){
+        $('#loader').addClass('hidden');
+        if(data.status==200){
+          alert(data.message);
+        }
+        $('#saveModal').modal('hide');
+           }
+   });
 
+}
+</script>

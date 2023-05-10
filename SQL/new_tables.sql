@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 08, 2023 at 01:33 PM
+-- Generation Time: May 10, 2023 at 06:47 AM
 -- Server version: 8.0.27
 -- PHP Version: 7.4.26
 
@@ -24,6 +24,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `parent` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '1',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'catdefault.png',
+  `icon_class` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `title`, `parent`, `status`, `image`, `icon_class`) VALUES
+(1, '2020', '0', 1, 'catdefault.png', 'fa fa-folder'),
+(2, '2021', '0', 1, 'catdefault.png', 'fa fa-folder'),
+(3, '2022', '0', 1, 'catdefault.png', 'fa fa-folder'),
+(4, '2023', '0', 1, 'catdefault.png', 'fa fa-folder'),
+(5, 'january', '1', 1, 'catdefault.png', 'fa fa-folder'),
+(6, 'february', '1', 1, 'catdefault.png', 'fa fa-folder'),
+(7, 'ABL', '5', 1, 'catdefault.png', NULL),
+(8, 'HCL', '5', 1, 'catdefault.png', NULL),
+(9, 'march', '2', 1, 'catdefault.png', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `history`
 --
 
@@ -33,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `history` (
   `shipment_order_id` int NOT NULL,
   `cat_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `history`
@@ -90,21 +122,23 @@ INSERT INTO `history` (`id`, `shipment_order_id`, `cat_id`) VALUES
 (48, 275, 8),
 (49, 276, 6),
 (50, 277, 2),
-(51, 278, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mailing`
---
-
-DROP TABLE IF EXISTS `mailing`;
-CREATE TABLE IF NOT EXISTS `mailing` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+(51, 278, 2),
+(52, 336, 1),
+(53, 337, 0),
+(54, 367, 0),
+(55, 428, 9),
+(56, 429, 2),
+(57, 430, 8),
+(58, 431, 5),
+(59, 439, 5),
+(60, 448, 9),
+(61, 451, 7),
+(62, 452, 1),
+(63, 453, 0),
+(64, 454, 5),
+(65, 455, 4),
+(66, 456, 4),
+(67, 457, 3);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

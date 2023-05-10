@@ -16,8 +16,12 @@ $Heading=   $module_heading;
         min-width:200px;
         min-height: 200px;
        }
-       a[data-id]:hover {
+       /* a[data-id]:hover {
   background-color: black;
+  color: #fff;
+} */
+.active_category{
+  background-color: red;
   color: #fff;
 }
     div.center{
@@ -31,6 +35,7 @@ background-color: #fff;
     top: 10%;
     width: 50%;
 }
+.
 .button>.active{
   border-bottom: 2px solid red;
 }
@@ -441,52 +446,60 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
        </div>
        <div class="modal-body">
        <input type="hidden" id="last_insert_id_input" name='shipment_order_id'>
-      <ul class="sidebar-menu" data-widget="tree">
+       <ul class="sidebar-menu" data-widget="tree">
        <li class="treeview">
-          <a href="javascript:void(0)">
-            <i class="fa fa-share"></i> <span>Directories</span>
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Directory</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="treeview">
             <?php 
-              $categories = getCategory();
-              foreach($categories as $category){
-              $subcategory=getSubcategory($category['id']);
-              ?>
-              <a href="javascript:void(0)"><i class="fa fa-circle-o"></i><?php echo $category['title']?>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                      <?php foreach($subcategory as $subcat){
-                          $subchilds = getSubchild($subcat['id']);
-                    ?>
-                <li><a href="javascript:void(0)"><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?></a></li>
+       $categories = getCategory();
+          foreach($categories as $category){
+            $subcategory=getSubcategory($category['id']);
+              if(count($subcategory)>0){?>
+    <li class="treeview">
+    <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $category['id'];?>'><i class="fa fa-circle-o"></i><?php echo $category['title'];?> 
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+   <ul class="treeview-menu">
+              <?php foreach($subcategory as $subcat){
+      $subchilds = getSubchild($subcat['id']);
+if(count($subchilds)>0){
+    ?>
                 <li class="treeview">
-                    <?php foreach($subchilds as $subchild){?>
-                        <a href="#"><i class="fa fa-circle-o"></i> <?php echo $subchild['title']?>
-                          <span class="pull-right-container">
-                             <i class="fa fa-angle-left pull-right"></i>
-                      </span>
+                  <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <?php foreach($subchilds as $subchild){?>
+                       <li><a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subchild['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subchild['title']?></a></li>
+                       <?php }}else{?>
+                         <li class="treeview">
+                         <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?>
+                         </a>
+                      <?php }?>
                   </ul>
                 </li>
-              </ul>
+                <?php }}else{?>
+            <li class="treeview">
+              <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $category['id'];?>'><i class="fa fa-circle-o"></i><?php echo $category['title'];?> 
+              </a>
             </li>
-            <?php }}}?>
-          </ul>
-        </li> 
-</ul>
+            <?php }}?>
+            </ul>
+        </li>
+      </ul>
       </div>
      <div class="modal-footer">
-       <button class="btn btn-success" type="button">Save</button>
+       <button class="btn btn-success" onclick='saveModalData()' type="button">Save</button>
+       <input type='hidden' >
        <button class='btn btn-danger' data-dismiss='modal'>Close</button>
      </div>
      
@@ -580,15 +593,6 @@ console.log('id'+id);
 		});
 
 	}
-
-$(function(){
-
-  $('.button').click(function () {
-    $('.button').removeClass("active");
-    $(this).addClass("active");
-  });
-
-});
 </script>
 <script type="text/javascript">
 function preview_image() 
@@ -844,11 +848,12 @@ $("#<?=$btn?>").addClass('active');
 ?>
 </script>
 <script>
- function saveModalData(event){
+ function saveModalData(){
     var id = $('#last_insert_id_input').val();
-    var selectedSubcategoryId = event.target.getAttribute('data-id');   
+    var cat_id = $('.active_category').attr('data-id');
+    //var selectedSubcategoryId = event.target.getAttribute('data-id');   
     var formdata = new FormData();
-    formdata.append('cat_id', selectedSubcategoryId);
+    formdata.append('cat_id', cat_id);
     formdata.append('shipment_order_id', id);
   $.ajax({
       type: "POST",
@@ -872,4 +877,32 @@ $("#<?=$btn?>").addClass('active');
    });
 
 }
+</script>
+<script>
+  let lastSelectedDataId = null;
+
+  function linkClicked(event) {
+    event.preventDefault();
+    
+    // Get the data-id value of the clicked link
+    let dataId = event.target.getAttribute('data-id');
+    
+    // Update the lastSelectedDataId variable
+    lastSelectedDataId = dataId;
+  }
+
+  function saveClicked() {
+    // Display the lastSelectedDataId value
+    console.log(lastSelectedDataId);
+  }
+</script>
+<script>
+$(function(){
+
+  $('a').click(function () {
+    $('a').removeClass("active_category");
+    $(this).addClass("active_category");
+  });
+
+});
 </script>

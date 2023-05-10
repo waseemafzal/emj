@@ -16,6 +16,10 @@ $Heading=   $module_heading;
   background-color: black;
   color: #fff;
 }
+.active_category{
+  background-color: red;
+  color: #fff;
+}
     .box-primary img{
         min-width:200px;
         min-height: 200px;
@@ -673,22 +677,60 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
        </div>
        <div class="modal-body">
        <input type="hidden" id="last_insert_id_input" name='shipment_order_id'>
-      <?php 
+       <ul class="sidebar-menu" data-widget="tree">
+       <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Directory</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <?php 
        $categories = getCategory();
-foreach($categories as $category){
-   $subcategory=getSubcategory($category['id']);
-?>
-   <h1><a href="javascript:void(0)" data-id='<?php echo $category['id'];?>' onclick='saveModalData(event)'><?php echo $category['title'];?></a></h1>
-   <?php foreach($subcategory as $subcat){
+          foreach($categories as $category){
+            $subcategory=getSubcategory($category['id']);
+              if(count($subcategory)>0){?>
+    <li class="treeview">
+    <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $category['id'];?>'><i class="fa fa-circle-o"></i><?php echo $category['title'];?> 
+      <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+    </a>
+   <ul class="treeview-menu">
+              <?php foreach($subcategory as $subcat){
       $subchilds = getSubchild($subcat['id']);
+if(count($subchilds)>0){
     ?>
-   <h1 style='margin-left:40px'><i class="fa fa-folder" style="font-size:30px"></i>&nbsp;<a href="javascript:void(0)" onclick='saveModalData(event)' data-id="<?php echo $subcat['id'];?>"><?php echo $subcat['title'];?></a></h1>
-   <?php foreach($subchilds as $subchild){?>
-   <h1 style='margin-left: 180px'><a href='javascript:void(0)' onclick='saveModalData(event)' style='margin-top:-5px' data-id='<?php echo $subchild['id'];?>'>&nbsp;<?php echo $subchild['title'];?></a></h1>
-   <?php }}}?>
+                <li class="treeview">
+                  <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <?php foreach($subchilds as $subchild){?>
+                       <li><a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subchild['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subchild['title']?></a></li>
+                       <?php }}else{?>
+                         <li class="treeview">
+                         <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?>
+                         </a>
+                      <?php }?>
+                  </ul>
+                </li>
+                <?php }}else{?>
+            <li class="treeview">
+              <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $category['id'];?>'><i class="fa fa-circle-o"></i><?php echo $category['title'];?> 
+              </a>
+            </li>
+            <?php }}?>
+            </ul>
+        </li>
+      </ul>
       </div>
      <div class="modal-footer">
-       <button class="btn btn-success" type="button">Save</button>
+       <button class="btn btn-success" onclick='saveModalData()' type="button">Save</button>
+       <input type='hidden' >
        <button class='btn btn-danger' data-dismiss='modal'>Close</button>
      </div>
      
@@ -1053,11 +1095,12 @@ $("#<?=$btn?>").addClass('active');
 ?>
 </script>
 <script>
-   function saveModalData(event){
+ function saveModalData(){
     var id = $('#last_insert_id_input').val();
-    var selectedSubcategoryId = event.target.getAttribute('data-id');   
+    var cat_id = $('.active_category').attr('data-id');
+    //var selectedSubcategoryId = event.target.getAttribute('data-id');   
     var formdata = new FormData();
-    formdata.append('cat_id', selectedSubcategoryId);
+    formdata.append('cat_id', cat_id);
     formdata.append('shipment_order_id', id);
   $.ajax({
       type: "POST",
@@ -1081,4 +1124,14 @@ $("#<?=$btn?>").addClass('active');
    });
 
 }
+</script>
+<script>
+$(function(){
+
+  $('a').click(function () {
+    $('a').removeClass("active_category");
+    $(this).addClass("active_category");
+  });
+
+});
 </script>

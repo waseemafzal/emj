@@ -74,7 +74,11 @@ background-color: #fff;
                                     <input type="text" class="form-control" id="title" name="title"  value= "<?php if(isset($row)){echo $row->title;}?>">
                                     
                                         </div>
-                                          <div  class="col-md-6">
+                                  </div>
+                                  </div>
+                                <div class='form-group'>
+                                  <div class="row">
+                                          <div  class="col-md-12">
                                     <label>Description</label>
                                     <textarea type="text" name="description" id="description"  class="form-control"><?php if(isset($row)){echo $row->description;}?></textarea>
                                     <input type='hidden' name='id' value='<?php if(isset($row)){echo $row->id;}?>'> 
@@ -118,7 +122,13 @@ background-color: #fff;
 </body>
 
 </html>
+<script type="text/javascript" src="bower_components/ckeditor/ckeditor.js"></script>   
+<script type="text/javascript">
+    $(function(){
+           CKEDITOR.replace('description');
 
+    });
+</script>
 <script>
   /**********************************save************************************/
      $('#form_add_update').on("submit",function(e) {
@@ -128,6 +138,10 @@ background-color: #fff;
         $.each(other_data,function(key,input){
         formData.append(input.name,input.value);
         });
+        if(window.CKEDITOR){
+            description = CKEDITOR.instances.description.getData();
+            formData.append("description", description);
+         }
     // ajax start
             $.ajax({
             type: "POST",

@@ -67,6 +67,24 @@ function commonjs(){
 	$CI = &get_instance();
 	return $CI->db->where('parent', 0)->get('categories')->result_array();
  }
+ function getSubcathistory($id){
+	$CI = &get_instance();
+  $join = $CI->db->select('history.*, shipment_orders.*')
+     ->from('history')
+     ->where('history.cat_id', $id)
+     ->join('shipment_orders', 'shipment_orders.id = history.shipment_order_id')
+     ->get()->result_array();
+	 return $join;
+ }
+ function getSubchildhistory($id){
+  $CI = &get_instance();
+  $join = $CI->db->select('history.*, shipment_orders.*')
+     ->from('history')
+     ->where('history.cat_id', $id)
+     ->join('shipment_orders', 'shipment_orders.id = history.shipment_order_id')
+     ->get()->result_array();
+	 return $join;
+ }
  function getSubcategory($id){
 	$CI = &get_instance();
     return $CI->db->where('parent', $id)->get('categories')->result_array();  

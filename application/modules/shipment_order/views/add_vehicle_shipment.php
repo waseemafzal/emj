@@ -86,16 +86,16 @@ background-color: #fff;
                                     <?php }}else{?>
                                     <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>            
                                     <?php }?>
-                                    <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>">
+                                    <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>" required>
                                     
                                         </div>
                                           <div id="shipper_phone" class="col-md-4">
                                     <label>Shipper's Phone</label>
-                                    <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>">
+                                    <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>" required>
                                   </div>
                                     <div class="col-xs-12 col-md-4">
                                       <label>Select State</label>
-                                    <select name="shipper_state" id="shipper_state" class="form-control">
+                                    <select name="shipper_state" id="shipper_state" class="form-control" required>
                                       <option value="">Select State</option>
                                       <?php
                                       foreach($nigerianStates as $state)
@@ -115,7 +115,7 @@ background-color: #fff;
   <div class='form-group'><div class='row'>
   <div class="col-xs-12 col-md-4">
     <label>Select city</label>
-   <select name="shipper_city" id="shipper_city" class="form-control">
+   <select name="shipper_city" id="shipper_city" class="form-control" required>
     <option>Select City</option>
    <?php 
 //nigeriancities
@@ -145,7 +145,7 @@ if($city['city_id']==$row->shipper_city){
   </div>
   <div class="form-group"  id="shipper_address">
                                    <label>Address</label>
-                                   <textarea type="text" name="shipper_address" class="form-control"><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
+                                   <textarea type="text" name="shipper_address" class="form-control" required><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
                                     </div>
  
                     <div class='form-group'><div class='row'>
@@ -209,8 +209,8 @@ if($city['city_id']==$row->shipper_city){
                       ?>
                                     <label>Delivery Type</label>
                                     <br>
-                                    <input type="radio" <?php echo  $home?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
-                                     <input type="radio" <?php echo  $warehouse?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
+                                    <input type="radio" <?php echo  $home?> id="delivery_type" name="delivery_type" value = "home" required>  Home &nbsp;&nbsp;
+                                     <input type="radio" <?php echo  $warehouse?> id="delivery_type" name="delivery_type" value="lagos warehouse" required>  Lagos Warehouse
                                         </div><hr>
                                <h3>Consignee Details</h3>
                                 
@@ -219,7 +219,7 @@ if($city['city_id']==$row->shipper_city){
                                             <div class="col-md-4">
                                     <label>Consignee's Name</label>
                                     
-                                    <input type="text" class="form-control" id="consignee_name" name="consignee_name" value="<?php if(isset($row)){ echo $row->consignee_name;} ?>">
+                                    <input type="text" class="form-control" id="consignee_name" name="consignee_name" value="<?php if(isset($row)){ echo $row->consignee_name;} ?>" required>
                                     
                                         </div>
                                          
@@ -227,7 +227,7 @@ if($city['city_id']==$row->shipper_city){
                                         <div class="col-md-4">
                                     <label>Consignee's Phone</label>
                                     
-                                    <input type="number" class="form-control" id="consignee_phone" name="consignee_phone" value="<?php if(isset($row)){ echo $row->consignee_phone;} ?>">
+                                    <input type="number" class="form-control" id="consignee_phone" name="consignee_phone" value="<?php if(isset($row)){ echo $row->consignee_phone;} ?>" required>
                                     
                                         </div>   
                                       </div></div>
@@ -235,14 +235,14 @@ if($city['city_id']==$row->shipper_city){
                                         <div class="row">
                                           <div class="col-xs-12 col-md-12">
                                             <label>Consignee's Address</label>
-                                            <textarea class="form-control" name="consignee_address"><?php if(isset($row)){ echo $row->consignee_address;} ?></textarea>
+                                            <textarea class="form-control" name="consignee_address" required><?php if(isset($row)){ echo $row->consignee_address;} ?></textarea>
                                           </div>
                                         </div>
                                       </div>
                                              <div class="form-group">
                                      <div class="row">
                                <div class="col-xs-12 col-md-4">
-   <select name="consignee_country" id="consignee_country" class="form-control">
+   <select name="consignee_country" id="consignee_country" class="form-control" required>
     <option value="">Select Country</option>
     <?php
     
@@ -260,7 +260,7 @@ echo '<option '.$selectedCountry.' value="'.$country->id.'">'.$country->name.'</
   </div>
   
   <div class="col-xs-12 col-md-4">
-   <select name="consignee_state" id="consignee_state" class="form-control">
+   <select name="consignee_state" id="consignee_state" class="form-control" required>
     <option value="">Select State</option>
     <?php
     
@@ -282,7 +282,7 @@ echo '<option '.$selectedState.' value="'.$selectstate['state_id'].'">'.$selects
   </div>
   
   <div class="col-xs-12 col-md-4">
-   <select name="consignee_city" id="consignee_city" class="form-control">
+   <select name="consignee_city" id="consignee_city" class="form-control" required>
     <option value="">Select City</option>
      <?php
 
@@ -405,16 +405,16 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                    <div class="row">
                                      <div class="col-md-4">
                                        <label>From City</label>
-                                       <input type="text" name="shipment_from" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_from;} ?>">
+                                       <input type="text" name="shipment_from" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_from;} ?>" required>
                                      </div>
                                      <div class="col-md-4">
                                        <label>To City</label>
-                                       <input type="text" name="shipment_to" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_to;} ?>">
+                                       <input type="text" name="shipment_to" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_to;} ?>" required>
                                      </div>
 
                                      <div class="col-md-4">
                                        <label>Shipment Date</label>
-                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
+                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>" required>
                                        <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
                                      </div>
                                    </div>

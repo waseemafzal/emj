@@ -51,10 +51,10 @@ $Heading=	$module_heading;
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
-<!--        <th>Status</th>
+        <th>Status</th>
         <th>Dock Receipt</th>
         <th>Invoice</th>
--->        <th>Actions</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -76,7 +76,7 @@ $Heading=	$module_heading;
     <td><?php echo $row->consignee_name;?></td>
     <td><?php echo $row->consignee_phone;?></td>   
     <td><?php echo $row->consignee_address;?></td>
-  <?php /*?>  <td>  
+    <td>  
       <select id="status_change" onchange="updateStatus('<?php echo $row->id;?>', this.value)">
            <?php 
              $query = $this->db->get('shipment_status')->result_array();
@@ -102,7 +102,7 @@ $Heading=	$module_heading;
          </td>
           <td>
             <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Invoice</a>
-         </td><?php */?>
+         </td>
          
     <td class="center">
             

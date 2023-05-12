@@ -51,6 +51,29 @@
         
         </ul>
       </li>
+      
+      <li class="treeview">
+          <a href="#">
+             <i class="fa fa-home"></i>
+                 <span>Create Shipment</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                                     </span>
+          </a>
+      
+          <ul class="treeview-menu">
+
+         
+          <li><a href="shipment_order/add_personal_effects?shipment_type=1" ><i style='font-size:20px' class="fa fa-user"></i> Personal Effects</a></li>
+          
+          <li><a href="shipment_order/add_ocean_shipment?shipment_type=2"><i style='font-size:20px' class="fa fa-ship icon-white"></i> Ocean Freight</a></li>
+          <li><a href="shipment_order/add_air_shipment?shipment_type=3" ><i style='font-size:20px' class="fa fa-plane icon-white"></i> Air Freight</a></li>
+          <li><a href="shipment_order/add_vehicle_shipment?shipment_type=4" ><i style='font-size:20px' class="fa fa-truck icon-white"></i> Vehicle Shipment</a></li>
+          
+        
+        </ul>
+      </li>
+      
       <li class="treeview">
           <a href="#">
              <i class="fa fa-cog"></i>

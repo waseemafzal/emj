@@ -11,9 +11,6 @@ $Heading=	$module_heading;
     color: #fff; 
     opacity: 1;
 }
-.selectedRow{
-    background-color: gainsboro;
-}
    </style>
   
 <div class="content-wrapper">
@@ -24,10 +21,10 @@ $Heading=	$module_heading;
         
       </h1>
       <ol class="breadcrumb">
-      <li > <a href="javascript:void()" onclick="updateShipment_type(1)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-user"></i> Personal Effects</a></li>
-      <li > <a  href="javascript:void()" onclick="updateShipment_type(2)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-ship icon-white"></i> Ocean Freight</a></li>
-      <li > <a  href="javascript:void()" onclick="updateShipment_type(3)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-plane icon-white"></i> Air Freight</a></li>
-        <li > <a  href="javascript:void()" onclick="updateShipment_type(4)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-truck icon-white"></i> Vehicle Shipment</a></li>
+      <li > <a href="<?=$controller?>/add_personal_effects?shipment_type=1" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-user"></i> Personal Effects</a></li>
+      <li > <a href="<?=$controller?>/add_ocean_shipment?shipment_type=2" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-ship icon-white"></i> Ocean Freight</a></li>
+      <li > <a href="<?=$controller?>/add_air_shipment?shipment_type=3" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-plane icon-white"></i> Air Freight</a></li>
+        <li > <a href="<?=$controller?>/add_vehicle_shipment?shipment_type=4" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-truck icon-white"></i> Vehicle Shipment</a></li>
       </ol>
     </section>
     <!-- Main content -->
@@ -43,18 +40,16 @@ $Heading=	$module_heading;
                 <table id="post_table" class="table table-bordered responsive">
     <thead>
     <tr>
-    <th></th>
         <th>Track Number</th>
-        <th>Type</th>
         <th>Shipper Name</th>
 		<th>Shipper Address</th>
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
-<!--        <th>Status</th>
+        <th>Status</th>
         <th>Dock Receipt</th>
         <th>Invoice</th>
--->        <th>Actions</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -65,10 +60,8 @@ $Heading=	$module_heading;
 		
 		?>
 		<tr id="row_<?php echo $row->id;?>">
-        <td><input type="checkbox" class="chkshipment" id="shipment_id<?php echo$row->id;?>" name="shipment_id" value="<?php echo $row->id;?>" /></td>
+        
 	<td align="center"><?php echo $row->track_number;?></td>
-    	<td align="center"><?php echo $row->type;?></td>
-
     <td><?php echo $row->shipper_name;?></td>
     <td><?php echo $row->shipper_address;?></td>
     
@@ -76,7 +69,7 @@ $Heading=	$module_heading;
     <td><?php echo $row->consignee_name;?></td>
     <td><?php echo $row->consignee_phone;?></td>   
     <td><?php echo $row->consignee_address;?></td>
-  <?php /*?>  <td>  
+    <td>  
       <select id="status_change" onchange="updateStatus('<?php echo $row->id;?>', this.value)">
            <?php 
              $query = $this->db->get('shipment_status')->result_array();
@@ -102,7 +95,7 @@ $Heading=	$module_heading;
          </td>
           <td>
             <a href="<?=$controller?>/generateinvoice/<?php echo $row->id;?>" class="btn btn-xs btn-success txt-white"><i class="fa fa-plus icon-white"></i>Invoice</a>
-         </td><?php */?>
+         </td>
          
     <td class="center">
             
@@ -329,46 +322,6 @@ $('#post_table').dataTable( {
         //        }
               }
     });
-  }
-  
-  
-  
-
-// Attach a click event listener to a button with the ID 'check-shipment'
-$('.chkshipment').on('click', function() {
-	$('.chkshipment').prop('checked', false);
-	$(this).prop('checked', true);
-	$('#post_table tr').removeClass('selectedRow');
-	$(this).parent().parent().addClass('selectedRow');
-});
-function updateShipment_type(shipment_type){
-
- var formData = new FormData();
- var id= $('.chkshipment:checked').val();
- formData.append("id", id);
- formData.append("shipment_type", shipment_type);
-  // ajax start
-        $.ajax({
-      type: "POST",
-      url: "<?php echo base_url()?>shipment_order/updateShipment_type",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: 'JSON',
-      beforeSend: function() {
-      $('#loader').removeClass('hidden');
-    //  $('#form_add_update .btn_au').addClass('hidden');
-      },
-      success: function(data){
-        $('#loader').addClass('hidden');
-        if(data.status==200){
-          //alert('Status has been changed successfully');
-		  window.location.href = '<?php echo base_url()?>shipment_order/edit/'+id+'/'+shipment_type;
-        }
-           }
-   });
-
   }
 </script>
   

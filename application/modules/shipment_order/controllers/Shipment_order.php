@@ -21,7 +21,10 @@ class Shipment_order extends MX_Controller {
 	/************Configuration of form and End*********************/
 	public function index(){  
 
-		$aData['data'] =$this->db->query("SELECT p.* FROM ".$this->tbl." as p");
+		$aData['data'] =$this->db->query("SELECT p.*,t.type FROM ".$this->tbl." as p 
+		join shipment_types as t on t.id=p.shipment_type
+		
+		");
 		$aData['tbl'] =$this->tbl;
 		$aData['module_heading'] =$this->module_heading;
 	    
@@ -442,6 +445,16 @@ public function updateStatus(){
 	extract($_POST);//pre($_POST);
        $response = array('status'=>201, 'message'=>'Not Updated');
       $query = $this->db->where('id', $id)->update('shipment_orders', array('shipment_status'=>$status));
+      if($query){
+      	$response = array('status'=>200, 'message'=>'Updated Successfully');
+      }
+      echo json_encode($response);
+}
+
+public function updateShipment_type(){
+	extract($_POST);//pre($_POST);
+       $response = array('status'=>201, 'message'=>'Not Updated');
+      $query = $this->db->where('id', $id)->update('shipment_orders', array('shipment_type'=>$shipment_type));
       if($query){
       	$response = array('status'=>200, 'message'=>'Updated Successfully');
       }

@@ -459,7 +459,40 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                    </div>
                                  <?php 
 								 $v++;
-								 }}}
+								 }}else{?>
+									 <div class="form-group field_wrapper" id="vehicles">
+                                   <div class="row">
+                                    <div class="col-md-3">
+                                       <label>Vehicle Description</label>
+                                       <input type="text" name="vehicle_description[]" class="form-control">
+                                     </div>
+                                     <div class="col-md-3">
+                                       <label>Vin Number</label>
+                                       <input type="text" name="vin_number[]" class="form-control">
+                                     </div>
+                                     <div class="col-md-2">
+                                       <label>Vehicle Purchase Cost</label>
+                                       <input type="text" name="purchase_cost[]" class="form-control">
+                                   
+                                     </div>
+                                     <div class="col-md-3">
+                                       <label>Company Preference</label>
+                                       <input type="text" name="company_preference[]" class="form-control">
+                                   
+                                     </div>
+                                     <div class="col-md-1">
+ <a href="javascript:void(0);" class="add_button" title="Add field">
+  <img width="30" height="30" src="<?php echo base_url()?>image/add-more.png">
+                                                </a>
+                                     </div>
+
+                                       
+                                   </div>
+                                  
+
+                                 </div>
+									<?php  }
+								 }
                                  
                                   else{?>
                                  <div class="form-group field_wrapper" id="vehicles">

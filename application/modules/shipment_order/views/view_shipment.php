@@ -47,7 +47,7 @@ $Heading=	$module_heading;
         <th>Track Number</th>
         <th>Type</th>
         <th>Shipper Name</th>
-		<th>Shipper Address</th>
+		    <th>Shipper Address</th>
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>

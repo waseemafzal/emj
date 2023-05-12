@@ -87,6 +87,7 @@
             <?php 
        $categories = getCategory();
           foreach($categories as $category){
+             $categoryhistory = getCategoryhistory($category['id']);
              $subcategory=getSubcategory($category['id']);
                 if(count($subcategory)>0){?>
     <li class="treeview">
@@ -96,29 +97,39 @@
       </span>
     </a>
    <ul class="treeview-menu">
-              <?php foreach($subcategory as $subcat){
-      $subchilds = getSubchild($subcat['id']);
-      $subcathistory=getSubcathistory($subcat['id']);
-if(count($subchilds)>0){
-    ?>
-                <li class="treeview">
-                  <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <?php
-                  if(count($subcathistory)>0){
+   <?php 
+                       if(count($categoryhistory)>0){
                         echo '<ul style="color:white">';
-           foreach($subcathistory as $subcathistory){?> 
+           foreach($categoryhistory as $catehistory){?> 
 <li>
-<a href="javascript:void(0)" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
+<a href="<?php echo base_url()?>/shipment_order/edit/<?php echo $catehistory['shipment_order_id'].'/'.$catehistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $catehistory['shipper_name'];?>
            </a>          
            </li>
            <?php }
           echo '</ul>';
           } ?>
+              <?php foreach($subcategory as $subcat){
+      $subchilds = getSubchild($subcat['id']);
+      $subcatshistory=getSubcathistory($subcat['id']);
+if(count($subchilds)>0){
+    ?>
+                <li class="treeview">
+                  <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title'];?>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
                   <ul class="treeview-menu">
+                  <?php if(count($subcatshistory)>0){
+                        echo '<ul style="color:white">';
+           foreach($subcatshistory as $subcathistory){?> 
+<li>
+          <a href="<?php echo base_url()?>/shipment_order/edit/<?php echo $subcathistory['shipment_order_id'].'/'.$subcathistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subcathistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
+           </a>          
+           </li>
+           <?php }
+          echo '</ul>';
+          } ?>
                      <?php foreach($subchilds as $subchild){
                        $subchildhistory=getSubchildhistory($subchild['id']);?>
                         <li><a href="javascript:void(0)" class='selectedId' data-id='<?php echo $subchild['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subchild['title']?></a>
@@ -128,7 +139,7 @@ if(count($subchilds)>0){
                         echo '<ul style="color:white">';
            foreach($subchildhistory as $subhistory){?> 
 <li>
-<a href="javascript:void(0)" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subhistory['shipper_name'];?>
+<a href="<?php echo base_url()?>/shipment_order/edit/<?php echo $subhistory['shipment_order_id'].'/'.$subhistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subhistory['shipper_name'];?>
            </a>          
            </li>
            <?php }
@@ -139,14 +150,22 @@ if(count($subchilds)>0){
 
       
           ?>
-
-         
-      
-       <?php 
+<?php 
         }else{?>
                          <li class="treeview">
                          <a href="javascript:void(0)" class='selectedId ' data-id='<?php echo $subcat['id'];?>'><i class="fa fa-circle-o"></i> <?php echo $subcat['title']?>
                          </a>
+                         <?php
+                  if(count($subcatshistory)>0){
+                        echo '<ul style="color:white">';
+           foreach($subcatshistory as $subcathistory){?> 
+<li>
+          <a href="<?php echo base_url()?>/shipment_order/edit/<?php echo $subcathistory['shipment_order_id'].'/'.$subcathistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subcathistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
+           </a>          
+           </li>
+           <?php }
+          echo '</ul>';
+          } ?>
                       <?php }?>
                   </ul>
                 </li>
@@ -154,6 +173,17 @@ if(count($subchilds)>0){
             <li class="treeview">
               <a href="javascript:void(0)" class='selectedId' data-id='<?php echo $category['id'];?>'><i class="fa fa-circle-o"></i><?php echo $category['title'];?> 
               </a>
+              <?php 
+                       if(count($categoryhistory)>0){
+                        echo '<ul style="color:white">';
+           foreach($categoryhistory as $catehistory){?> 
+<li>
+<a href="<?php echo base_url()?>/shipment_order/edit/<?php echo $catehistory['shipment_order_id'].'/'.$catehistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $catehistory['shipper_name'];?>
+           </a>          
+           </li>
+           <?php }
+          echo '</ul>';
+          } ?>
             </li>
             <?php }}?>
             </ul>

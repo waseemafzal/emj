@@ -105,13 +105,17 @@ background-color: #fff;
                             <?php if(isset($row)){?>
                                <input type='text' readonly name='shipment_name' class='form-control' value='<?php echo $row->shipment_name;?>'>
                                <?php }else{?>
-                               <input type='text' readonly name='shipment_name' class='form-control' value='<?php echo shipmentName();?>'>
+                               <input type='text' readonly name='shipment_name' class='form-control' value='EMJ-<?php echo shipmentName();?>'>
                                <?php }?>
                           </div>
                           <div class='col-md-4'>
                             <label>Bill of Landing Number</label>
-                               <input type='text' name='landing_bill_no' class='form-control' value='<?php if(isset($row)){echo $row->landing_bill_no;}?>'>
-                          </div>
+                            <?php if(isset($row)){?>
+                               <input type='text' readonly name='landing_bill_no' class='form-control' value='<?php echo $row->landing_bill_no;?>'>
+                          <?php }else{?>
+                               <input type='text' readonly name='landing_bill_no' class='form-control' value='EMJ-<?php echo shipmentName();?>'>
+                           <?php }?>
+                              </div>
                           <div class='col-md-4'>
                             <label>Booking Number</label>
                             <?php if(isset($row)){?>

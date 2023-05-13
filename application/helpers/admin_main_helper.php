@@ -66,7 +66,7 @@ function commonjs(){
 function shipmentName() {
 	$CI = &get_instance(); 
 	$query = $CI->db->select('*')->order_by('id', 'DESC')->limit(1)->get('shipment_orders')->result_array();
-   $data = $query[0]['id']+1;
+    $data = $query[0]['id']+1;
 //echo '<pre>';print_r($data);exit;
      return $data;
 }

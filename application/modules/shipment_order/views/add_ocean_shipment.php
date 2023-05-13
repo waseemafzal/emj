@@ -85,16 +85,136 @@ background-color: #fff;
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#shipper_details" data-toggle="tab">Shipper Details</a></li>
+              <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+              <li><a href="#shipper_details" data-toggle="tab">Shipper Details</a></li>
               <li><a href="#consignee_details" data-toggle="tab">Consignee Details</a></li>
-              <li><a href="#shipment_details" data-toggle="tab">Shipment Details</a></li>
               <li><a href='#package_details' data-toggle='tab'>Package Details</a></li>
               <li><a href="#entitles" data-toggle="tab">Entitles</a></li>
               <li><a href="#routing_information" data-toggle="tab">Routing Information</a></li>
               <li><a href="#exporting_information" data-toggle="tab">Exporting Information</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="shipper_details">
+            <div class="tab-pane active" id="general">
+              <div class="form-group">
+                                  <h2>Shipment Details</h2><hr>
+                                  <div id='shipment_extra_details'>
+                                 <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-4'>
+                            <label>Shipment Name</label>
+                            <?php if(isset($row)){?>
+                               <input type='text' readonly name='shipment_name' class='form-control' value='<?php echo $row->shipment_name;?>'>
+                               <?php }else{?>
+                               <input type='text' readonly name='shipment_name' class='form-control' value='<?php echo shipmentName();?>'>
+                               <?php }?>
+                          </div>
+                          <div class='col-md-4'>
+                            <label>Bill of Landing Number</label>
+                               <input type='text' name='landing_bill_no' class='form-control' value='<?php if(isset($row)){echo $row->landing_bill_no;}?>'>
+                          </div>
+                          <div class='col-md-4'>
+                            <label>Booking Number</label>
+                            <?php if(isset($row)){?>
+                               <input type='text' name='booking_no' class='form-control' readonly value='<?php echo $row->booking_no;?>'>
+                               <?php }else{?>
+                            <input type='text' name='booking_no' class='form-control' readonly value='<?php echo uniqid()?>'>
+                       <?php }?>
+                          </div>
+                        </div>
+                        </div>
+                            </div>
+                        <div class='form-group'>
+                                 <div class="row">
+                                     <div class="col-md-4">
+                                       <label>From City</label>
+                                       <input type="text" name="shipment_from" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_from;} ?>">
+                                     </div>
+                                     <div class="col-md-4">
+                                       <label>To City</label>
+                                       <input type="text" name="shipment_to" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_to;} ?>">
+                                     </div>
+
+                                     <div class="col-md-4">
+                                       <label>Shipment Date</label>
+                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
+                                       <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
+                                     </div>
+                                   </div>
+                                  </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                        <div class='col-md-3'>
+                                          <label>Shipment Status</label><br>
+                                          <select class='form-control' name='shipment_status'>
+                                            <option value='null'>Choose Status</option>
+                                            <?php 
+                                            $status = $this->db->get('shipment_status')->result_array();
+                                             foreach($status as $shipment_status){
+                                            $selected="";
+                                            if(isset($row)){
+                                              if($shipment_status['status_id']==$row->shipment_status){
+                                                $selected='selected="selected"';
+                                              }
+                                            }
+                                             echo '<option value = "'.$shipment_status['status_id'].'" '.$selected.'>'.$shipment_status['status_title'].'</option>';
+                                             } ?>
+                                          </select>
+                                        </div>
+                          <div class='col-md-3'>
+                            <label>Executed Place</label>
+                               <input type='text' name='executed_place' class='form-control' value='<?php if(isset($row)){echo $row->executed_place;}?>'>
+                          </div>
+                          <div class='col-md-3'>
+                            <label>Executed By</label>
+                               <input type='text' name='executed_by' class='form-control' value='<?php if(isset($row)){echo $row->executed_by;}?>'>
+                          </div>
+                          <div class='col-md-3'>
+                            <label>Executed Date</label>
+                               <input type='date' name='executed_date' class='form-control' value='<?php if(isset($row)){echo $row->executed_date;}?>'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-6'>
+                            <label>Departure Date/Time</label>
+                               <input type='date' name='departure_date' class='form-control' value='<?php if(isset($row)){echo $row->departure_date;}?>'></div>
+                               <div class='col-md-6'>
+                                <label></label>
+                               <input type='time' name='departure_time' class='form-control' value='<?php if(isset($row)){echo $row->departure_time;}?>'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'> 
+                      <div class='row'>
+                          <div class='col-md-6'>
+                            <label>Arrival Date/Time</label>
+                               <input type='date' name='arrival_date' class='form-control' value='<?php if(isset($row)){echo $row->arrival_date;}?>'></div>
+                               <div class='col-md-6'>
+                                <label></label>
+                               <input type='time' name='arrival_time' class='form-control' value='<?php if(isset($row)){echo $row->arrival_time;}?>'>
+                          </div>
+                        </div>
+                        </div>
+                        <div class='form-group'>
+                          <div class='row'>
+                            <div class='col-md-6'>
+                              <label>Declared Value</label>
+                                <input type='text' name='declared_value' class='form-control' value='<?php if(isset($row)){echo $row->declared_value;}?>'>
+                            </div>
+                          </div>
+                        </div>
+                        <div class='form-group'>
+                          <div class='row'>
+                            <div class='col-md-12'>
+                              <label>Description of Goods</label>
+                                <textarea name='description_of_goods' class='form-control'><?php if(isset($row)){echo $row->description_of_goods;}?></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              <div class="tab-pane" id="shipper_details">
                 <h2>Shipper Details</h2><hr>
               <div class="form-group">
                                 <div class="row"> 
@@ -324,100 +444,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                               </div></div>
               </div>
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="shipment_details">
-              <div class="form-group">
-                                  <h2>Shipment Details</h2><hr>
-                                   <div class="row">
-                                     <div class="col-md-4">
-                                       <label>From City</label>
-                                       <input type="text" name="shipment_from" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_from;} ?>">
-                                     </div>
-                                     <div class="col-md-4">
-                                       <label>To City</label>
-                                       <input type="text" name="shipment_to" class="form-control" value="<?php if(isset($row)){ echo $row->shipment_to;} ?>">
-                                     </div>
-
-                                     <div class="col-md-4">
-                                       <label>Shipment Date</label>
-                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
-                                     <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-                                     </div>
-                                   </div>
-                                 </div>
-                                 <div id='shipment_extra_details'>
-                                 <div class='form-group'> 
-                      <div class='row'>
-                          <div class='col-md-4'>
-                            <label>Shipment Name</label>
-                               <input type='text' name='shipment_name' class='form-control' value='<?php if(isset($row)){echo $row->shipment_name;}?>'>
-                          </div>
-                          <div class='col-md-4'>
-                            <label>Bill of Landing Number</label>
-                               <input type='text' name='landing_bill_no' class='form-control' value='<?php if(isset($row)){echo $row->landing_bill_no;}?>'>
-                          </div>
-                          <div class='col-md-4'>
-                            <label>Booking Number</label>
-                               <input type='text' name='booking_no' class='form-control' value='<?php if(isset($row)){echo $row->booking_no;}?>'>
-                          </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
-                          <div class='col-md-4'>
-                            <label>Executed Place</label>
-                               <input type='text' name='executed_place' class='form-control' value='<?php if(isset($row)){echo $row->executed_place;}?>'>
-                          </div>
-                          <div class='col-md-4'>
-                            <label>Executed By</label>
-                               <input type='text' name='executed_by' class='form-control' value='<?php if(isset($row)){echo $row->executed_by;}?>'>
-                          </div>
-                          <div class='col-md-4'>
-                            <label>Executed Date</label>
-                               <input type='date' name='executed_date' class='form-control' value='<?php if(isset($row)){echo $row->executed_date;}?>'>
-                          </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
-                          <div class='col-md-6'>
-                            <label>Departure Date/Time</label>
-                               <input type='date' name='departure_date' class='form-control' value='<?php if(isset($row)){echo $row->departure_date;}?>'></div>
-                               <div class='col-md-6'>
-                                <label></label>
-                               <input type='time' name='departure_time' class='form-control' value='<?php if(isset($row)){echo $row->departure_time;}?>'>
-                          </div>
-                        </div>
-                        </div>
-                        <div class='form-group'> 
-                      <div class='row'>
-                          <div class='col-md-6'>
-                            <label>Arrival Date/Time</label>
-                               <input type='date' name='arrival_date' class='form-control' value='<?php if(isset($row)){echo $row->arrival_date;}?>'></div>
-                               <div class='col-md-6'>
-                                <label></label>
-                               <input type='time' name='arrival_time' class='form-control' value='<?php if(isset($row)){echo $row->arrival_time;}?>'>
-                          </div>
-                        </div>
-                        </div>
-                        <div class='form-group'>
-                          <div class='row'>
-                            <div class='col-md-6'>
-                              <label>Declared Value</label>
-                                <input type='text' name='declared_value' class='form-control' value='<?php if(isset($row)){echo $row->declared_value;}?>'>
-                            </div>
-                          </div>
-                        </div>
-                        <div class='form-group'>
-                          <div class='row'>
-                            <div class='col-md-12'>
-                              <label>Description of Goods</label>
-                                <textarea name='description_of_goods' class='form-control'><?php if(isset($row)){echo $row->description_of_goods;}?></textarea>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class='tab-pane' id='package_details'>
+                 <div class='tab-pane' id='package_details'>
                                         <h3>Package Details</h3>
                                              <div class="form-group">
                                               <div class="row">
@@ -909,12 +936,19 @@ $(document).ready(function(){
             }
             else if (data.status == 2)
             {   
-            $(".alert").addClass('alert-success');
+                $(".alert").addClass('alert-success');
+                var id = data.primary_id;
+                $('#saveModal').modal('show');
+                $('#saveModal').find('#last_insert_id_input').val(id); // Set the value of the hidden input field to the id
                 $(".alert").html(data.message);
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){
-                window.location='<?php echo base_url().$controller; ?>';
-                },1000);
+                $(".alert").addClass('hidden');
+                //$('#form_add_update')[0].reset();
+                },3000);
+                // setTimeout(function(){
+                // window.location='<?php echo base_url().$controller; ?>';
+                // },1000);
             }
             else if (data.status == "validation_error")
             {   

@@ -63,6 +63,13 @@ function commonjs(){
 	$CI = &get_instance();
 	return $CI->load->view("admin/myscript");
 }
+function shipmentName() {
+	$CI = &get_instance(); 
+	$query = $CI->db->select('*')->order_by('id', 'DESC')->limit(1)->get('shipment_orders')->result_array();
+   $data = $query[0]['id']+1;
+//echo '<pre>';print_r($data);exit;
+     return $data;
+}
  function getCategory(){
 	$CI = &get_instance();
 	return $CI->db->where('parent', 0)->get('categories')->result_array();

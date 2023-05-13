@@ -89,8 +89,15 @@ background-color: #fff;
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-                    
-           
+        <label>Client</label>            
+        <select name='client_id' class='form-control' style='width:80%'>
+                    <?php 
+                    $clients = $this->db->where('user_type', '3')->get('users')->result_array();
+                  if($clients){
+                    foreach($clients as $client){?>
+                    <option value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
+                    <?php }}?>
+                    </select>  
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">

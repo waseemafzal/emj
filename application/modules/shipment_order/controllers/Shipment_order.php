@@ -20,10 +20,13 @@ class Shipment_order extends MX_Controller {
 	public $module_heading='Shipment Management'; 
 	/************Configuration of form and End*********************/
 	public function index(){  
-
+		$shipment_status=0;
+		if(isset($_GET['shipment_type'])){
+			$shipment_status=$_GET['shipment_type'];
+		}
 		$aData['data'] =$this->db->query("SELECT p.*,t.type FROM ".$this->tbl." as p 
 		join shipment_types as t on t.id=p.shipment_type
-		
+		where shipment_status='".$shipment_status."'
 		");
 		$aData['tbl'] =$this->tbl;
 		$aData['module_heading'] =$this->module_heading;
@@ -245,6 +248,25 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	}
 	echo json_encode($arr);
 	}
+	public function paid_invoices(){
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
+		->from('clients_invoice')
+		->where('clients_invoice.paid', 'yes')
+		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
+		->join('users', 'shipment_orders.user_id = users.id')
+		->get()->result_array();
+	// echo '<pre>'; print_r($data);exit;
+		$this->load->view('paid_invoices', $data);
+	}
+	public function unpaid_invoices(){
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
+		->from('clients_invoice')
+		->where('clients_invoice.paid', 'no')
+		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
+		->join('users', 'shipment_orders.user_id = users.id')
+		->get()->result_array();
+		$this->load->view('unpaid_invoices', $data);
+	}
 	public function delete(){ 
 		extract($_POST);
 		$result =$this->crud->delete($id,$this->tbl);
@@ -366,7 +388,7 @@ $mess = $e['message'];
 			break;
 			case 2:
 			
-			$arr = array('status' => 2,'message' => "Updated Succefully !");
+			$arr = array('status' => 2,'message' => "Updated Succefully !", 'primary_id'=>$PrimaryID);
 			echo json_encode($arr);
 			break;
 			case 0:

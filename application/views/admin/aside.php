@@ -188,6 +188,36 @@ if(count($subchilds)>0){
             <?php }}?>
             </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+             <i class="fa fa-cog"></i>
+                 <span>Accounting</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                                     </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="<?= getActive('cat') ?>"><a href="<?php echo base_url()?>/shipment_order/paid_invoices"><span>Paid Invoices</span></a></li>
+          <li class="<?= getActive('carriers') ?>"><a href="<?php echo base_url()?>/shipment_order/unpaid_invoices"><span>Unpaid Invoices</span></a></li>
+        </ul>
+        
+      </li>
+      <li class="treeview">
+          <a href="#">
+             <i class="fa fa-cog"></i>
+                 <span>Shipments</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                                     </span>
+          </a>
+          <ul class="treeview-menu">
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa fa-shopping-cart'></i> <span>Received</span></a></li> 
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order?shipment_type=1"><i class='fa fa-shopping-cart'></i> <span>Processing</span></a></li> 
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order?shipment_type=2"><i class='fa fa-shopping-cart'></i> <span>Shipped</span></a></li> 
+          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order?shipment_type=3"><i class='fa fa-shopping-cart'></i> <span>Cancelled</span></a></li> 
+         </ul>
+        
+      </li>
          <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa fa-shopping-cart'></i> <span>Shipment Orders</span></a></li> 
          <li class="<?= getActive('pickup_orders') ?>"><a href="pickup_orders"><i class='fa fa-shopping-cart'></i> <span>Pickup Orders</span></a></li> 
          <!-- <li class="<?= getActive('purchase_order') ?>"><a href="shipment_order/view_purchase_orders"><i class='fa fa-shopping-cart'></i><span>Purchase Orders</span></a></li> -->

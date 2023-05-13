@@ -141,7 +141,24 @@ if($city['city_id']==$row->shipper_city){
                                     <input type="text" class="form-control" id="pickup_location" name="pickup_location" value="<?php if(isset($row)){echo $row->pickup_location;}?>">
                                     
                                         </div>
-  </div>
+                                        <div class='col-md-4'>
+                                        <label>Shipment Status</label><br>
+                                          <select class='form-control' name='shipment_status'>
+                                            <option value='null'>Choose Status</option>
+                                            <?php 
+                                            $status = $this->db->get('shipment_status')->result_array();
+                                             foreach($status as $shipment_status){
+                                            $selected="";
+                                            if(isset($row)){
+                                              if($shipment_status['status_id']==$row->shipment_status){
+                                                $selected='selected="selected"';
+                                              }
+                                            }
+                                             echo '<option value = "'.$shipment_status['status_id'].'" '.$selected.'>'.$shipment_status['status_title'].'</option>';
+                                             } ?>
+                                          </select>
+                                        </div>
+                                      </div>
   </div>
   <div class="form-group"  id="shipper_address">
                                    <label>Address</label>
@@ -834,10 +851,18 @@ $(document).ready(function(){
             {   
             $(".alert").addClass('alert-success');
                 $(".alert").html(data.message);
+                var id = data.primary_id;
+                $('#saveModal').modal('show');
+                $('#saveModal').find('#last_insert_id_input').val(id); // Set the value of the hidden input field to the id
+                $(".alert").html(data.message);
                 $(".alert").removeClass('hidden');
                 setTimeout(function(){
-                window.location='<?php echo base_url().$controller; ?>';
-                },1000);
+                $(".alert").addClass('hidden');
+                //$('#form_add_update')[0].reset();
+                },3000);
+                // setTimeout(function(){
+                // window.location='<?php echo base_url().$controller; ?>';
+                // },1000);
             }
             else if (data.status == "validation_error")
             {   

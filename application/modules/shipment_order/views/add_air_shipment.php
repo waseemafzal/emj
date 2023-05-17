@@ -15,8 +15,17 @@ $Heading=   $module_heading;
     .box-primary img{
         min-width:200px;
         min-height: 200px;
-    
-    }
+      }
+    table.table-autocomplete thead tr th {
+    padding: 3px;
+}
+table.table-autocomplete .ui-menu-item td {
+    border-left: solid 1px #B6B6B6;
+    padding: 3px;
+}
+.ui-autocomplete { 
+  
+}	
     a[data-id]:hover {
   background-color: black;
   color: #fff;
@@ -44,6 +53,8 @@ background-color: #fff;
 }
 
    </style>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -159,9 +170,9 @@ if($city['city_id']==$row->shipper_city){
                                         </div>
   </div>
   </div>
-  <div class="form-group"  id="shipper_address">
+  <div class="form-group">
                                    <label>Address</label>
-                                   <textarea type="text" name="shipper_address" class="form-control" required><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
+                                   <textarea type="text" name="shipper_address" id='shipper_address' class="form-control" required><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
                                     </div>
  
  
@@ -230,7 +241,7 @@ if($city['city_id']==$row->shipper_city){
                                         <div class="row">
                                           <div class="col-xs-12 col-md-12">
                                             <label>Consignee's Address</label>
-                                            <textarea class="form-control" name="consignee_address" required><?php if(isset($row)){ echo $row->consignee_address;} ?></textarea>
+                                            <textarea class="form-control" id='consignee_address' name="consignee_address" required><?php if(isset($row)){ echo $row->consignee_address;} ?></textarea>
                                           </div>
                                         </div>
                                       </div>
@@ -503,7 +514,7 @@ if(count($subchilds)>0){
 </div>
 </div>  
   <?php  getFooter(); ?>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <!-- Scroll to Top Button-->
  <?php // commonjs() ?>
 </body>
@@ -874,5 +885,47 @@ $(function(){
     $(this).addClass("active_category");
   });
 
+});
+</script>
+<script>
+  $(function() {
+    $("#shipper_name").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_shipper_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.name);
+			     $("#shipper_address").val(ui.item.address);
+           $("#shipper_phone").val(ui.item.mobile);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
+});
+</script>
+<script>
+  $(function() {
+    $("#consignee_name").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_consignee_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.name);
+			     $("#consignee_address").val(ui.item.address);
+           $("#consignee_phone").val(ui.item.mobile);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
 });
 </script>

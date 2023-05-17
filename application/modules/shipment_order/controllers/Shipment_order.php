@@ -249,7 +249,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	echo json_encode($arr);
 	}
 	public function paid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as name,shipment_orders.booking_no as booking_no, users.id as user_id, users.name as name, users.email as email')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'yes')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
@@ -259,7 +259,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$this->load->view('paid_invoices', $data);
 	}
 	public function unpaid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as name,shipment_orders.booking_no as booking_no, users.id as user_id, users.name as name, users.email as email')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'no')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
@@ -267,6 +267,87 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		->get()->result_array();
 		$this->load->view('unpaid_invoices', $data);
 	}
+	function autocomplete_shipper_data(){
+
+		$searchTerm = $_GET['term']; 
+
+		$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3")->result_array();
+
+		// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+	foreach($query as $row){ 
+
+		$data['id'] = $row['id']; 
+
+	    $data['value'] =$row['name'].' | '.$row['address'].' | '.$row['mobile']; 
+
+		//$data['origin'] = $row['port_name'];
+	
+		$data['name'] =$row['name']; 
+
+		$data['address'] =$row['address'];
+		
+		$data['mobile'] =$row['mobile']; 
+
+		array_push($skillData, $data); 
+
+	} 
+
+} 
+//echo '<pre>'; print_r($skillData);exit;
+echo json_encode($skillData); 
+
+}
+function autocomplete_consignee_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	$data['value'] =$row['name'].' | '.$row['address'].' | '.$row['mobile']; 
+
+	//$data['origin'] = $row['port_name'];
+
+	$data['name'] =$row['name']; 
+
+	$data['address'] =$row['address'];
+	
+	$data['mobile'] =$row['mobile']; 
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+//echo '<pre>'; print_r($skillData);exit;
+echo json_encode($skillData); 
+}
+ function autocomplete_mailtemplate_description(){
+	$query='';
+	$arr = array('status'=>201, 'message'=>'Operation Failed');
+	extract($_POST);
+	$data = $this->db->where('id', $_POST['id'])->get('mailing')->result_array();
+	//$this->db->last_query();
+	$query = $data[0]['description'];
+if($data){
+	$arr = array('status'=>200, 'message'=>'Data Get Successfully', 'description'=>$query);
+}
+    echo json_encode($arr);
+ }
 	public function delete(){ 
 		extract($_POST);
 		$result =$this->crud->delete($id,$this->tbl);

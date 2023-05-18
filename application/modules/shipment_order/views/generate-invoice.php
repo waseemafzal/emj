@@ -1,6 +1,10 @@
 <?php getHead();
 $controller=$this->router->class;
-$Heading= 'Generate Invoices';
+$Heading=$controller;
+if(isset($module_heading) and $module_heading!=''){
+$Heading=   $module_heading;
+    }
+
  ?>
    <style>
     .remove_button{position: absolute;top: 25px;left: 0;}
@@ -85,9 +89,8 @@ background-color: #fff;
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-        <label>To Client</label>            
+        <label>Client</label>            
         <select name='client_id' class='form-control' style='width:80%'>
-            <option value='not selected' readonly>Select</option>
                     <?php 
                     $clients = $this->db->where('user_type', '3')->get('users')->result_array();
                   if($clients){

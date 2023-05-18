@@ -12,6 +12,10 @@ class Shipment_order extends MX_Controller {
 			redirect('auth/login', 'refresh');
 			
 		}
+		
+		require_once APPPATH.'third_party/dompdf/autoload.inc.php';
+        $this->dompdf = new Dompdf\Dompdf();
+		
 	}
 	public $view = "view_shipment";
 	/************Configuration of form and dataTable*********************/
@@ -206,6 +210,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$aData['tbl'] =$this->tbl;
 		
 		$aData['module_heading'] =$this->module_heading;
+
 		//pre($aData);
 		$this->load->view('add_air_shipment', $aData);
 	}
@@ -249,7 +254,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	echo json_encode($arr);
 	}
 	public function paid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as name,shipment_orders.booking_no as booking_no, users.id as user_id, users.name as name, users.email as email')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'yes')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
@@ -259,7 +264,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$this->load->view('paid_invoices', $data);
 	}
 	public function unpaid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as name,shipment_orders.booking_no as booking_no, users.id as user_id, users.name as name, users.email as email')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'no')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
@@ -267,87 +272,6 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		->get()->result_array();
 		$this->load->view('unpaid_invoices', $data);
 	}
-	function autocomplete_shipper_data(){
-
-		$searchTerm = $_GET['term']; 
-
-		$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3")->result_array();
-
-		// Generate array with account data 
-
-$skillData = array(); 
-
-if(count($query) > 0){ 
-
-	foreach($query as $row){ 
-
-		$data['id'] = $row['id']; 
-
-	    $data['value'] =$row['name'].' | '.$row['address'].' | '.$row['mobile']; 
-
-		//$data['origin'] = $row['port_name'];
-	
-		$data['name'] =$row['name']; 
-
-		$data['address'] =$row['address'];
-		
-		$data['mobile'] =$row['mobile']; 
-
-		array_push($skillData, $data); 
-
-	} 
-
-} 
-//echo '<pre>'; print_r($skillData);exit;
-echo json_encode($skillData); 
-
-}
-function autocomplete_consignee_data(){
-
-	$searchTerm = $_GET['term']; 
-
-	$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3")->result_array();
-
-	// Generate array with account data 
-
-$skillData = array(); 
-
-if(count($query) > 0){ 
-
-foreach($query as $row){ 
-
-	$data['id'] = $row['id']; 
-
-	$data['value'] =$row['name'].' | '.$row['address'].' | '.$row['mobile']; 
-
-	//$data['origin'] = $row['port_name'];
-
-	$data['name'] =$row['name']; 
-
-	$data['address'] =$row['address'];
-	
-	$data['mobile'] =$row['mobile']; 
-
-	array_push($skillData, $data); 
-
-} 
-
-} 
-//echo '<pre>'; print_r($skillData);exit;
-echo json_encode($skillData); 
-}
- function autocomplete_mailtemplate_description(){
-	$query='';
-	$arr = array('status'=>201, 'message'=>'Operation Failed');
-	extract($_POST);
-	$data = $this->db->where('id', $_POST['id'])->get('mailing')->result_array();
-	//$this->db->last_query();
-	$query = $data[0]['description'];
-if($data){
-	$arr = array('status'=>200, 'message'=>'Data Get Successfully', 'description'=>$query);
-}
-    echo json_encode($arr);
- }
 	public function delete(){ 
 		extract($_POST);
 		$result =$this->crud->delete($id,$this->tbl);
@@ -631,7 +555,8 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
 			/*===============================================*/
 			if($mail){
 				// generate pdf
-				$filePath = $this->generatePdf($tcpdfContent);
+				//pre($tcpdfContent);
+				$filePath = $this->generate_pdf($tcpdfContent,$PrimaryID);
 				// send email to this client
 				$m='<p>'.ucfirst(get_session('name')).' sent you an invoice. please find an attachment</p>';
 				//$this->seneMailtoUser($filePath,$m);
@@ -690,6 +615,65 @@ switch($result){
 		}	
 
 }
+
+public function generate_pdf($content,$pdfID) {
+        $html = $this->content($content);
+
+        // Load HTML into Dompdf
+        $this->dompdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $this->dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $this->dompdf->render();
+
+        // Output the generated PDF to browser
+        //$this->dompdf->stream("pdf_example2.pdf", array("Attachment" => false));
+		$filename = 'invoice-'.$pdfID.'.pdf';
+
+    // Get the path to the folder where you want to save the file
+    $savePath = FCPATH . 'invoices/'; // Assuming 'pdfs' is the folder in the root directory
+
+    // Create the directory if it doesn't exist
+    if (!is_dir($savePath)) {
+        mkdir($savePath, 0777, true);
+    }
+
+    // Save the generated PDF to the folder
+    file_put_contents($savePath . $filename, $this->dompdf->output());
+
+		
+		
+    }
+
+function content($rawHtml){
+	$c='<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        p {
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    '.$rawHtml.'
+</body>
+</html>
+';
+return $c;
+	
+	}
 function save_purchase_orders(){
 	extract($_POST);
  $PrimaryID ='';

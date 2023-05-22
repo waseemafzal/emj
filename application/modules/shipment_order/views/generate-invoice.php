@@ -82,15 +82,16 @@ background-color: #fff;
           From:
           
             <strong>EmjayGlobal</strong><br>
-           Address: <?php echo $setting->address;?><br>
+            Address: <?php echo $setting->address;?><br>
             Phone: <?php echo $setting->phone;?><br>
             Email: <?php echo $setting->email;?>
           
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-        <label>Client</label>            
+        <div class="col-sm-4 invoice-col select_client">
+        <label>To Client</label>            
         <select name='client_id' class='form-control' style='width:80%'>
+                    <option value='Not Selected'>Select</option>
                     <?php 
                     $clients = $this->db->where('user_type', '3')->get('users')->result_array();
                   if($clients){
@@ -109,7 +110,7 @@ background-color: #fff;
   <?php if(isset($row)){$row=$row[0];} ?>
           <b>Created Date:</b><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"><br>
           <b>Payment Due:</b><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>">
-          <input type="hidden" name="order_id" value="<?php echo $result->id?>">
+          <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
         <!-- /.col -->
@@ -249,7 +250,6 @@ background-color: #fff;
         </div>
       </div>
     </section>
-     </div>
                 <div class="clearfix">&nbsp;</div>
                   <div class="clearfix">&nbsp;</div>
                 

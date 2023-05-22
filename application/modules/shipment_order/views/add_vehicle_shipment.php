@@ -47,13 +47,17 @@ background-color: #fff;
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+     <div class='row'>
+       <div class='col-md-6'>
      <h1><?=$Heading?></h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url() ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li > <a href="<?=$controller?>">View <?=$controller?> </a></li>
-      </ol>
+</div>
+<div class='col-md-6'>
+     <?php if(isset($_GET['template'])){
+      include 'templates.php';
+      }?>
+    </div>
+    </div>
     </section>
-
 
         <!-- Sidebar -->
        <?php getSidebar()?>

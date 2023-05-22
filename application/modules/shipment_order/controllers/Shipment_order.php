@@ -110,9 +110,100 @@ class Shipment_order extends MX_Controller {
  public function tabs(){
 	$this->load->view('tabs-form');
  }
+ function autocomplete_shipper_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3 ")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	//$data['location'] = $row['port_name'];
+
+	$data['value'] =$row['name'].','.$row['address'].','.$row['mobile']; 
+
+	$data['name'] = $row['name'];
+
+	$data['address'] = $row['address'];
+
+	$data['mobile'] = $row['mobile'];
+
+	$data[]='';
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+function autocomplete_consignee_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3 ")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	//$data['location'] = $row['port_name'];
+
+	$data['value'] =$row['name'].','.$row['address'].','.$row['mobile']; 
+
+	$data['name'] = $row['name'];
+
+	$data['address'] = $row['address'];
+
+	$data['mobile'] = $row['mobile'];
+
+	$data[]='';
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+public function view_outgoing($id, $shipment_type){
+	//pre($aData);
+	$template=$_GET['template'];
+ if($shipment_type=='1'){
+	$this->edit_outgoing_personal_effects($id, $shipment_type);
+ }
+ if($shipment_type=='2'){
+	$this->edit_outgoing_ocean_shipment($id, $shipment_type);
+ }
+ if($shipment_type=='3'){
+	$this->edit_outgoing_air_shipment($id, $shipment_type);
+ }
+ if($shipment_type=='4'){
+	$this->edit_outgoing_vehicle_shipment($id, $shipment_type);
+ }
+}
  //public function 
 	public function edit($id, $shipment_type){
 		//pre($aData);
+		
 	 if($shipment_type=='1'){
 		$this->edit_personal_effects($id, $shipment_type);
 	 }
@@ -244,6 +335,124 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		//pre($aData);
 		$this->load->view('add_vehicle_shipment', $aData);
 	}
+	public function edit_outgoing_personal_effects($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	//print_r($aData['row']);exit;
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+		//pre($aData);
+		$this->load->view('add_personal_effects_shipment', $aData);
+	}
+	public function edit_outgoing_ocean_shipment($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+		//pre($aData);
+		$this->load->view('add_ocean_shipment', $aData);
+	}
+	public function edit_outgoing_air_shipment($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	//print_r($aData['row']);exit;
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+
+		//pre($aData);
+		$this->load->view('add_air_shipment', $aData);
+	}
+	public function edit_outgoing_vehicle_shipment($id, $shipment_type){
+		$query =$this->crud->edit($id,$this->tbl);
+		$aData["countries"] = $this->country_model->get_country();
+
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
+$aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
+		$aData['row']=$query;
+	//print_r($aData['row']);exit;
+	
+	$shipper_state=	$query->shipper_state;
+	
+	$aData["nigerianCities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$shipper_state."';")->result_array();
+	
+	
+
+$consignee_country = $query->consignee_country;
+$aData["selectedstates"] =$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id='".$consignee_country."';")->result_array();
+
+$consignee_state = $query->consignee_state;
+
+$aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FROM `tbl_cities` WHERE state_id='".$consignee_state."';")->result_array();
+
+		//pre($aData);
+		$aData['tbl'] =$this->tbl;
+		
+		$aData['module_heading'] =$this->module_heading;
+		//pre($aData);
+		$this->load->view('add_vehicle_shipment', $aData);
+	}
 	public function storeDirectory(){
 		extract($_POST);
 		//print_r($_POST);exit;
@@ -254,23 +463,87 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	echo json_encode($arr);
 	}
 	public function paid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as shipper_name, users.id as user_id, users.name as user_name,users.email as email')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'yes')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
 		->join('users', 'shipment_orders.user_id = users.id')
 		->get()->result_array();
-	// echo '<pre>'; print_r($data);exit;
+	     // echo '<pre>'; print_r($data);exit;
 		$this->load->view('paid_invoices', $data);
 	}
 	public function unpaid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.*, users.*')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as shipper_name, users.id as user_id, users.name as user_name,users.email as email')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'no')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
 		->join('users', 'shipment_orders.user_id = users.id')
 		->get()->result_array();
 		$this->load->view('unpaid_invoices', $data);
+	}
+	public function template(){
+		$status = $this->db->get('shipment_status')->result_array();
+		$this->load->view('templates', $status);
+	}
+	public function mailInvoice(){
+	    $arr = array('status'=>204, 'message'=>'Email Sending Failed');
+	    extract($_POST);
+	   // print_r($_POST);exit;
+	    $email = $_POST['email'];
+	    $fileName=FCPATH .'invoices/invoice-'.$id.'.pdf';
+	  //  echo $fileName;exit;
+	  //      $link=base_url() .'invoices/invoice-"'.$id.'"';
+	    $description = $_POST['description'];
+	    $id = $_POST['id'];
+	    $subject = 'Invoice From EMJ';
+	    $email = $this->sendEmail($email, $subject, $description, $fileName);
+	    //print_r($email);exit;
+	    if($email){
+	        $arr = array('status'=>200, 'message'=>'Email Send Successfully');
+	    }
+	    echo json_encode($arr);
+}
+   public function sendEmail($email,$subject,$message,$fileName)
+    {
+
+    
+    $config = array(
+    'protocol'  => 'smtp',
+    'smtp_host' => 'ssl://mail.cyphersol.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'emj@cyphersol.com',
+    'smtp_pass' => '-b3RBiUIfE(F',
+    'mailtype'  => 'html',
+    'charset'   => 'utf-8'
+);
+    
+          $this->load->library('email');
+          $this->email->initialize($config);
+          $this->email->set_newline("\r\n");
+          $this->email->from('emj@cyphersol.com');
+          $this->email->to($email);
+          $this->email->subject($subject);
+          $this->email->message($message);
+           $this->email->attach($fileName);
+          if($this->email->send())
+         {
+          return $arr=array('status'=>200, 'message'=>'Email Send Successfully');
+         }
+         else
+        {
+         show_error($this->email->print_debugger());
+        }
+
+    }
+    public function autocomplete_mailtemplate_description(){
+		$arr = array('status'=>204, 'Message'=>'Operation Failed');
+		extract($_POST);
+		$data = $this->db->where('id', $_POST['id'])->get('mailing')->result_array();
+	if($data){
+		$query = $data[0]['description'];
+		$arr = array('status'=>200, 'Message'=>'Successfully Get Data', 'description'=>$query);
+	}
+	 echo json_encode($arr);
 	}
 	public function delete(){ 
 		extract($_POST);
@@ -630,8 +903,12 @@ public function generate_pdf($content,$pdfID) {
 
         // Output the generated PDF to browser
         //$this->dompdf->stream("pdf_example2.pdf", array("Attachment" => false));
+	if($pdfID==''){
+		$pdfID = maxInvoiceId();	
 		$filename = 'invoice-'.$pdfID.'.pdf';
-
+	}else{
+		$filename = 'invoice-'.$pdfID.'-updated.pdf';
+	}
     // Get the path to the folder where you want to save the file
     $savePath = FCPATH . 'invoices/'; // Assuming 'pdfs' is the folder in the root directory
 
@@ -659,15 +936,28 @@ function content($rawHtml){
         h1 {
             color: #333;
             font-size: 24px;
+			text-align:center;
         }
+		.select_client{
+			display:none;
+		}
         p {
             color: #666;
             font-size: 14px;
         }
+		.table{
+			width:100;
+		}
+		th{
+			width:100%;
+		}
+		td{
+			width:100%;
+		}
     </style>
 </head>
 <body>
-    '.$rawHtml.'
+    "'.$rawHtml.'"
 </body>
 </html>
 ';

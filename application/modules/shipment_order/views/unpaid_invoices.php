@@ -41,36 +41,36 @@ $Heading=	'Unpaid Invoices';
         <th>Created Date</th>
         <th>Due Date</th>
         <th>Booking No</th>
-	      <th>Paid</th>    
+	    <th>Paid</th>    
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <?php
+     <?php
 	
 	if($invoices!=''){
 	foreach ($invoices as $invoice){
 		
 		?>
 		<tr id="row_<?php echo $invoice['id'];?>">
-    <td><input type='checkbox' id='invoiceMail' value='<?php echo $invoice['user_id']?>'></td>
-        <td><?php echo $invoice['name'];?></td>
+        <td><input class='checkoption' id='invoiceMail' data-email='<?php echo $invoice["email"]?>' type='checkbox' data-id='<?php echo $invoice["id"]?>'></td>
+        <td><?php echo $invoice['user_name'];?></td>
         <td><?php echo $invoice['email'];?></td>
-        <td><?php echo $invoice['created_date'];?></td>
+	      <td><?php echo $invoice['created_date'];?></td>
         <td><?php echo $invoice['due_date'];?></td>
         <td><?php echo $invoice['booking_no'];?></td>
         <td><?php echo $invoice['paid'];?></td>
+
     <td class="center">
             
            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Edit'));?>" class="btn btn-info btn-xs" href="<?=$controller?>/generateinvoice/<?php echo $invoice['id'];?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
             </a>
-            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $invoice['id'];?>', 'clients_invoice);">
+            <a data-toggle="tooltip" title=" <?php echo ucwords(this_lang('Delete'));?>" class="btn btn-danger btn-xs" href="javascript:void(0)" id="deleteion" onClick="deleteRecord('<?php echo $invoice['id'];?>', 'clients_invoice');">
                 <i class="glyphicon glyphicon-trash icon-white"></i>
             </a>
         </td>
     </tr>
-    
 		<?php }
 	}
 		
@@ -78,23 +78,26 @@ $Heading=	'Unpaid Invoices';
     
     </tbody>
     </table>
-                  </div>  
-                    
-     <div class="modal fade" id="invoiceMailModal_<?php echo $invoice['user_id']?>" tabindex="-1" data-bs-backdrop="static">
+</div>  
+
+</div>
+         <div class="modal fade" id="invoiceMailModal" tabindex="-1" data-bs-backdrop="static">
      <div class="modal-dialog modal-dialog-centered">
        <div class="modal-content">
          <div class="modal-header bg-black">
-           <h3 class="modal-title">Mail Invoice Modal</h3>
+           <h1 class="modal-title">Invoice Modal</h1>
              <button class="close" data-dismiss="modal"><span>&times;</span></button>
        </div>
        <div class="modal-body">
        <form id="sendMailInvoice">
+           <!--<?php print_r($invoice);?>-->
          <label>From:</label>
-         <input type="text" readonly name="name" style='width:50%' class="form-control" value="EMJ Global"><br>
+         <input type="text" readonly name="name" class="form-control" value="EMJ Global"><br>
          <label>To:</label>
-         <input type="email" readonly style='width:50%' value='<?php echo $invoice['email'];?>' name="email" class="form-control">
+         <input type="email" id='email' readonly name="email" class="form-control">
+         <input type='hidden' name='id' id='id'>
          <br><label>Template:</label>
-             <select style='width:50%' class='form-control' id="mail_templates">
+             <select class='form-control' id="mail_templates">
               <option>Choose Template</option>
              <?php 
              $data = $this->db->get('mailing')->result_array();
@@ -106,21 +109,41 @@ $Heading=	'Unpaid Invoices';
                   </select>
           <br>
           <label>Description:</label>
-          <textarea id='description' class='form-control'></textarea>
-       </form>
-       <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+          <textarea name='description' id='description' class='form-control'></textarea><br><br>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
        <script type="text/javascript" src="bower_components/ckeditor/ckeditor.js"></script>   
 <script type="text/javascript">
-    $(function(){
+
+    $(document).ready(function(){
            CKEDITOR.replace('description');
 
     });
 </script> 
+          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+       </form>
        </div>
-     <div class="modal-footer">
-       <button class="btn btn-success" id="saveData" type="button">Save</button>
-       <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
-     </div>
+<script>
+  $("input[type='checkbox']").on('change', function(e) {
+    if (this.checked) {
+      var id = checkedCheckbox();
+      var email = checkedCheckboxEmail();
+     // alert("id:" + id + ", Email:" + email);
+      $('#invoiceMailModal').modal('show');
+      $('#id').val(id);
+      $('#email').val(email);
+    }
+  });
+
+  function checkedCheckbox() {
+    var selected = $('input.checkoption:checked').attr('data-id');
+    return selected;
+  }
+  function checkedCheckboxEmail() {
+    var selected = $('input.checkoption:checked').data('email');
+    return selected;
+  }
+</script>
      <script>
      $(function() {
     $("#mail_templates").change(function(){
@@ -142,13 +165,30 @@ $Heading=	'Unpaid Invoices';
   })
 
 </script>
+<script>
+    $("#sendMailInvoice").submit(function(e){
+        e.preventDefault();
+        var description = CKEDITOR.instances.description.getData();
+        var email = $('#email').val();
+        var id = $('#id').val();
+        
+    $.ajax({
+        type: "POST", 
+        url: '<?php echo base_url()?>/shipment_order/mailInvoice',
+        data: {email:email, description:description, id:id},
+        dataType: 'JSON',
+        success:function(response){
+            if(response.status==200){
+                alert(response.message);
+                $('#invoiceMailModal').modal('hide');
+            }
+        }
+    })
+    })
+</script>
      </div>
 </div>
-</div>            
-                
-          
-          </div>
-          
+</div>
           <!-- /.box -->
         </div>
         <!-- /.col -->
@@ -157,125 +197,21 @@ $Heading=	'Unpaid Invoices';
     </section>
     <!-- /.content -->
   </div>
-   
+<?php  getFooter(); ?>
+<script type="text/javascript">
+   $(document).ready(function(){
 
-  <?php  getFooter(); ?>
-<script>
- function updateStatus(id,status){
+      $('.checkoption').click(function() {
+         $('.checkoption').not(this).prop('checked', false);
+      });
 
- var formData = new FormData();
- formData.append("id", id);
- formData.append("status", status);
-  // ajax start
-        $.ajax({
-      type: "POST",
-      url: "<?php echo base_url()?>shipment_order/updateStatus",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: 'JSON',
-      beforeSend: function() {
-      $('#loader').removeClass('hidden');
-    //  $('#form_add_update .btn_au').addClass('hidden');
-      },
-      success: function(data){
-        $('#loader').addClass('hidden');
-        if(data.status==200){
-          alert('Status has been changed successfully');
-        }
-           }
    });
-
-  }
-</script>  
-<script>
-  function redirectMe(id){
-    window.location.href="shipment_order/generate/"+id;
-  }
-$('#post_table').dataTable( {
-  "ordering": false
-} );
-</script>
-<script>
-  function dockreceipt(id, value){
-    // formData = new FormData();
-    // formData.append('id', id);
-    // formData.append('value', value);
-    $.ajax({
-      type: 'POST',
-      url: '<?php echo base_url()?>shipment_order/dock_receipt',
-      data:{id:'id',value:'value'},
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: 'JSON',
-      success:function(response){
-        if(response.value=='dock_receipt'){
-          alert(response.value);
-          // window.location.href = '<?php echo base_url()?>shipment_status/dock_receipt';
-        }
-        //  if(response.value=='bill_of_receipt'){
-        //   window.location.href = '<?php echo base_url()?>shipment_status/bill_of_receipt';
-        //        }
-              }
-    });
-  }
-  
-  
-  
-
-// Attach a click event listener to a button with the ID 'check-shipment'
-$('.chkshipment').on('click', function() {
-	$('.chkshipment').prop('checked', false);
-	$(this).prop('checked', true);
-	$('#post_table tr').removeClass('selectedRow');
-	$(this).parent().parent().addClass('selectedRow');
-});
-function updateShipment_type(shipment_type){
-
- var formData = new FormData();
- var id= $('.chkshipment:checked').val();
- formData.append("id", id);
- formData.append("shipment_type", shipment_type);
-  // ajax start
-        $.ajax({
-      type: "POST",
-      url: "<?php echo base_url()?>shipment_order/updateShipment_type",
-      data: formData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: 'JSON',
-      beforeSend: function() {
-      $('#loader').removeClass('hidden');
-    //  $('#form_add_update .btn_au').addClass('hidden');
-      },
-      success: function(data){
-        $('#loader').addClass('hidden');
-        if(data.status==200){
-          //alert('Status has been changed successfully');
-		  window.location.href = '<?php echo base_url()?>shipment_order/edit/'+id+'/'+shipment_type;
-        }
-           }
-   });
-
-  }
-</script>
-<script>
-  $(function(){
-    $("input[type='checkbox']").on('change', function(e){
-      if(e.target.checked){
-        $('#invoiceMailModal_<?php echo $invoice["user_id"]?>').modal('show');
-        // var id = $('#invoiceMail').val();
-        // alert(id);
-        // $('#QueryId').val(id);
-      }
-    })
-  })
-</script>  
-  
-
-  
-  
-  
+   </script>
+<!--  <script>-->
+<!--      $("input:checkbox").each(function(){-->
+<!--       var $this = $(this);    -->
+<!--    if($this.is(":checked")){-->
+<!--        alert($this.attr("data-id"));-->
+<!--    }-->
+<!--});-->
+<!--  </script>-->

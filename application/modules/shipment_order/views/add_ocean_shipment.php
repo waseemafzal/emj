@@ -48,13 +48,17 @@ background-color: #fff;
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+     <div class='row'>
+       <div class='col-md-6'>
      <h1><?=$Heading?></h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url() ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li > <a href="<?=$controller?>">View <?=$controller?> </a></li>
-      </ol>
+</div>
+<div class='col-md-6'>
+     <?php if(isset($_GET['template'])){
+      include 'templates.php';
+      }?>
+    </div>
+    </div>
     </section>
-
 
         <!-- Sidebar -->
        <?php getSidebar()?>
@@ -106,7 +110,7 @@ background-color: #fff;
                             <?php if(isset($row)){?>
                                <input type='text' readonly name='shipment_name' class='form-control' value='<?php echo $row->shipment_name;?>'>
                                <?php }else{?>
-                               <input type='text' readonly name='shipment_name' class='form-control' value='EMJ-<?php echo shipmentName();?>'>
+                               <input type='text' readonly name='shipment_name' class='form-control' value='EMJ-<?php echo maxShipmentId();?>'>
                                <?php }?>
                           </div>
                           <div class='col-md-4'>
@@ -114,7 +118,7 @@ background-color: #fff;
                             <?php if(isset($row)){?>
                                <input type='text' readonly name='landing_bill_no' class='form-control' value='<?php echo $row->landing_bill_no;?>'>
                           <?php }else{?>
-                               <input type='text' readonly name='landing_bill_no' class='form-control' value='EMJ-<?php echo shipmentName();?>'>
+                               <input type='text' readonly name='landing_bill_no' class='form-control' value='EMJ-<?php echo maxShipmentId();?>'>
                            <?php }?>
                               </div>
                           <div class='col-md-4'>

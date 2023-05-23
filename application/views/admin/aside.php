@@ -102,7 +102,7 @@
                         echo '<ul style="color:white">';
            foreach($categoryhistory as $catehistory){?> 
 <li>
-<a href="<?php echo base_url()?>/shipment_order/view_outgoing?template=true/<?php echo $catehistory['shipment_order_id'].'/'.$catehistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $catehistory['shipper_name'];?>
+<a href="<?php echo base_url()?>/shipment_order/view_outgoing/<?php echo $catehistory['shipment_order_id'].'/'.$catehistory['shipment_type']?>?template=true" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $catehistory['shipper_name'];?>
            </a>          
            </li>
            <?php }
@@ -124,7 +124,7 @@ if(count($subchilds)>0){
                         echo '<ul style="color:white">';
            foreach($subcatshistory as $subcathistory){?> 
 <li>
-          <a href="<?php echo base_url()?>/shipment_order/view_outgoing?template=true/<?php echo $subcathistory['shipment_order_id'].'/'.$subcathistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subcathistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
+          <a href="<?php echo base_url()?>/shipment_order/view_outgoing/<?php echo $subcathistory['shipment_order_id'].'/'.$subcathistory['shipment_type']?>?template=true" style='color:white' class='selectedId' data-id='<?php echo $subcathistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
            </a>          
            </li>
            <?php }
@@ -139,7 +139,7 @@ if(count($subchilds)>0){
                         echo '<ul style="color:white">';
            foreach($subchildhistory as $subhistory){?> 
 <li>
-<a href="<?php echo base_url()?>/shipment_order/view_outgoing?template=true/<?php echo $subhistory['shipment_order_id'].'/'.$subhistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subhistory['shipper_name'];?>
+<a href="<?php echo base_url()?>/shipment_order/view_outgoing/<?php echo $subhistory['shipment_order_id'].'/'.$subhistory['shipment_type']?>?template=true" style='color:white' class='selectedId' data-id='<?php echo $subhistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subhistory['shipper_name'];?>
            </a>          
            </li>
            <?php }
@@ -160,7 +160,7 @@ if(count($subchilds)>0){
                         echo '<ul style="color:white">';
            foreach($subcatshistory as $subcathistory){?> 
 <li>
-          <a href="<?php echo base_url()?>/shipment_order/view_outgoing?template=true/<?php echo $subcathistory['shipment_order_id'].'/'.$subcathistory['shipment_type']?>" style='color:white' class='selectedId' data-id='<?php echo $subcathistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
+          <a href="<?php echo base_url()?>/shipment_order/view_outgoing/<?php echo $subcathistory['shipment_order_id'].'/'.$subcathistory['shipment_type']?>?template=true" style='color:white' class='selectedId' data-id='<?php echo $subcathistory['id'];?>'><i class="fa fa-user"></i> &nbsp; <?php echo $subcathistory['shipper_name'];?>
            </a>          
            </li>
            <?php }

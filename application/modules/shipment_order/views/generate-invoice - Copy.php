@@ -34,7 +34,22 @@ background-color: #fff;
 .button{
   display: inline-block;
 }
-
+#addLine{
+       background-color:green;
+       color:white;
+       cursor:pointer;
+       padding: 5px 8px;
+       margin-left: 5px;
+       border-radius: 5px 5px;
+}
+#btnSave{
+       background-color:green;
+       color:white;
+       cursor:pointer;
+       border-radius: 5px 5px;
+       border:none;
+       padding: 5px 8px;
+}
    </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -54,7 +69,7 @@ background-color: #fff;
 <section class="content">
                  <form id="form_add_update" name="form_add_update" role="form">
 <div class="alert hidden"></div>
-      <div class="row" style="margin-right: -15px;
+      <div style="margin-right: -15px;
     margin-left: -15px;">
         <div style="width: 100%;" >
           <div class="box">
@@ -67,32 +82,39 @@ background-color: #fff;
   
   <section class="invoice">
       <!-- title row -->
-      <div class="row">
-        <div class="col-xs-12">
+        <div style='width:100%'>
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> Client Invoices
+              <?php $setting = $this->db->get('setting')->row();?>
+            <img height="60" src="uploads/<?php echo $setting->image;?>">Client Invoices
               </h2>
         </div>
         <!-- /.col -->
-      </div>
       <!-- info row -->
-      <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
-          From
-          <address>
+      <div class="invoice-info">
+        <div class="invoice-col" style='width:40%;display:inline-block'>
+          From:
+          
             <strong>EmjayGlobal</strong><br>
-            Chowk Shah Abbass Multan<br>
-            Phone: 0341-1663111<br>
-            Email: admin@admin.com
-          </address>
+            Address: <?php echo $setting->address;?><br>
+            Phone: <?php echo $setting->phone;?><br>
+            Email: <?php echo $setting->email;?>
+          
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-                    
-           
+        <div class="invoice-col select_client" style='width:20%;display:inline-block;'>
+        <label>To Client</label>            
+        <select name='client_id' class='form-control' style='width:100%'>
+                    <option value='Not Selected'>Select</option>
+                    <?php 
+                    $clients = $this->db->where('user_type', '3')->get('users')->result_array();
+                  if($clients){
+                    foreach($clients as $client){?>
+                    <option value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
+                    <?php }}?>
+                    </select>  
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
+        <div class="invoice-col" style='width:25%;display:inline-block;float:right'>
           <b>Invoice # <?php if(isset($row)){
             echo $row[0]['id'];
           echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
@@ -101,7 +123,7 @@ background-color: #fff;
   <?php if(isset($row)){$row=$row[0];} ?>
           <b>Created Date:</b><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"><br>
           <b>Payment Due:</b><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>">
-          <input type="hidden" name="order_id" value="<?php echo $result->id?>">
+          <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
         <!-- /.col -->
@@ -109,9 +131,8 @@ background-color: #fff;
       <!-- /.row -->
 
       <!-- Table row -->
-      <div class="row">
-        <div class="col-xs-12 table-responsive">
-          <table class="table table-bordered" id="items" border="1">
+        <div class="" style='width:100%'>
+          <table id="items" border="1" style='width:100%;margin-top:30px'>
             <thead>
             <tr>
               <th>Item Details</th>
@@ -133,16 +154,16 @@ background-color: #fff;
         
           ?>
           <tr id="row_0">
-              <td><input type="text" class="form-control noprint" name="item[]" value="<?=$item?>" />
+              <td><input type="text" class="noprint" style='width:100%' name="item[]" value="<?=$item?>" />
               <p  class="showpdf hidden"><?=$item?></p>
               </td>
-              <td><input type="number" class="form-control quantity noprint" name="quantity[]" value="<?=$quantity?>" />
+              <td><input type="number" class="quantity noprint" style='width:100%' name="quantity[]" value="<?=$quantity?>" />
                <p  class="showpdf hidden"><?=$quantity?></p>
               </td>
-              <td><input type="number" class="form-control rate noprint" name="rate[]" value="<?=$rate?>" />
+              <td><input type="number" class="rate noprint" style='width:100%' name="rate[]" value="<?=$rate?>" />
                <p  class="showpdf hidden"><?=$rate?></p>
               </td>
-              <td><input type="text" class="form-control subtotal noprint" readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
+              <td><input type="text" class="subtotal noprint" style='width:100%' readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
               <?php 
         if($subtotal!=''){
         ?>
@@ -154,45 +175,45 @@ background-color: #fff;
       }else{
         ?>
             <tr id="row_0">
-              <td><input type="text" class="form-control" name="item[]" /></td>
-              <td><input type="number" class="form-control quantity" name="quantity[]" /></td>
-              <td><input type="number" class="form-control rate" name="rate[]" /></td>
-              <td><input type="text" class="form-control subtotal" readonly="readonly" name="subtotal[]" /></td>
+              <td><input type="text" name="item[]" /></td>
+              <td><input type="number" class=" quantity" name="quantity[]" /></td>
+              <td><input type="number" class=" rate" name="rate[]" /></td>
+              <td><input type="text" class="subtotal" readonly="readonly" name="subtotal[]" /></td>
             </tr>
         <?php } ?>
            </tbody>
             <tfoot>
             <tr>
               <td colspan="3" style="text-align: right;">Tax %</td>
-              <td><input type="number" class="form-control noprint" id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
+              <td><input type="number" style='width:100%' class="noprint" id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
                 </td>
             </tr>
            <tr>
               <td colspan="3" style="text-align: right;">Discount</td>
-              <td><input type="number" class="form-control" id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
+              <td><input type="number" style='width:100%' id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
             </tr>
            <tr>
-              <td colspan="3" style="text-align: right;">Total</td>
+                
+              <td colspan="3" style="text-align: right;">Total(<span class=""><i class="fa fa-dollar"></i></span>)</td>
               <td>
-                <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control noprint" id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
+                <div class="">
+                <input type="text" class="noprint" style='width:100%' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
                 
               </div>
                 </td>
             </tr>
          <tr class="noprint">
-              <td colspan="2" ><a class="btn btn-success add_button noprint"><i class="fa fa-plus"></i>Add Line</a></td>
+              <td colspan="2" ><a  id='addLine' class="add_button noprint"><i class="fa fa-plus"></i>Add Line</a></td>
               </tr>   
          <tr>
               <td colspan="4" ><b>Payment Terms</b>
-                <textarea class="form-control noprint" id="payment_terms"  name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
+                <textarea class="noprint" id="payment_terms" style='width:30%' name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
               
                 </td>
             </tr>
         <tr>
               <td colspan="4" ><b>Notes</b>
-                <textarea class="form-control noprint" id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
+                <textarea class="noprint" style='width:30%' id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
                 
                 </td>
             </tr>
@@ -211,7 +232,7 @@ background-color: #fff;
          }
             ?>
               <td colspan="4" class="noprint" >
-               <input type="checkbox" name="paid" id="paid"  data-toggle="tooltip" title="Mark True if paid" <?php echo $Checked;?>><b>Paid </b></td>
+               <input style='margin-left:10px' type="checkbox" name="paid" id="paid"  data-toggle="tooltip" title="Mark True if paid" <?php echo $Checked;?>>&nbsp;&nbsp;<b>Paid </b></td>
             </tr>
                    
             </tfoot>
@@ -221,19 +242,16 @@ background-color: #fff;
       
         </div>
         <!-- /.col -->
-      </div>
       <!-- /.row -->
 
 
       <!-- this row will not appear when printing -->
-      <div class="row no-print" style="margin-right: -15px;
-    margin-left: -15px;">
+      <div class="no-print" style="float:right;margin-top:10px">
         <div style="width: 100%;">
-          <a href="javascript:void(0)" onclick="PrintElem('invoice')"  class="btn btn-default noprint"><i class="fa fa-print"></i> Print</a>
-         <button type="button" class="btn btn-success pull-right noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
+         <button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
           </button>&nbsp;
          
-           <button type="button" class="btn btn-success pull-right noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
+           <button type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
           </button>
           <?php /*?> <button type="button" class="btn btn-primary pull-right" id="downloadPdf" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generate PDF
@@ -241,7 +259,6 @@ background-color: #fff;
         </div>
       </div>
     </section>
-     </div>
                 <div class="clearfix">&nbsp;</div>
                   <div class="clearfix">&nbsp;</div>
                 
@@ -289,27 +306,69 @@ $('textarea').change(function(){
         var amount = (qty*price);
         $(this).find('.subtotal').val(amount);
         sum+=amount;
+         $('#total').val(sum);
+   if($('#tax, #discount').val()!=''){
+        var tax = parseInt($('#tax').val());
+        var total = parseInt($('#total').val());
+        var discount = $('#discount').val();
+        var taxamount = total - discount + (total*tax)/100;
+
+        $('#total').val(taxamount);
+        }
+  // if($('#discount').val()!=''){
+  //       var total = $('#total').val();
+  //       var discount = $(this).val();
+  //       var discounted = total - discount;
+  //       $('#total').val(discounted);
+  // }
+        
+//         if($('#tax').val()!=''){
+//        // var total = parseInt( $('#total').val());
+// var taxRate = parseInt( $(this).val());
+// var disc = parseInt( $('#discount').val());
+
+// var taxAmount = total * (taxRate/parseInt("100")); //15000 * .1
+
+// var sum = total + (taxAmount) - (disc);
+
+// //update div with the val
+// $('#total').val(sum);
+// }
     });
+  });
+  //$(document).ready(function(){
+           //         $("#tax").on('kepress', function(){
+           //          var amt = parseInt($("#total").val());
+           //          var tax = parseInt($(this).val()); 
+           //    var total = (amt * tax)/100;
+           //    //alert(total);
+           //    //$("#tax_amount").val(total);
+           //    var grand_total = amt + total;
+           //    $("#total").val(grand_total);
+           // });
+
+
     /***********loop through trs end****************/
    
     //just subtract discount  
-    if($('#disount').val()!=""){
-        var discount = parseInt($('#discount').val());
-        sum=sum-discount;
-        $('#total').val(sum);
-      }
+    // $('#discount').on('click', function(){
+    //     var total = parseInt($("#total").val());
+    //     var discount = parseInt($(this).val());
+    //     var discounted=total-discount;
+    //     $('#total').val(discounted);
+    //   });
  /***********Add tax start****************/
    
-      if(($('#tax').val()!="")){
-        var taxRate = parseInt( $('#tax').val());
-        var taxAmount = sum * (taxRate/parseInt("100")); //15000 * .1
-        //console.log(disc);
-        var sum = sum + taxAmount;
-        $("#total").val(sum);
-      }
+     // $('#tax').on('keyup', function(){
+     //    var taxRate = parseInt( $('#tax').val());
+     //    var total = parseInt($("#total").val());
+     //    var taxAmount = total * (taxRate/parseInt("100")); //15000 * .1
+     //    //console.log(disc);
+     //    var totaltax = sum + taxAmount;
+     //    $("#total").val(totaltax);
+     //  }
  /***********Add tax end ****************/
    
-  });
 
   
 $(document).ready(function(){

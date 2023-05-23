@@ -34,7 +34,7 @@ class Shipment_order extends MX_Controller {
 		");
 		$aData['tbl'] =$this->tbl;
 		$aData['module_heading'] =$this->module_heading;
-	    
+
 		$this->load->view($this->view,$aData);
 	}
 	public function add_personal_effects(){  
@@ -42,7 +42,7 @@ class Shipment_order extends MX_Controller {
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData["countries"] = $this->country_model->get_country();
-	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+	    $aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add_personal_effects_shipment',$aData);
@@ -775,15 +775,15 @@ public function generateinvoice($id){
 	$this->load->view('generate-invoice', $data);
 
 }
-function saveInvoice(){ 
-		extract($_POST);
-		//pre($_POST);
-		$tcpdfContent=$pdfcontent;
-		unset($_POST['pdfcontent']);
-		$mail=$ifmail;
-		unset($_POST['ifmail']);
-		
-		$_POST['detail']=array(
+public function saveInvoice() {
+    extract($_POST);
+    $tcpdfContent = $pdfcontent;
+    unset($_POST['pdfcontent']);
+    $mail = $ifmail;
+    unset($_POST['ifmail']);
+
+    // Rest of the code...
+	$_POST['detail']=array(
 		'items'=>$_POST['item'],
 		'quantities'=>$_POST['quantity'],
 		'rates'=>$_POST['rate'],
@@ -792,11 +792,7 @@ function saveInvoice(){
 		$_POST['amount']=$_POST['total'];
 		$_POST['detail']=json_encode($_POST['detail']);
 		unset($_POST['total'],$_POST['item'],$_POST['quantity'],$_POST['rate'],$_POST['subtotal']);
-		$PrimaryID ='';
-		if(isset($_POST['id']) and $_POST['id']!=''){
-			$PrimaryID = $_POST['id'];
-			}
-		unset($_POST['action'],$_POST['id']);
+    
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('created_date', 'created date', 'trim|required');
 		$this->form_validation->set_rules('due_date', 'due date', 'trim|required');
@@ -825,11 +821,24 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
 			
 			
 			
+
+		// Generate PDF
+		if($mail){
+		  $pdfID = ''; // Initialize pdfID
+    if (isset($_POST['id']) && $_POST['id'] !== '') {
+        $pdfID = $_POST['id'];
+    }
+
+    $filePath = $this->generate_pdf($tcpdfContent, $pdfID);
+
+    // Rest of the code...
+}
+		
+		
+	
 			/*===============================================*/
-			if($mail){
 				// generate pdf
 				//pre($tcpdfContent);
-				$filePath = $this->generate_pdf($tcpdfContent,$PrimaryID);
 				// send email to this client
 				$m='<p>'.ucfirst(get_session('name')).' sent you an invoice. please find an attachment</p>';
 				//$this->seneMailtoUser($filePath,$m);
@@ -855,7 +864,7 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
 		}
 	}	
 
-	}
+
 	function save_landing_bill(){ 
 		extract($_POST);
 		$_POST['commodities'] = json_encode($_POST['commodities']);
@@ -889,28 +898,27 @@ switch($result){
 
 }
 
-public function generate_pdf($content,$pdfID) {
-        $html = $this->content($content);
+public function generate_pdf($content, $pdfID) {
+    $html = $this->content($content);
+    // Load HTML into Dompdf
+    $this->dompdf->loadHtml($html);
 
-        // Load HTML into Dompdf
-        $this->dompdf->loadHtml($html);
+    // Set paper size and orientation
+    $this->dompdf->setPaper('A4', 'portrait');
 
-        // Set paper size and orientation
-        $this->dompdf->setPaper('A4', 'portrait');
+    // Render the HTML as PDF
+    $this->dompdf->render();
 
-        // Render the HTML as PDF
-        $this->dompdf->render();
+    // Determine the filename based on the insert or update case
+    if ($pdfID == '') {
+        $pdfID = maxInvoiceId();
+        $filename = 'invoice-' . $pdfID . '.pdf';
+    } else {
+        $filename = 'invoice-' . $pdfID . '-updated.pdf';
+    }
 
-        // Output the generated PDF to browser
-        //$this->dompdf->stream("pdf_example2.pdf", array("Attachment" => false));
-	if($pdfID==''){
-		$pdfID = maxInvoiceId();	
-		$filename = 'invoice-'.$pdfID.'.pdf';
-	}else{
-		$filename = 'invoice-'.$pdfID.'-updated.pdf';
-	}
     // Get the path to the folder where you want to save the file
-    $savePath = FCPATH . 'invoices/'; // Assuming 'pdfs' is the folder in the root directory
+    $savePath = FCPATH . 'invoices/';
 
     // Create the directory if it doesn't exist
     if (!is_dir($savePath)) {
@@ -919,10 +927,8 @@ public function generate_pdf($content,$pdfID) {
 
     // Save the generated PDF to the folder
     file_put_contents($savePath . $filename, $this->dompdf->output());
+}
 
-		
-		
-    }
 
 function content($rawHtml){
 	$c='<!DOCTYPE html>

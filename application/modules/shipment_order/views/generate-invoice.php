@@ -34,7 +34,22 @@ background-color: #fff;
 .button{
   display: inline-block;
 }
-
+#addLine{
+       background-color:green;
+       color:white;
+       cursor:pointer;
+       padding: 5px 8px;
+       margin-left: 5px;
+       border-radius: 5px 5px;
+}
+#btnSave{
+       background-color:green;
+       color:white;
+       cursor:pointer;
+       border-radius: 5px 5px;
+       border:none;
+       padding: 5px 8px;
+}
    </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -54,7 +69,7 @@ background-color: #fff;
 <section class="content">
                  <form id="form_add_update" name="form_add_update" role="form">
 <div class="alert hidden"></div>
-      <div class="row" style="margin-right: -15px;
+      <div style="margin-right: -15px;
     margin-left: -15px;">
         <div style="width: 100%;" >
           <div class="box">
@@ -67,18 +82,16 @@ background-color: #fff;
   
   <section class="invoice">
       <!-- title row -->
-      <div class="row">
-        <div class="col-xs-12">
+        <div style='width:100%'>
           <h2 class="page-header">
               <?php $setting = $this->db->get('setting')->row();?>
             <img height="60" src="uploads/<?php echo $setting->image;?>">Client Invoices
               </h2>
         </div>
         <!-- /.col -->
-      </div>
       <!-- info row -->
-      <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
+      <div class="invoice-info">
+        <div class="invoice-col" style='width:40%;display:inline-block'>
           From:
           
             <strong>EmjayGlobal</strong><br>
@@ -88,9 +101,9 @@ background-color: #fff;
           
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col select_client">
+        <div class="invoice-col select_client" style='width:20%;display:inline-block;'>
         <label>To Client</label>            
-        <select name='client_id' class='form-control' style='width:80%'>
+        <select name='client_id' class='form-control' style='width:100%'>
                     <option value='Not Selected'>Select</option>
                     <?php 
                     $clients = $this->db->where('user_type', '3')->get('users')->result_array();
@@ -101,9 +114,10 @@ background-color: #fff;
                     </select>  
         </div>
         <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-          <b>Invoice # <?php if(isset($row)){
-            echo $row[0]['id'];
+        <div class="invoice-col" style='width:25%;display:inline-block;float:right'>
+        <?php if(isset($row)){ ?>
+          <b>Invoice # 
+         <?php   echo $row[0]['id'];
           echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
           } ?></b><br>
           <br>
@@ -118,9 +132,8 @@ background-color: #fff;
       <!-- /.row -->
 
       <!-- Table row -->
-      <div class="row">
-        <div class="col-xs-12 table-responsive">
-          <table class="table table-bordered" id="items" border="1">
+        <div class="" style='width:100%'>
+          <table id="items" border="1" style='width:100%;margin-top:30px'>
             <thead>
             <tr>
               <th>Item Details</th>
@@ -142,16 +155,16 @@ background-color: #fff;
         
           ?>
           <tr id="row_0">
-              <td><input type="text" class="form-control noprint" name="item[]" value="<?=$item?>" />
+              <td><input type="text" class="noprint" style='width:100%' name="item[]" value="<?=$item?>" />
               <p  class="showpdf hidden"><?=$item?></p>
               </td>
-              <td><input type="number" class="form-control quantity noprint" name="quantity[]" value="<?=$quantity?>" />
+              <td><input type="number" class="quantity noprint" style='width:100%' name="quantity[]" value="<?=$quantity?>" />
                <p  class="showpdf hidden"><?=$quantity?></p>
               </td>
-              <td><input type="number" class="form-control rate noprint" name="rate[]" value="<?=$rate?>" />
+              <td><input type="number" class="rate noprint" style='width:100%' name="rate[]" value="<?=$rate?>" />
                <p  class="showpdf hidden"><?=$rate?></p>
               </td>
-              <td><input type="text" class="form-control subtotal noprint" readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
+              <td><input type="text" class="subtotal noprint" style='width:100%' readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
               <?php 
         if($subtotal!=''){
         ?>
@@ -163,45 +176,45 @@ background-color: #fff;
       }else{
         ?>
             <tr id="row_0">
-              <td><input type="text" class="form-control" name="item[]" /></td>
-              <td><input type="number" class="form-control quantity" name="quantity[]" /></td>
-              <td><input type="number" class="form-control rate" name="rate[]" /></td>
-              <td><input type="text" class="form-control subtotal" readonly="readonly" name="subtotal[]" /></td>
+              <td><input type="text" class='noprint' style='width:100%' name="item[]" /></td>
+              <td><input type="number" style='width:100%' class="noprint quantity" name="quantity[]" /></td>
+              <td><input type="number" style='width:100%' class="noprint rate" name="rate[]" /></td>
+              <td><input type="text" style='width:100%' class="noprint subtotal" readonly="readonly" name="subtotal[]" /></td>
             </tr>
         <?php } ?>
            </tbody>
             <tfoot>
             <tr>
               <td colspan="3" style="text-align: right;">Tax %</td>
-              <td><input type="number" class="form-control noprint" id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
+              <td><input type="number" style='width:100%' class="noprint" id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
                 </td>
             </tr>
            <tr>
               <td colspan="3" style="text-align: right;">Discount</td>
-              <td><input type="number" class="form-control" id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
+              <td><input class='noprint' type="number" style='width:100%' id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
             </tr>
            <tr>
-              <td colspan="3" style="text-align: right;">Total</td>
+                
+              <td colspan="3" style="text-align: right;">Total(<span class=""><i class="fa fa-dollar"></i></span>)</td>
               <td>
-                <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                <input type="text" class="form-control noprint" id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
+                <div class="">
+                <input type="text" class="noprint" style='width:100%' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
                 
               </div>
                 </td>
             </tr>
          <tr class="noprint">
-              <td colspan="2" ><a class="btn btn-success add_button noprint"><i class="fa fa-plus"></i>Add Line</a></td>
+              <td colspan="2" ><a  id='addLine' class="add_button noprint"><i class="fa fa-plus"></i>Add Line</a></td>
               </tr>   
          <tr>
               <td colspan="4" ><b>Payment Terms</b>
-                <textarea class="form-control noprint" id="payment_terms"  name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
+                <textarea class="" id="payment_terms" style='width:30%' name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
               
                 </td>
             </tr>
         <tr>
               <td colspan="4" ><b>Notes</b>
-                <textarea class="form-control noprint" id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
+                <textarea class="" style='width:30%' id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
                 
                 </td>
             </tr>
@@ -220,13 +233,12 @@ background-color: #fff;
          }
             ?>
               <td colspan="4" class="noprint" >
-               <input type="checkbox" name="paid" id="paid"  data-toggle="tooltip" title="Mark True if paid" <?php echo $Checked;?>><b>Paid </b></td>
+               <input style='margin-left:10px' type="checkbox" name="paid" id="paid"  data-toggle="tooltip" title="Mark True if paid" <?php echo $Checked;?>>&nbsp;&nbsp;<b>Paid </b></td>
             </tr>
                    
             </tfoot>
             
           </table>
-      
       
         </div>
         <!-- /.col -->
@@ -235,30 +247,22 @@ background-color: #fff;
 
 
       <!-- this row will not appear when printing -->
-      <div class="row no-print" style="margin-right: -15px;
-    margin-left: -15px;">
+      <div class="no-print" style="float:right;margin-top:10px">
         <div style="width: 100%;">
-          <a href="javascript:void(0)" onclick="PrintElem('invoice')"  class="btn btn-default noprint"><i class="fa fa-print"></i> Print</a>
-         <button type="button" class="btn btn-success pull-right noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
+         <button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
           </button>&nbsp;
          
-           <button type="button" class="btn btn-success pull-right noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
+           <button type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
           </button>
           <?php /*?> <button type="button" class="btn btn-primary pull-right" id="downloadPdf" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generate PDF
           </button><?php */?>
         </div>
-      </div>
     </section>
                 <div class="clearfix">&nbsp;</div>
-                  <div class="clearfix">&nbsp;</div>
-                
-            </div>
-          
+                  <div class="clearfix">&nbsp;</div>          
           <!-- /.box -->
-        </div>
         <!-- /.col -->
-      </div>
       <!-- /.row -->
       </form>
     </section>
@@ -267,19 +271,19 @@ background-color: #fff;
 <?php  getFooter(); ?>
    <script type="text/javascript">
    
-    function setp(rowid){
-  var myval=  $('#row_'+rowid+' textarea' ).val();
-    $('#row_'+rowid+' td').append('<div  class="showpdf hidden"><p>'+myval+'</p></div>');
-    }
+//     function setp(rowid){
+//   var myval=  $('#row_'+rowid+' textarea' ).val();
+//     $('#row_'+rowid+' td').append('<div  class="showpdf"><p>'+myval+'</p></div>');
+//     }
     
-$('textarea').change(function(){
+// $('textarea').change(function(){
   
-  $(this).parent().append('<div  class="showpdf hidden"><p>'+$(this).val()+'</p></div>');
-  });
-  $('td>input').change(function(){
+//   $(this).parent().append('<div  class="showpdf"><p>'+$(this).val()+'</p></div>');
+//   });
+//   $('td>input').change(function(){
   
-  $(this).parent().append('<div  class="showpdf hidden"><p>'+$(this).val()+'</p></div>');
-  });
+//   $(this).parent().append('<div  class="showpdf"><p>'+$(this).val()+'</p></div>');
+//   });
   
 
   $('#items').change(function(){
@@ -375,7 +379,7 @@ $(document).ready(function(){
         //Check maximum number of input fields
         if(x < maxField){ 
             x++; //Increment field counter
-       var fieldHTML = '<tr id="row_'+x+'"><td><input type="text" class="form-control" name="item[]" /></td><td><input type="number" class="form-control quantity" onChange="update_amounts()" name="quantity[]" /></td><td><input type="text" class="form-control rate" onChange="update_amounts()" name="rate[]" /></td><td><input type="text" class="form-control subtotal" readonly="readonly" name="subtotal[]" /><a data-id="'+x+'" href="javascript:void(0);" class="remove_button"><i class="fa  fa-minus-circle"></i></a></td></tr>'; //New input field html 
+       var fieldHTML = '<tr id="row_'+x+'"><td><input type="text" class="" style="width:100%" name="item[]" /></td><td><input type="number" class="quantity" style="width:100%" onChange="update_amounts()" name="quantity[]" /></td><td><input type="text" class="rate" style="width:100%" onChange="update_amounts()" name="rate[]" /></td><td><input type="text" class="subtotal" style="width:100%" readonly="readonly" name="subtotal[]" /><a data-id="'+x+'" href="javascript:void(0);" class="remove_button"><i class="fa  fa-minus-circle"></i></a></td></tr>'; //New input field html 
  
       
             $(wrapper).append(fieldHTML); //Add field html

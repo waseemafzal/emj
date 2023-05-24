@@ -108,29 +108,29 @@ background-color: #fff;
           
         </div>
         <!-- /.col -->
-        <div class="invoice-col select_client " style='width:25%;float: left;; '>
-        <label>To Client</label>     
-             
-        <select name='client_id' id="toclientSelect" onchange="Setmyvlaue(this.value)" data-value="" class='form-control' style='width:100%'>
+        <div class="invoice-col select_client" style='width:10%;float: left;;'>
+        <label>To Client</label>            
+        <select name='client_id' class='form-control' style='width:100%'>
                     <option value='Not Selected'>Select</option>
                     <?php 
                     $clients = $this->db->where('user_type', '3')->get('users')->result_array();
                   if($clients){
                     foreach($clients as $client){?>
-                    <option data-value="<?php echo $client['name'];?>" value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
+                    <option value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
                     <?php }}?>
                     </select>  
         </div>
         <!-- /.col -->
-        <div class="invoice-col" style='width: 25%;float: right;display: inline-block;margin: 0 0 0 85px;text-align: right;'>
+        <div class="invoice-col" style='width: 26%;float: right;'>
         <?php if(isset($row)){ ?>
           <b>Invoice # 
          <?php   echo $row[0]['id'];
           echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
-          } ?></b>
+          } ?></b><br>
+          <br>
   <?php if(isset($row)){$row=$row[0];} ?>
-          <p><label>Created Date:</label><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"></p>
-          <p><label>Payment Due:</label><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>"></p>
+          <p><label>Created Date:</label><input type="text" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"></p>
+          <p><label>Payment Due:</label><input type="text" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>"></p>
           <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
@@ -140,11 +140,8 @@ background-color: #fff;
         
       </div>
       
-      <div style="display:block;width:100%;float: left;margin: 0 0 10px 0;">
-      
-      </div>
           
-<table border="1"  id="items" style="width:100%;font-size:14px margin-top:10px;"  >
+<table border="1" cellpadding="10" cellspacing="10" id="items" style="width:100%;font-size:14px margin-top:10px;"  >
             <thead>
             <tr>
               <th>Item Details</th>
@@ -417,8 +414,8 @@ $(document).ready(function(){
         $('.showpdf').removeClass('hidden');
         }*/
 if(1){
-        $('.noprint').remove();
-        $('.showpdf').removeClass('hidden');
+       // $('.noprint').remove();
+       // $('.showpdf').removeClass('hidden');
         }
             formData.append('pdfcontent',$('#invoice').html());
             formData.append('ifmail',type);
@@ -588,10 +585,6 @@ $('#removeheader').click(function(){
     //ajax end    
   });
 
-
-function Setmyvlaue(user){
-        $('#toclientSelect').attr('data-value',user);
-        }  
   </script>
   
   

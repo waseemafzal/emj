@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH . 'third_party/mpdf/vendor/autoload.php'; // Include the mPDF autoload file
 
+use Mpdf\Mpdf;
 class Shipment_order extends MX_Controller {
 	
 	public function __construct(){
@@ -782,10 +784,10 @@ public function saveInvoice() {
     unset($_POST['pdfcontent']);
     $mail = $ifmail;
     unset($_POST['ifmail']);
-	$PrimaryID='';
-	if(isset($_POST['id'])){
-		$PrimaryID=$_POST['id'];
-	}
+$PrimaryID='';
+			  if(isset($_POST['id'])){
+				  $PrimaryID=$_POST['id'];
+			  }
     // Rest of the code...
 	$_POST['detail']=array(
 		'items'=>$_POST['item'],
@@ -821,13 +823,14 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
 	  $_POST['paid']='No';
 	  }
 			$_POST['order_no']=time();
+			
 			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
 			
 			
 			
 
 		// Generate PDF
-		if($mail){
+		if(1){
 		  $pdfID = ''; // Initialize pdfID
     if (isset($_POST['id']) && $_POST['id'] !== '') {
         $pdfID = $_POST['id'];
@@ -902,8 +905,81 @@ switch($result){
 
 }
 
-public function generate_pdf($content, $pdfID) {
+
+function replaceInputsWithValues($html)
+{
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true); // Disable error reporting for malformed HTML
+    $dom->loadHTML($html);
+    libxml_clear_errors();
+
+    $xpath = new DOMXPath($dom);
+    $inputNodes = $xpath->query('//table//input[@value] | //table//select | //table//textarea[@value]');
+
+    foreach ($inputNodes as $inputNode) {
+        $value = '';
+        if ($inputNode->nodeName === 'input') {
+            $inputType = $inputNode->getAttribute('type');
+            if (in_array($inputType, ['date', 'number', 'text'], true)) {
+                $value = $inputNode->getAttribute('value');
+            }
+        } elseif ($inputNode->nodeName === 'select') {
+            $selectedOption = $xpath->query('./option[@selected]', $inputNode)->item(0);
+            if ($selectedOption !== null) {
+                $value = $selectedOption->nodeValue;
+                $dataValue = $selectedOption->getAttribute('data-value');
+                if ($dataValue) {
+                    $value = $dataValue;
+                }
+            }
+        } elseif ($inputNode->nodeName === 'textarea') {
+            $value = $inputNode->nodeValue;
+        }
+
+        if (in_array($inputNode->nodeName, ['input', 'textarea'], true)) {
+            $parentElement = $inputNode->parentNode;
+            $spanElement = $dom->createElement('span', $value);
+            $parentElement->replaceChild($spanElement, $inputNode);
+        } elseif ($inputNode->nodeName === 'select') {
+            $parentElement = $inputNode->parentNode;
+            $labelElement = $dom->createElement('label', $value);
+            $parentElement->replaceChild($labelElement, $inputNode);
+        }
+    }
+
+    return $dom->saveHTML();
+}
+
+    public function generate_pdf($content, $pdfID)
+    {
+		$html = $this->replaceInputsWithValues($content);
+		//$html = $content;
+		//echo $html;exit;
+
+        // Generate the PDF
+        $pdf = new Mpdf();
+/*$stylesheet = file_get_contents('https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css');
+$pdf->WriteHTML($stylesheet, 1);
+*/        // Add content to the PDF
+$pdf->WriteHTML('<style>table { font-size: 12px; }table input,th{ font-size: 15px; }</style>'); // Set the desired font size for tables
+
+        $pdf->WriteHTML($html);
+
+        // Set the file name and save path
+        $filename = 'invoice-'.$pdfID.'.pdf';
+        $savePath = FCPATH . 'invoices/' . $filename;
+
+        // Save the PDF to the specified path
+        $pdf->Output($savePath, 'F');
+
+        // Display a success message or perform any additional actions
+       // echo "PDF generated and saved successfully!";
+    }
+	
+public function _generate_pdf($content, $pdfID) {
     $html = $this->content($content);
+	echo $html;exit;
+	//$html='';
     // Load HTML into Dompdf
     $this->dompdf->loadHtml($html);
 
@@ -918,7 +994,7 @@ public function generate_pdf($content, $pdfID) {
         $pdfID = maxInvoiceId();
         $filename = 'invoice-' . $pdfID . '.pdf';
     } else {
-        $filename = 'invoice-' . $pdfID . '-updated.pdf';
+        $filename = 'invoice-' . $pdfID . '.pdf';
     }
 
     // Get the path to the folder where you want to save the file
@@ -964,6 +1040,7 @@ function content($rawHtml){
 		td{
 			width:100%;
 		}
+		.hidden{display:none}
     </style>
 </head>
 <body>

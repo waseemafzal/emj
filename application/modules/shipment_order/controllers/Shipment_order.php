@@ -777,11 +777,15 @@ public function generateinvoice($id){
 }
 public function saveInvoice() {
     extract($_POST);
-    $tcpdfContent = $pdfcontent;
+    //echo '<pre>;';print_r($_POST);exit;
+	$tcpdfContent = $pdfcontent;
     unset($_POST['pdfcontent']);
     $mail = $ifmail;
     unset($_POST['ifmail']);
-
+	$PrimaryID='';
+	if(isset($_POST['id'])){
+		$PrimaryID=$_POST['id'];
+	}
     // Rest of the code...
 	$_POST['detail']=array(
 		'items'=>$_POST['item'],

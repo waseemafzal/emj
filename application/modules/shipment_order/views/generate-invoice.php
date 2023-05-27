@@ -84,14 +84,21 @@ background-color: #fff;
       <!-- title row -->
         <div style='width:100%'>
           <h2 class="page-header">
-              <?php $setting = $this->db->get('setting')->row();?>
-            <img height="60" src="uploads/<?php echo $setting->image;?>">Client Invoices
+              <?php $setting = $this->db->get('setting')->row();
+			  if(is_file(FCPATH.'uploads/'.$setting->image)){
+				 $logo= base_url().'uploads/'.$setting->image;
+				  }else{
+				 $logo= base_url().'assets/company_logo.jpg';
+					  }
+			  //
+			  ?>
+            <img height="60" src="<?=$logo?>">Client Invoices
               </h2>
         </div>
         <!-- /.col -->
       <!-- info row -->
-      <div class="invoice-info">
-        <div class="invoice-col" style='width:40%;display:inline-block'>
+      <div class="invoice-info" style="position:relative">
+        <div class="invoice-col" style='width:40%;float: left;'>
           From:
           
             <strong>EmjayGlobal</strong><br>
@@ -101,39 +108,48 @@ background-color: #fff;
           
         </div>
         <!-- /.col -->
-        <div class="invoice-col select_client" style='width:20%;display:inline-block;'>
-        <label>To Client</label>            
-        <select name='client_id' class='form-control' style='width:100%'>
+        <div class="invoice-col select_client " style='width:25%;float: left;; '>
+        <label>To Client</label>     
+             
+        <select name='client_id' id="toclientSelect" onchange="Setmyvlaue(this.value)" data-value="" class='form-control' style='width:100%'>
                     <option value='Not Selected'>Select</option>
                     <?php 
                     $clients = $this->db->where('user_type', '3')->get('users')->result_array();
-                  if($clients){
-                    foreach($clients as $client){?>
-                    <option value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
-                    <?php }}?>
+                  
+                    foreach($clients as $client){
+                      $selected='';
+                      if(isset($row)){
+                      if($row->client_id==$client['id']){
+                        $selected='selected';
+                        }}?>
+                    <option data-value="<?php echo $client['name'];?>" <?php echo $selected?> value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
+                    <?php }?>
                     </select>  
         </div>
         <!-- /.col -->
-        <div class="invoice-col" style='width:25%;display:inline-block;float:right'>
+        <div class="invoice-col" style='width: 25%;float: right;display: inline-block;margin: 0 0 0 85px;text-align: right;'>
         <?php if(isset($row)){ ?>
           <b>Invoice # 
          <?php   echo $row[0]['id'];
           echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
-          } ?></b><br>
-          <br>
+          } ?></b>
   <?php if(isset($row)){$row=$row[0];} ?>
-          <b>Created Date:</b><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"><br>
-          <b>Payment Due:</b><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>">
+          <p><label>Created Date:</label><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"></p>
+          <p><label>Payment Due:</label><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>"></p>
           <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
-        <!-- /.col -->
+        
+   
+     <!-- /.col -->
+        
       </div>
-      <!-- /.row -->
-
-      <!-- Table row -->
-        <div class="" style='width:100%'>
-          <table id="items" border="1" style='width:100%;margin-top:30px'>
+      
+      <div style="display:block;width:100%;float: left;margin: 0 0 10px 0;">
+      
+      </div>
+          
+<table border="1"  id="items" style="width:100%;font-size:14px margin-top:10px;"  >
             <thead>
             <tr>
               <th>Item Details</th>
@@ -155,50 +171,43 @@ background-color: #fff;
         
           ?>
           <tr id="row_0">
-              <td><input type="text" class="noprint" style='width:100%' name="item[]" value="<?=$item?>" />
-              <p  class="showpdf hidden"><?=$item?></p>
+              <td><input type="text"  style='width:100%;background: white;border: none;' name="item[]" value="<?=$item?>" />
               </td>
-              <td><input type="number" class="quantity noprint" style='width:100%' name="quantity[]" value="<?=$quantity?>" />
-               <p  class="showpdf hidden"><?=$quantity?></p>
+              <td><input type="number" class="quantity " style='width:100%;background: white;border: none;' name="quantity[]" value="<?=$quantity?>" />
               </td>
-              <td><input type="number" class="rate noprint" style='width:100%' name="rate[]" value="<?=$rate?>" />
-               <p  class="showpdf hidden"><?=$rate?></p>
+              <td><input type="number" class="rate " style='width:100%;background: white;border: none;'  name="rate[]" value="<?=$rate?>" />
               </td>
-              <td><input type="text" class="subtotal noprint" style='width:100%' readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
-              <?php 
-        if($subtotal!=''){
-        ?>
-                <b class="showpdf hidden"><?=$subtotal?></b>
-                <?php } ?>
+              <td><input type="text" class="subtotal " style='width:100%;background: white;border: none;'  readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
+           
               </td>
             </tr>
          <?php  }
       }else{
         ?>
             <tr id="row_0">
-              <td><input type="text" class='noprint' style='width:100%' name="item[]" /></td>
-              <td><input type="number" style='width:100%' class="noprint quantity" name="quantity[]" /></td>
-              <td><input type="number" style='width:100%' class="noprint rate" name="rate[]" /></td>
-              <td><input type="text" style='width:100%' class="noprint subtotal" readonly="readonly" name="subtotal[]" /></td>
+              <td><input type="text" style='width:100%;border:none;' name="item[]" /></td>
+              <td><input type="number" style='width:100%;border:none;' class=" quantity" name="quantity[]" /></td>
+              <td><input type="number" style='width:100%;border:none;' class=" rate" name="rate[]" /></td>
+              <td><input type="text" style='width:100%;border:none;' class=" subtotal" readonly="readonly" name="subtotal[]" /></td>
             </tr>
         <?php } ?>
            </tbody>
             <tfoot>
             <tr>
               <td colspan="3" style="text-align: right;">Tax %</td>
-              <td><input type="number" style='width:100%' class="noprint" id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
+              <td><input type="number" style='width:100%;border:none'  id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
                 </td>
             </tr>
            <tr>
               <td colspan="3" style="text-align: right;">Discount</td>
-              <td><input class='noprint' type="number" style='width:100%' id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
+              <td><input  type="number" style='width:100%;border:none' id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
             </tr>
            <tr>
                 
               <td colspan="3" style="text-align: right;">Total(<span class=""><i class="fa fa-dollar"></i></span>)</td>
               <td>
                 <div class="">
-                <input type="text" class="noprint" style='width:100%' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
+                <input type="text"  style='width:100%;border:none' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
                 
               </div>
                 </td>
@@ -208,13 +217,13 @@ background-color: #fff;
               </tr>   
          <tr>
               <td colspan="4" ><b>Payment Terms</b>
-                <textarea class="" id="payment_terms" style='width:30%' name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
+                <textarea class="" id="payment_terms" style='width:100%' name="payment_terms" rows="2" /><?php if(isset($row)){echo $row['payment_terms'];}?></textarea>
               
                 </td>
             </tr>
         <tr>
               <td colspan="4" ><b>Notes</b>
-                <textarea class="" style='width:30%' id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
+                <textarea class="" style='width:100%' id="notes" name="notes" rows="2" /><?php if(isset($row)){echo $row['notes'];}?></textarea>
                 
                 </td>
             </tr>
@@ -240,10 +249,7 @@ background-color: #fff;
             
           </table>
       
-        </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
 
 
       <!-- this row will not appear when printing -->
@@ -258,7 +264,7 @@ background-color: #fff;
             <i class="fa fa-download"></i> Generate PDF
           </button><?php */?>
         </div>
-    </section>
+    </div>
                 <div class="clearfix">&nbsp;</div>
                   <div class="clearfix">&nbsp;</div>          
           <!-- /.box -->
@@ -411,7 +417,11 @@ $(document).ready(function(){
         formData.append(input.name,input.value);
     });   
 
-if(type==1){
+/*if(type==1){
+        $('.noprint').remove();
+        $('.showpdf').removeClass('hidden');
+        }*/
+if(1){
         $('.noprint').remove();
         $('.showpdf').removeClass('hidden');
         }
@@ -583,6 +593,10 @@ $('#removeheader').click(function(){
     //ajax end    
   });
 
+
+function Setmyvlaue(user){
+        $('#toclientSelect').attr('data-value',user);
+        }  
   </script>
   
   

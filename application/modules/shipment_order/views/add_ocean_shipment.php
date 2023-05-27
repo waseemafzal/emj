@@ -238,7 +238,7 @@ background-color: #fff;
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>" required>
                                     
                                         </div>
-                                          <div id="shipper_phone" class="col-md-4">
+                                          <div class="col-md-4">
                                     <label>Shipper's Phone</label>
                                     <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>" required>
                                   </div>

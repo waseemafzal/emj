@@ -28,7 +28,7 @@ $Heading=	'Unpaid Invoices';
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              
+               <button type='button' id='sendMail' class='btn btn-success' style='display:none'>Send Mail</button>    
             </div>
             <!-- /.box-header -->
              <div class="box-body">
@@ -38,27 +38,29 @@ $Heading=	'Unpaid Invoices';
         <th></th>
         <th>User</th>
         <th>Email</th>
+        <th>Amount</th>
         <th>Created Date</th>
         <th>Due Date</th>
-        <th>Booking No</th>
-	    <th>Paid</th>    
+	    <th>Booking no</th>    
+        <th>Paid</th>    
         <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-     <?php
+    <?php
 	
 	if($invoices!=''){
 	foreach ($invoices as $invoice){
 		
 		?>
 		<tr id="row_<?php echo $invoice['id'];?>">
-        <td><input class='checkoption' id='invoiceMail' data-email='<?php echo $invoice["email"]?>' type='checkbox' data-id='<?php echo $invoice["id"]?>'></td>
+        <td><input class='checkoption' id='invoiceMail' name='checkedBox' value='<?php echo $invoice["id"]?>' data-email='<?php echo $invoice["email"]?>' type='checkbox' data-id='<?php echo $invoice["id"]?>'></td>
         <td><?php echo $invoice['user_name'];?></td>
         <td><?php echo $invoice['email'];?></td>
-	      <td><?php echo $invoice['created_date'];?></td>
+        <td><?php echo $invoice['amount'];?></td>
+  	    <td><?php echo $invoice['created_date'];?></td>
         <td><?php echo $invoice['due_date'];?></td>
-        <td><?php echo $invoice['booking_no'];?></td>
+        <td><?php echo $invoice['track_number'];?></td>
         <td><?php echo $invoice['paid'];?></td>
 
     <td class="center">
@@ -81,22 +83,23 @@ $Heading=	'Unpaid Invoices';
 </div>  
 
 </div>
-         <div class="modal fade" id="invoiceMailModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal fade" id="invoiceMailModal" tabindex="-1" data-bs-backdrop="static">
      <div class="modal-dialog modal-dialog-centered">
        <div class="modal-content">
          <div class="modal-header bg-black">
-           <h1 class="modal-title">Invoice Modal</h1>
-             <button class="close" data-dismiss="modal"><span>&times;</span></button>
+           <h5 class="modal-title"><b>Invoice Modal</b></h5>
+           <button class='close' data-dismiss='modal'>&times;</button>
        </div>
        <div class="modal-body">
        <form id="sendMailInvoice">
            <!--<?php print_r($invoice);?>-->
-         <label>From:</label>
-         <input type="text" readonly name="name" class="form-control" value="EMJ Global"><br>
-         <label>To:</label>
-         <input type="email" id='email' readonly name="email" class="form-control">
-         <input type='hidden' name='id' id='id'>
-         <br><label>Template:</label>
+        <div class='row'>
+            <div class='col-md-6'>
+                 <label>From:</label>
+                 <input type="text" readonly name="name" class="form-control" value="EMJ Global"><br>
+              </div>
+            </div>
+         <label>Template:</label>
              <select class='form-control' id="mail_templates">
               <option>Choose Template</option>
              <?php 
@@ -109,7 +112,7 @@ $Heading=	'Unpaid Invoices';
                   </select>
           <br>
           <label>Description:</label>
-          <textarea name='description' id='description' class='form-control'></textarea><br><br>
+          <textarea name='description' id='description' class='form-control'></textarea><br>
           <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
        <script type="text/javascript" src="bower_components/ckeditor/ckeditor.js"></script>   
 <script type="text/javascript">
@@ -119,21 +122,30 @@ $Heading=	'Unpaid Invoices';
 
     });
 </script> 
-          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-success" id="btnSendMail" type="submit">Save</button>
           <button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
        </form>
        </div>
 <script>
-  $("input[type='checkbox']").on('change', function(e) {
-    if (this.checked) {
-      var id = checkedCheckbox();
-      var email = checkedCheckboxEmail();
-     // alert("id:" + id + ", Email:" + email);
-      $('#invoiceMailModal').modal('show');
-      $('#id').val(id);
-      $('#email').val(email);
-    }
-  });
+     $(document).ready(function() {
+      var checked = 'input[name="checkedBox"]';
+      var $submit = $("#sendMail").hide();
+      $(document).on("change", checked, function() {
+        //console.log($(checked).is(":checked"))
+        $submit.toggle($(checked).is(":checked"));
+      });
+		//$('<input type="checkbox" name="checkedBox" value="<?php echo $invoice['id']?>">').appendTo("div");
+    });
+//   $("input[type='checkbox']").on('change', function(e) {
+//     if (this.checked) {
+//       var id = checkedCheckbox();
+//       var email = checkedCheckboxEmail();
+//      // alert("id:" + id + ", Email:" + email);
+//       $('#invoiceMailModal').modal('show');
+//       $('#id').val(id);
+//       $('#email').val(email);
+//     }
+//   });
 
   function checkedCheckbox() {
     var selected = $('input.checkoption:checked').attr('data-id');
@@ -169,8 +181,8 @@ $Heading=	'Unpaid Invoices';
     $("#sendMailInvoice").submit(function(e){
         e.preventDefault();
         var description = CKEDITOR.instances.description.getData();
-        var email = $('#email').val();
-        var id = $('#id').val();
+         var id = $('#ids').val();
+         var email = $('#emails').val();
         
     $.ajax({
         type: "POST", 
@@ -198,15 +210,15 @@ $Heading=	'Unpaid Invoices';
     <!-- /.content -->
   </div>
 <?php  getFooter(); ?>
-<script type="text/javascript">
-   $(document).ready(function(){
+<!--<script type="text/javascript">-->
+<!--   $(document).ready(function(){-->
 
-      $('.checkoption').click(function() {
-         $('.checkoption').not(this).prop('checked', false);
-      });
+<!--      $('.checkoption').click(function() {-->
+<!--         $('.checkoption').not(this).prop('checked', false);-->
+<!--      });-->
 
-   });
-   </script>
+<!--   });-->
+<!--   </script>-->
 <!--  <script>-->
 <!--      $("input:checkbox").each(function(){-->
 <!--       var $this = $(this);    -->
@@ -215,3 +227,34 @@ $Heading=	'Unpaid Invoices';
 <!--    }-->
 <!--});-->
 <!--  </script>-->
+<script>
+$('#sendMail').click(function(){
+getCheckedValues();
+  $('#invoiceMailModal').modal();
+  //$('#invoiceMailModal').find('#id').val(checkVals['id']);
+  //$('#invoiceMailModal').find('#email').val(checkVals['email']);
+  //alert(checkVals['id']);
+     //alert(checkedVals+checkedEmail);  
+});
+  function getCheckedValues() {
+  var checkedValues = []; // Array to store checked checkbox values
+var checkedValuesEmail = []; // Array to store checked checkbox values
+
+  // Iterate through each checked checkbox
+  $('.checkoption:checked').each(function() {
+    var email = $(this).data('email'); // Get the value of data-email attribute
+    var id = $(this).data('id'); // Get the value of data-id attribute
+
+    checkedValues.push(id); // Combine email and id with a colon separator and add to the array
+      checkedValuesEmail.push(email); // Combine email and id with a colon separator and add to the array
+  });
+
+  var resultString = checkedValues.join(','); // Join the array elements with commas
+var resultStringEmail = checkedValuesEmail.join(','); // Join the array elements with commas
+
+  // Append hidden field with the comma-separated string under the submit button
+  $('#btnSendMail').before('<input type="hidden" id="ids" name="ids" value="' + resultString + '">');
+  $('#btnSendMail').before('<input type="hidden" id="emails" name="emails" value="' + resultStringEmail + '">');
+}
+
+</script>

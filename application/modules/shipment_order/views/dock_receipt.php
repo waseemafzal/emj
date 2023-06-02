@@ -67,12 +67,10 @@ background-color: #fff;
                  <tr>
                   <td rowspan='2'>
                   Exporter<br>
-                  <b>Emjay Global LLC, FMC#024627N</b><br>
-                  6254 FRANKFORD AVENUE<br>
-                  443-304-2803, Tel: 443-304-2803,<br>
-                  BALTIMORE, MD 21206. UNITED STATES
+                  <b><?php echo $result[0]['shipper_name'];?></b><br>
+                  <?php echo $result[0]['shipper_address'];?><br>
                   </td>
-                  <td>Document Number<br>SAL-575448</td>
+                  <td>Document Number<br><?php echo $result[0]['booking_no'];?></td>
                   <td colspan='2'>B/L Number<br><?php echo $result[0]['landing_bill_no'];?></td>
                  </tr>
                  <tr>
@@ -125,11 +123,9 @@ background-color: #fff;
                         <tr>
                           <td>WR EGW14172</td>
                           <td>1 VEH</td>
-                          <td>2016 HONDA CIVIC EX<br>
-                              VIN:2HGFC2F77GH574944<br>
-                              AES ITN:X20220706171267
+                          <td><?php echo htmlspecialchars_decode($result[0]['item_description']); ?>
                         </td>
-                          <td>1,267.79 Kg<br>"2,795.00 Lb"</td>
+                          <td id='gross-weight'></td>
                           <td>418.77 ft³<br>"4,359.24 Vlb"</td>
                         </tr>
                       </tbody>
@@ -140,7 +136,7 @@ background-color: #fff;
                   <td colspan='2'>
                     <p style='text-align:center'><b>DELIVERED BY</b></p>
                     LIGHTER TRUCK<br> <br>
-                  ARRIVED DATE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TIME
+                  ARRIVED DATE: <?php echo $result[0]['arrival_date']?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TIME: <?php echo $result[0]['arrival_time']?>
                   <br><br>UNLOADED DATE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TIME<br>
                   <br>CHECKED BY<br> <br>
                   PLACED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN SHIP/ ON DOCX&nbsp;&nbsp;&nbsp;LOCATION
@@ -226,6 +222,23 @@ $('#post_table').dataTable( {
   "ordering": false
 } );
 </script>
+<script>
+  var length = <?php echo $result[0]['length']; ?>; // Replace with the actual length value from the database
+  var width = <?php echo $result[0]['width'] ?>; // Replace with the actual width value from the database
+  var height = <?php echo $result[0]['height'] ?>; // Replace with the actual height value from the database
+
+  // Calculate the gross weight
+  var grossWeight = length * width * height;
+
+  // Display the gross weight in the table cell
+  document.getElementById("gross-weight").innerHTML = grossWeight + " kg";
+</script>
+
+
+
+
+
+
 
   
 

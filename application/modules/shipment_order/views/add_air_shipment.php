@@ -103,8 +103,8 @@ background-color: #fff;
                                     <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>            
                                     <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>" required>
-                                    
-                                        </div>
+                                    <input type='hidden' class='form-control' name='user_id' id='user_id' value='<?php if(isset($row)){echo $row->user_id;}?>'>
+                                   </div>
                                           <div class="col-md-4">
                                     <label>Shipper's Phone</label>
                                     <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>" required>
@@ -511,7 +511,6 @@ if(count($subchilds)>0){
       </div>
      <div class="modal-footer">
        <button class="btn btn-success" onclick='saveModalData()' type="button">Save</button>
-       <input type='hidden' >
        <button class='btn btn-danger' data-dismiss='modal'>Close</button>
      </div>
      
@@ -877,6 +876,9 @@ $("#<?=$btn?>").addClass('active');
           alert(data.message);
         }
         $('#saveModal').modal('hide');
+        setTimeout(function(){
+            location.reload();
+        },3000);
            }
    });
 
@@ -902,6 +904,7 @@ $(function(){
             event.preventDefault();
            $(this).val(ui.item.name);
 			     $("#shipper_address").val(ui.item.address);
+			     $("#user_id").val(ui.item.id);
            $("#shipper_phone").val(ui.item.mobile);
         }
     })

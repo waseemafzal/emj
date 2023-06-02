@@ -108,25 +108,25 @@ background-color: #fff;
                           <div class='col-md-4'>
                             <label>Shipment Name</label>
                             <?php if(isset($row)){?>
-                               <input type='text' readonly name='shipment_name' class='form-control' value='<?php echo $row->shipment_name;?>'>
+                               <input type='text' name='shipment_name' class='form-control' value='<?php echo $row->shipment_name;?>'>
                                <?php }else{?>
-                               <input type='text' readonly name='shipment_name' class='form-control' value='EMJ-<?php echo maxShipmentId();?>'>
+                               <input type='text' name='shipment_name' class='form-control' value='EMJ-<?php echo maxShipmentId();?>'>
                                <?php }?>
                           </div>
                           <div class='col-md-4'>
                             <label>Bill of Landing Number</label>
                             <?php if(isset($row)){?>
-                               <input type='text' readonly name='landing_bill_no' class='form-control' value='<?php echo $row->landing_bill_no;?>'>
+                               <input type='text' name='landing_bill_no' class='form-control' value='<?php echo $row->landing_bill_no;?>'>
                           <?php }else{?>
-                               <input type='text' readonly name='landing_bill_no' class='form-control' value='EMJ-<?php echo maxShipmentId();?>'>
+                               <input type='text' name='landing_bill_no' class='form-control' value='EMJ-<?php echo maxShipmentId();?>'>
                            <?php }?>
                               </div>
                           <div class='col-md-4'>
                             <label>Booking Number</label>
                             <?php if(isset($row)){?>
-                               <input type='text' name='booking_no' class='form-control' readonly value='<?php echo $row->booking_no;?>'>
+                               <input type='text' name='booking_no' class='form-control' value='<?php echo $row->booking_no;?>'>
                                <?php }else{?>
-                            <input type='text' name='booking_no' class='form-control' readonly value='<?php echo uniqid()?>'>
+                            <input type='text' name='booking_no' class='form-control' value='<?php echo uniqid()?>'>
                        <?php }?>
                           </div>
                         </div>
@@ -147,7 +147,7 @@ background-color: #fff;
                                        <label>Shipment Date</label>
                                        <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
                                        <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-                                     </div>
+                                    </div>
                                    </div>
                                   </div>
                         <div class='form-group'> 
@@ -217,7 +217,7 @@ background-color: #fff;
                           <div class='row'>
                             <div class='col-md-12'>
                               <label>Description of Goods</label>
-                                <textarea name='description_of_goods' class='form-control'><?php if(isset($row)){echo $row->description_of_goods;}?></textarea>
+                                <textarea name='description_of_goods' class='form-control'>Automobile</textarea>
                             </div>
                           </div>
                         </div>
@@ -236,7 +236,7 @@ background-color: #fff;
                                     <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>
                                     <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>" required>
-                                    
+                                    <input type='hidden' class='form-control' name='user_id' id='user_id' value='<?php if(isset($row)){echo $row->user_id;}?>'>
                                         </div>
                                           <div class="col-md-4">
                                     <label>Shipper's Phone</label>
@@ -407,50 +407,6 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
 </div>
                            
                                </div>
-                        
-                                <div class="form-group">
-                          <label>Item Description</label>
-                            <textarea type="text" class="form-control" id="editor1" name="item_description" required><?php if(isset($row)){ echo $row->item_description;} ?></textarea>
-                       
-                       </div>
-                     
-                                <div class="form-group">
-                               <div class="row">
-                                 <div class="col-md-2">
-                           <label>Quantity</label>
-                           
-                           <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
-                           
-                           </div>                                      
-                               <div class="col-md-2">       
-                           <label>Length (cm)</label>
-                           
-                           <input type="number" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
-                           
-                                </div>
-                                  <div class="col-md-2"> 
-                           <label>Width (cm)</label>
-                           
-                           <input type="number" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
-                           </div>
-                                 <div class="col-md-2">
-                                   
-                           <label>Height (cm)</label>
-                           
-                           <input type="number" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
-                           
-                              </div> 
-                              <div id="select_packaging" class="col-md-3">
-                           <label>Please Select Your Packaging</label>
-                           
-                          <select class="form-control" name="package_type">
-                              <option value="extra large box" <?php if(isset($row)){ echo setSelect($row->package_type,'extra large box');}?>>Extra Large Box</option>
-                              <option value="large box"  <?php if(isset($row)){ echo setSelect($row->package_type,'large box');}?>>Large Box</option>
-                              <option value="medium box" <?php if(isset($row)){ echo setSelect($row->package_type,'medium box');}?>>Medium Box</option>
-                              <option value="letter" <?php if(isset($row)){ echo setSelect($row->package_type,'letter');}?>>Letter</option> 
-                          </select>
-                               </div>
-                              </div></div>
               </div>
               <!-- /.tab-pane -->
                  <div class='tab-pane' id='package_details'>
@@ -498,7 +454,51 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                      <?php } }}}?>
                      </div>
                                
-                                  </div></div></div>
+                                  </div></div>
+                                  <div class="form-group">
+                          <label>Item Description</label>
+                            <textarea type="text" class="form-control" id="editor1" name="item_description" required><?php if(isset($row)){ echo $row->item_description;} ?></textarea>
+                       
+                       </div>
+                     
+                                <div class="form-group">
+                               <div class="row">
+                                 <div class="col-md-2">
+                           <label>Quantity</label>
+                           
+                           <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
+                           
+                           </div>                                      
+                               <div class="col-md-2">       
+                           <label>Length (cm)</label>
+                           
+                           <input type="number" class="form-control" id="length" name="length" value="<?php if(isset($row)){ echo $row->length;} ?>">
+                           
+                                </div>
+                                  <div class="col-md-2"> 
+                           <label>Width (cm)</label>
+                           
+                           <input type="number" class="form-control" id="width" name="width" value="<?php if(isset($row)){ echo $row->width;} ?>">
+                           </div>
+                                 <div class="col-md-2">
+                                   
+                           <label>Height (cm)</label>
+                           
+                           <input type="number" class="form-control" id="height" name="height" value="<?php if(isset($row)){ echo $row->height;} ?>">
+                           
+                              </div> 
+                              <div id="select_packaging" class="col-md-3">
+                           <label>Please Select Your Packaging</label>
+                           
+                          <select class="form-control" name="package_type">
+                              <option value="extra large box" <?php if(isset($row)){ echo setSelect($row->package_type,'extra large box');}?>>Extra Large Box</option>
+                              <option value="large box"  <?php if(isset($row)){ echo setSelect($row->package_type,'large box');}?>>Large Box</option>
+                              <option value="medium box" <?php if(isset($row)){ echo setSelect($row->package_type,'medium box');}?>>Medium Box</option>
+                              <option value="letter" <?php if(isset($row)){ echo setSelect($row->package_type,'letter');}?>>Letter</option> 
+                          </select>
+                               </div>
+                              </div></div>
+                                </div>
               <div class='tab-pane' id='entitles'>                    
                       <h2>Select the entitles</h2>
                         <hr>
@@ -506,37 +506,48 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                             
                             <div class='col-md-6'>
                               <label>Ultimate Consignee</label>
-                                <input type='text' name='ultimate_consignee' class='form-control' value='<?php if(isset($row)){echo $row->ultimate_consignee;}?>'>
+                                <input type='text' id='ultimate_consignee' name='ultimate_consignee' class='form-control' value='<?php if(isset($row)){echo $row->ultimate_consignee;}?>'>
                             </div>
                            
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='ultimate_consignee_address' class='form-control'><?php if(isset($row)){echo $row->ultimate_consignee_address;}?></textarea>
+                                <textarea id='ultimate_consignee_address' name='ultimate_consignee_address' class='form-control'><?php if(isset($row)){echo $row->ultimate_consignee_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Notify Party</label>
-                                <input type='text' name='notify_party' class='form-control' value='<?php if(isset($row)){echo $row->notify_party;}?>'>
+                              <select name='notify_party' class='form-control' onchange="notify_party_address_autofill(this.value)">
+                                 <option>Choose</option>         
+                          <?php 
+                              $notifies = $this->db->where('user_type', 3)->get('users')->result_array();
+                            if(count($notifies)>0){
+                              foreach($notifies as $notify){?>
+                              <option value='<?php echo $notify['id'];?>'><?php echo $notify['name'];?></option>
+
+                              <?php }
+                            }
+                              ?>
+                              </select>
                             </div>
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='notify_party_address' class='form-control'><?php if(isset($row)){echo $row->notify_party_address;}?></textarea>
+                                <textarea id='notify_party_address' name='notify_party_address' class='form-control'><?php if(isset($row)){echo $row->notify_party_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Intermediate</label>
-                                <input type='text' name='intermediate' class='form-control' value='<?php if(isset($row)){echo $row->intermediate;}?>'>
+                                <input type='text' id='intermediate' name='intermediate' class='form-control' value='<?php if(isset($row)){echo $row->intermediate;}?>'>
                             </div>
                             
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='intermediate_address' class='form-control'><?php if(isset($row)){echo $row->intermediate_address;}?></textarea>
+                                <textarea  id='intermediate_address' name='intermediate_address' class='form-control'><?php if(isset($row)){echo $row->intermediate_address;}?></textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Forwording Agent</label>
-                                <input type='text' name='forwording_agent' class='form-control' value='<?php if(isset($row)){echo $row->forwording_agent;}?>'>
+                                <input type='text' name='forwording_agent' class='form-control' value='Emjay Global LLC' readonly>
                             </div>
                             <div class='col-md-6'>
                               <label>Address</label>
-                                <textarea name='forwording_agent_address' class='form-control'><?php if(isset($row)){echo $row->forwording_agent_address;}?></textarea>
+                                <textarea name='forwording_agent_address' class='form-control' readonly>6254 Frankford Avenue</textarea>
                             </div>
                             <div class='col-md-6'>
                               <label>Destination Agent</label>
@@ -595,11 +606,11 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                               </div>
                               <div class='col-md-4'>
                                  <label>Port of Loading</label>
-                                   <input type='text' name='port_of_loading' class='form-control' value='<?php if(isset($row)){echo $row->port_of_loading;}?>'>
+                                   <input id='port_of_loading' type='text' name='port_of_loading' class='form-control' value='<?php if(isset($row)){echo $row->port_of_loading;}?>'>
                               </div>
                               <div class='col-md-4'>
                                  <label>Exporting Carrier</label>
-                                   <input type='text' name='exporting_carrier' class='form-control' value='<?php if(isset($row)){echo $row->exporting_carrier;}?>'>
+                                   <input type='text' id='exporting_carrier' name='exporting_carrier' class='form-control' value='<?php if(isset($row)){echo $row->exporting_carrier;}?>'>
                               </div>
                             </div>
                           </div>
@@ -1123,6 +1134,9 @@ $("#<?=$btn?>").addClass('active');
           alert(data.message);
         }
         $('#saveModal').modal('hide');
+        setTimeout(function(){
+            location.reload();
+        },3000);
            }
    });
 
@@ -1148,6 +1162,7 @@ $(function(){
             event.preventDefault();
            $(this).val(ui.item.name);
 			     $("#shipper_address").val(ui.item.address);
+           $('#user_id').val(ui.item.id);
            $("#shipper_phone").val(ui.item.mobile);
         }
     })
@@ -1179,4 +1194,116 @@ $(function(){
 	}*/;
 	
 });
+</script>
+<script>
+  $(function() {
+    $("#port_of_loading").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_ports_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.name);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
+});
+</script>
+<script>
+  $(function() {
+    $("#ultimate_consignee").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_ultimate_consignee_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.name);
+           $('#ultimate_consignee_address').val(ui.item.address);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
+});
+</script>
+<script>
+  $(function() {
+    $("#port_of_loading").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_ports_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.name);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
+});
+</script>
+<script>
+  $(function() {
+    $("#intermediate").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_intermediate_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+           $(this).val(ui.item.name);
+           $('#intermediate_address').val(ui.item.address);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
+});
+</script>
+<script>
+  $(function() {
+    $("#exporting_carrier").autocomplete({
+        source: "<?=base_url()?>shipment_order/autocomplete_exporting_carrier_data",
+        // minLength:2,
+        // autoFocus:true,
+        select: function( event, ui ) {
+            event.preventDefault();
+            $(this).val(ui.item.name);
+        }
+    })
+	/*.data("ui-autocomplete")._renderItem = function (table, item) {
+	return $("<table class='flightstatTable' border='1'><thead><tr><th>Desc</th><th>Length</th><th>Width</th><th>Height</th><th>Volume</th></tr></thead><tbody></tbody></table>")
+	.data("item.autocomplete", item)
+	.append( "</td>"+"<td>"+item.description+"</td>"+"<td>"+item.length+"</td>"+"<td>"+item.width+"</td>"+"<td>"+item.height+"</td>" +"<td>"+item.volume+"</td>").appendTo(table);
+	}*/;
+	
+});
+</script>
+<script>
+  function notify_party_address_autofill(id){
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url()?>shipment_order/notify_party_address_autofill', 
+      data:{id:id},
+      dataType:'json',
+      success:function(response){
+        if(response.status==200){
+          $('#notify_party_address').val(response.address);
+        }
+      }
+    })
+  }
 </script>

@@ -1,4 +1,4 @@
-<div class='col-md-4' style='margin-top:20px'>
+<div class='col-md-3'>
 <label>Status</label>
 <select id="status_change" class='form-control' onchange="updateStatus('<?php echo $row->id;?>', this.value)">
            <?php 
@@ -17,8 +17,15 @@
           
          </select>
         </div>
-        <div class='col-md-4' style='margin-top:40px'>
-          <a style='margin-left:80px' class='btn btn-success' href='<?php echo base_url()?>shipment_order/generateinvoice/<?php echo $row->id;?>'><i class='fa fa-plus'></i>Generate Invoice</a>
+        <div class='col-md-2' style='margin-top:25px'>
+          <a class='btn btn-success' href='<?php echo base_url()?>shipment_order/generateinvoice/<?php echo $row->id;?>'><i class='fa fa-plus'></i>Invoice</a>
+        </div>
+        <div class='col-md-3' style='margin-top:25px;margin-left:10px'>
+            <select class='form-control' onchange="redirectMe(this.value)">
+            <option>Select</option>
+            <option value='<?php echo $row->id?>_dock'>Dock Receipt</option>
+            <option value='<?php echo $row->id?>_bill'>Landing Bill</option>
+          </select>
         </div>
         <script>
 function updateStatus(id, status){
@@ -47,3 +54,8 @@ function updateStatus(id, status){
    });
   }
 </script>  
+<script>
+    function redirectMe(id){
+    window.location.href="shipment_order/generate/"+id;
+  }
+</script>

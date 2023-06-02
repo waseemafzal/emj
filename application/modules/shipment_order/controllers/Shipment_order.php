@@ -44,7 +44,7 @@ class Shipment_order extends MX_Controller {
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData["countries"] = $this->country_model->get_country();
-	    $aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+	    $aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add_personal_effects_shipment',$aData);
@@ -54,7 +54,7 @@ class Shipment_order extends MX_Controller {
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData["countries"] = $this->country_model->get_country();
-	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add_ocean_shipment',$aData);
@@ -64,7 +64,7 @@ class Shipment_order extends MX_Controller {
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData["countries"] = $this->country_model->get_country();
-	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add_air_shipment',$aData);
@@ -74,7 +74,7 @@ class Shipment_order extends MX_Controller {
 		$aData['tbl'] =$this->tbl;
 		$aData['add'] =1;
 		$aData["countries"] = $this->country_model->get_country();
-	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+	$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 		$aData['module_heading'] =$this->module_heading;
 	//	pre($aData);
 		$this->load->view('add_vehicle_shipment',$aData);
@@ -186,6 +186,154 @@ foreach($query as $row){
 echo json_encode($skillData); 
 
 }
+function autocomplete_ports_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from ports WHERE port_name LIKE '%".$searchTerm."%'")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	//$data['location'] = $row['port_name'];
+
+	$data['value'] =$row['port_name']; 
+
+	$data['name'] = $row['port_name'];
+
+	$data[]='';
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+function autocomplete_ultimate_consignee_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	//$data['location'] = $row['port_name'];
+
+	$data['value'] =$row['name'].'|'.$row['address']; 
+
+	$data['name'] = $row['name'];
+
+	$data['address'] = $row['address'];
+
+
+	$data[]='';
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+function autocomplete_intermediate_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from users WHERE name LIKE '%".$searchTerm."%' AND user_type=3")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	//$data['location'] = $row['port_name'];
+
+	$data['value'] =$row['name'].'|'.$row['address']; 
+
+	$data['name'] = $row['name'];
+
+	$data['address'] = $row['address'];
+
+
+	$data[]='';
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+function autocomplete_exporting_carrier_data(){
+
+	$searchTerm = $_GET['term']; 
+
+	$query =$this->db->query("select * from carriers WHERE name LIKE '%".$searchTerm."%'")->result_array();
+
+	// Generate array with account data 
+
+$skillData = array(); 
+
+if(count($query) > 0){ 
+
+foreach($query as $row){ 
+
+	$data['id'] = $row['id']; 
+
+	//$data['location'] = $row['port_name'];
+
+	$data['value'] =$row['name']; 
+
+	$data['name'] = $row['name'];
+
+	$data[]='';
+
+	array_push($skillData, $data); 
+
+} 
+
+} 
+
+echo json_encode($skillData); 
+
+}
+public function notify_party_address_autofill(){
+	$arr = array('status'=>204, 'message'=>'Something went wrong');
+	extract($_POST);
+	$data = $this->db->where('id', $_POST['id'])->get('users')->result_array();
+if(count($data)>0){
+	$address=$data[0]['address'];
+	$arr = array('status'=>200, 'message'=>'Address has been successfully get', 'address'=>$address);
+}
+	echo json_encode($arr);
+}
 public function view_outgoing($id, $shipment_type){
 	//pre($aData);
 	$template=$_GET['template'];
@@ -223,7 +371,7 @@ public function view_outgoing($id, $shipment_type){
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -252,7 +400,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -281,7 +429,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -311,7 +459,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -341,7 +489,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -370,7 +518,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -399,7 +547,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -429,7 +577,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$query =$this->crud->edit($id,$this->tbl);
 		$aData["countries"] = $this->country_model->get_country();
 
-$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=160;")->result_array();
+$aData["nigerianStates"] =	$this->db->query("SELECT id as state_id,name as state FROM `tbl_states` WHERE country_id=231;")->result_array();
 $aData['vehicles'] = $this->db->where('order_id', $id)->get('shipment_orders_oceanfreight');	
 $aData['files'] = $this->db->where('order_id', $id)->get('shipment_orders_files');
 		$aData['row']=$query;
@@ -465,7 +613,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	echo json_encode($arr);
 	}
 	public function paid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as shipper_name, users.id as user_id, users.name as user_name,users.email as email')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as shipper_name,shipment_orders.track_number, users.id as user_id, users.name as user_name,users.email as email')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'yes')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
@@ -475,7 +623,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$this->load->view('paid_invoices', $data);
 	}
 	public function unpaid_invoices(){
-		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as shipper_name, users.id as user_id, users.name as user_name,users.email as email')
+		$data['invoices'] = $this->db->select('clients_invoice.*, shipment_orders.id as shipment_id, shipment_orders.shipper_name as shipper_name,shipment_orders.track_number, users.id as user_id, users.name as user_name,users.email as email')
 		->from('clients_invoice')
 		->where('clients_invoice.paid', 'no')
 		->join('shipment_orders', 'shipment_orders.id = clients_invoice.order_id')
@@ -490,22 +638,26 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	public function mailInvoice(){
 	    $arr = array('status'=>204, 'message'=>'Email Sending Failed');
 	    extract($_POST);
-	   // print_r($_POST);exit;
-	    $email = $_POST['email'];
-	    $fileName=FCPATH .'invoices/invoice-'.$id.'.pdf';
+	    //print_r($_POST);exit;
+	  
+	    //print_r($id);exit;
+	  
+	    
+	    //$email = $_POST['email'];
+	   
 	  //  echo $fileName;exit;
 	  //      $link=base_url() .'invoices/invoice-"'.$id.'"';
 	    $description = $_POST['description'];
-	    $id = $_POST['id'];
+	   
 	    $subject = 'Invoice From EMJ';
-	    $email = $this->sendEmail($email, $subject, $description, $fileName);
+	    $email = $this->sendEmail($email, $subject, $description,$fileName, $_POST['id']);
 	    //print_r($email);exit;
 	    if($email){
 	        $arr = array('status'=>200, 'message'=>'Email Send Successfully');
 	    }
 	    echo json_encode($arr);
 }
-   public function sendEmail($email,$subject,$message,$fileName)
+   public function sendEmail($email,$subject,$message,$fileName, $ids)
     {
 
     
@@ -518,6 +670,10 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
     'mailtype'  => 'html',
     'charset'   => 'utf-8'
 );
+$emails=explode(',',$_POST['emails']);
+$mail_count= count($emails);
+         for($i=0;$i<$mail_count;$i++)
+         {
     
           $this->load->library('email');
           $this->email->initialize($config);
@@ -526,7 +682,18 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
           $this->email->to($email);
           $this->email->subject($subject);
           $this->email->message($message);
-           $this->email->attach($fileName);
+         
+          //$this->email->attach($fileName);
+$ids=explode(',',$_POST['ids']);
+//pre($ids);
+if (count($ids) > 0) {
+   
+    foreach ($ids as $specific) {
+        $fileName = FCPATH . 'invoices/invoice-' . $specific . '.pdf';
+        $this->email->attach($fileName); // Attach each invoice file
+    }
+}
+}
           if($this->email->send())
          {
           return $arr=array('status'=>200, 'message'=>'Email Send Successfully');
@@ -567,6 +734,7 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 	}
 	function save(){ 
 		extract($_POST);
+		//pre($_POST);
 		//var_dump($_POST);
 		//    echo "<pre>";
 		//    print_r($_POST);
@@ -775,12 +943,11 @@ public function generateinvoice($id){
   //echo "<pre>";print_r($data['row']);exit();
   	 }  
 	$this->load->view('generate-invoice', $data);
-
 }
 public function saveInvoice() {
     extract($_POST);
-    //echo '<pre>;';print_r($_POST);exit;
-	$tcpdfContent = $pdfcontent;
+    $invoiceStatus='';
+    $tcpdfContent = $pdfcontent;
     unset($_POST['pdfcontent']);
     $mail = $ifmail;
     unset($_POST['ifmail']);
@@ -819,22 +986,26 @@ $_POST['created_date']=date('Y-m-d',strtotime($_POST['created_date']));
 $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
   if(isset($_POST['paid'])){
 	  $_POST['paid']='Yes';
+	  $invoiceStatus = 'paid';
 	  }else {
 	  $_POST['paid']='No';
+	  $invoiceStatus = 'unpaid';
 	  }
 			$_POST['order_no']=time();
 			
 			$result = $this->crud->saveRecord($PrimaryID,$_POST,'clients_invoice');
 			
-			
-			
+			// echo $pdfID;
+            // exit;			
 
 		// Generate PDF
 		if(1){
 		  $pdfID = ''; // Initialize pdfID
     if (isset($_POST['id']) && $_POST['id'] !== '') {
         $pdfID = $_POST['id'];
-    }
+    }else{
+		$pdfID = $this->db->insert_id();
+	}
 
     $filePath = $this->generate_pdf($tcpdfContent, $pdfID);
 
@@ -853,11 +1024,11 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
 		switch($result){
 			case 1:
 			
-			$arr = array('status' => 1,'message' => "Saved Succefully !");
+			$arr = array('status' => 1,'message' => "Saved Succefully !", 'paid_unpaid'=>$invoiceStatus);
 			echo json_encode($arr);
 			break;
 			case 2:
-			$arr = array('status' => 2,'message' => "Updated Succefully !");
+			$arr = array('status' => 2,'message' => "Updated Succefully !", 'paid_unpaid'=>$invoiceStatus);
 			echo json_encode($arr);
 			break;
 			case 0:

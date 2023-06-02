@@ -108,24 +108,24 @@ background-color: #fff;
           
         </div>
         <!-- /.col -->
-        <div class="invoice-col select_client " style='width:25%;float: left;; '>
-        <label>To Client</label>     
+        <!--<div class="invoice-col select_client" id='client_id' style='width:25%;float: left;; '>-->
+        <!--<label>To Client</label>     -->
              
-        <select name='client_id' id="toclientSelect" onchange="Setmyvlaue(this.value)" data-value="" class='form-control' style='width:100%'>
-                    <option value='Not Selected'>Select</option>
-                    <?php 
-                    $clients = $this->db->where('user_type', '3')->get('users')->result_array();
+        <!--<select name='client_id' id="toclientSelect" onchange="Setmyvlaue(this.value)" data-value="" class='form-control' style='width:100%'>-->
+        <!--            <option value='Not Selected' selected>Select</option>-->
+        <!--            
+        <!--            $clients = $this->db->where('user_type', '3')->get('users')->result_array();-->
                   
-                    foreach($clients as $client){
-                      $selected='';
-                      if(isset($row)){
-                      if($row->client_id==$client['id']){
-                        $selected='selected';
-                        }}?>
-                    <option data-value="<?php echo $client['name'];?>" <?php echo $selected?> value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
-                    <?php }?>
-                    </select>  
-        </div>
+        <!--              $selected='';-->
+        <!--            foreach($clients as $client){-->
+        <!--             if(isset($row)){-->
+        <!--              if($row->client_id==$client['id']){-->
+        <!--                $selected='selected';-->
+        <!--                }}?>-->
+        <!--            <option data-value="<?php echo $client['name'];?>" <?php echo $selected?> value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>-->
+        <!--        
+        <!--            </select>  -->
+        <!--</div>-->
         <!-- /.col -->
         <div class="invoice-col" style='width: 25%;float: right;display: inline-block;margin: 0 0 0 85px;text-align: right;'>
         <?php if(isset($row)){ ?>
@@ -254,11 +254,11 @@ background-color: #fff;
 
       <!-- this row will not appear when printing -->
       <div class="no-print" style="float:right;margin-top:10px">
-        <div style="width: 100%;">
+        <div style="width: 100%;margin-top: -25px;margin-right: 52px;">
          <button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
           </button>&nbsp;
          
-           <button type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
+           <button style='margin-top:-5px;margin-left:20px' type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
           </button>
           <?php /*?> <button type="button" class="btn btn-primary pull-right" id="downloadPdf" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generate PDF
@@ -417,18 +417,20 @@ $(document).ready(function(){
         formData.append(input.name,input.value);
     });   
 
-/*if(type==1){
-        $('.noprint').remove();
-        $('.showpdf').removeClass('hidden');
-        }*/
-if(1){
-        $('.noprint').remove();
-        $('.showpdf').removeClass('hidden');
-        }
+if(type==1){
+         $('.noprint').remove();
+         $('.showpdf').removeClass('hidden');
+         }
+  if(1){
+          $('.noprint').remove();
+          $('#client_id').hide();
+          $("#client_id").hide().css("visibility", "hidden");
+          $('.showpdf').removeClass('hidden');
+          }
             formData.append('pdfcontent',$('#invoice').html());
             formData.append('ifmail',type);
   // ajax start
-        $.ajax({
+    $.ajax({
       type: "POST",
       url: "<?php echo base_url().'shipment_order/saveInvoice'; ?>",
       data: formData,
@@ -453,12 +455,25 @@ if(1){
         setTimeout(function(){
         $(".alert").addClass('hidden');
         $('#form_add_update')[0].reset();
-        window.location='shipment_order';
-        },2000);
+    if(data.paid_unpaid=='paid'){
+        window.location='<?php echo base_url()?>shipment_order/paid_invoices';
+        }
+        },3000);
+        if(data.paid_unpaid=='unpaid'){
+        $(".alert").addClass('alert-success');
+        $(".alert").html(data.message);
+        $(".alert").removeClass('hidden');
+        setTimeout(function(){
+        $(".alert").addClass('hidden');
+        $('#form_add_update')[0].reset();
+             window.location='<?php echo base_url()?>shipment_order/unpaid_invoices';
+        },3000);
+        }
             }
+            
            else if (data.status ==0)
             {  
-      $(".alert").addClass('alert-danger');
+        $(".alert").addClass('alert-danger');
         $(".alert").html(data.message);
         $(".alert").removeClass('hidden');
         setTimeout(function(){
@@ -471,8 +486,21 @@ if(1){
         $(".alert").html(data.message);
         $(".alert").removeClass('hidden');
         setTimeout(function(){
-        window.location='shipment_order';
-        },1000);
+            if(data.paid_unpaid=='paid'){
+        window.location='<?php echo base_url()?>shipment_order/paid_invoices';
+        }
+        },3000);
+        if(data.paid_unpaid=='unpaid'){
+            $(".alert").addClass('alert-success');
+        $(".alert").html(data.message);
+        $(".alert").removeClass('hidden');
+        setTimeout(function(){
+        $(".alert").addClass('hidden');
+        $('#form_add_update')[0].reset();
+             window.location='<?php echo base_url()?>shipment_order/unpaid_invoices';
+        },3000);
+        }
+        
             }
       else if (data.status == "validation_error")
             {   

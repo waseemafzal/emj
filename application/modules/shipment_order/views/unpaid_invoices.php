@@ -58,7 +58,7 @@ $Heading=	'Unpaid Invoices';
         <td><?php echo $invoice['user_name'];?></td>
         <td><?php echo $invoice['email'];?></td>
         <td><?php echo $invoice['amount'];?></td>
-  	    <td><?php echo $invoice['created_date'];?></td>
+	    <td><?php echo $invoice['created_date'];?></td>
         <td><?php echo $invoice['due_date'];?></td>
         <td><?php echo $invoice['track_number'];?></td>
         <td><?php echo $invoice['paid'];?></td>

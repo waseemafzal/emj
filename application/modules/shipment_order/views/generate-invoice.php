@@ -134,8 +134,8 @@ background-color: #fff;
           echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
           } ?></b>
   <?php if(isset($row)){$row=$row[0];} ?>
-          <p><label>Created Date:</label><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"></p>
-          <p><label>Payment Due:</label><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>"></p>
+          <p><label>Created Date:</label><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>" required></p>
+          <p><label>Payment Due:</label><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>" required></p>
           <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
@@ -207,7 +207,7 @@ background-color: #fff;
               <td colspan="3" style="text-align: right;">Total(<span class=""><i class="fa fa-dollar"></i></span>)</td>
               <td>
                 <div class="">
-                <input type="text"  style='width:100%;border:none' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
+                <input type="text"  style='width:100%;border:none' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>" readonly>
                 
               </div>
                 </td>

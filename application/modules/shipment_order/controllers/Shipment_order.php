@@ -955,6 +955,19 @@ $PrimaryID='';
 			  if(isset($_POST['id'])){
 				  $PrimaryID=$_POST['id'];
 			  }
+				$array = array(
+					'item' => $_POST['item'],
+					'quantity' => $_POST['quantity'],
+					'rate' => $_POST['rate'],
+					'subtotal' => $_POST['subtotal'],
+					'created_date' => $_POST['created_date'],
+					'due_date' => $_POST['due_date'],
+					'tax' => $_POST['tax'],
+					'discount' => $_POST['discount'],
+					'total' => $_POST['total'],
+					'payment_terms' => $_POST['payment_terms'],
+					'notes' => $_POST['notes'],
+				);
     // Rest of the code...
 	$_POST['detail']=array(
 		'items'=>$_POST['item'],
@@ -999,18 +1012,18 @@ $_POST['due_date']=date('Y-m-d',strtotime($_POST['due_date']));
             // exit;			
 
 		// Generate PDF
-		if(1){
+		
 		  $pdfID = ''; // Initialize pdfID
     if (isset($_POST['id']) && $_POST['id'] !== '') {
         $pdfID = $_POST['id'];
     }else{
 		$pdfID = $this->db->insert_id();
 	}
-
-    $filePath = $this->generate_pdf($tcpdfContent, $pdfID);
+	$pdf = $this->testpdf($array, $pdfID);
+    //$filePath = $this->generate_pdf($tcpdfContent, $pdfID);
 
     // Rest of the code...
-}
+
 		
 		
 	
@@ -1120,10 +1133,128 @@ function replaceInputsWithValues($html)
 
     return $dom->saveHTML();
 }
+function invoice_pdf(){
+  $this->load->view('invoice-template');
+}
+function testpdf($array, $id){
+	//pre($array);exit;
+    $html='
+  
+	<section class="invoice">
+	<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+	  <div class="invoice-col" style="width:100%;float: left;">
+	  <h2 class="page-header">';
+			 $setting = $this->db->get('setting')->row();
+			if(is_file(FCPATH.'uploads/'.$setting->image)){
+			   $logo= base_url().'uploads/'.$setting->image;
+				}else{
+			   $logo= base_url().'assets/company_logo.jpg';
+					}
+			//
+			$tr='';
+if(count($array['item'])>0){
+	for($i=0;$i<count($array['item']);$i++){
+		$tr.='<tr>
+	<td>'.$array['item'][$i].'</td>
+	<td>'.$array['quantity'][$i].'</td>
+	<td>'.$array['rate'][$i].'</td>
+	<td>'.$array['subtotal'][$i].'</td>
+  </tr>';
+	}
+}
+
+			$html.='
+		  <img height="60" src="'.$logo.'">Emjay Global
+			</h2>
+				  </div>
+		  <div style="width: 40%;float:left;margin-bottom:20px">
+		  <b>Address: </b>'.$setting->address.'<br>
+		  <b>Phone: </b>'.$setting->phone.'<br>
+		  <b>Email: </b>'.$setting->email.'
+	  </div>
+  <div style="width: 50%;float:right; margin-right:20px">
+  <p><b>Created Date:</b>'.$array['created_date'].'</p>
+  <p><b>Due Date:</b>'.$array['due_date'].'</p>
+</div>       
+	<div style="display:inline-block;width:100%">
+	<div style="margin-bottom:10px">
+		<table border="1" style="width:100%">
+		  <thead>
+		  <tr>
+			<th>Item</th>
+			<th>Qty</th>
+			<th>Rate</th>
+			<th>Subtotal</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  '.$tr.'
+		  </tbody>
+		</table>
+	  </div>
+		<div>
+		<div style="width:100%">
+		  <table style="width:100%" border="1">
+			<tr>
+			  <th>Tax (%)</th>
+			  <td>'.$array['tax'].'</td>
+			</tr>
+			<tr>
+			  <th>Discount </th>
+			  <td>'.$array['discount'].'</td>
+			</tr>
+			<tr>
+			  <th>Total:</th>
+			  <td>'.$array['total'].'</td>
+			</tr>
+			<tr>
+			<th><p>Payment terms:</th>';
+		if($array['payment_terms']){
+			$html.='<td>'.$array['payment_terms'].'</td>';
+		}else{
+			$html.='<td>Not Available</td>';
+		}
+			$html.='</tr>
+			<tr>'
+			;
+			if($array['notes']){
+
+$html.='<th colspan="2">Notes:&nbsp;&nbsp;'.$array['notes'].'</th>';}
+		else{
+			$html.='<th colspan="2">Notes:&nbsp;&nbsp;Not Available</th>';
+		}	
+		$html.='</tr>
+		  </table>
+		</div>
+		</div>
+  </section>
+		';
+	
+		//echo $html;exit;
+		$this->generate_pdf($html, $id);
+	}
+	
+          
 
     public function generate_pdf($content, $pdfID)
     {
-		$html = $this->replaceInputsWithValues($content);
+		//$html = $this->replaceInputsWithValues($content);
 		//$html = $content;
 		//echo $html;exit;
 
@@ -1134,7 +1265,7 @@ $pdf->WriteHTML($stylesheet, 1);
 */        // Add content to the PDF
 $pdf->WriteHTML('<style>table { font-size: 12px; }table input,th{ font-size: 15px; }</style>'); // Set the desired font size for tables
 
-        $pdf->WriteHTML($html);
+        $pdf->WriteHTML($content);
 
         // Set the file name and save path
         $filename = 'invoice-'.$pdfID.'.pdf';

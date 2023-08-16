@@ -15,11 +15,21 @@ $Heading=   $module_heading;
     .box-primary img{
         min-width:200px;
         min-height: 200px;
-       }
-       /* a[data-id]:hover {
+      }
+    table.table-autocomplete thead tr th {
+    padding: 3px;
+}
+table.table-autocomplete .ui-menu-item td {
+    border-left: solid 1px #B6B6B6;
+    padding: 3px;
+}
+.ui-autocomplete { 
+  
+}	
+    a[data-id]:hover {
   background-color: black;
   color: #fff;
-} */
+}
 .active_category{
   background-color: red;
   color: #fff;
@@ -35,15 +45,15 @@ background-color: #fff;
     top: 10%;
     width: 50%;
 }
-.
 .button>.active{
   border-bottom: 2px solid red;
 }
 .button{
   display: inline-block;
 }
-</style>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+
+   </style>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -78,51 +88,47 @@ background-color: #fff;
              <form id="form_add_update" name="form_add_update" role="form">
              <div class="alert hidden"></div>
                     <div class="form-group wrap_form">
-                                <h2>Perosnal Effects</h2>
+                                <h2>Air Shipment</h2>
                                 <hr>
                                 <!--Body-->
-                                 <h3>Shipper Details</h3>
+                                  <h3>Shipper Details</h3>
                                 <div class="form-group">
                                 <div class="row"> 
                                 
                                 <div class="col-xs-12 col-md-4">
                                     <label>Shipper's Name</label>
                                     <?php if(isset($row)){?>
-                                    <input type='hidden' name='shipment_type' value='<?php echo $row->shipment_type;?>'>
-                                  <?php  }else{?>
-                                    <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>
+                                      <input type="hidden" name="shipment_type" value="<?php echo $row->shipment_type;?>">
+                                    <?php }else{?>
+                                    <input type='hidden' name='shipment_type' value='<?php echo $_GET["shipment_type"];?>'>            
                                     <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>" required>
                                     <input type='hidden' class='form-control' name='user_id' id='user_id' value='<?php if(isset($row)){echo $row->user_id;}?>'>
-                                        </div>
+                                   </div>
                                           <div class="col-md-4">
                                     <label>Shipper's Phone</label>
                                     <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>" required>
-                                    <!--<input type='hidden' name='user_id' value='<?php echo $_SESSION['user_id'];?>'>-->
-                                <?php if(isset($row)){?>
-                                <input type='hidden' name='user_id' value='<?php echo $row->user_id;?>'>
-                                <?php }?>
                                   </div>
-                                 
-                          <div class="col-xs-12 col-md-4">
-                              <label>Select State</label>
-                               <select name="shipper_state" id="shipper_state" class="form-control" required>
-                                 <option value="">Select State</option>
-                              <?php
-                              foreach($nigerianStates as $state)
-                              {
-                                $stateSelected='';
-                                  if(isset($row)){
-                              if($state['state_id']==$row->shipper_state){
-                                $stateSelected='selected="selected"';
-                              }
-                                }
-                              echo '<option '.$stateSelected.' value="'.$state['state_id'].'">'.$state['state'].'</option>';
-                              }
-                              ?>
-                            </select>
-                            </div></div></div>
-  <div class='form-group'><div class='row'>                    
+                                      <div class="col-xs-12 col-md-4">
+                                        <label>Select State</label>
+                                      <select name="shipper_state" id="shipper_state" class="form-control" required>
+                                        <option value="">Select State</option>
+                                        <?php
+                                        foreach($nigerianStates as $state)
+                                        {
+                                          $stateSelected='';
+                                            if(isset($row)){
+                                        if($state['state_id']==$row->shipper_state){
+                                          $stateSelected='selected="selected"';
+                                        }
+                                          }
+                                        echo '<option '.$stateSelected.' value="'.$state['state_id'].'">'.$state['state'].'</option>';
+                                        }
+                                        ?>
+                                      </select>
+  </div>
+                                      </div></div>
+  <div class='form-group'><div class='row'>  
   <div class="col-xs-12 col-md-4">
     <label>Select city</label>
    <select name="shipper_city" id="shipper_city" class="form-control" required>
@@ -147,11 +153,11 @@ if($city['city_id']==$row->shipper_city){
   <div class="col-md-4">
                                     <label>Pickup Location</label>
                                     
-                                    <input type="text" class="form-control" id="pickup_location" name="pickup_location" value="<?php if(isset($row)){echo $row->pickup_location;}?>" required>
+                                    <input type="text" class="form-control" id="pickup_location" name="pickup_location" value="<?php if(isset($row)){echo $row->pickup_location;}?>">
                                     
                                         </div>
                                         <div class='col-md-4'>
-                                          <label>Shipment Status</label><br>
+                                        <label>Shipment Status</label><br>
                                           <select class='form-control' name='shipment_status'>
                                             <option value='null'>Choose Status</option>
                                             <?php 
@@ -167,34 +173,55 @@ if($city['city_id']==$row->shipper_city){
                                              } ?>
                                           </select>
                                         </div>
-                                        
   </div>
   </div>
-                <div class="form-group">
+  <div class="form-group">
                                    <label>Address</label>
-                                   <textarea type="text" id='shipper_address' name="shipper_address" class="form-control" required><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
+                                   <textarea type="text" name="shipper_address" id='shipper_address' class="form-control" required><?php if(isset($row)){echo $row->shipper_address;}?></textarea>
                                     </div>
  
  
-                                     <div class="form-group" id="request_pickup">
-                                       <div class='row'>
-                                         <div class='col-md-4'>
-                      
-                                    Request PickUp  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_pickup" name="request_pickup" <?php if(isset($row)){ echo setChecked($row->request_pickup,'yes');}?> value="yes">    
+                                     <div class="form-group">
+                                        <div class='row'>
+                                          <div class='col-md-4'>
+                                          <input type="hidden" name="request_pickup" value="no">
+                      Request PickUp  &nbsp;&nbsp;&nbsp; 
+                      <input type="checkbox" name="request_pickup" value="yes" <?php if((isset($row) &&$row->request_pickup == 'yes')) echo 'checked'; ?>>
+
                                     
                                         </div>
-                 <div class='col-md-4'>
-            
-                                    Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="yes" <?php if(isset($row)){ echo setChecked($row->request_insurance,'yes');}?>>    
+                                     <div class="col-md-4">
+                                     <?php
+                                      $checked = '';
+                                      if (isset($row)) {
+                                          if ($row->request_insurance == 'yes') {
+                                              $checked = 'checked';
+                                          }
+            }
+            ?>
+                                    Request Insurance  &nbsp;&nbsp;&nbsp;<input type="checkbox" id="request_insurance" name="request_insurance" value="yes" <?php echo $checked;?>>    
                                   
-                                        </div>
-                    </div></div>
+                                        </div></div></div>
+
                                      <div class="form-group" id="delivery_option">
-                              
+                                       <?php
+                        $home='';
+                        $warehouse='';
+                       if(isset($row)){            
+                       switch ($row->delivery_type) {
+                        case 'home':
+                         $home='checked';
+                          break;
+                        case 'lagos warehouse':
+                         $warehouse='checked';                      
+                         break;
+                      }
+                      }
+                      ?>
                                     <label>Delivery Type</label>
                                     <br>
-                                    <input type="radio" <?php if(isset($row)){ echo setChecked($row->delivery_type,'home');}?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
-                                     <input type="radio" <?php if(isset($row)){ echo setChecked($row->delivery_type,'lagos warehouse');}?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
+                                    <input type="radio" <?php echo $home;?> id="delivery_type" name="delivery_type" value = "home">  Home &nbsp;&nbsp;
+                                     <input type="radio" <?php echo  $warehouse;?> id="delivery_type" name="delivery_type" value="lagos warehouse">  Lagos Warehouse
                                         </div><hr>
                                <h3>Consignee Details</h3>
                                 
@@ -301,7 +328,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
                                           <div class="col-md-2">
                                     <label>Quantity</label>
                                     
-                                    <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>" required>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" value="<?php if(isset($row)){ echo $row->quantity;} ?>">
                                     
                                     </div>                                      
                                         <div class="col-md-2">       
@@ -398,20 +425,21 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
 
                                      <div class="col-md-4">
                                        <label>Shipment Date</label>
-                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
+                                       <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>" required>
                                      <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
                                      </div>
                                    </div>
-                                 </div> 
+                                 </div>
+                                  
                                         <div class="clearfix">&nbsp;</div>
                 <div class="col-xs-12 col-md-12">
                            <button type="submit" class="btn btn-info">Submit</button>
                       
                    </div>
-           </div>
+           </div> 
                 <div class="clearfix">&nbsp;</div>
-                </form>
-                </div>
+              </form>
+                 </div>
             </div>
           </div>
           
@@ -421,9 +449,7 @@ echo '<option '.$selectedCity.' value="'.$selectcity['city_id'].'">'.$selectcity
       </div>
       <!-- /.row -->
     </section>
-    <!-- /.content -->
-  </div>
-  <div class='modal fade' id="saveModal">
+    <div class='modal fade' id="saveModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
        <div class="modal-header text-white bg-green">
@@ -485,7 +511,6 @@ if(count($subchilds)>0){
       </div>
      <div class="modal-footer">
        <button class="btn btn-success" onclick='saveModalData()' type="button">Save</button>
-       <input type='hidden' >
        <button class='btn btn-danger' data-dismiss='modal'>Close</button>
      </div>
      
@@ -494,12 +519,13 @@ if(count($subchilds)>0){
 </div>  
   <?php  getFooter(); ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-
     <!-- Scroll to Top Button-->
  <?php // commonjs() ?>
 </body>
 </html>
  <script type="text/javascript" src="bower_components/ckeditor/ckeditor.js"></script>   
+ 	 
+
 <script type="text/javascript">
 function deleteImg(id, table) {
 console.log('table'+table);
@@ -580,6 +606,15 @@ console.log('id'+id);
 		});
 
 	}
+
+$(function(){
+
+  $('.button').click(function () {
+    $('.button').removeClass("active");
+    $(this).addClass("active");
+  });
+
+});
 </script>
 <script type="text/javascript">
 function preview_image() 
@@ -590,32 +625,6 @@ function preview_image()
   $('#preview_image').append("<div class='col-md-3'><img width='100' height='100' c src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
  }
 }
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-    var maxField = 10; //Input fields increment limitation
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = ' <div class="row"><div class="col-md-3"> <label>Vehicle Description</label> <input type="text" name="vehicle_description[]" class="form-control"> </div><div class="col-md-3"> <label>Vin Number</label> <input type="text" name="vin_number[]" class="form-control"> </div><div class="col-md-2"> <label>Vehicle Purchase Cost</label> <input type="text" name="purchase_cost[]" class="form-control"> </div><div class="col-md-3"> <label>Company Preference</label> <input type="text" name="company_preference[]" class="form-control"> </div><div class="col-md-1"><a  href="javascript:void(0);" class="remove_button"><img height="30" width="30" src="<?php echo base_url()?>image/remove.png"/></a></div></div>'; //New input field html 
-    var x = 1; //Initial field counter is 1
-    
-    //Once add button is clicked
-    $(addButton).click(function(){
-        //Check maximum number of input fields
-        if(x < maxField){ 
-            x++; //Increment field counter
-            $(wrapper).append(fieldHTML); //Add field html
-        }
-    });
-    
-    //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e){
-      //console.log('remove clicked');
-        e.preventDefault();
-        $(this).parent().parent('div').remove(); //Remove field html
-        x--; //Decrement field counter
-    });
-});
 </script>
 <script type="text/javascript">
     $(function(){
@@ -691,7 +700,7 @@ $(document).ready(function(){
             else if (data.status == 2)
             {   
             $(".alert").addClass('alert-success');
-            var id = data.primary_id;
+                var id = data.primary_id;
                 $('#saveModal').modal('show');
                 $('#saveModal').find('#last_insert_id_input').val(id); // Set the value of the hidden input field to the id
                 $(".alert").html(data.message);
@@ -876,24 +885,6 @@ $("#<?=$btn?>").addClass('active');
 }
 </script>
 <script>
-  let lastSelectedDataId = null;
-
-  function linkClicked(event) {
-    event.preventDefault();
-    
-    // Get the data-id value of the clicked link
-    let dataId = event.target.getAttribute('data-id');
-    
-    // Update the lastSelectedDataId variable
-    lastSelectedDataId = dataId;
-  }
-
-  function saveClicked() {
-    // Display the lastSelectedDataId value
-    console.log(lastSelectedDataId);
-  }
-</script>
-<script>
 $(function(){
 
   $('a').click(function () {
@@ -912,8 +903,8 @@ $(function(){
         select: function( event, ui ) {
             event.preventDefault();
            $(this).val(ui.item.name);
-           $('#user_id').val(ui.item.id);
-	       $("#shipper_address").val(ui.item.address);
+			     $("#shipper_address").val(ui.item.address);
+			     $("#user_id").val(ui.item.id);
            $("#shipper_phone").val(ui.item.mobile);
         }
     })

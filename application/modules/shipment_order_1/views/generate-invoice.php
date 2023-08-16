@@ -95,6 +95,8 @@ background-color: #fff;
             <img height="60" src="<?=$logo?>">Client Invoices
               </h2>
         </div>
+        <!-- /.col -->
+      <!-- info row -->
       <div class="invoice-info" style="position:relative">
         <div class="invoice-col" style='width:40%;float: left;'>
           From:
@@ -103,8 +105,28 @@ background-color: #fff;
             Address: <?php echo $setting->address;?><br>
             Phone: <?php echo $setting->phone;?><br>
             Email: <?php echo $setting->email;?>
-         
+          
         </div>
+        <!-- /.col -->
+        <!--<div class="invoice-col select_client" id='client_id' style='width:25%;float: left;; '>-->
+        <!--<label>To Client</label>     -->
+             
+        <!--<select name='client_id' id="toclientSelect" onchange="Setmyvlaue(this.value)" data-value="" class='form-control' style='width:100%'>-->
+        <!--            <option value='Not Selected' selected>Select</option>-->
+        <!--            
+        <!--            $clients = $this->db->where('user_type', '3')->get('users')->result_array();-->
+                  
+        <!--              $selected='';-->
+        <!--            foreach($clients as $client){-->
+        <!--             if(isset($row)){-->
+        <!--              if($row->client_id==$client['id']){-->
+        <!--                $selected='selected';-->
+        <!--                }}?>-->
+        <!--            <option data-value="<?php echo $client['name'];?>" <?php echo $selected?> value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>-->
+        <!--        
+        <!--            </select>  -->
+        <!--</div>-->
+        <!-- /.col -->
         <div class="invoice-col" style='width: 25%;float: right;display: inline-block;margin: 0 0 0 85px;text-align: right;'>
         <?php if(isset($row)){ ?>
           <b>Invoice # 
@@ -117,9 +139,17 @@ background-color: #fff;
           <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
+        
+   
+     <!-- /.col -->
+        
+      </div>
+      
+      <div style="display:block;width:100%;float: left;margin: 0 0 10px 0;">
+      
       </div>
           
-     <table border="1"  id="items" style="width:100%;font-size:14px margin-top:10px;"  >
+<table border="1"  id="items" style="width:100%;font-size:14px margin-top:10px;"  >
             <thead>
             <tr>
               <th>Item Details</th>
@@ -132,7 +162,7 @@ background-color: #fff;
               <?php 
                    if(isset($row)){
                 $detail = json_decode($row['detail']);
-      $count = count($detail->rates);
+         $count = count($detail->rates);
      for($i=0;$i<$count;$i++){
          $item = $detail->items[$i];
          $quantity = $detail->quantities[$i];
@@ -148,7 +178,8 @@ background-color: #fff;
               <td><input type="number" class="rate " style='width:100%;background: white;border: none;'  name="rate[]" value="<?=$rate?>" />
               </td>
               <td><input type="text" class="subtotal " style='width:100%;background: white;border: none;'  readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
-             </td>
+           
+              </td>
             </tr>
          <?php  }
       }else{
@@ -176,7 +207,7 @@ background-color: #fff;
               <td colspan="3" style="text-align: right;">Total(<span class=""><i class="fa fa-dollar"></i></span>)</td>
               <td>
                 <div class="">
-                <input type="text"  style='width:100%;border:none' id="total" readonly name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
+                <input type="text"  style='width:100%;border:none' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>" readonly>
                 
               </div>
                 </td>
@@ -224,7 +255,7 @@ background-color: #fff;
       <!-- this row will not appear when printing -->
       <div class="no-print" style="float:right;margin-top:10px">
         <div style="width: 100%;margin-top: -25px;margin-right: 52px;">
-         <!--<button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail-->
+         <button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
           </button>&nbsp;
          
            <button style='margin-top:-5px;margin-left:20px' type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
@@ -386,20 +417,20 @@ $(document).ready(function(){
         formData.append(input.name,input.value);
     });   
 
-/*if(type==1){
-        $('.noprint').remove();
-        $('.showpdf').removeClass('hidden');
-        }*/
-// if(1){
-//         $('.noprint').remove();
-//         //$('#client_id').hide();
-//         //$("#client_id").hide().css("visibility", "hidden");
-//         $('.showpdf').removeClass('hidden');
-//         }
+if(type==1){
+         $('.noprint').remove();
+         $('.showpdf').removeClass('hidden');
+         }
+  if(1){
+          $('.noprint').remove();
+          $('#client_id').hide();
+          $("#client_id").hide().css("visibility", "hidden");
+          $('.showpdf').removeClass('hidden');
+          }
             formData.append('pdfcontent',$('#invoice').html());
             formData.append('ifmail',type);
   // ajax start
-        $.ajax({
+    $.ajax({
       type: "POST",
       url: "<?php echo base_url().'shipment_order/saveInvoice'; ?>",
       data: formData,
@@ -429,7 +460,7 @@ $(document).ready(function(){
         }
         },3000);
         if(data.paid_unpaid=='unpaid'){
-            $(".alert").addClass('alert-success');
+        $(".alert").addClass('alert-success');
         $(".alert").html(data.message);
         $(".alert").removeClass('hidden');
         setTimeout(function(){
@@ -442,7 +473,7 @@ $(document).ready(function(){
             
            else if (data.status ==0)
             {  
-      $(".alert").addClass('alert-danger');
+        $(".alert").addClass('alert-danger');
         $(".alert").html(data.message);
         $(".alert").removeClass('hidden');
         setTimeout(function(){

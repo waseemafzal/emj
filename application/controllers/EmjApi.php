@@ -123,6 +123,79 @@ $this->response($this->data);
 	$this->response($this->data);
 
     }
+        function saveShopOrder(){ 
+ extract($_POST);       
+$this->AM->verifyRequiredParams( array(
+             "store_id", 
+             "tracking_no",
+              "customer_name",
+               "address",
+                "mobile"
+        ));
+        
+        if(checkExist('shop_orders',array('tracking_no'=>$tracking_no))){
+            $this->error("Tracking number already exist!");
+        }
+if(isset($_POST['id'])){
+        $PrimaryID = $_POST['id'];
+}else{
+	$PrimaryID='';
+	}
+$_POST['user_id']=USER_ID;
+/**************/
+if ( isset( $_FILES['image']['name'] ) ) {
+
+            $info    = pathinfo( $_FILES['image']['name'] );
+
+            $ext     = $info['extension']; // get the extension of the file
+
+            $newname = rand( 5, 3456 ) * date( time() ) . "." . $ext;
+
+            $target  = 'uploads/' . $newname;
+
+            if ( move_uploaded_file( $_FILES['image']['tmp_name'], $target ) ) {
+
+                $_POST['image'] = 'uploads/' . $newname;
+
+            }
+
+        }
+/***********/
+$product=array();
+			$product['name'] = $_POST['name'];
+			$product['quantity'] = $_POST['quantity'];
+			$product['price'] = $_POST['price'];
+			$_POST['product_detail']=json_encode($product);
+			unset($_POST['name'],$_POST['quantity'],$_POST['price']);
+        $result = $this->crud->saveRecord($PrimaryID,$_POST,'shop_orders');
+         switch($result){
+            case 1:
+            $arr = array('status' => 200,'message' => "Request received and will be processed soon!");
+            echo json_encode($arr);
+            break;
+            case 2:
+            $arr = array('status' => 200,'message' => "Updated Succefully !");
+            echo json_encode($arr);
+            break;
+            case 0:
+            $arr = array('status' => 204,'message' => "Not Saved!");
+            echo json_encode($arr);
+            break;
+            default:
+            $arr = array('status' => 204,'message' => "Not Saved!");
+            echo json_encode($arr);
+            break;  
+        }
+    }   
+
+    public function getStores(){ 	
+
+	$this->data['data']= $this->db->select('*')->get('tbl_stores')->result_array();  
+
+	$this->response($this->data);
+
+    }
+    
 
 	public function countries(){ 
 
@@ -173,6 +246,14 @@ $this->response($this->data);
 	$this->response($this->data);
 
     }
+    
+    	public function getboxes(){ 	
+
+	$this->data['data']= $this->db->select("*,CONCAT('" . base_url() . "uploads/', image) as image")->get('boxes')->result_array();  
+
+	$this->response($this->data);
+
+    }
 
 	function getSum(){
 
@@ -186,7 +267,7 @@ $this->response($this->data);
 
     if($sum!=NULL){
 
-		return (float)$sum;
+		return $sum;
 
 		}else{
 
@@ -216,7 +297,7 @@ $this->response($this->data);
 
 	$this->data['openCount'] =count($openInvoices);
 
-	$this->data['totalAmount'] =$this->getSum();
+	$this->data['totalAmount'] =(int) $this->getSum();
 
 	$this->data['openInvoices'] =$openInvoices;
 
@@ -226,7 +307,86 @@ $this->response($this->data);
 
     }
 
-	
+
+	public function getInvoices_shopping(){ 	
+
+	$paidInvoices = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
+
+	->join('shipment_orders o','o.id=i.order_id')
+
+	->where(array('o.user_id'=>USER_ID,'i.paid'=>'Yes'))
+
+	->get('clients_invoices_shopping as i ')->result_array(); 
+
+	$openInvoices = $this->db->select('i.`id`,  i.`amount`,  i.`tax`, i.`discount`, i.`paid`, i.`created_date`, i.`due_date`, i.`order_no`, i.`notes`')
+
+	->join('shipment_orders o','o.id=i.order_id')
+
+	->where(array('o.user_id'=>USER_ID,'i.paid'=>'No'))
+
+	->get('clients_invoices_shopping as i ')->result_array(); 
+
+	$this->data['openCount'] =count($openInvoices);
+
+	$this->data['totalAmount'] =(int) $this->getSum();
+
+	$this->data['openInvoices'] =$openInvoices;
+
+	$this->data['paidInvoices'] =$paidInvoices;
+
+	$this->response($this->data);
+
+    }
+		public function getShopOrders(){ 	
+
+
+/*
+0=pending,1=received,2=on hold,3=shipped
+*/
+ $this->data['pending']=$this->getShopOrderByStatus(0);
+$this->data['received']=$this->getShopOrderByStatus(1);
+$this->data['onhold']=$this->getShopOrderByStatus(2);
+$this->data['shipped']=$this->getShopOrderByStatus(3);
+
+	$this->response($this->data);
+
+    }
+
+function getShopOrderByStatus($status){
+    $data =$this->db
+->select('o.*,s.store_name')
+->where(array('o.user_id'=>USER_ID,'status'=>$status))
+->join('tbl_stores s','s.id=o.store_id')
+->order_by('o.id','desc')
+	->get('shop_orders as o ')
+	->result_array(); 
+$arr=array();
+	foreach($data as $row){
+	    $product=json_decode($row['product_detail']);
+unset($row['product_detail'],$row['store_id'],$row['user_id'],$row['type']);
+	    /**************************/
+$products=array();
+if (strpos($product->name, ',') !== false) {
+    $nameArr = explode(',',$product->name);
+     $priceArr = explode(',',$product->price);
+      $quantityArr = explode(',',$product->quantity);
+      for($i=0;$i<count($nameArr);$i++){
+          $products[]=array(
+              'name'=>$nameArr[$i],
+              'quantityArr'=>$quantityArr[$i],
+              'price'=>$priceArr[$i],
+              );
+      }
+}
+/**************************/
+	    $row['products']=$products;
+$row['image']=base_url().$row['image'];
+
+	     $arr[]=$row;
+
+	}
+	return $arr;
+}
 
 	public function getShipments(){ 	
 
@@ -351,6 +511,9 @@ if(count($orders)>0){
 
 	function payInvoice(){
 
+if(!checkExist('clients_invoice',array('id'=>$_POST['invoice_id']))){
+    $this->error('Invoice id not exist');
+}
 		$Token = $this->validateCard();
 
 		$payment_id = $this->stripePayment($Token,$_POST['amount']);
@@ -1004,10 +1167,72 @@ if(count($orders)>0){
         ) ) ) {
 
             $_POST['user_id'] = USER_ID;
+ $_POST['ticket_no'] = time();
 
             if ( $this->db->insert( 'helpcenter', $_POST ) ) {
 
-                $this->data['message'] = 'We have received your feedback our team will contact you as soon as possible.';
+                $this->data['message'] = 'We have received your request our team will contact you as soon as possible.';
+
+                $this->response( $this->data );
+
+            }
+
+        }
+
+    }
+
+
+public function openTicket()
+
+    {
+
+        $this->checkLogin();
+
+        extract( $_POST );
+
+        if ( $this->AM->verifyRequiredParams( array(
+
+             "message" 
+
+        ) ) ) {
+
+            $_POST['user_id'] = USER_ID;
+ $_POST['ticket_no'] = time();
+
+            if ( $this->db->insert( 'helpcenter', $_POST ) ) {
+
+                $this->data['message'] = 'We have received your request our team will contact you as soon as possible.';
+
+                $this->response( $this->data );
+
+            }
+
+        }
+
+    }    
+    
+public function saveTicketReply()
+
+    {
+
+        $this->checkLogin();
+
+        extract( $_POST );
+
+        if ( $this->AM->verifyRequiredParams( array(
+
+             "message",
+             "id"
+
+        ) ) ) {
+
+            $_POST['sender_id'] = USER_ID;
+          $_POST['helpcenter_id'] = $id;
+unset($_POST['id']);
+
+            if ( $this->db->insert( 'helpcenter_messages', $_POST ) ) {
+
+                $this->data['message'] = 'sent successful';
 
                 $this->response( $this->data );
 
@@ -1065,6 +1290,66 @@ if(count($orders)>0){
 
 
 	$this->response($this->data);
+ 
+    }
+    
+    public function getTickets(){ 	
+
+	$this->data['pending']= $this->db->select('*')
+	->where(array('user_id'=>USER_ID,'status'=>0))
+		->order_by('id','desc')
+	->get('helpcenter')
+	->result_array();  
+		$this->data['closed']= $this->db->select('*')
+	->where(array('user_id'=>USER_ID,'status'=>1))
+	->order_by('id','desc')
+	->get('helpcenter')
+	->result_array();  
+	$this->response($this->data);
+ 
+    }
+    
+    
+    function getRates(){
+
+       $this->data['data']= $this->db->get('tbl_rates')->result_array();
+       $this->response($this->data);
+    }
+    
+    public function getticketReplies(){ 	
+ 
+ if(isset($_GET['id'])){
+     $id=$_GET['id'];
+ }elseif(isset($_POST['id'])){
+     $id=$_POST['id'];
+ }
+	$data= $this->db->select('*')
+	->where(array('helpcenter_id'=>$id))
+	->order_by('id','desc')
+	
+	->get('helpcenter_messages')
+	
+	->result_array();  
+
+foreach($data as $row){
+    $row['mymessage']=0;
+    if($row['sender_id']==USER_ID){
+        $row['mymessage']=1;
+    }
+    $arr[]=$row;
+}
+$this->data['data']=$arr;
+	$this->response($this->data);
+ 
+    }
+
+
+   public function getFaqs(){ 	
+
+	$this->data['data']= $this->db->select('*')
+	->get('faqs')
+	->result_array();  
+$this->response($this->data);
  
     }
 
@@ -1404,6 +1689,21 @@ $this->data['full_url'] =base_url().$target;
  function privacy(){
  		$termsData  = $this->db->select( 'post_description' )->where( 'id', 2 )->get( 'cms' )->row()->post_description;
         $this->data['data'] = $termsData;
+        $this->response( $this->data );
+    }
+function contactinfo(){
+ 		$termsData  = $this->db->select( 'post_description' )->where( 'id', 3 )->get( 'cms' )->row()->post_description;
+        $this->data['data'] = $termsData;
+        $this->response( $this->data );
+    }
+function usashippinginfo(){
+ 		$termsData  = $this->db->select( 'post_description' )->where( 'id', 4 )->get( 'cms' )->row()->post_description;
+        $this->data['data'] = $termsData;
+        $this->response( $this->data );
+    }
+    function howitworks(){
+ 	
+        $this->data['data'] = $this->db->select('title')->get( 'how_it_works' )->result_array();
         $this->response( $this->data );
     }
 
@@ -2241,9 +2541,13 @@ $this->data['full_url'] =base_url().$target;
 
     function shipmentOrders(){ 
 
-        extract($_POST);
-       
+ //$this->response($_FILES);
 
+	
+        extract($_POST);
+       $data = json_encode($_POST);
+      $logs = $this->db->insert('json_logs', array('body'=>$data));
+//exit;
         //pre($_POST);
 
 $this->AM->verifyRequiredParams( array(
@@ -2310,18 +2614,21 @@ if(isset($_POST['id'])){
 
 		
 if($shipment_type==4){
-if(isset($_POST['vehicle_description'])  ){
-	//and count($_POST['vehicle_description'])>0
-if( ! is_array($_POST['vehicle_description'])){
-	
-	}
-	
-                $vehicleDescriptionArr=$_POST['vehicle_description'];
-    $vin_numberArr=$_POST['vin_number'];
-    $purchase_costArr=$_POST['purchase_cost'];
-    $company_preferenceArr=$_POST['company_preference'];
-        unset($_POST['vehicle_description'],$_POST['vin_number'],$_POST['purchase_cost'], $_POST['company_preference']);
+if (isset($_POST['vehicle_description'])) {
+    $vehicleDescriptionArr = is_array($_POST['vehicle_description']) ? $_POST['vehicle_description'] : explode(',', $_POST['vehicle_description']);
+    $vin_numberArr = is_array($_POST['vin_number']) ? $_POST['vin_number'] : explode(',', $_POST['vin_number']);
+    $purchase_costArr = is_array($_POST['purchase_cost']) ? $_POST['purchase_cost'] : explode(',', $_POST['purchase_cost']);
+    $company_preferenceArr = is_array($_POST['company_preference']) ? $_POST['company_preference'] : explode(',', $_POST['company_preference']);
+
+    // Remove any empty elements from the arrays
+    $vehicleDescriptionArr = array_filter($vehicleDescriptionArr);
+    $vin_numberArr = array_filter($vin_numberArr);
+    $purchase_costArr = array_filter($purchase_costArr);
+    $company_preferenceArr = array_filter($company_preferenceArr);
+
+    unset($_POST['vehicle_description'], $_POST['vin_number'], $_POST['purchase_cost'], $_POST['company_preference']);
 }
+
 	}
 
 //echo 'out o if';exit;
@@ -2359,7 +2666,7 @@ unset($_POST['file']);
         $query = $this->db->last_query();
        // print_r($query);
        // echo '<pre>';
-         $this->db->insert('json_logs', array('body'=>json_encode($query)));
+        // $this->db->insert('json_logs', array('body'=>json_encode($query)));
         //print_r($query);
         if($PrimaryID==''){
 
@@ -2368,8 +2675,29 @@ unset($_POST['file']);
                 $PrimaryID = $this->db->insert_id();
 
         }
+        if (isset($_FILES['file']['name'] )  and $_FILES['file']['name']!='' and count($_FILES['file']['name'])==1) {
 
-       if (!empty($_FILES)){ 
+            $info    = pathinfo( $_FILES['file']['name'] );
+
+            $ext     = $info['extension']; // get the extension of the file
+
+            $newname = rand( 5, 3456 ) * date( time() ) . "." . $ext;
+
+            $target  = 'uploads/' . $newname;
+
+				if ( move_uploaded_file( $_FILES['file']['tmp_name'], $target ) ) {
+
+					$file_data = array(
+        'file' => $newname,
+        'order_id' => $PrimaryID
+    );
+    $this->db->insert('shipment_orders_files', $file_data);
+
+				}
+
+        	}
+
+    else   if (count($_FILES)>1){ 
             $nameArray = $this->crud->upload_files($_FILES);
               }
 
@@ -2377,22 +2705,18 @@ if($nameArray!=''){
 	
            // pre($nameArray);
 
-            $nameData = explode(',',$nameArray);
+      $nameData = explode(',', $nameArray);
 
-            foreach($nameData as $file){
-
-                $file_data = array(
-
-                'file' => $file,
-
-                'order_id' => $PrimaryID
-
-                );
-
-                $this->db->insert('shipment_orders_files', $file_data);
-
-                }
-	
+if (count($nameData) > 1) {
+    // If $nameArray contains a comma, loop through the $nameData and insert multiple records
+    foreach ($nameData as $file) {
+        $file_data = array(
+            'file' => $file,
+            'order_id' => $PrimaryID
+        );
+        $this->db->insert('shipment_orders_files', $file_data);
+    }
+} 
 	}
 
             if( count($vehicleDescriptionArr)>0){
@@ -2409,37 +2733,28 @@ if($nameArray!=''){
                 //$company_preference =  $_POST['company_preference'];
 
                 
-
+ if($PrimaryID!=''){
+                    $this->db->where('order_id',$PrimaryID)->delete('shipment_orders_oceanfreight');
+                    }
               for ($i=0; $i < $totalvehicle; $i++) { 
 
                 $dataArr = array(
-
                       'vin_number'=>$vin_numberArr[$i],
-
                       'vehicle_description'=>$vehicleDescriptionArr[$i],
-
                       'order_id'=> $PrimaryID,
-
                       'purchase_cost'=>$purchase_costArr[$i],
-
                       'company_preference' => $company_preferenceArr[$i]
-
-                      
-
-
-
                 );  
 
                 
 
-                if($PrimaryID!=''){
-
-                    $this->db->where('order_id',$PrimaryID)->delete('shipment_orders_oceanfreight');
-
-                    }
-
+               
                     $this->db->insert('shipment_orders_oceanfreight', $dataArr);
-
+                
+                    $query = $this->db->last_query();
+                    
+                    $this->db->insert('json_logs', array('body'=>json_encode($query)));
+ 
                         
 
                 

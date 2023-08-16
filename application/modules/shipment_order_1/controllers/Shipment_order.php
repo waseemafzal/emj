@@ -635,64 +635,75 @@ $aData["selectedcities"] =$this->db->query("SELECT id as city_id,name as city FR
 		$status = $this->db->get('shipment_status')->result_array();
 		$this->load->view('templates', $status);
 	}
-public function mailInvoice()
-{
-    $arr = array('status' => 204, 'message' => 'Email Sending Failed');
-    extract($_POST);
-    $description = $_POST['description'];
-    $subject = 'Invoice From EMJ';
-
-    $ids = explode(',', $_POST['id']);
-    $emails = explode(',', $_POST['email']);
-    $counter = count($emails);
-
-    for ($i = 0; $i < $counter; $i++) {
-        $fileName = FCPATH . 'invoices/invoice-' . $ids[$i] . '.pdf';
-        $email = $this->sendEmail($emails[$i], $subject, $description, $fileName);
-    }
-
-    if ($email) {
-        $arr = array('status' => 200, 'message' => 'Email Sent Successfully');
-    }
-
-    echo json_encode($arr);
+	public function mailInvoice(){
+	    $arr = array('status'=>204, 'message'=>'Email Sending Failed');
+	    extract($_POST);
+	    //print_r($_POST);exit;
+	  
+	    //print_r($id);exit;
+	  
+	    
+	    //$email = $_POST['email'];
+	   
+	  //  echo $fileName;exit;
+	  //      $link=base_url() .'invoices/invoice-"'.$id.'"';
+	    $description = $_POST['description'];
+	   
+	    $subject = 'Invoice From EMJ';
+	    $email = $this->sendEmail($email, $subject, $description,$fileName, $_POST['id']);
+	    //print_r($email);exit;
+	    if($email){
+	        $arr = array('status'=>200, 'message'=>'Email Send Successfully');
+	    }
+	    echo json_encode($arr);
 }
+   public function sendEmail($email,$subject,$message,$fileName, $ids)
+    {
 
-public function sendEmail($email, $subject, $message, $attachment)
-{
+    
     $config = array(
-        'protocol'  => 'smtp',
-        'smtp_host' => 'ssl://mail.cyphersol.com',
-        'smtp_port' => 465,
-        'smtp_user' => 'emj@cyphersol.com',
-        'smtp_pass' => '-b3RBiUIfE(F',
-        'mailtype'  => 'html',
-        'charset'   => 'utf-8'
-    );
-
-    $this->load->library('email');
-
-    $this->email->initialize($config);
-    $this->email->set_newline("\r\n");
-
-    $this->email->from('emj@cyphersol.com'); // Replace 'Your Name' with the desired sender name
-    $this->email->to($email);
-    $this->email->subject($subject);
-    $this->email->message($message);
-
-   // $this->email->clear(); // Clear any previously attached files
-
-    if (file_exists($attachment)) {
-        $this->email->attach($attachment);
+    'protocol'  => 'smtp',
+    'smtp_host' => 'ssl://mail.cyphersol.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'emj@cyphersol.com',
+    'smtp_pass' => '-b3RBiUIfE(F',
+    'mailtype'  => 'html',
+    'charset'   => 'utf-8'
+);
+$emails=explode(',',$_POST['emails']);
+$mail_count= count($emails);
+         for($i=0;$i<$mail_count;$i++)
+         {
+    
+          $this->load->library('email');
+          $this->email->initialize($config);
+          $this->email->set_newline("\r\n");
+          $this->email->from('emj@cyphersol.com');
+          $this->email->to($email);
+          $this->email->subject($subject);
+          $this->email->message($message);
+         
+          //$this->email->attach($fileName);
+$ids=explode(',',$_POST['ids']);
+//pre($ids);
+if (count($ids) > 0) {
+   
+    foreach ($ids as $specific) {
+        $fileName = FCPATH . 'invoices/invoice-' . $specific . '.pdf';
+        $this->email->attach($fileName); // Attach each invoice file
     }
-
-    if (!$this->email->send()) {
-        show_error($this->email->print_debugger());
-    }
-$this->email->clear(true);
-    return 1;
 }
+}
+          if($this->email->send())
+         {
+          return $arr=array('status'=>200, 'message'=>'Email Send Successfully');
+         }
+         else
+        {
+         show_error($this->email->print_debugger());
+        }
 
+    }
     public function autocomplete_mailtemplate_description(){
 		$arr = array('status'=>204, 'Message'=>'Operation Failed');
 		extract($_POST);
@@ -723,6 +734,7 @@ $this->email->clear(true);
 	}
 	function save(){ 
 		extract($_POST);
+		//pre($_POST);
 		//var_dump($_POST);
 		//    echo "<pre>";
 		//    print_r($_POST);
@@ -931,7 +943,6 @@ public function generateinvoice($id){
   //echo "<pre>";print_r($data['row']);exit();
   	 }  
 	$this->load->view('generate-invoice', $data);
-
 }
 public function saveInvoice() {
     extract($_POST);
@@ -1077,6 +1088,8 @@ switch($result){
 		}	
 
 }
+
+
 function replaceInputsWithValues($html)
 {
     $dom = new DOMDocument();
@@ -1085,13 +1098,13 @@ function replaceInputsWithValues($html)
     libxml_clear_errors();
 
     $xpath = new DOMXPath($dom);
-    $inputNodes = $xpath->query('//table//input | //table//select | //table//textarea');
+    $inputNodes = $xpath->query('//table//input[@value] | //table//select | //table//textarea[@value]');
 
     foreach ($inputNodes as $inputNode) {
         $value = '';
         if ($inputNode->nodeName === 'input') {
             $inputType = $inputNode->getAttribute('type');
-            if (!in_array($inputType, ['hidden', 'submit', 'button', 'reset'], true)) {
+            if (in_array($inputType, ['date', 'number', 'text'], true)) {
                 $value = $inputNode->getAttribute('value');
             }
         } elseif ($inputNode->nodeName === 'select') {
@@ -1119,6 +1132,9 @@ function replaceInputsWithValues($html)
     }
 
     return $dom->saveHTML();
+}
+function invoice_pdf(){
+  $this->load->view('invoice-template');
 }
 function testpdf($array, $id){
 	//pre($array);exit;
@@ -1261,6 +1277,7 @@ $pdf->WriteHTML('<style>table { font-size: 12px; }table input,th{ font-size: 15p
         // Display a success message or perform any additional actions
        // echo "PDF generated and saved successfully!";
     }
+	
 public function _generate_pdf($content, $pdfID) {
     $html = $this->content($content);
 	echo $html;exit;

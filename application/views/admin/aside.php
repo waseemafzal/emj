@@ -33,50 +33,8 @@
         
         </ul>
       </li>
-                  <li class="treeview">
-          <a href="#">
-             <i class="fa fa-home"></i>
-                 <span>Warehouse</span>
-                     <span class="pull-right-container">
-                         <i class="fa fa-angle-left pull-right"></i>
-                                     </span>
-          </a>
-        <ul class="treeview-menu">
-          <li><a href="warehouse_receipt/add"><i class="fa fa-circle-o"></i>Add Warehouse Receipt</a></li>
-          <li><a href="warehouse_receipt"><i class="fa fa-circle-o"></i>Warehouse Receipt List</a></li>
-        </ul>
-      </li>
-      <li class="treeview">
-          <a href="#">
-             <i class="fa fa-cog"></i>
-                 <span>Maintenance</span>
-                     <span class="pull-right-container">
-                         <i class="fa fa-angle-left pull-right"></i>
-                                     </span>
-      
-          </a>
-      
-          <ul class="treeview-menu">
-          <li class="<?= getActive('cat') ?>"><a href="cat"><span>Directories</span></a></li>
-          <li class="<?= getActive('carriers') ?>"><a href="carriers"><span>Carriers</span></a></li>
-          <li class="<?= getActive('commodity_types') ?>"><a href="commodity_types"><span>Commodity Types</span></a></li>
-          <li class="<?= getActive('commdity') ?>" ><a href="commodity"><span>Commodity</span></a></li>
-          <li class="<?= getActive('charges') ?>" ><a href="charges"><span>Charges</span></a></li>
-          <li class="<?= getActive('containers') ?>" ><a href="container"><span>Containers</span></a></li>          
-         <li class="<?= getActive('mail_templates') ?>" ><a href="mail_templates"><span>Mail Templates</span></a></li>                
-          <li class="<?= getActive('drivers') ?>" ><a href="drivers"><span>Drivers</span></a></li>
-          <li class="<?= getActive('mode_of_transport') ?>"><a href="mode_of_transport"><span>Mode of Transport</span></a></li>
-          <li class="<?= getActive('packages') ?>"><a href="packages"><span>Packages</span></a></li>
-          <li class="<?= getActive('ports') ?>"><a href="ports"><span>Ports</span></a></li>
-          <li class="<?= getActive('supplier') ?>" ><a href="supplier"><span>Suppliers</span></a></li>
-          <li class="<?= getActive('inventory_items_definition') ?>"><a href="inventory_items_definition"><span>inventory Items Definition</span></a></li>
-          <li><a href="warehouse"><i class="fa fa-circle-o"></i>Warehouse List</a></li>      
-      
-
-        </ul>
-        
-      </li>
-      <li class="treeview">
+        <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa fa-shopping-cart'></i> <span>Shipment Orders</span></a></li> 
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Outgoing</span>
             <span class="pull-right-container">
@@ -188,7 +146,7 @@ if(count($subchilds)>0){
             <?php }}?>
             </ul>
         </li>
-        <li class="treeview">
+           <li class="treeview">
           <a href="#">
              <i class="fa fa-cog"></i>
                  <span>Accounting</span>
@@ -202,7 +160,7 @@ if(count($subchilds)>0){
         </ul>
         
       </li>
-      <li class="treeview">
+       <li class="treeview">
           <a href="#">
              <i class="fa fa-cog"></i>
                  <span>Shipments</span>
@@ -218,7 +176,49 @@ if(count($subchilds)>0){
          </ul>
         
       </li>
-         <li class="<?= getActive('shipment_type') ?>"><a href="shipment_order"><i class='fa fa-shopping-cart'></i> <span>Shipment Orders</span></a></li> 
+                  <li class="treeview">
+          <a href="#">
+             <i class="fa fa-home"></i>
+                 <span>Warehouse</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                                     </span>
+          </a>
+        <ul class="treeview-menu">
+          <li><a href="warehouse_receipt/add"><i class="fa fa-circle-o"></i>Add Warehouse Receipt</a></li>
+          <li><a href="warehouse_receipt"><i class="fa fa-circle-o"></i>Warehouse Receipt List</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+          <a href="#">
+             <i class="fa fa-cog"></i>
+                 <span>Maintenance</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                                     </span>
+      
+          </a>
+      
+          <ul class="treeview-menu">
+          <li class="<?= getActive('cat') ?>"><a href="cat"><span>Directories</span></a></li>
+          <li class="<?= getActive('carriers') ?>"><a href="carriers"><span>Carriers</span></a></li>
+          <li class="<?= getActive('commodity_types') ?>"><a href="commodity_types"><span>Commodity Types</span></a></li>
+          <li class="<?= getActive('commdity') ?>" ><a href="commodity"><span>Commodity</span></a></li>
+          <li class="<?= getActive('charges') ?>" ><a href="charges"><span>Charges</span></a></li>
+          <li class="<?= getActive('containers') ?>" ><a href="container"><span>Containers</span></a></li>          
+          <li class="<?= getActive('mail_templates') ?>" ><a href="mail_templates"><span>Mail Templates</span></a></li>                
+          <li class="<?= getActive('drivers') ?>" ><a href="drivers"><span>Drivers</span></a></li>
+          <li class="<?= getActive('mode_of_transport') ?>"><a href="mode_of_transport"><span>Mode of Transport</span></a></li>
+          <li class="<?= getActive('packages') ?>"><a href="packages"><span>Packages</span></a></li>
+          <li class="<?= getActive('ports') ?>"><a href="ports"><span>Ports</span></a></li>
+          <li class="<?= getActive('supplier') ?>" ><a href="supplier"><span>Suppliers</span></a></li>
+          <li class="<?= getActive('inventory_items_definition') ?>"><a href="inventory_items_definition"><span>inventory Items Definition</span></a></li>
+          <li><a href="warehouse"><i class="fa fa-circle-o"></i>Warehouse List</a></li>      
+      
+
+        </ul>
+        
+      </li>
          <li class="<?= getActive('pickup_orders') ?>"><a href="pickup_orders"><i class='fa fa-shopping-cart'></i> <span>Pickup Orders</span></a></li> 
          <!-- <li class="<?= getActive('purchase_order') ?>"><a href="shipment_order/view_purchase_orders"><i class='fa fa-shopping-cart'></i><span>Purchase Orders</span></a></li> -->
          <!-- <li class="<?= getActive('landing_bill') ?>"><a href="shipment_order/view_landing_bill"><i class='fa  fa-arrow-down'></i><span>Bill of Landing</span></a></li> -->

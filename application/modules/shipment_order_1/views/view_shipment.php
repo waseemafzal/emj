@@ -23,7 +23,7 @@ $Heading=	$module_heading;
       <?=$Heading?>
         
       </h1>
-      <ol class="breadcrumb" id='shipment_btns' style='display:none'>
+      <ol class="breadcrumb">
       <li > <a href="javascript:void()" onclick="updateShipment_type(1)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-user"></i> Personal Effects</a></li>
       <li > <a  href="javascript:void()" onclick="updateShipment_type(2)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-ship icon-white"></i> Ocean Freight</a></li>
       <li > <a  href="javascript:void()" onclick="updateShipment_type(3)" class="btn btn-sm btn-info txt-white"><i style='font-size:20px' class="fa fa-plane icon-white"></i> Air Freight</a></li>
@@ -47,7 +47,7 @@ $Heading=	$module_heading;
         <th>Track Number</th>
         <th>Type</th>
         <th>Shipper Name</th>
-		<th>Shipper Address</th>
+		    <th>Shipper Address</th>
         <th>Consignee Name</th>
         <th>Consignee Phone</th>
         <th>Consignee Address</th>
@@ -221,21 +221,15 @@ $Heading=	$module_heading;
                   
              ?>
             <table class="table table-striped">
-                <tr>
-                     <td>Vin Number</td>
-                <td>Vehicle Description</td>
-                <td>Purchase Cost</td>
-                <td>Company Preference</td>
-              
-                </tr>
                <?php foreach($vehicles as $vehicle){?>
               <tr>
-                <td><?php echo $vehicle['vin_number']?></td>
-                <td><?php echo $vehicle['vehicle_description']?></td>
-                <td><?php echo $vehicle['purchase_cost']?></td>
-                <td><?php echo $vehicle['company_preference']?></td>
+                <td><b>Vin Number:</b> <?php echo $vehicle['vin_number']?></td>
+                <td><b>Vehicle Description:</b> <?php echo $vehicle['vehicle_description']?></td>
                 </tr>
-                
+                <tr>
+                <td><b>Purchase Cost:</b> <?php echo $vehicle['purchase_cost']?></td>
+                <td><b>Company Preference:</b> <?php echo $vehicle['company_preference']?></td>
+              </tr>
             <?php }?>
             </table>
        </div>
@@ -377,25 +371,7 @@ function updateShipment_type(shipment_type){
 
   }
 </script>
-<script>
-     $(document).ready(function() {
-      var checked = 'input[name="shipment_id"]';
-      var $submit = $("#shipment_btns").hide();
-      $(document).on("change", checked, function() {
-        //console.log($(checked).is(":checked"))
-        $submit.toggle($(checked).is(":checked"));
-      });
-     });
-</script>
-<!--<script type="text/javascript">-->
-<!--   $(document).ready(function(){-->
-
-<!--      $('.chkshipment').click(function() {-->
-<!--         $('.chkshipment').not(this).prop('checked', false);-->
-<!--      });-->
-
-<!--   });-->
-<!--   </script>-->
+  
   
   
   

@@ -104,10 +104,16 @@ background-color: #fff;
                                     <?php }?>
                                     <input type="text" class="form-control" id="shipper_name" name="shipper_name"  value= "<?php if(isset($row)){echo $row->shipper_name;}?>" required>
                                     <input type='hidden' class='form-control' name='user_id' id='user_id' value='<?php if(isset($row)){echo $row->user_id;}?>'>
-                                   </div>
+
+                                    
+                                        </div>
                                           <div class="col-md-4">
                                     <label>Shipper's Phone</label>
                                     <input type="number" name="shipper_phone" id="shipper_phone"  class="form-control" value= "<?php if(isset($row)){echo $row->shipper_phone;}?>" required>
+                                    <!--<input type='hidden' name='user_id' value='<?php echo $_SESSION['user_id'];?>'>-->
+                                  <?php if(isset($row)){?>
+                                <input type='hidden' name='user_id' value='<?php echo $row->user_id;?>'>
+                                <?php }?>
                                   </div>
                                       <div class="col-xs-12 col-md-4">
                                         <label>Select State</label>
@@ -511,6 +517,7 @@ if(count($subchilds)>0){
       </div>
      <div class="modal-footer">
        <button class="btn btn-success" onclick='saveModalData()' type="button">Save</button>
+       <input type='hidden' >
        <button class='btn btn-danger' data-dismiss='modal'>Close</button>
      </div>
      
@@ -903,8 +910,8 @@ $(function(){
         select: function( event, ui ) {
             event.preventDefault();
            $(this).val(ui.item.name);
-			     $("#shipper_address").val(ui.item.address);
-			     $("#user_id").val(ui.item.id);
+           $('#user_id').val(ui.item.id);
+		   $("#shipper_address").val(ui.item.address);
            $("#shipper_phone").val(ui.item.mobile);
         }
     })

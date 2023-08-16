@@ -95,6 +95,8 @@ background-color: #fff;
             <img height="60" src="<?=$logo?>">Client Invoices
               </h2>
         </div>
+        <!-- /.col -->
+      <!-- info row -->
       <div class="invoice-info" style="position:relative">
         <div class="invoice-col" style='width:40%;float: left;'>
           From:
@@ -103,23 +105,43 @@ background-color: #fff;
             Address: <?php echo $setting->address;?><br>
             Phone: <?php echo $setting->phone;?><br>
             Email: <?php echo $setting->email;?>
-         
+          
         </div>
-        <div class="invoice-col" style='width: 25%;float: right;display: inline-block;margin: 0 0 0 85px;text-align: right;'>
+        <!-- /.col -->
+        <div class="invoice-col select_client" style='width:10%;float: left;;'>
+        <label>To Client</label>            
+        <select name='client_id' class='form-control' style='width:100%'>
+                    <option value='Not Selected'>Select</option>
+                    <?php 
+                    $clients = $this->db->where('user_type', '3')->get('users')->result_array();
+                  if($clients){
+                    foreach($clients as $client){?>
+                    <option value='<?php echo $client['id'];?>'><?php echo $client['name'];?></option>
+                    <?php }}?>
+                    </select>  
+        </div>
+        <!-- /.col -->
+        <div class="invoice-col" style='width: 26%;float: right;'>
         <?php if(isset($row)){ ?>
           <b>Invoice # 
          <?php   echo $row[0]['id'];
           echo '<input type="hidden" name="id" value="'.$row[0]['id'].'">';
-          } ?></b>
+          } ?></b><br>
+          <br>
   <?php if(isset($row)){$row=$row[0];} ?>
-          <p><label>Created Date:</label><input type="date" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>" required></p>
-          <p><label>Payment Due:</label><input type="date" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>" required></p>
+          <p><label>Created Date:</label><input type="text" name="created_date" value="<?php if(isset($row)){echo $row['created_date'];}?>"></p>
+          <p><label>Payment Due:</label><input type="text" name="due_date" value="<?php if(isset($row)){echo $row['due_date'];} ?>"></p>
           <input type="hidden" name="order_id" value="<?php echo $result->id;?>">
           
         </div>
+        
+   
+     <!-- /.col -->
+        
       </div>
+      
           
-     <table border="1"  id="items" style="width:100%;font-size:14px margin-top:10px;"  >
+<table border="1" cellpadding="10" cellspacing="10" id="items" style="width:100%;font-size:14px margin-top:10px;"  >
             <thead>
             <tr>
               <th>Item Details</th>
@@ -132,7 +154,7 @@ background-color: #fff;
               <?php 
                    if(isset($row)){
                 $detail = json_decode($row['detail']);
-      $count = count($detail->rates);
+         $count = count($detail->rates);
      for($i=0;$i<$count;$i++){
          $item = $detail->items[$i];
          $quantity = $detail->quantities[$i];
@@ -148,35 +170,36 @@ background-color: #fff;
               <td><input type="number" class="rate " style='width:100%;background: white;border: none;'  name="rate[]" value="<?=$rate?>" />
               </td>
               <td><input type="text" class="subtotal " style='width:100%;background: white;border: none;'  readonly="readonly" name="subtotal[]" value="<?=$subtotal?>" />
-             </td>
+           
+              </td>
             </tr>
          <?php  }
       }else{
         ?>
             <tr id="row_0">
-              <td><input type="text" style='width:100%;border:none;' name="item[]" /></td>
-              <td><input type="number" style='width:100%;border:none;' class=" quantity" name="quantity[]" /></td>
-              <td><input type="number" style='width:100%;border:none;' class=" rate" name="rate[]" /></td>
-              <td><input type="text" style='width:100%;border:none;' class=" subtotal" readonly="readonly" name="subtotal[]" /></td>
+              <td><input type="text"   name="item[]" /></td>
+              <td><input type="number"  class=" quantity" name="quantity[]" /></td>
+              <td><input type="number"  class=" rate" name="rate[]" /></td>
+              <td><input type="text"  class=" subtotal" readonly="readonly" name="subtotal[]" /></td>
             </tr>
         <?php } ?>
            </tbody>
             <tfoot>
             <tr>
               <td colspan="3" style="text-align: right;">Tax %</td>
-              <td><input type="number" style='width:100%;border:none'  id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
+              <td><input type="number" style='width:100%'  id="tax"  name="tax" value="<?php if(isset($row)){echo $row['tax'];}?>">
                 </td>
             </tr>
            <tr>
               <td colspan="3" style="text-align: right;">Discount</td>
-              <td><input  type="number" style='width:100%;border:none' id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
+              <td><input  type="number" style='width:100%' id="discount" name="discount" value="<?php if(isset($row)){echo $row['discount'];}?>"></td>
             </tr>
            <tr>
                 
               <td colspan="3" style="text-align: right;">Total(<span class=""><i class="fa fa-dollar"></i></span>)</td>
               <td>
                 <div class="">
-                <input type="text"  style='width:100%;border:none' id="total" readonly name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
+                <input type="text"  style='width:100%' id="total" name="total" value="<?php if(isset($row)){echo $row['amount'];}?>">
                 
               </div>
                 </td>
@@ -223,11 +246,11 @@ background-color: #fff;
 
       <!-- this row will not appear when printing -->
       <div class="no-print" style="float:right;margin-top:10px">
-        <div style="width: 100%;margin-top: -25px;margin-right: 52px;">
-         <!--<button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail-->
+        <div style="width: 100%;">
+         <button type="button" id='btnSave' class="noprint" onclick="submitform(1)"><i class="fa fa-envelope"></i> Save and mail
           </button>&nbsp;
          
-           <button style='margin-top:-5px;margin-left:20px' type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
+           <button type="button" id='btnSave' class="noprint" onclick="submitform(0)"><i class="fa fa-save"></i> Save
           </button>
           <?php /*?> <button type="button" class="btn btn-primary pull-right" id="downloadPdf" style="margin-right: 5px;">
             <i class="fa fa-download"></i> Generate PDF
@@ -390,12 +413,10 @@ $(document).ready(function(){
         $('.noprint').remove();
         $('.showpdf').removeClass('hidden');
         }*/
-// if(1){
-//         $('.noprint').remove();
-//         //$('#client_id').hide();
-//         //$("#client_id").hide().css("visibility", "hidden");
-//         $('.showpdf').removeClass('hidden');
-//         }
+if(1){
+       // $('.noprint').remove();
+       // $('.showpdf').removeClass('hidden');
+        }
             formData.append('pdfcontent',$('#invoice').html());
             formData.append('ifmail',type);
   // ajax start
@@ -424,22 +445,9 @@ $(document).ready(function(){
         setTimeout(function(){
         $(".alert").addClass('hidden');
         $('#form_add_update')[0].reset();
-    if(data.paid_unpaid=='paid'){
-        window.location='<?php echo base_url()?>shipment_order/paid_invoices';
-        }
-        },3000);
-        if(data.paid_unpaid=='unpaid'){
-            $(".alert").addClass('alert-success');
-        $(".alert").html(data.message);
-        $(".alert").removeClass('hidden');
-        setTimeout(function(){
-        $(".alert").addClass('hidden');
-        $('#form_add_update')[0].reset();
-             window.location='<?php echo base_url()?>shipment_order/unpaid_invoices';
-        },3000);
-        }
+        window.location='shipment_order';
+        },2000);
             }
-            
            else if (data.status ==0)
             {  
       $(".alert").addClass('alert-danger');
@@ -455,21 +463,8 @@ $(document).ready(function(){
         $(".alert").html(data.message);
         $(".alert").removeClass('hidden');
         setTimeout(function(){
-            if(data.paid_unpaid=='paid'){
-        window.location='<?php echo base_url()?>shipment_order/paid_invoices';
-        }
-        },3000);
-        if(data.paid_unpaid=='unpaid'){
-            $(".alert").addClass('alert-success');
-        $(".alert").html(data.message);
-        $(".alert").removeClass('hidden');
-        setTimeout(function(){
-        $(".alert").addClass('hidden');
-        $('#form_add_update')[0].reset();
-             window.location='<?php echo base_url()?>shipment_order/unpaid_invoices';
-        },3000);
-        }
-        
+        window.location='shipment_order';
+        },1000);
             }
       else if (data.status == "validation_error")
             {   
@@ -590,10 +585,6 @@ $('#removeheader').click(function(){
     //ajax end    
   });
 
-
-function Setmyvlaue(user){
-        $('#toclientSelect').attr('data-value',user);
-        }  
   </script>
   
   

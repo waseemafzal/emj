@@ -147,7 +147,6 @@ background-color: #fff;
                                        <label>Shipment Date</label>
                                        <input type="date" name="shipment_date" class="form-control" value="<?php if(isset($row)){echo $row->shipment_date;}?>">
                                        <input type="hidden" id="id"  name="id" value="<?php if(isset($row)){ echo $row->id;} ?>">
-                                       <!--<input type='hidden' name='user_id' value='<?php echo $_SESSION['user_id'];?>'>-->
                                     </div>
                                    </div>
                                   </div>
@@ -1162,8 +1161,8 @@ $(function(){
         select: function( event, ui ) {
             event.preventDefault();
            $(this).val(ui.item.name);
+			     $("#shipper_address").val(ui.item.address);
            $('#user_id').val(ui.item.id);
-		   $("#shipper_address").val(ui.item.address);
            $("#shipper_phone").val(ui.item.mobile);
         }
     })

@@ -21,8 +21,8 @@ define('USER',3);
 /*************************/
 //define('USER_ID',user_id());
 
-define('APP_EMAIL','no-reply@safelify.com');
-define('FROM_HEADING','SafeLify');
+define('APP_EMAIL','no-reply@emjayglobal.com');
+define('FROM_HEADING','emjayglobal');
 define('DEFAULT_CURRENCY_SYMBOL','$');
 define('STRIPE_PUBLISH_KEY','pk_test_cWfGTcc1aNFIc8Tz3Mp3exL5');
 define('STRIPE_SECRETE_KEY','sk_test_6pWhoJIxtluIsHSVt9NObsuN');
